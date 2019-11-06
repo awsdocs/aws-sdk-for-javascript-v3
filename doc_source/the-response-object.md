@@ -6,7 +6,7 @@ After a service client method has been called, it returns a response object inst
 
 The response object contains the data, as properties, returned by the service request\.
 
-In the previous example, the `DescribeTableCommand` command returned the number of items in the table in the `ItemCount` property of the response\.
+In the previous example, the `ListTablesCommand` command returned the table names in the `TableNames` property of the response\.
 
 ## Accessing Error Information<a name="response-error-property"></a>
 

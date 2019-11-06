@@ -9,27 +9,27 @@
 
 ## The Scenario<a name="getting-started-browser-scenario"></a>
 
-Amazon Polly is a cloud service that converts text into lifelike speech\. You can use Amazon Polly to develop applications that increase engagement and accessibility\. Amazon Polly supports multiple languages and includes a variety of lifelike voices\. For more information about Amazon Polly, see the [https://docs.aws.amazon.com/polly/latest/dg/](https://docs.aws.amazon.com/polly/latest/dg/)\.
+Amazon Polly is a cloud service that converts text into lifelike speech\. You can use Amazon Polly to develop applications that increase engagement and accessibility\. Amazon Polly supports multiple languages and includes a variety of lifelike voices\. For more information about Amazon Polly, see the [Amazon Polly Developer Guide](https://docs.aws.amazon.com/polly/latest/dg/)\.
 
-The example shows how to set up and run a simple browser script that takes text you enter, sends that text to Amazon Polly, and then returns the URL of the synthesized audio of the text for you to play\. The browser script uses Amazon Cognito Identity to provide credentials needed to access AWS services\. You will see the basic patterns for loading and using the SDK for JavaScript in browser scripts\.
+This example shows you how to set up and run a browser script that takes text, sends that text to Amazon Polly, and returns the URL of the synthesized audio of the text for you to play\. The browser script uses an Amazon Cognito Identity pool to provide credentials needed to access AWS services\. The example demonstrates the basic patterns for loading and using the SDK for JavaScript in browser scripts\.
 
 **Note**  
-Playback of the synthesized speech in this example depends on running in a browser that supports HTML 5 audio\.
+You must run this example in a browser that supports HTML 5 audio to playback the synthesized speech\.
 
 
 
-The browser script uses the SDK for JavaScript to synthesize text by using these APIs:
+The browser script uses the SDK for JavaScript to synthesize text by using the following APIs:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityCredentials.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityCredentials.html) constructor
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly/Presigner.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly/Presigner.html) constructor
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly/Presigner.html#getSynthesizeSpeechUrl-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly/Presigner.html#getSynthesizeSpeechUrl-property)
 
 ## Step 1: Create an Amazon Cognito Identity Pool<a name="getting-started-browser-create-identity-pool"></a>
 
-In this exercise, you create and use an Amazon Cognito identity pool to provide unauthenticated access to your browser script for the Amazon Polly service\. Creating an identity pool also creates two IAM roles, one to support users authenticated by an identity provider and the other to support unauthenticated guest users\.
+In this exercise, you create and use an Amazon Cognito Identity pool to provide unauthenticated access to your browser script for the Amazon Polly service\. Creating an identity pool also creates two IAM roles, one to support users authenticated by an identity provider and the other to support unauthenticated guest users\.
 
 In this exercise, we will only work with the unauthenticated user role to keep the task focused\. You can integrate support for an identity provider and authenticated users later\.
 
-**To create an Amazon Cognito identity pool**
+**To create an Amazon Cognito Identity pool**
 
 1. Sign in to the AWS Management Console and open the Amazon Cognito console at [https://console\.aws\.amazon\.com/cognito/\.](https://console.aws.amazon.com/cognito/)
 
@@ -164,15 +164,15 @@ After you create the presigner object, call the `getSynthesizeSpeechUrl` method 
     </script>
 ```
 
-## Step 5: Run the Sample<a name="getting-started-browser-run-sample"></a>
+## Step 5: Run the Example<a name="getting-started-browser-run-sample"></a>
 
-To run the sample app, load `polly.html` into a web browser\. This is what the browser presentation should resemble\.
+To run the example app, load `polly.html` into a web browser\. The app should look similar to the following\.
 
 
 
 Enter a phrase you want turned to speech in the input box, then choose **Synthesize**\. When the audio is ready to play, a message appears\. Use the audio player controls to hear the synthesized speech\.
 
-## Full Sample<a name="getting-started-browser-full-sample"></a>
+## Full Example<a name="getting-started-browser-full-sample"></a>
 
  Here is the full HTML page with the browser script\. It's also available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/browserstart/polly.html)\. 
 

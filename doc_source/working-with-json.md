@@ -37,19 +37,21 @@ The `pullParams` object is defined by three name\-value pairs, separated by comm
 When passing parameters to a service object method call, provide the JSON object to the method call, as shown in the following example of invoking a Lambda function\.
 
 ```
-lambda = new AWS.Lambda({region: 'us-west-2', apiVersion: '2015-03-31'});
+const lambda = require('@aws-sdk/client-lambda')
+const lambdaClient = new lambda.LambdaClient({ region: 'us-west-2' })
 // create JSON object for service call parameters
 var pullParams = {
    FunctionName : 'slotPull',
    InvocationType : 'RequestResponse',
    LogType : 'None'
-};                
+}
+
 // invoke Lambda function, passing JSON object
-lambda.invoke(pullParams, function(err, data) {
+lambdaClient.invoke(pullParams, function(err, data) {
    if (err) {
       console.log(err);
    } else {
       console.log(data);
    }
-});
+})
 ```

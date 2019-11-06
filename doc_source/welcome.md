@@ -6,6 +6,114 @@ The [AWS SDK for JavaScript](aws-jsdk-reference.md) provides a JavaScript API fo
 
 Not all services are immediately available in the SDK\. To find out which services are currently supported by the AWS SDK for JavaScript, see [ https://github\.com/aws/aws\-sdk\-js/blob/master/SERVICES\.md]( https://github.com/aws/aws-sdk-js/blob/master/SERVICES.md)\. For information about the SDK for JavaScript on GitHub, see [Additional Resources](resources.md)\.
 
+## What's New in Version 3<a name="welcome_whats_new_v3"></a>
+
+Version 3 of the SDK for JavaScript \(V3\) contains three new features:
+
+Modularized Packages  
+Users can now use a separate package for each service\.
+
+New Middleware Stack  
+Users can now use a middleware stack to control the lifecycle of an operation call\.
+
+Separate Node\.js and Browser Packages  
+Each package has both a browser and Node\.js version\.
+
+### Modularized Packages<a name="welcome_whats_new_v3_modularized_packages"></a>
+
+Version 2 of the SDK for JavaScript \(V2\) required you to use the entire AWS SDK, as follows\.
+
+```
+var AWS = require("aws-sdk");
+```
+
+Loading the entire SDK isn’t an issue if your application is using many AWS services\. However, if you need to use only a few services, it means increasing the size of your application with code you don't need or use\.
+
+In V3, you can load and use only the individual services you need\. This is shown in the following example, which only gives you access to Amazon S3\.
+
+```
+const s3 = require("@aws-sdk/client-s3");
+```
+
+#### Comparing Code Size<a name="welcome_whats_new_v3_modularized_packages_code_size"></a>
+
+In V2, a simple code example that lists all of your Amazon S3 buckets in the `us-west-2` Region might look like the following\.
+
+```
+var AWS = require("aws-sdk");
+// Set the Region
+AWS.config.update({region: "us-west-2"})
+// Create S3 service object
+s3Client = new AWS.S3({apiVersion: "2006-03-01"})
+
+// List your buckets
+s3Client.listBuckets(function(err, data) {
+  if (err) {
+    console.log("Error", err);
+  } else {
+    console.log("Success", data.Buckets);
+  }
+})
+```
+
+The V3 version looks like the following:
+
+```
+(async function () {
+  const S3 = require('@aws-sdk/client-s3-node')
+  const S3Client = new S3.S3Client({
+    region: 'us-west-2'
+  })
+
+  const command = new S3.ListBucketsCommand({})
+
+  try {
+    const results = await S3Client.send(command)
+    results.Buckets.forEach(function (item, index) {
+      console.log(item.Name)
+    })
+  } catch (err) {
+    console.error(err)
+  }
+})()
+```
+
+The `aws-sdk` package adds about 40 MB to your application\. By replacing `var AWS = require("aws-sdk")` with `const s3 = require("@aws-sdk/client-s3")` reduces that overhead to about ??MB\.
+
+### New Middleware Stack<a name="welcome_whats_new_v3_middleware_stack"></a>
+
+V2 enabled modifying a request throughout the multiple stages of its lifecycle by attaching event listeners to the request\. This approach can make if difficult to debug what went wrong during a request’s lifecycle\.
+
+In V3, you can use a new middleware stack to control the lifecycle of an operation call\. This approach provides a couple of benefits\. Each middleware stage in the stack calls the next middleware stage after making any changes to the request object\. This also makes debugging issues in the stack much easier, because you can see exactly which middleware stages were called leading up to the error\.
+
+The following example adds a custom header to an AWS Lambda client using middleware\. The first argument is a function that accepts next, which is the next middleware stage in the stack to call, and context, which is an object that contains some information about the operation being called\. The function returns a function that accepts args, which is an object that contains the parameters passed to the operation and the request, and returns the result from calling the next middleware with args\.
+
+```
+lambda.middlewareStack.add(
+  (next, context) => args => {
+    args.request.headers["Custom-Header"] = "value";
+    return next(args);
+  },
+  {
+    step: "build"
+  }
+)
+
+lambda.send(new PutObjectCommand(params))
+```
+
+### Separate Node\.js and Browser Packages<a name="welcome_whats_new_v3_separate_packages"></a>
+
+V2 used the browser field in `package.json` to enable writing code against the aws\-sdk package for use in either browsers or Node\.js\.
+
+This approach had a few limitations\.
+
+To import the SDK into a project, you had to use build tools that knew how to parse the browser field to get the browser version of the SDK\. This caused problems when build tools created a JavaScript bundle using the browser version of the SDK, but applications required the Node\.js version of the SDK\. In addition, to support TypeScript, both the Node\.js and DOM typings had to be present\.
+
+In V3, each package has both a browser version and a Node\.js version\. By publishing separate packages for Node\.js and browser environments, the SDK has removed the guesswork around which version your builds use\. This also enables the SDK to use environment\-specific typings\.
+
+For example, the SDK implements streams with different interfaces in Node\.js and browsers\. Depending on which package you’re using, the typings reflect the streams for the environment you’ve chosen\.
+
 ## Using the SDK with Node\.js<a name="welcome_node"></a>
 
 Node\.js is a cross\-platform runtime for running server\-side JavaScript applications\. You can set up Node\.js on an Amazon EC2 instance to run on a server\. You can also use Node\.js to write on\-demand AWS Lambda functions\.

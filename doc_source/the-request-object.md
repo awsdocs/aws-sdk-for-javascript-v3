@@ -10,27 +10,36 @@ To send a request:
 
 1. Call `send` on the client with the command object as input\.
 
-For example, to list your DynamoDB tables in `us-west-2` and how many items each table contains:
+For example, to list your DynamoDB tables in `us-west-2`, you can do it with async/await:
+
+```
+(async function() {
+  const DDB = require('@aws-sdk/client-dynamodb-node')
+  const dbClient = new DDB.DynamoDBClient({ region: 'us-west-2' })
+  const command = new DDB.ListTablesCommand({})
+
+  try {
+    const results = await dbClient.send(command)
+    console.log(results.TableNames.join('\n'))
+  } catch (err) {
+    console.error(err)
+  }
+})()
+```
+
+Or using a promise, as some browsers don't support async/await:
 
 ```
 const DDB = require('@aws-sdk/client-dynamodb')
 const dbClient = new DDB.DynamoDBClient({ region: 'us-west-2' })
+const command = new DDB.ListTablesCommand({})
 
 dbClient
-  .send(new DDB.ListTablesCommand({}))
+  .send(command)
   .then(response => {
-    // List the number of items in each table
-    // console.log(response.TableNames.join('\n'))
-    response.TableNames.forEach(function(item, index) {
-      // console.log(item, index)
-      dbClient
-        .send(new DDB.DescribeTableCommand({ TableName: item }))
-        .then(response => {
-          console.log(item + ': ' + response.Table.ItemCount)
-        })
-    })
+    console.log(response.TableNames.join('\n'))
   })
   .catch(error => {
     console.error(error)
-  })
+})
 ```
