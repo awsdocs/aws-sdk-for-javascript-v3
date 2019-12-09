@@ -54,7 +54,7 @@ To run the example, type the following at the command line\.
 node sns_createtopic.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_createtopic.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_createtopic.js)\.
 
 ## Listing Your Topics<a name="sns-examples-managing-topics-listtopics"></a>
 
@@ -120,7 +120,7 @@ To run the example, type the following at the command line\.
 node sns_deletetopic.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_deletetopic.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_deletetopic.js)\.
 
 ## Getting Topic Attributes<a name="sns-examples-managing-topicsgetttopicattributes"></a>
 
@@ -154,7 +154,7 @@ To run the example, type the following at the command line\.
 node sns_gettopicattributes.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_gettopicattributes.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_gettopicattributes.js)\.
 
 ## Setting Topic Attributes<a name="sns-examples-managing-topicsstttopicattributes"></a>
 
@@ -194,4 +194,4 @@ To run the example, type the following at the command line\.
 node sns_settopicattributes.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_settopicattributes.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_settopicattributes.js)\.

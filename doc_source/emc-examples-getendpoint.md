@@ -54,4 +54,4 @@ To run the example, type the following at the command line\.
 node emc_getendpoint.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_getendpoint.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_getendpoint.js)\.

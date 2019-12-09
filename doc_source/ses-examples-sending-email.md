@@ -95,7 +95,7 @@ To run the example, type the following at the command line\. The email is queued
 node ses_sendemail.js
 ```
 
-This sample code can be [found here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_sendemail.js)\. 
+This example code can be [found here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_sendemail.js)\. 
 
 ## Sending an Email Using a Template<a name="ses-examples-sendtemplatedemail"></a>
 
@@ -149,7 +149,7 @@ To run the example, type the following at the command line\. The email is queued
 node ses_sendtemplatedemail.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_sendtemplatedemail.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_sendtemplatedemail.js)\.
 
 ## Sending Bulk Email Using a Template<a name="ses-examples-sendbulktemplatedemail"></a>
 
@@ -209,4 +209,4 @@ To run the example, type the following at the command line\. The email is queued
 node ses_sendbulktemplatedemail.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_sendbulktemplatedemail.js)\. 
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_sendbulktemplatedemail.js)\. 

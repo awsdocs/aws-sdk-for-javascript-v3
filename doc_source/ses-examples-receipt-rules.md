@@ -82,7 +82,7 @@ To run the example, type the following at the command line\. Amazon SES creates 
 node ses_createreceiptrule.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_createreceiptrule.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_createreceiptrule.js)\.
 
 ## Deleting a Receipt Rule<a name="ses-examples-deletingreceipt-rules"></a>
 
@@ -121,7 +121,7 @@ To run the example, type the following at the command line\. Amazon SES creates 
 node ses_deletereceiptrule.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deletereceiptrule.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deletereceiptrule.js)\.
 
 ## Creating a Receipt Rule Set<a name="ses-examples-creatingreceiptrulesets"></a>
 
@@ -154,7 +154,7 @@ To run the example, type the following at the command line\. Amazon SES creates 
 node ses_createreceiptruleset.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_createreceiptruleset.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_createreceiptruleset.js)\.
 
 ## Deleting a Receipt Rule Set<a name="ses-examples-deletingreceiptrulesets"></a>
 
@@ -187,4 +187,4 @@ To run the example, type the following at the command line\. Amazon SES creates 
 node ses_deletereceiptruleset.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deletereceiptruleset.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deletereceiptruleset.js)\.

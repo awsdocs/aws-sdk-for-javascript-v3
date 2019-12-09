@@ -8,7 +8,8 @@ For example, the home page of an e\-commerce website lets returning customers si
 
 1. The database provides the customer's preferences that are used to customize the site before the page loads\.
 
-If these tasks execute synchronously, then each must finish before the next can start\. The web page would be unable to finish loading until the customer preferences return from the database\. However, after the database query is sent to the server, receipt of the customer data can be delayed or even fail due to network bottlenecks, exceptionally high database traffic, or a poor mobile device connection\.
+If these tasks execute synchronously, then each must finish before the next can start\. The webpage would be unable to finish loading until the customer preferences return from the database\. However, after the database query is sent to the server, receipt of the customer data can be delayed or even fail due to network bottlenecks, exceptionally high database traffic, or a poor mobile device connection\.
 
 To keep the website from freezing under those conditions, call the database asychronously\. After the database call executes, sending your asynchronous request, your code continues to execute as expected\. If you don't properly manage the response of an asynchronous call, your code can attempt to use information it expects back from the database when that data isn't available yet\.
 
+![\[Showing difference between synchronous and asynchronous execution.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/async-vs-sync.png)

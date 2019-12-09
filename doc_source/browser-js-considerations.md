@@ -1,12 +1,14 @@
 # Browser Script Considerations<a name="browser-js-considerations"></a>
 
-This topic describe special considerations for using the AWS SDK for JavaScript in browser scripts\.
+This topic describes special considerations for using the AWS SDK for JavaScript in browser scripts\.
 
 ## Cross\-Origin Resource Sharing \(CORS\)<a name="cors"></a>
 
-Cross\-origin resource sharing, or CORS, is a security feature of modern web browsers\. It enables web browsers to negotiate which domains can make requests of external websites or services\. CORS is an important consideration when developing browser applications with the AWS SDK for JavaScript because most requests to resources are sent to an external domain, such as the endpoint for a web service\. If your JavaScript environment enforces CORS security, you must configure CORS with the service\.
+Cross\-origin resource sharing, or CORS, is a security feature of modern web browsers\. It enables web browsers to negotiate which domains can make requests of external websites or services\. 
 
-CORS determines whether to allow sharing of resources in a cross\-origin request based on:
+CORS is an important consideration when developing browser applications with the AWS SDK for JavaScript because most requests to resources are sent to an external domain, such as the endpoint for a web service\. If your JavaScript environment enforces CORS security, you must configure CORS with the service\.
+
+CORS determines whether to allow sharing of resources in a cross\-origin request based on the following:
 + The specific domain that makes the request 
 + The type of HTTP request being made \(GET, PUT, POST, DELETE and so on\)
 
@@ -16,7 +18,7 @@ In the simplest case, your browser script makes a GET request for a resource fro
 
 If either the requesting domain or the type of HTTP request is not authorized, the request is denied\. However, CORS makes it possible to preflight the request before actually submitting it\. In this case, a preflight request is made in which the `OPTIONS` access request operation is sent\. If the cross\-origin server's CORS configuration grants access to the requesting domain, the server sends back a preflight response that lists all the HTTP request types that the requesting domain can make on the requested resource\.
 
-
+![\[Process flow for CORS requests\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/cors-overview.png)
 
 ### Is CORS Configuration Required<a name="the-need-for-cors-configuration"></a>
 
@@ -28,24 +30,22 @@ You can configure an Amazon S3 bucket to use CORS in the Amazon S3 console\.
 
 1. In the Amazon S3 console, find the bucket you want to configure and select its check box\.
 
-1. In the pop\-up\-dialog, choose **Permissions**  
+1. In the pane that opens, choose **Permissions**\.
 
+1. On the **Permission** tab, choose **CORS Configuration**\.
 
-1. In the **Permission** tab, choose **CORS Configuration**\.
-
-1. Type your CORS configuration in the **CORS Configuration Editor** and then choose **Save**\.  
-
+1. Type your CORS configuration in the **CORS Configuration Editor**, and then choose **Save**\.
 
 A CORS configuration is an XML file that contains a series of rules within a `<CORSRule>`\. A configuration can have up to 100 rules\. A rule is defined by one of the following tags:
-+ `<AllowedOrigin>`, which specifies domain origins that you allow to make cross\-domain requests\.
-+ `<AllowedMethod>`, which specifies a type of request you allow \(GET, PUT, POST, DELETE, HEAD\) in cross\-domain requests\.
-+ `<AllowedHeader>`, which specifies the headers allowed in a preflight request\.
++ `<AllowedOrigin>` – Specifies domain origins that you allow to make cross\-domain requests\.
++ `<AllowedMethod>` – Specifies a type of request you allow \(GET, PUT, POST, DELETE, HEAD\) in cross\-domain requests\.
++ `<AllowedHeader>` – Specifies the headers allowed in a preflight request\.
 
-For sample configurations, see [How Do I Configure CORS on My Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html#how-do-i-enable-cors) in the *Amazon Simple Storage Service Developer Guide*\.
+For example configurations, see [How Do I Configure CORS on My Bucket?](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html#how-do-i-enable-cors) in the *Amazon Simple Storage Service Developer Guide*\.
 
 ### CORS Configuration Example<a name="cors-configuration-example"></a>
 
-The following CORS configuration sample allows a user to view, add, remove, or update objects inside of a bucket from the domain `example.org`, though it is recommended that you scope the `<AllowedOrigin>` to the domain of your website\. You can specify `"*"` to allow any origin\.
+The following CORS configuration example allows a user to view, add, remove, or update objects inside of a bucket from the domain `example.org`\. However, we recommend that you scope the `<AllowedOrigin>` to the domain of your website\. You can specify `"*"` to allow any origin\.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>

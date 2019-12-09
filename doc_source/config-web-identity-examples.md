@@ -1,6 +1,6 @@
 # Web Federated Identity Examples<a name="config-web-identity-examples"></a>
 
-Here are a few examples of using web federated identity to obtain credentials in browser JavaScript\. These examples must be run from an http:// or https:// host scheme to ensure the identity provider can redirect to your application\. 
+Here are a few examples of using web federated identity to obtain credentials in browser JavaScript\. These examples must be run from an `http://` or `https://` host scheme to ensure the identity provider can redirect to your application\. 
 
 ## Login with Amazon Example<a name="config-web-identity-amazon-login-example"></a>
 
@@ -51,7 +51,7 @@ The following code shows how to use Login with Amazon as an identity provider\.
 
 ## Facebook Login Example<a name="config-web-identity-facebook-login-example"></a>
 
-The following code shows how to use Facebook Login as an identity provider:
+The following code shows how to use Facebook Login as an identity provider\.
 
 ```
 <button id="login">Login</button>
@@ -99,7 +99,7 @@ window.fbAsyncInit = function() {
 
 ## Google\+ Sign\-in Example<a name="config-web-identity-google-login-example"></a>
 
-The following code shows how to use Google\+ Sign\-in as an identity provider\. The access token used for web identity federation from Google is stored in `response.id_token` instead of `access_token` like other identity providers\. 
+The following code shows how to use Google\+ Sign\-in as an identity provider\. Unlike other providers, the access token used for web identity federation from Google is stored in `response.id_token` instead of `access_token`\. 
 
 ```
 <span

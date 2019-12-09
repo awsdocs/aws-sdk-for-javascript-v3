@@ -60,7 +60,7 @@ To run the example, type the following at the command line\.
 node cw_listmetrics.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cw_listmetrics.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cw_listmetrics.js)\.
 
 ## Submitting Custom Metrics<a name="cloudwatch-examples-getting-metrics-publishing-custom"></a>
 
@@ -108,4 +108,4 @@ To run the example, type the following at the command line\.
 node cw_putmetricdata.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cw_putmetricdata.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cw_putmetricdata.js)\.

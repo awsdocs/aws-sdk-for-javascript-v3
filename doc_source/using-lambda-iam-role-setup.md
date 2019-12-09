@@ -4,7 +4,7 @@ This topic is part of a larger tutorial about using the AWS SDK for JavaScript w
 
 In this task, you will focus on creating IAM role used by the application to execute the Lambda function\.
 
-![\[Create an IAM execution role for Lambda\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Create an IAM execution role for Lambda\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Create an IAM execution role for Lambda\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Create an IAM execution role for Lambda\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/create-iam-role.png)![\[Create an IAM execution role for Lambda\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Create an IAM execution role for Lambda\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 A Lambda function requires an execution role created in IAM that provides the function with the necessary permissions to run\. For more information about the Lambda execution role, see [Manage Permissions: Using an IAM Role \(Execution Role\)](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role) in the *AWS Lambda Developer Guide*\. 
 

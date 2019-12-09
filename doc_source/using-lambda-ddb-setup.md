@@ -1,10 +1,10 @@
 # Create and Populate a DynamoDB Table<a name="using-lambda-ddb-setup"></a>
 
-In this task, you create and populate the DynamoDB table used by the application\.
+In this task, you create and populate the Amazon DynamoDB table used by the application\.
 
-![\[Create a DynamoDB table for the tutorial application\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Create a DynamoDB table for the tutorial application\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Create a DynamoDB table for the tutorial application\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Create a DynamoDB table for the tutorial application\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/create-ddb-table.png)![\[Create a DynamoDB table for the tutorial application\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Create a DynamoDB table for the tutorial application\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
-The Lambda function generates three random numbers, then uses those numbers as keys to look up file names stored in an Amazon DynamoDB table\. In the `slotassets.zip` archive file are two Node\.js scripts named `ddb-table-create.js` and `ddb-table-populate.js`\. Together these files create the DynamoDB table and populate it with the names of the image files in the Amazon S3 bucket\. The Lambda function exclusively provides access to the table\. Completing this portion of the application requires you to do these things:
+The AWS Lambda function generates three random numbers, then uses those numbers as keys to look up file names stored in an Amazon DynamoDB table\. In the `slotassets.zip` archive file are two Node\.js scripts named `ddb-table-create.js` and `ddb-table-populate.js`\. Together these files create the DynamoDB table and populate it with the names of the image files in the Amazon S3 bucket\. The Lambda function exclusively provides access to the table\. Completing this portion of the application requires you to do these things:
 + Edit the Node\.js code used to create the DynamoDB table\.
 + Run the setup script that creates the DynamoDB table\.
 + Run the setup script, which populates the DynamoDB table with data the application expects and needs\.

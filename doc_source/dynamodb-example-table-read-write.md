@@ -1,4 +1,4 @@
-# Reading and Writing A Single Item in DynamoDB<a name="dynamodb-example-table-read-write"></a>
+# Reading and Writing a Single Item in DynamoDB<a name="dynamodb-example-table-read-write"></a>
 
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 
@@ -58,7 +58,7 @@ To run the example, type the following at the command line\.
 node ddb_putitem.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_putitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_putitem.js)\.
 
 ## Getting an Item<a name="dynamodb-example-table-read-write-getting-an-item"></a>
 
@@ -99,7 +99,7 @@ To run the example, type the following at the command line\.
 node ddb_getitem.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_getitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_getitem.js)\.
 
 ## Deleting an Item<a name="dynamodb-example-table-read-write-deleting-an-item"></a>
 
@@ -137,4 +137,4 @@ To run the example, type the following at the command line\.
 node ddb_deleteitem.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_deleteitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_deleteitem.js)\.

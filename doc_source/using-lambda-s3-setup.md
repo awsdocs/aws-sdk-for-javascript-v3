@@ -2,7 +2,7 @@
 
 In this task, you create and prepare the Amazon S3 bucket used by the application\.
 
-![\[JavaScript running in a browser that creates an Amazon S3 bucket\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[JavaScript running in a browser that creates an Amazon S3 bucket\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[JavaScript running in a browser that creates an Amazon S3 bucket\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[JavaScript running in a browser that creates an Amazon S3 bucket\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/create-s3-bucket.png)![\[JavaScript running in a browser that creates an Amazon S3 bucket\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[JavaScript running in a browser that creates an Amazon S3 bucket\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 For this application, the first thing you need to create is an Amazon S3 bucket to store all the browser assets\. These include the HTML file, all graphics files, and the CSS file\. The bucket is configured as a static website so that it also serves the application from the bucket's URL\. 
 

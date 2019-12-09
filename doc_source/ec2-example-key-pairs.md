@@ -53,7 +53,7 @@ To run the example, type the following at the command line\.
 node ec2_describekeypairs.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describekeypairs.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describekeypairs.js)\.
 
 ## Creating a Key Pair<a name="ec2-example-key-pairs-creating"></a>
 
@@ -123,4 +123,4 @@ To run the example, type the following at the command line\.
 node ec2_deletekeypair.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_deletekeypair.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_deletekeypair.js)\.

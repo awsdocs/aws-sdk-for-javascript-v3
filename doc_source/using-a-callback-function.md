@@ -1,6 +1,6 @@
 # Using an Anonymous Callback Function<a name="using-a-callback-function"></a>
 
-Each service object method can accept an anonymous callback function as the last parameter\. The signature of this callback function is:
+Each service object method can accept an anonymous callback function as the last parameter\. The signature of this callback function is as follows\.
 
 ```
 function(error, data) {

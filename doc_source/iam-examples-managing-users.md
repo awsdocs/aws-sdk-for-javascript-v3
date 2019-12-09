@@ -64,7 +64,7 @@ To run the example, type the following at the command line\.
 node iam_createuser.js USER_NAME
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_createuser.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_createuser.js)\.
 
 ## Listing Users in Your Account<a name="iam-examples-managing-users-listing-users"></a>
 
@@ -101,7 +101,7 @@ To run the example, type the following at the command line\.
 node iam_listusers.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_listusers.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_listusers.js)\.
 
 ## Updating a User's Name<a name="iam-examples-managing-users-updating-users"></a>
 
@@ -136,7 +136,7 @@ To run the example, type the following at the command line, specifying the user'
 node iam_updateuser.js ORIGINAL_USERNAME NEW_USERNAME
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_updateuser.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_updateuser.js)\.
 
 ## Deleting a User<a name="iam-examples-managing-users-deleting-users"></a>
 
@@ -178,4 +178,4 @@ To run the example, type the following at the command line\.
 node iam_deleteuser.js USER_NAME
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_deleteuser.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_deleteuser.js)\.

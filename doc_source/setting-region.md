@@ -1,6 +1,6 @@
 # Setting the AWS Region<a name="setting-region"></a>
 
-A Region is a named set of AWS resources in the same geographical area\. An example of a Region is `us-east-1`, which is the US East \(N\. Virginia\) Region\. You specify a Region when creating a service client in the SDK for JavaScript so that the SDK accesses the service in that Region\. Some services are available only in specific Regions\.
+An AWS Region is a named set of AWS resources in the same geographical area\. An example of a Region is `us-east-1`, which is the US East \(N\. Virginia\) Region\. You specify a Region when creating a service client in the SDK for JavaScript so that the SDK accesses the service in that Region\. Some services are available only in specific Regions\.
 
 The SDK for JavaScript doesn't select a Region by default\. However, you can set the Region using an environment variable, a shared `config` file, or the global configuration object\.
 
@@ -9,7 +9,7 @@ The SDK for JavaScript doesn't select a Region by default\. However, you can set
 When you instantiate a service object, you can specify the Region for that resource as part of the client class constructor, as shown here\.
 
 ```
-var s3Client = new s3({region: 'us-west-2'});
+const s3Client = new S3.S3Client({region: 'us-west-2'})
 ```
 
 ## Using an Environment Variable<a name="setting-region-environment-variable"></a>

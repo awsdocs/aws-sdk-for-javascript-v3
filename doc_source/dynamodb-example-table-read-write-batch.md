@@ -61,7 +61,7 @@ To run the example, type the following at the command line\.
 node ddb_batchgetitem.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_batchgetitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_batchgetitem.js)\.
 
 ## Writing Items in Batch<a name="dynamodb-example-table-read-write-batch-writing"></a>
 
@@ -116,4 +116,4 @@ To run the example, type the following at the command line\.
 node ddb_batchwriteitem.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_batchwriteitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_batchwriteitem.js)\.

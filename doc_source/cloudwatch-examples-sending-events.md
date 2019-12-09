@@ -23,7 +23,7 @@ For more information about CloudWatch Events, see [Adding Events with PutEvents]
 To set up and run this example, you must first complete these tasks:
 + Install Node\.js\. For more information about installing Node\.js, see the [Node\.js website](https://nodejs.org)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading Credentials in Node\.js from the Shared Credentials File](loading-node-credentials-shared.md)\.
-+ Create a Lambda function using the **hello\-world** blueprint to serve as the target for events\. To learn how, see [ Step 1: Create an AWS Lambda function](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/LogEC2InstanceState.html) in the *Amazon CloudWatch Events User Guide*\.
++ Create an AWS Lambda function using the **hello\-world** blueprint to serve as the target for events\. To learn how, see [ Step 1: Create an AWS Lambda function](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/LogEC2InstanceState.html) in the *Amazon CloudWatch Events User Guide*\.
 + Create an IAM role whose policy grants permission to CloudWatch Events and that includes `events.amazonaws.com` as a trusted entity\. For more information about creating an IAM role, see [ Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
 Use the following role policy when creating the IAM role\.
@@ -105,7 +105,7 @@ To run the example, type the following at the command line\.
 node cwe_putrule.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwe_putrule.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwe_putrule.js)\.
 
 ## Adding a Lambda Function Target<a name="cloudwatch-examples-sending-events-targets"></a>
 
@@ -145,7 +145,7 @@ To run the example, type the following at the command line\.
 node cwe_puttargets.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwe_puttargets.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwe_puttargets.js)\.
 
 ## Sending Events<a name="cloudwatch-examples-sending-events-putevents"></a>
 
@@ -188,4 +188,4 @@ To run the example, type the following at the command line\.
 node cwe_putevents.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwe_putevents.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwe_putevents.js)\.

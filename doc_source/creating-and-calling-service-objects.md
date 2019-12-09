@@ -6,7 +6,7 @@ When using the SDK in Node\.js, you add the SDK package for each service you nee
 
 ```
 // Import the Amazon S3 service client
-const S3 = require("@aws-sdk/clients-S3"); 
+const S3 = require("@aws-sdk/client-s3"); 
 // Create an S3 client in the us-west-1 Region
 const s3Client = new S3.S3Client({
     region: 'us-west-1'
@@ -20,7 +20,15 @@ When calling a method of a service object, pass parameters in JSON as required b
 ```
 s3Client.send(new GetObjectCommand(
   {Bucket: 'bucketName', Key: 'keyName'}
-));
+))
+```
+
+You can also call the `GetObject` method from the `S3Client` directly:
+
+```
+s3Client.getObject(
+  {Bucket: 'bucketName', Key: 'keyName'}
+))
 ```
 
 For more information about Amazon S3 parameters, see [Class: AWS\.S3](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html) in the API reference\.

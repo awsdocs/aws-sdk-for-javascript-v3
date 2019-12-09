@@ -11,7 +11,7 @@ In this example, a simulated browser\-based slot machine game invokes a Lambda f
 
 This diagram illustrates most of the elements in this application and how they relate to one another\. Versions of this diagram will appear throughout the tutorial to show the focus of each task
 
-![\[JavaScript running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[JavaScript running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[JavaScript running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[JavaScript running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browser-calls-lambda-function.png)![\[JavaScript running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[JavaScript running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 ## Prerequisites<a name="using-lambda-prerequisites"></a>
 

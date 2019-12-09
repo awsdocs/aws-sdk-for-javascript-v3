@@ -23,7 +23,7 @@ To set up and run this example, first complete these tasks\.
 
 Create a Node\.js module with the file name `ec2_createinstances.js`\. Be sure to configure the SDK as previously shown\.
 
-Create an object to pass the parameters for the `runInstances` method of the AWS\.EC2 client class, including the name of the key pair to assign and the ID of the AMI to run\. To call the `runInstances` method, create a promise for invoking an Amazon EC2 service object, passing the parameters\. Then handle the response in the promise callback\. 
+Create an object to pass the parameters for the `runInstances` method of the `AWS.EC2` client class, including the name of the key pair to assign and the ID of the AMI to run\. To call the `runInstances` method, create a promise for invoking an Amazon EC2 service object, passing the parameters\. Then handle the response in the promise callback\. 
 
 The code next adds a `Name` tag to a new instance, which the Amazon EC2 console recognizes and displays in the **Name** field of the instance list\. You can add up to 50 tags to an instance, all of which can be added in a single call to the `createTags` method\.
 
@@ -31,7 +31,7 @@ The code next adds a `Name` tag to a new instance, which the Amazon EC2 console 
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
 // Load credentials and set region from JSON file
-AWS.config.loadFromPath('./config.json');
+AWS.config.update({region: 'REGION'});
 
 // Create EC2 service object
 var ec2 = new AWS.EC2({apiVersion: '2016-11-15'});
@@ -39,7 +39,7 @@ var ec2 = new AWS.EC2({apiVersion: '2016-11-15'});
 // AMI is amzn-ami-2011.09.1.x86_64-ebs
 var instanceParams = {
    ImageId: 'AMI_ID', 
-   InstanceType: 't1.micro',
+   InstanceType: 't2.micro',
    KeyName: 'KEY_PAIR_NAME',
    MinCount: 1,
    MaxCount: 1
@@ -83,4 +83,4 @@ To run the example, type the following at the command line\.
 node ec2_createinstances.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_createinstances.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_createinstances.js)\.

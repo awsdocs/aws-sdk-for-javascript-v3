@@ -60,7 +60,7 @@ To run the example, type the following at the command line\.
 node ec2_describeinstances.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describeinstances.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describeinstances.js)\.
 
 ## Managing Instance Monitoring<a name="ec2-example-managing-instances-monitoring"></a>
 
@@ -123,7 +123,7 @@ To run the example, type the following at the command line, specifying `ON` to b
 node ec2_monitorinstances.js ON
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_monitorinstances.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_monitorinstances.js)\.
 
 ## Starting and Stopping Instances<a name="ec2-example-managing-instances-starting-stopping"></a>
 
@@ -186,7 +186,7 @@ To run the example, type the following at the command line specifying `START` to
 node ec2_startstopinstances.js START INSTANCE_ID
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_startstopinstances.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_startstopinstances.js)\.
 
 ## Rebooting Instances<a name="ec2-example-managing-instances-rebooting"></a>
 
@@ -229,4 +229,4 @@ To run the example, type the following at the command line\.
 node ec2_rebootinstances.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_rebootinstances.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_rebootinstances.js)\.

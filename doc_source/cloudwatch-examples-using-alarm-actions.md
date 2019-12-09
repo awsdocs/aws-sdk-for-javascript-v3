@@ -47,7 +47,7 @@ Use the following role policy when creating the IAM role\.
 
 ## <a name="cloudwatch-examples-using-alarm-actions-configure-sdk"></a>
 
-Configure the SDK for JavaScript by creating a global configuration object then setting the Region for your code\. In this example, the Region is set to `us-west-2`\.
+Configure the SDK for JavaScript by creating a global configuration object then setting the AWS Region for your code\. In this example, the Region is set to `us-west-2`\.
 
 ```
 // Load the SDK for JavaScript
@@ -119,7 +119,7 @@ To run the example, type the following at the command line\.
 node cw_enablealarmactions.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cw_enablealarmactions.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cw_enablealarmactions.js)\.
 
 ## Disabling Actions on an Alarm<a name="cloudwatch-examples-using-alarm-actions-disabling"></a>
 
@@ -149,4 +149,4 @@ To run the example, type the following at the command line\.
 node cw_disablealarmactions.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cw_disablealarmactions.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cw_disablealarmactions.js)\.

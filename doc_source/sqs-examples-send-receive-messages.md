@@ -75,7 +75,7 @@ To run the example, type the following at the command line\.
 node sqs_sendmessage.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_sendmessage.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_sendmessage.js)\.
 
 ## Receiving and Deleting Messages from a Queue<a name="sqs-examples-send-receive-messages-receiving"></a>
 
@@ -132,4 +132,4 @@ To run the example, type the following at the command line\.
 node sqs_receivemessage.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_receivemessage.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_receivemessage.js)\.

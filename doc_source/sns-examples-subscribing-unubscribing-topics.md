@@ -33,8 +33,12 @@ var AWS = require('aws-sdk');
 // Set region
 AWS.config.update({region: 'REGION'});
 
+const params = {
+  TopicArn : 'TOPIC_ARN'
+}
+
 // Create promise and SNS service object
-var subslistPromise = new AWS.SNS({apiVersion: '2010-03-31'}).listSubscriptionsByTopic({TopicArn : TOPIC_ARN}).promise();
+var subslistPromise = new AWS.SNS({apiVersion: '2010-03-31'}).listSubscriptionsByTopic(params).promise();
 
 // Handle promise's fulfilled/rejected states
   subslistPromise.then(
@@ -53,7 +57,7 @@ To run the example, type the following at the command line\.
 node sns_listsubscriptions.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_listsubscriptions.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_listsubscriptions.js)\.
 
 ## Subscribing an Email Address to a Topic<a name="sns-examples-subscribing-email"></a>
 
@@ -95,7 +99,7 @@ To run the example, type the following at the command line\.
 node sns_subscribeemail.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_subscribeemail.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_subscribeemail.js)\.
 
 ## Subscribing an Application Endpoint to a Topic<a name="sns-examples-subscribing-apps"></a>
 
@@ -137,7 +141,7 @@ To run the example, type the following at the command line\.
 node sns_subscribeapp.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_subscribeapp.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_subscribeapp.js)\.
 
 ## Subscribing a Lambda Function to a Topic<a name="sns-examples-subscribing-lambda"></a>
 
@@ -179,7 +183,7 @@ To run the example, type the following at the command line\.
 node sns_subscribelambda.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_subscribelambda.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_subscribelambda.js)\.
 
 ## Unsubscribing from a Topic<a name="sns-examples-unsubscribing"></a>
 
@@ -214,4 +218,4 @@ To run the example, type the following at the command line\.
 node sns_unsubscribe.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_unsubscribe.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_unsubscribe.js)\.

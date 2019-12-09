@@ -27,13 +27,13 @@ fs.readFile('index.html', function(err, data) {
 
 For a complete list of all built\-in modules that Node\.js provides, see [Node\.js v6\.11\.1 Documentation](https://nodejs.org/api/modules.html) on the Node\.js website\.
 
-## Using NPM Packages<a name="node-npm-packages"></a>
+## Using npm Packages<a name="node-npm-packages"></a>
 
-In addition to the built\-in modules, you can also include and incorporate third\-party code from npm, the Node\.js package manager\. This is a repository of open source Node\.js packages and a command\-line interface for installing those packages\. For more information about npm and a list of currently available packages, see [https://www\.npmjs\.com](https://www.npmjs.com)\. You can also learn about additional Node\.js packages you can use [here on GitHub](https://github.com/sindresorhus/awesome-nodejs)\.
+In addition to the built\-in modules, you can also include and incorporate third\-party code from `npm`, the Node\.js package manager\. This is a repository of open source Node\.js packages and a command\-line interface for installing those packages\. For more information about `npm` and a list of currently available packages, see [https://www\.npmjs\.com](https://www.npmjs.com)\. You can also learn about additional Node\.js packages you can use [here on GitHub](https://github.com/sindresorhus/awesome-nodejs)\.
 
 **Topics**
 + [Using Built\-In Node\.js Modules](#node-common-modules)
-+ [Using NPM Packages](#node-npm-packages)
++ [Using npm Packages](#node-npm-packages)
 + [Configuring maxSockets in Node\.js](node-configuring-maxsockets.md)
 + [Reusing Connections with Keep\-Alive in Node\.js](node-reusing-connections.md)
 + [Configuring Proxies for Node\.js](node-configuring-proxies.md)

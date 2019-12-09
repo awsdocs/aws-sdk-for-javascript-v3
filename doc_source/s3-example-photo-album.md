@@ -9,7 +9,7 @@
 
 In this example, a simple HTML page provides a browser\-based application for creating photo albums in an Amazon S3 bucket into which you can upload photos\. The application lets you delete photos and albums that you add\.
 
-
+![\[JavaScript in a browser script using Amazon S3 buckets for photo albums.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/s3-photo-album-example.png)
 
 The browser script uses the SDK for JavaScript to interact with an Amazon S3 bucket\. Use the following methods of the Amazon S3 client class to enable the photo album application: 
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property)
@@ -127,7 +127,7 @@ Nearly all of the rest of the code in this example is organized into a series of
 
 The application creates albums in the Amazon S3 bucket as objects whose keys begin with a forward slash character, indicating the object functions as a folder\. To list all the existing albums in the bucket, the application's `listAlbums` function calls the `listObjects` method of the `AWS.S3` service object while using `commonPrefix` so the call returns only objects used as albums\.
 
-The rest of the function takes the list of albums from the Amazon S3 bucket and generates the HTML needed to display the album list in the web page\. It also enables deleting and opening individual albums\.
+The rest of the function takes the list of albums from the Amazon S3 bucket and generates the HTML needed to display the album list in the webpage\. It also enables deleting and opening individual albums\.
 
 ```
 function listAlbums() {
@@ -207,7 +207,7 @@ function createAlbum(albumName) {
 
 To display the contents of an album in the Amazon S3 bucket, the application's `viewAlbum` function takes an album name and creates the Amazon S3 key for that album\. The function then calls the `listObjects` method of the `AWS.S3` service object to obtain a list of all the objects \(photos\) in the album\.
 
-The rest of the function takes the list of objects \(photos\) from the album and generates the HTML needed to display the photos in the web page\. It also enables deleting individual photos and navigating back to the album list\.
+The rest of the function takes the list of objects \(photos\) from the album and generates the HTML needed to display the photos in the webpage\. It also enables deleting individual photos and navigating back to the album list\.
 
 ```
 function viewAlbum(albumName) {
@@ -269,7 +269,7 @@ function viewAlbum(albumName) {
 
 ## Adding Photos to an Album<a name="s3-example-photo-album-adding-photos"></a>
 
-To upload a photo to an album in the Amazon S3 bucket, the application's `addPhoto` function uses a file picker element in the web page to identify a file to upload\. It then forms a key for the photo to upload from the current album name and the file name\.
+To upload a photo to an album in the Amazon S3 bucket, the application's `addPhoto` function uses a file picker element in the webpage to identify a file to upload\. It then forms a key for the photo to upload from the current album name and the file name\.
 
 The function calls the `upload` method of the Amazon S3 service object to upload the photo\. The `ACL` parameter is set to `public-read` so the application can fetch the photos in an album for display by their URL in the bucket\. After uploading the photo, the function redisplays the album so the uploaded photo appears\.
 

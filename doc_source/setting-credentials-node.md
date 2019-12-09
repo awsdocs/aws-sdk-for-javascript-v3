@@ -22,11 +22,11 @@ If more than one credential source is available to the SDK, the default preceden
 
 1. The shared credentials file
 
-1. Credentials loaded from the ECS credentials provider \(if applicable\)
+1. Credentials loaded from the Amazon ECS credentials provider \(if applicable\)
 
 1. Credentials that are obtained by using a credential process specified in the shared AWS config file or the shared credentials file\. For more information, see [Loading Credentials in Node\.js using a Configured Credential Process](loading-node-credentials-configured-credential-process.md)\.
 
-1. Credentials loaded from AWS IAM using the credentials provider of the Amazon EC2 instance \(if configured in the instance metadata\)
+1. Credentials loaded from AWS Identity and Access Management \(IAM\) using the credentials provider of the Amazon EC2 instance \(if configured in the instance metadata\)
 
 For more information, see [Class: AWS\.Credentials](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Credentials.html) and [Class: AWS\.CredentialProviderChain](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CredentialProviderChain.html) in the API reference\.
 
@@ -36,7 +36,7 @@ While it is possible to do so, we do not recommend hard\-coding your AWS credent
 The topics in this section describe how to load credentials into Node\.js\.
 
 **Topics**
-+ [Loading Credentials in Node\.js from IAM Roles for EC2](loading-node-credentials-iam.md)
++ [Loading Credentials in Node\.js from IAM Roles for Amazon EC2](loading-node-credentials-iam.md)
 + [Loading Credentials for a Node\.js Lambda Function](loading-node-credentials-lambda.md)
 + [Loading Credentials in Node\.js from the Shared Credentials File](loading-node-credentials-shared.md)
 + [Loading Credentials in Node\.js from Environment Variables](loading-node-credentials-environment.md)

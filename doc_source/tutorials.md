@@ -1,4 +1,4 @@
-# Tutorials<a name="tutorials"></a>
+# Tutorials for the AWS SDK for JavaScript<a name="tutorials"></a>
 
 The following tutorials show you how to perform different tasks related to using the AWS SDK for JavaScript\.
 

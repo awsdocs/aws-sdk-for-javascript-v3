@@ -9,7 +9,7 @@
 
 ## The Scenario<a name="ec2-example-elastic-ip-addresses-scenario"></a>
 
-An *Elastic IP address* is a static IP address designed for dynamic cloud computing\. An Elastic IP address is associated with your AWS account\. It is a public IP address, which is reachable from the Internet\. If your instance does not have a public IP address, you can associate an Elastic IP address with your instance to enable communication with the Internet\.
+An *Elastic IP address* is a static IP address designed for dynamic cloud computing\. An Elastic IP address is associated with your AWS account\. It is a public IP address, which is reachable from the internet\. If your instance does not have a public IP address, you can associate an Elastic IP address with your instance to enable communication with the internet\.
 
 In this example, you use a series of Node\.js modules to perform several Amazon EC2 operations involving Elastic IP addresses\. The Node\.js modules use the SDK for JavaScript to manage Elastic IP addresses by using these methods of the Amazon EC2 client class:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeAddresses-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeAddresses-property)
@@ -61,7 +61,7 @@ To run the example, type the following at the command line\.
 node ec2_describeaddresses.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describeaddresses.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describeaddresses.js)\.
 
 ## Allocating and Associating an Elastic IP Address with an Amazon EC2 Instance<a name="ec2-example-elastic-ip-addresses-allocating-associating"></a>
 
@@ -112,7 +112,7 @@ To run the example, type the following at the command line\.
 node ec2_allocateaddress.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_allocateaddress.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_allocateaddress.js)\.
 
 ## Releasing an Elastic IP Address<a name="ec2-example-elastic-ip-addresses-releasing"></a>
 

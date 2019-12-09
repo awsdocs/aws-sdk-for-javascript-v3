@@ -55,7 +55,7 @@ To run the example, type the following at the command line\. Amazon SES returns 
 node ses_listtemplates.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_listtemplates.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_listtemplates.js)\.
 
 ## Getting an Email Template<a name="ses-examples-get-template"></a>
 
@@ -88,7 +88,7 @@ To run the example, type the following at the command line\. Amazon SES returns 
 node ses_gettemplate.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_gettemplate.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_gettemplate.js)\.
 
 ## Creating an Email Template<a name="ses-examples-create-template"></a>
 
@@ -131,7 +131,7 @@ To run the example, type the following at the command line\. The template is add
 node ses_createtemplate.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_createtemplate.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_createtemplate.js)\.
 
 ## Updating an Email Template<a name="ses-examples-update-template"></a>
 
@@ -174,7 +174,7 @@ To run the example, type the following at the command line\. Amazon SES returns 
 node ses_updatetemplate.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_updatetemplate.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_updatetemplate.js)\.
 
 ## Deleting an Email Template<a name="ses-examples-delete-template"></a>
 
@@ -207,4 +207,4 @@ To run the example, type the following at the command line\. Amazon SES returns 
 node ses_deletetemplate.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deletetemplate.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deletetemplate.js)\.

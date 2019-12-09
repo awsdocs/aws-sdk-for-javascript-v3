@@ -1,6 +1,6 @@
-# Capturing Web Page Scroll Progress Code<a name="kinesis-examples-capturing-page-scrolling-full"></a>
+# Capturing Webpage Scroll Progress Code<a name="kinesis-examples-capturing-page-scrolling-full"></a>
 
-Here is the browser script code for the Kinesis capturing web page scroll progress example\.
+Here is the browser script code for the Kinesis capturing webpage scroll progress example\.
 
 ```
 // Configure Credentials to use Cognito

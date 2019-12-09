@@ -35,15 +35,14 @@ By default, the SDK checks the `AWS_PROFILE` environment variable to determine w
 **Note**  
 When setting environment variables, be sure to take appropriate actions afterwards \(according to the needs of your operating system\) to make the variables available in the shell or command environment\.
 
-After setting the environment variable \(if needed\), you can run a file named `script.js` that uses the SDK as follows:
+After setting the environment variable \(if needed\), you can run a file named `script.js` that uses the SDK as follows\.
 
 ```
 $ node script.js
 ```
 
-You can also explicitly select the profile used by the SDK, either by setting `process.env.AWS_PROFILE` before loading the SDK, or by selecting the credential provider as shown in the following example:
+You can also explicitly select the profile used by a client as shown in the following example\.
 
 ```
-var credentials = new AWS.SharedIniFileCredentials({profile: 'work-account'});
-AWS.config.credentials = credentials;
+const s3Client = new S3.S3Client({profile: 'work-account'})
 ```

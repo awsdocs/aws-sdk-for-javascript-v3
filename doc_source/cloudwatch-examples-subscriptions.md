@@ -21,7 +21,7 @@ For more information about CloudWatch Logs subscriptions, see [Real\-time Proces
 To set up and run this example, you must first complete these tasks:
 + Install Node\.js\. For more information about installing Node\.js, see the [Node\.js website](https://nodejs.org)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading Credentials in Node\.js from the Shared Credentials File](loading-node-credentials-shared.md)\.
-+ Create a Lambda function as the destination for log events\. You will need to use the ARN of this function\. For more information about setting up a Lambda function, see [Subscription Filters with AWS Lambda](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#LambdaFunctionExample) in the *Amazon CloudWatch Logs User Guide*\.
++ Create an AWS Lambda function as the destination for log events\. You will need to use the Amazon Resource Name \(ARN\) of this function\. For more information about setting up a Lambda function, see [Subscription Filters with AWS Lambda](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#LambdaFunctionExample) in the *Amazon CloudWatch Logs User Guide*\.
 + Create an IAM role whose policy grants permission to invoke the Lambda function you created and grants full access to CloudWatch Logs or apply the following policy to the execution role you create for the Lambda function\. For more information about creating an IAM role, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
 Use the following role policy when creating the IAM role\.
@@ -85,7 +85,7 @@ To run the example, type the following at the command line\.
 node cwl_describesubscriptionfilters.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwl_describesubscriptionfilters.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwl_describesubscriptionfilters.js)\.
 
 ## Creating a Subscription Filter<a name="cloudwatch-examples-subscriptions-creating"></a>
 
@@ -122,7 +122,7 @@ To run the example, type the following at the command line\.
 node cwl_putsubscriptionfilter.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwl_putsubscriptionfilter.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwl_putsubscriptionfilter.js)\.
 
 ## Deleting a Subscription Filter<a name="cloudwatch-examples-subscriptions-deleting"></a>
 
@@ -157,4 +157,4 @@ To run the example, type the following at the command line\.
 node cwl_deletesubscriptionfilter.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwl_deletesubscriptionfilter.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/cloudwatch/cwl_deletesubscriptionfilter.js)\.

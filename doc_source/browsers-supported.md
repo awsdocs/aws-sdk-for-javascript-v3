@@ -1,19 +1,21 @@
-# Web Browsers Supported<a name="browsers-supported"></a>
+# Supported Web Browsers<a name="browsers-supported"></a>
 
-The SDK for JavaScript supports all modern web browsers, including these minimum versions:
+The SDK for JavaScript supports all modern web browsers, including these minimum versions\.
 
 
 ****  
 
 | Browser | Version | 
 | --- | --- | 
-| Google Chrome | 28\.0\+ | 
-| Mozilla Firefox | 26\.0\+ | 
-| Opera | 17\.0\+ | 
-| Microsoft Edge | 25\.10\+ | 
-| Windows Internet Explorer | 10\+ | 
-| Apple Safari | 5\+ | 
-| Android Browser | 4\.3\+ | 
+| Google Chrome | 49\.0\+ | 
+| Mozilla Firefox | 45\.0\+ | 
+| Opera | 36\.0\+ | 
+| Microsoft Edge | 12\.0\+ | 
+| Windows Internet Explorer | N/A | 
+| Apple Safari | 9\.0\+ | 
+| Android Browser | 76\.0\+ | 
+| UC Browser | 12\.12\+ | 
+| Samsung Internet | 5\.0\+ | 
 
 **Note**  
-Frameworks such as AWS Amplify might not offer the same browser support as the SDK for JavaScript\. Check a framework's documentation for details\.
+Frameworks such as AWS Amplify might not offer the same browser support as the SDK for JavaScript\. See the framework's documentation for details\.

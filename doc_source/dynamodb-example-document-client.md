@@ -27,7 +27,7 @@ To set up and run this example, first complete these tasks:
 
 ## Getting an Item from a Table<a name="dynamodb-example-document-client-get"></a>
 
-Create a Node\.js module with the file name `ddbdoc_get.js`\. Be sure to configure the SDK as previously shown\. To access DynamoDB, create an `AWS.DynamoDB.DocumentClient` object\. Create a JSON object containing the parameters needed get an item from the table, which in this example includes the name of the table, the name of the hash key in that table, and the value of the hash key for the item you want to get\. Call the `get` method of the DynamoDB document client\.
+Create a Node\.js module with the file name `ddbdoc_get.js`\. Be sure to configure the SDK as previously shown\. To access DynamoDB, create an `AWS.DynamoDB.DocumentClient` object\. Create a JSON object containing the parameters needed get an item from the table, which in this example includes the name of the table, the name of the hash key in that table, and the value of the hash key for the item you want to get\. Call the `get` method of the DynamoDB `DocumentClient` class\.
 
 ```
 // Load the AWS SDK for Node.js
@@ -58,7 +58,7 @@ To run the example, type the following at the command line\.
 node ddbdoc_get.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_get.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_get.js)\.
 
 ## Putting an Item in a Table<a name="dynamodb-example-document-client-put"></a>
 
@@ -97,7 +97,7 @@ To run the example, type the following at the command line\.
 node ddbdoc_put.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_put.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_put.js)\.
 
 ## Updating an Item in a Table<a name="dynamodb-example-document-client-update"></a>
 
@@ -144,7 +144,7 @@ To run the example, type the following at the command line\.
 node ddbdoc_update.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_update.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_update.js)\.
 
 ## Querying a Table<a name="dynamodb-example-document-client-query"></a>
 
@@ -187,7 +187,7 @@ To run the example, type the following at the command line\.
 node ddbdoc_query.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_query.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_query.js)\.
 
 ## Deleting an Item from a Table<a name="dynamodb-example-document-client-delete"></a>
 
@@ -224,4 +224,4 @@ To run the example, type the following at the command line\.
 node ddbdoc_delete.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_delete.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddbdoc_delete.js)\.

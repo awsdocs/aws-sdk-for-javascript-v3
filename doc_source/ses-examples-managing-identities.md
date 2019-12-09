@@ -10,7 +10,7 @@
 
 An Amazon SES *identity* is an email address or domain that Amazon SES uses to send email\. Amazon SES requires you to verify your email identities, confirming that you own them and preventing others from using them\.
 
-For details on how to verify email addresses and domains in Amazon SES, see [Verifying Email Addresses and Domains in Amazon SES](Amazon Simple Email Service Developer Guideverify-addresses-and-domains.html) in the Amazon Simple Email Service Developer Guide\. For information about sending authorization in Amazon SES, see [Overview of Amazon SES Sending Authorization ](Amazon Simple Email Service Developer Guidesending-authorization-overview.html)\.
+For details on how to verify email addresses and domains in Amazon SES, see [Verifying Email Addresses and Domains in Amazon SES](Amazon Simple Email Service Developer Guideverify-addresses-and-domains.html) in the Amazon Simple Email Service Developer Guide\. For information about sending authorization in Amazon SES, see [Overview of Amazon SES Sending Authorization](Amazon Simple Email Service Developer Guidesending-authorization-overview.html)\.
 
 ## The Scenario<a name="ses-examples-verifying-identities-scenario"></a>
 
@@ -77,7 +77,7 @@ To run the example, type the following at the command line\.
 node ses_listidentities.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_listidentities.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_listidentities.js)\.
 
 ## Verifying an Email Address Identity<a name="ses-examples-verifying-email"></a>
 
@@ -110,7 +110,7 @@ To run the example, type the following at the command line\. The domain is added
 node ses_verifyemailidentity.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_verifyemailidentity.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_verifyemailidentity.js)\.
 
 ## Verifying a Domain Identity<a name="ses-examples-verifying-domains"></a>
 
@@ -143,7 +143,7 @@ To run the example, type the following at the command line\. The domain is added
 node ses_verifydomainidentity.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_verifydomainidentity.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_verifydomainidentity.js)\.
 
 ## Deleting Identities<a name="ses-examples-deleting-identities"></a>
 
@@ -176,4 +176,4 @@ To run the example, type the following at the command line\.
 node ses_deleteidentity.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deleteidentity.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deleteidentity.js)\.

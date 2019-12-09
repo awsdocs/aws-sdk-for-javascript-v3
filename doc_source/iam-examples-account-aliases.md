@@ -50,7 +50,7 @@ To run the example, type the following at the command line\.
 node iam_createaccountalias.js ALIAS
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_createaccountalias.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_createaccountalias.js)\.
 
 ## Listing Account Aliases<a name="iam-examples-account-aliases-listing"></a>
 
@@ -80,7 +80,7 @@ To run the example, type the following at the command line\.
 node iam_listaccountaliases.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_listaccountaliases.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_listaccountaliases.js)\.
 
 ## Deleting an Account Alias<a name="iam-examples-account-aliases-deleting"></a>
 
@@ -110,4 +110,4 @@ To run the example, type the following at the command line\.
 node iam_deleteaccountalias.js ALIAS
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_deleteaccountalias.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_deleteaccountalias.js)\.

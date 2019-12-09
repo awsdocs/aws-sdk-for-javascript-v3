@@ -76,7 +76,7 @@ To run the example, type the following at the command line\. The filter is creat
 node ses_createreceiptfilter.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_createreceiptfilter.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_createreceiptfilter.js)\.
 
 ## Listing Your IP Address Filters<a name="ses-examples-ip-filters-listing"></a>
 
@@ -109,7 +109,7 @@ To run the example, type the following at the command line\. Amazon SES returns 
 node ses_listreceiptfilters.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_listreceiptfilters.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_listreceiptfilters.js)\.
 
 ## Deleting an IP Address Filter<a name="ses-examples-ip-filters-deleting"></a>
 
@@ -142,4 +142,4 @@ To run the example, type the following at the command line\. The filter is delet
 node ses_deletereceiptfilter.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deletereceiptfilter.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deletereceiptfilter.js)\.

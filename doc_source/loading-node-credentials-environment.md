@@ -6,4 +6,4 @@ The SDK automatically detects AWS credentials set as variables in your environme
 + `AWS_SESSION_TOKEN` \(optional\)
 
 **Note**  
-When setting environment variables, be sure to take appropriate actions afterwards \(according to the needs of your operating system\) to make the variables available in the shell or command environment\.
+When setting environment variables, be sure to take appropriate actions afterward \(according to the needs of your operating system\) to make the variables available in the shell or command environment\.

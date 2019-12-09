@@ -59,7 +59,7 @@ To run the example, type the following at the command line\.
 node ec2_describesecuritygroups.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describesecuritygroups.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describesecuritygroups.js)\.
 
 ## Creating a Security Group and Rules<a name="ec2-example-security-groups-creating"></a>
 
@@ -71,7 +71,7 @@ After you successfully create the security group, you can define rules for allow
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
 // Load credentials and set region from JSON file
-AWS.config.loadFromPath('./config.json');
+AWS.config.update({region: 'REGION'});
 
 // Create EC2 service object
 var ec2 = new AWS.EC2({apiVersion: '2016-11-15'});
@@ -133,7 +133,7 @@ To run the example, type the following at the command line\.
 node ec2_createsecuritygroup.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_createsecuritygroup.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_createsecuritygroup.js)\.
 
 ## Deleting a Security Group<a name="ec2-example-security-groups-deleting"></a>
 
@@ -168,4 +168,4 @@ To run the example, type the following at the command line\.
 node ec2_deletesecuritygroup.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_deletesecuritygroup.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_deletesecuritygroup.js)\.

@@ -59,7 +59,7 @@ To run the example, type the following at the command line\.
 node sqs_longpolling_createqueue.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_longpolling_createqueue.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_longpolling_createqueue.js)\.
 
 ## Enabling Long Polling on an Existing Queue<a name="sqs-examples-enable-long-polling-existing-queue"></a>
 
@@ -96,7 +96,7 @@ To run the example, type the following at the command line\.
 node sqs_longpolling_existingqueue.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_longpolling_existingqueue.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_longpolling_existingqueue.js)\.
 
 ## Enabling Long Polling on Message Receipt<a name="sqs-examples-enable-long-polling-on-receive-message"></a>
 
@@ -140,4 +140,4 @@ To run the example, type the following at the command line\.
 node sqs_longpolling_receivemessage.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_longpolling_receivemessage.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_longpolling_receivemessage.js)\.

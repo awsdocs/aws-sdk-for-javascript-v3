@@ -9,7 +9,7 @@
 
 In this example, a simple HTML page provides a browser\-based application for viewing the photos in a photo album\. The photo album is in an Amazon S3 bucket into which photos are uploaded\.
 
-
+![\[JavaScript in a browser script using Amazon S3 buckets for photo albums.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/s3-photo-album-example.png)
 
 The browser script uses the SDK for JavaScript to interact with an Amazon S3 bucket\. The script uses the [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property) method of the Amazon S3 client class to enable you to view the photo albums\.
 

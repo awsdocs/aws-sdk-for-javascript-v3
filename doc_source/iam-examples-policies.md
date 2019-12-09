@@ -81,7 +81,7 @@ To run the example, type the following at the command line\.
 node iam_createpolicy.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_createpolicy.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_createpolicy.js)\.
 
 ## Getting an IAM Policy<a name="iam-examples-policies-getting"></a>
 
@@ -115,7 +115,7 @@ To run the example, type the following at the command line\.
 node iam_getpolicy.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_getpolicy.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/iam/iam_getpolicy.js)\.
 
 ## Attaching a Managed Role Policy<a name="iam-examples-policies-attaching-role-policy"></a>
 

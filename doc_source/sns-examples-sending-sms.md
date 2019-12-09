@@ -67,7 +67,7 @@ To run the example, type the following at the command line\.
 node sns_getsmstype.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_getsmstype.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_getsmstype.js)\.
 
 ## Setting SMS Attributes<a name="sending-sms-setattributes"></a>
 
@@ -108,7 +108,7 @@ To run the example, type the following at the command line\.
 node sns_setsmstype.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_setsmstype.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_setsmstype.js)\.
 
 ## Checking If a Phone Number Has Opted Out<a name="sending-sms-checkifphonenumberisoptedout"></a>
 
@@ -141,7 +141,7 @@ To run the example, type the following at the command line\.
 node sns_checkphoneoptout.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_checkphoneoptout.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_checkphoneoptout.js)\.
 
 ## Listing Opted\-Out Phone Numbers<a name="sending-sms-listphonenumbersoptedout"></a>
 
@@ -175,7 +175,7 @@ To run the example, type the following at the command line\.
 node sns_listnumbersoptedout.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_listnumbersoptedout.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_listnumbersoptedout.js)\.
 
 ## Publishing an SMS Message<a name="sending-sms-publishsms"></a>
 
@@ -216,4 +216,4 @@ To run the example, type the following at the command line\.
 node sns_publishsms.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_publishsms.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_publishsms.js)\.

@@ -1,15 +1,15 @@
-# Capturing Web Page Scroll Progress with Amazon Kinesis<a name="kinesis-examples-capturing-page-scrolling"></a>
+# Capturing Webpage Scroll Progress with Amazon Kinesis<a name="kinesis-examples-capturing-page-scrolling"></a>
 
 ![\[JavaScript code example that applies to browser execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browsericon.png)
 
 **This browser script example shows:**
-+ How to capture scroll progress in a web page with Amazon Kinesis as an example of streaming page usage metrics for later analysis\.
++ How to capture scroll progress in a webpage with Amazon Kinesis as an example of streaming page usage metrics for later analysis\.
 
 ## The Scenario<a name="kinesis-examples-capturing-page-scrolling-scenario"></a>
 
 In this example, a simple HTML page simulates the content of a blog page\. As the reader scrolls the simulated blog post, the browser script uses the SDK for JavaScript to record the scroll distance down the page and send that data to Kinesis using the [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Kinesis.html#putRecords-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Kinesis.html#putRecords-property) method of the Kinesis client class\. The streaming data captured by Amazon Kinesis Data Streams can then be processed by Amazon EC2 instances and stored in any of several data stores including Amazon DynamoDB and Amazon Redshift\.
 
-
+![\[JavaScript in a browser script sending scroll data to Kinesis.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/kinesis-examples.png)
 
 ## Prerequisite Tasks<a name="kinesis-examples-capturing-page-scrolling-prerequisites"></a>
 
@@ -76,7 +76,7 @@ The HTML for the blog page consists mainly of a series of paragraphs contained w
 
 Obtain the credentials needed to configure the SDK by calling the `CognitoIdentityCredentials` method, providing the Amazon Cognito identity pool ID\. Upon success, create the Kinesis service object in the callback function\.
 
-The following code snippet shows this step\. \(See [Capturing Web Page Scroll Progress Code](kinesis-examples-capturing-page-scrolling-full.md) for the full example\.\)
+The following code snippet shows this step\. \(See [Capturing Webpage Scroll Progress Code](kinesis-examples-capturing-page-scrolling-full.md) for the full example\.\)
 
 ```
 // Configure Credentials to use Cognito
@@ -104,7 +104,7 @@ AWS.config.credentials.get(function(err) {
 
 Scroll progress is calculated using the `scrollHeight` and `scrollTop` properties of the `<div>` containing the content of the blog post\. Each scroll record is created in an event listener function for the `scroll` event and then added to an array of records for periodic submission to Kinesis\.
 
-The following code snippet shows this step\. \(See [Capturing Web Page Scroll Progress Code](kinesis-examples-capturing-page-scrolling-full.md) for the full example\.\)
+The following code snippet shows this step\. \(See [Capturing Webpage Scroll Progress Code](kinesis-examples-capturing-page-scrolling-full.md) for the full example\.\)
 
 ```
     // Get the ID of the Web page element.
@@ -146,7 +146,7 @@ The following code snippet shows this step\. \(See [Capturing Web Page Scroll Pr
 
 Once each second, if there are records in the array, those pending records are sent to Kinesis\.
 
-The following code snippet shows this step\. \(See [Capturing Web Page Scroll Progress Code](kinesis-examples-capturing-page-scrolling-full.md) for the full example\.\)
+The following code snippet shows this step\. \(See [Capturing Webpage Scroll Progress Code](kinesis-examples-capturing-page-scrolling-full.md) for the full example\.\)
 
 ```
     // upload data to Amazon Kinesis every second if data exists

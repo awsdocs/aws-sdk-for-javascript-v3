@@ -4,7 +4,7 @@ This topic is part of a larger tutorial about using the AWS SDK for JavaScript w
 
 In this task, you will focus on creating an Amazon Cognito identity pool used to authenticate your browser script code, and then editing the browser script accordingly\.
 
-![\[Preparing the browser JavaScript\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing the browser JavaScript\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing the browser JavaScript\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Preparing the browser JavaScript\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browser-script.png)![\[Preparing the browser JavaScript\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing the browser JavaScript\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 ## Prepare an Amazon Cognito Identity Pool<a name="identity-pool"></a>
 
@@ -46,7 +46,7 @@ The JavaScript code in the browser script needs authentication to access AWS ser
 1. Choose **Allow**\.
 
 1. Choose **Sample code** in the side menu\. Make a note of the identity pool ID, shown in red text in the console\.  
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/identity-pool-id.png)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 ## Edit the Browser Script<a name="edit-script"></a>
 

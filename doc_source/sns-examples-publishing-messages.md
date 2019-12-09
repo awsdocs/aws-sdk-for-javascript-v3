@@ -42,7 +42,7 @@ var publishTextPromise = new AWS.SNS({apiVersion: '2010-03-31'}).publish(params)
 // Handle promise's fulfilled/rejected states
 publishTextPromise.then(
   function(data) {
-    console.log("Message ${params.Message} send sent to the topic ${params.TopicArn}");
+    console.log(`Message ${params.Message} send sent to the topic ${params.TopicArn}`);
     console.log("MessageID is " + data.MessageId);
   }).catch(
     function(err) {
@@ -56,4 +56,4 @@ To run the example, type the following at the command line\.
 node sns_publishtotopic.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_publishtotopic.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sns/sns_publishtotopic.js)\.

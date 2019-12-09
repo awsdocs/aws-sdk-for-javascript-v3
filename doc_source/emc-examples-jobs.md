@@ -204,7 +204,7 @@ To run the example, type the following at the command line\.
 node emc_createjob.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_createjob.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_createjob.js)\.
 
 ## Canceling a Transcoding Job<a name="emc-examples-jobs-cancel"></a>
 
@@ -244,7 +244,7 @@ To run the example, type the following at the command line\.
 node ec2_canceljob.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_canceljob.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_canceljob.js)\.
 
 ## Listing Recent Transcoding Jobs<a name="emc-examples-jobs-listing"></a>
 
@@ -288,4 +288,4 @@ To run the example, type the following at the command line\.
 node emc_listjobs.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_listjobs.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_listjobs.js)\.

@@ -1,9 +1,9 @@
 # Using JavaScript Promises<a name="using-promises"></a>
 
-Use the service client's `send` method to make the service call and manage asynchronous flow instead of using callbacks\. The following example shows how to get the names of your DynamoDB tables in `us-west-2`\.
+Use the service client's `send` method to make the service call and manage asynchronous flow instead of using callbacks\. The following example shows how to get the names of your Amazon DynamoDB tables in `us-west-2`\.
 
 ```
-const DDB = require('@aws-sdk/client-dynamodb-node')
+const DDB = require('@aws-sdk/client-dynamodb')
 const dbClient = new DDB.DynamoDBClient({ region: 'us-west-2' })
 
 dbClient
@@ -18,25 +18,9 @@ dbClient
 
 ## Coordinating Multiple Promises<a name="multiple-promises"></a>
 
-In some situations, your code must make multiple asynchronous calls that require action only when they have all returned successfully\. If you manage those individual asynchronous method calls with promises, you can create an additional promise that uses the `all` method\. This method fulfills this umbrella promise if and when the array of promises that you pass into the method are fulfilled\. The callback function is passed an array of the values of the promises passed to the `all` method\.
+In some situations, your code must make multiple asynchronous calls that require action only when they have all returned successfully\. If you manage those individual asynchronous method calls with promises, you can create an additional promise that uses the `all` method\. 
 
-In the following example, an AWS Lambda function must make three asynchronous calls to Amazon DynamoDB but can only complete after the promises for each call are fulfilled\.
-
-```
-Promise.all([firstPromise, secondPromise, thirdPromise]).then(function(values) {
-  
-  console.log("Value 0 is " + values[0].toString);
-  console.log("Value 1 is " + values[1].toString);
-  console.log("Value 2 is " + values[2].toString);
-
-  // return the result to the caller of the Lambda function
-  callback(null, values);
-});
-```
-
-## Coordinating Multiple Promises<a name="multiple-promises"></a>
-
-In some situations, your code must make multiple asynchronous calls that require action only when they have all returned successfully\. If you manage those individual asynchronous method calls with promises, you can create an additional promise that uses the `all` method\. This method fulfills this umbrella promise if and when the array of promises that you pass into the method are fulfilled\. The callback function is passed an array of the values of the promises passed to the `all` method\.
+This method fulfills this umbrella promise if and when the array of promises that you pass into the method are fulfilled\. The callback function is passed an array of the values of the promises passed to the `all` method\.
 
 In the following example, an AWS Lambda function must make three asynchronous calls to Amazon DynamoDB but can only complete after the promises for each call are fulfilled\.
 
@@ -63,7 +47,7 @@ In addition to the native promise implementation in ECMAScript 2015, you can als
 
 These optional promise libraries can be useful if you need your code to run in environments that don't support the native promise implementation in ECMAScript 5 and ECMAScript 2015\.
 
-To use a third\-party promise library, set a promises dependency on the SDK by calling the `setPromisesDependency` method of the global configuration object\. In browser scripts, make sure to load the third\-party promise library before loading the SDK\. In the following example, the SDK is configured to use the implementation in the bluebird promise library\.
+To use a third\-party promise library, set a promises dependency on the SDK by calling the `setPromisesDependency` method of the global configuration object\. In browser scripts, make sure to load the third\-party promise library before loading the SDK\. In the following example, the SDK is configured to use the implementation in the `bluebird` promise library\.
 
 ```
 AWS.config.setPromisesDependency(require('bluebird'));

@@ -15,39 +15,7 @@ To begin, register an application with the identity providers you choose to supp
 
 ## Step 2: Creating an IAM Role for an Identity Provider<a name="config-web-identity-role"></a>
 
-After you obtain the application ID from an identity provider, go to the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/) to create a new IAM role\.
-
-**To create an IAM role for an identity provider**
-
-1. Open [https://console.aws.amazon.com/iam](https://console.aws.amazon.com/iam) in a browser\.
-
-1. Select **Roles** in the left navigation bar\.
-
-1. Select **Create role**\.
-
-1. Select **Web identity**
-
-1. Select **Facebook** as the **Identity provider**\.
-
-1. Enter your Facebook ID in **Application ID** and select **Next: Permissions**\.
-
-1. Since we are using Amazon S3, select **AmazonS3FullAccess**\.
-
-   Attach any other policies you need\. For information about IAM policies, see [Overview of IAM Policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)\.
-
-   Select **Next: tags**\.
-
-1. Since we don't need to tag this role, select **Next: Review**
-
-1. Enter a name for the new role that helps you keep track of its use, such as **facebookIdentity**\.
-
-   \(Optional\) Add a description\.
-
-   Select **Create role**\.
-
-You can provide other constraints to the role, such as scoping it to specific user IDs\. If the role grants write permissions to your resources, make sure you correctly scope the role to users with the correct privileges, otherwise any user with an Amazon, Facebook, or Google identity will be able to modify resources in your application\.
-
-For more information on using web identity federation in IAM, see [ About Web Identity Federation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html) in the *IAM User Guide*\.
+After you obtain the application ID from an identity provider, use the [IAM console](https://console.aws.amazon.com/iam) to create a new IAM role\. See https://docs\.aws\.amazon\.com/cognito/latest/developerguide/iam\-roles\.html for details\.  
 
 ## Step 3: Obtaining a Provider Access Token After Login<a name="config-web-identity-obtain-token"></a>
 
@@ -58,7 +26,7 @@ Set up the login action for your application by using the identity provider's SD
 
 ## Step 4: Obtaining Temporary Credentials<a name="config-web-identity-get-credentials"></a>
 
-After your application, roles, and resource permissions are configured, add the code to your application to obtain temporary credentials\. These credentials are provided through the AWS Security Token Service using web identity federation\. Users log in to the identity provider, which returns an access token\. Set up the `AWS.WebIdentityCredentials` object using the ARN for the IAM role you created for this identity provider:
+After your application, roles, and resource permissions are configured, add the code to your application to obtain temporary credentials\. These credentials are provided through the AWS Security Token Service using web identity federation\. Users log in to the identity provider, which returns an access token\. Set up the `AWS.WebIdentityCredentials` object using the ARN for the IAM role you created for this identity provider\.
 
 ```
 AWS.config.credentials = new AWS.WebIdentityCredentials({
@@ -68,11 +36,11 @@ AWS.config.credentials = new AWS.WebIdentityCredentials({
 });
 ```
 
-The value for *PROVIDER\_ID* depends on the specified identity provider: **graph\.facebook\.com** for Facebook, **www\.amazon\.com** for Amazon, and **null** for Google\. The value for *ACCESS\_TOKEN* is the access token retrieved from a successful login with the identity provider\. For more information on how to configure and retrieve access tokens for each identity provider, see the documentation from the identity provider\.
+The value for *PROVIDER\_ID* depends on the specified identity provider: **graph\.facebook\.com** for Facebook, **www\.amazon\.com** for Amazon, and **null** for Google\. The value for *ACCESS\_TOKEN* is the access token retrieved from a successful login with the identity provider\. For more information about how to configure and retrieve access tokens for each identity provider, see the documentation from the identity provider\.
 
-Service objects that are created subsequently will have the proper credentials:
+Service objects that are created subsequently will have the proper credentials\.
 
-You can also create credentials before retrieving the access token\. This allows you to create service objects that depend on credentials before loading the access token\. To do this, create the credentials object without the `WebIdentityToken` parameter:
+You can also create credentials before retrieving the access token\. This allows you to create service objects that depend on credentials before loading the access token\. To do this, create the credentials object without the `WebIdentityToken` parameter\.
 
 ```
 AWS.config.credentials = new AWS.WebIdentityCredentials({
@@ -81,7 +49,7 @@ AWS.config.credentials = new AWS.WebIdentityCredentials({
 });
 ```
 
-Then set the `WebIdentityToken` in the callback from the identity provider SDK that contains the access token:
+Then set the `WebIdentityToken` in the callback from the identity provider SDK that contains the access token\.
 
 ```
 S3Client.credentials.WebIdentityToken = ACCESS_TOKEN

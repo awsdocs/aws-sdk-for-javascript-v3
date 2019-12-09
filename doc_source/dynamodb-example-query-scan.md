@@ -65,7 +65,7 @@ To run the example, type the following at the command line\.
 node ddb_query.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_query.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_query.js)\.
 
 ## Scanning a Table<a name="dynamodb-example-table-query-scan-scanning"></a>
 
@@ -109,4 +109,4 @@ To run the example, type the following at the command line\.
 node ddb_scan.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_scan.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/dynamodb/ddb_scan.js)\.

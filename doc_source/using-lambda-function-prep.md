@@ -1,8 +1,8 @@
 # Prepare and Create the Lambda Function<a name="using-lambda-function-prep"></a>
 
-In this task, you create the Lambda function used by the application\.
+In this task, you create the AWS Lambda function used by the application\.
 
-![\[JavaScript running in a browser invoking a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[JavaScript running in a browser invoking a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[JavaScript running in a browser invoking a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[JavaScript running in a browser invoking a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/create-lambda-function.png)![\[JavaScript running in a browser invoking a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[JavaScript running in a browser invoking a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 The Lambda function is invoked by the browser script every time the player of the game clicks and releases the handle on the side of the machine\. There are 16 possible results that can appear in each slot position, chosen at random\. 
 
@@ -32,7 +32,7 @@ The Node\.js code needed for the Lambda function is in the `slotassets` director
 
 1. Compress `slotpull.js` into a \.zip archive file for creating the Lambda function\.
 
-1. Upload `slotpull.js.zip` to the Amazon S3 bucket you created for this app\. You can use the following CLI command, where *BUCKET* is the name of your Amazon S3 bucket:
+1. Upload `slotpull.js.zip` to the Amazon S3 bucket you created for this app\. You can use the following CLI command, where *BUCKET* is the name of your Amazon S3 bucket\.
 
    ```
    aws s3 cp slotpull.js.zip s3://BUCKET
@@ -50,7 +50,7 @@ You can provide the Node\.js code for the Lambda function is in a file compresse
 
 1. Open `lambda-function-setup.js` in the `slotassets` directory in a text editor\. 
 
-1. Find this line in the script 
+1. Find this line in the script\. 
 
    ```
       S3Bucket: 'BUCKET_NAME',

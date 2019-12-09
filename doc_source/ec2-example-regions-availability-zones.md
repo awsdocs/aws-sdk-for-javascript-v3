@@ -3,7 +3,7 @@
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 
 **This Node\.js code example shows:**
-+ How to retrieve descriptions for Regions and Availability Zones\.
++ How to retrieve descriptions for AWS Regions and Availability Zones\.
 
 ## The Scenario<a name="ec2-example-regions-availability-zones-scenario"></a>
 
@@ -61,4 +61,4 @@ To run the example, type the following at the command line\.
 node ec2_describeregionsandzones.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describeregionsandzones.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ec2/ec2_describeregionsandzones.js)\.

@@ -53,7 +53,7 @@ To run the example, type the following at the command line\.
 node sqs_listqueues.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_listqueues.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_listqueues.js)\.
 
 ## Creating a Queue<a name="sqs-examples-using-queues-create-queue"></a>
 
@@ -91,7 +91,7 @@ To run the example, type the following at the command line\.
 node sqs_createqueue.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_createqueue.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_createqueue.js)\.
 
 ## Getting the URL for a Queue<a name="sqs-examples-using-queues-get-queue-url"></a>
 
@@ -125,7 +125,7 @@ To run the example, type the following at the command line\.
 node sqs_getqueueurl.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_getqueueurl.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_getqueueurl.js)\.
 
 ## Deleting a Queue<a name="sqs-examples-using-queues-delete-queue"></a>
 
@@ -159,4 +159,4 @@ To run the example, type the following at the command line\.
 node sqs_deletequeue.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_deletequeue.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/sqs/sqs_deletequeue.js)\.

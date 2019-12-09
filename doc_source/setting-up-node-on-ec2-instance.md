@@ -38,7 +38,7 @@ AWS does not control the following code\. Before you run it, be sure to verify i
    nvm install node
    ```
 
-   Installing Node\.js also installs the Node Package Manager \(npm\) so you can install additional modules as needed\.
+   Installing Node\.js also installs the Node Package Manager \(`npm`\) so you can install additional modules as needed\.
 
 1. Test that Node\.js is installed and running correctly by typing the following at the command line\.
 
@@ -59,6 +59,6 @@ After you install Node\.js on an Amazon EC2 instance, you can create an Amazon M
 
 ## Related Resources<a name="setting-up-node-on-ec2-instance-related-resource"></a>
 
-For more information about the commands and software used in this topic, see the following web pages:
-+ node version manager \(nvm\): see [nvm repo on GitHub](https://github.com/creationix/nvm)\.
-+ node package manager \(npm\): see [npm website](https://www.npmjs.com)\.
+For more information about the commands and software used in this topic, see the following webpages:
++ Node Version Manager \(`nvm`\): see [nvm repo on GitHub](https://github.com/creationix/nvm)\.
++ Node Package Manager \(`npm`\): see [npm website](https://www.npmjs.com)\.

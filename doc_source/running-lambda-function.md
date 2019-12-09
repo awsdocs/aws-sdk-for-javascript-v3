@@ -1,16 +1,16 @@
 # Run the Lambda Function<a name="running-lambda-function"></a>
 
-In this task, you run the application\.
+In this task, you run the application you created starting with [Tutorial: Creating and Using Lambda Functions](using-lambda-functions.md)\.
 
 **To run the browser application**
 
 1. Open a web browser\.
 
 1. Point the browser at the URL for the Amazon S3 bucket that hosts the application\.  
-![\[Slot machine web application running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Slot machine web application running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Slot machine web application running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Slot machine web application running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/app_02.png)![\[Slot machine web application running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Slot machine web application running in a browser that invokes a Lambda function\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Select the handle on the right side of the slot machine\. The wheels begin to spin as the browser script invokes the Lambda function to generate results for this turn\.  
-![\[Web application running in a browser that invokes a Lambda function.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Web application running in a browser that invokes a Lambda function.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Web application running in a browser that invokes a Lambda function.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Web application running in a browser that invokes a Lambda function.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/app_01.png)![\[Web application running in a browser that invokes a Lambda function.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Web application running in a browser that invokes a Lambda function.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Once the Lambda function returns the spin results to the browser script, the browser script sets the game display to show the images that the Lambda function selected\.
 

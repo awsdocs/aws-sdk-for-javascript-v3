@@ -4,7 +4,7 @@ Amazon Simple Notification Service \(Amazon SNS\) is a web service that coordina
 
 In Amazon SNS, there are two types of clients—publishers and subscribers—also referred to as producers and consumers\. 
 
-
+![\[Relationship between JavaScript environments, the SDK, and Amazon SNS\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-sns.png)
 
 Publishers communicate asynchronously with subscribers by producing and sending a message to a topic, which is a logical access point and communication channel\. Subscribers \(web servers, email addresses, Amazon SQS queues, Lambda functions\) consume or receive the message or notification over one of the supported protocols \(Amazon SQS, HTTP/S, email, SMS, AWS Lambda\) when they are subscribed to the topic\. 
 
