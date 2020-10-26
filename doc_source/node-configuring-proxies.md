@@ -13,14 +13,14 @@ npm install PROXY --save
 To use a proxy in your application, use the `httpOptions` property, as shown in the following example for a DynamoDB client\. 
 
 ```
-const proxy = require('proxy-agent')
-const NodeHttpHandler = require("@aws-sdk/node-http-handler")
+const proxy = require("proxy-agent");
+const { NodeHttpHandler } = require("@aws-sdk/node-http-handler");
 
 const dynamodbClient = new DynamoDBClient({
   requestHandler: new NodeHttpHandler({
-    httpAgent: new Agent({proxy: proxy('http://internal.proxy.com')})
-  })
-})
+    httpAgent: new Agent({ proxy: proxy("http://internal.proxy.com") }),
+  }),
+});
 ```
 
 \.
