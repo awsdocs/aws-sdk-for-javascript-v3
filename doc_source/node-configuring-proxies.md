@@ -18,7 +18,7 @@ const { NodeHttpHandler } = require("@aws-sdk/node-http-handler");
 
 const dynamodbClient = new DynamoDBClient({
   requestHandler: new NodeHttpHandler({
-    httpAgent: new Agent({ proxy: proxy("http://internal.proxy.com") }),
+    httpsAgent: proxy("http://internal.proxy.com"),
   }),
 });
 ```
