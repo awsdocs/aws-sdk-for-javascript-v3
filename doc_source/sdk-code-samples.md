@@ -1,19 +1,30 @@
-# SDK for JavaScript Code Examples<a name="sdk-code-samples"></a>
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# SDK for JavaScript code examples<a name="sdk-code-samples"></a>
 
 The topics in this section contain examples of how to use the AWS SDK for JavaScript with the APIs of various services to carry out common tasks\.
 
-Find the source code for these examples and others in the AWS documentation [code examples repository on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples)\. To propose a new code example for the AWS documentation team to consider producing, create a request\. The team is looking to produce code examples that cover broader scenarios and use cases, versus simple code snippets that cover only individual API calls\. For instructions, see the *Proposing new code examples* section in the [Readme on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/README.rst)\.
+Find the source code for these examples and others in the [AWS Code Examples Repository on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples)\. To propose a new code example for the AWS documentation team to consider producing, create a request\. The team is looking to produce code examples that cover broader scenarios and use cases, versus simple code snippets that cover only individual API calls\. For instructions, see the *Proposing new code examples* section in the [Readme on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/README.rst)\.
 
 **Topics**
-+ [Amazon CloudWatch Examples](cloudwatch-examples.md)
-+ [Amazon DynamoDB Examples](dynamodb-examples.md)
-+ [Amazon EC2 Examples](ec2-examples.md)
-+ [AWS Elemental MediaConvert Examples](emc-examples.md)
-+ [Amazon S3 Glacier Examples](glacier-examples.md)
-+ [AWS Identity and Access Management Examples](iam-examples.md)
++ [Amazon CloudWatch examples](cloudwatch-examples.md)
++ [Amazon DynamoDB examples](dynamodb-examples.md)
++ [Amazon EC2 examples](ec2-examples.md)
++ [AWS Elemental MediaConvert examples](emc-examples.md)
++ [Amazon S3 Glacier examples](glacier-examples.md)
++ [AWS Identity and Access Management examples](iam-examples.md)
 + [Amazon Kinesis Example](kinesis-examples.md)
-+ [AWS Lambda Examples](lambda-examples.md)
-+ [Amazon S3 Examples](s3-examples.md)
-+ [Amazon Simple Email Service Examples](ses-examples.md)
++ [AWS Lambda examples](lambda-examples.md)
++ [Amazon S3 examples](s3-examples.md)
++ [Amazon Simple Email Service examples](ses-examples.md)
 + [Amazon Simple Notification Service Examples](sns-examples.md)
-+ [Amazon SQS Examples](sqs-examples.md)
++ [Amazon SQS examples](sqs-examples.md)
++ [Amazon Redshift examples](redshift-examples.md)

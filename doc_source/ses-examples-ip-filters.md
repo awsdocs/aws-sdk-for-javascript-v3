@@ -1,145 +1,181 @@
-# Using IP Address Filters for Email Receipt in Amazon SES<a name="ses-examples-ip-filters"></a>
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# Using IP address filters for email receipt in Amazon SES<a name="ses-examples-ip-filters"></a>
 
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 
 **This Node\.js code example shows:**
-+ Create IP address filters to accept or reject mail that originates from an IP address or range of IP addresses\.
-+ List your current IP address filters\.
-+ Delete an IP address filter\.
++ How to create IP address filters to accept or reject mail that originates from an IP address or range of IP addresses\.
++ How to list your current IP address filters\.
++ How to delete an IP address filter\.
 
-In Amazon SES, a *filter* is a data structure that consists of a name, an IP address range, and whether to allow or block mail from it\. IP addresses you want to block or allow are specified as a single IP address or a range of IP addresses in Classless Inter\-Domain Routing \(CIDR\) notation\. For details on how Amazon SES receives email, see [Amazon SES Email\-Receiving Concepts](Amazon Simple Email Service Developer Guidereceiving-email-concepts.html) in the Amazon Simple Email Service Developer Guide\.
+In Amazon SES, a *filter* is a data structure that consists of a name, an IP address range, and the functionality to allow or block mail from it\. IP addresses you want to block or allow are specified as a single IP address or a range of IP addresses in Classless Inter\-Domain Routing \(CIDR\) notation\. For details on how Amazon SES receives email, see [Amazon SES email\-receiving concepts](Amazon Simple Email Service Developer Guidereceiving-email-concepts.html) in the Amazon Simple Email Service Developer Guide\.
 
-## The Scenario<a name="ses-examples-receiving-email-scenario"></a>
+## The scenario<a name="ses-examples-receiving-email-scenario"></a>
 
-In this example, a series of Node\.js modules are used to send email in a variety of ways\. The Node\.js modules use the SDK for JavaScript to create and use email templates using these methods of the `AWS.SES` client class:
+In this example, a series of Node\.js modules are used to send email in a variety of ways\. The Node\.js modules use the SDK for JavaScript to create and use email templates using these methods of the `SES` client class:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#createReceiptFilter-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#createReceiptFilter-property)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#listReceiptFilters-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#listReceiptFilters-property)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#deleteReceiptFilter-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#deleteReceiptFilter-property)
 
-## Prerequisite Tasks<a name="ses-examples-ip-filters-prerequisites"></a>
+## Prerequisite tasks<a name="ses-examples-ip-filters-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Install Node\.js\. For more information about installing Node\.js, see the [Node\.js website](https://nodejs.org)\.
-+ Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading Credentials in Node\.js from the Shared Credentials File](loading-node-credentials-shared.md)\.
++ Set up a project environment to run Node TypeScript examples\. For more information, see[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ses/README.md)\.
+**Note**  
+The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
++ Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
-## Configuring the SDK<a name="ses-examples-ip-filters-configure-sdk"></a>
+## Creating an IP address filter<a name="ses-examples-ip-filters-creating"></a>
 
-Configure the SDK for JavaScript by creating a global configuration object then setting the Region for your code\. In this example, the Region is set to `us-west-2`\.
+In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_createreceiptfilter.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
-```
-// Load the SDK for JavaScript
-var AWS = require('aws-sdk');
-// Set the Region 
-AWS.config.update({region: 'us-west-2'});
-```
+Create an object to pass the parameter values that define the IP filter, including the filter name, an IP address or range of addresses to filter, and whether to allow or block email traffic from the filtered addresses\. To call the `CreateReceiptFilterCommand` method, invoke an Amazon SES service object, passing the parameters\. 
 
-## Creating an IP Address Filter<a name="ses-examples-ip-filters-creating"></a>
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
-In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_createreceiptfilter.js`\. Configure the SDK as previously shown\.
-
-Create an object to pass the parameter values that define the IP filter, including the filter name, an IP address or range of addresses to filter, and whether to allow or block email traffic from the filtered addresses\. To call the `createReceiptFilter` method, create a promise for invoking an Amazon SES service object, passing the parameters\. Then handle the `response` in the promise callback\.
+**Note**  
+Replace *REGION* with your AWS Region, *IP\_ADDRESS\_OR\_RANGE* with the IP address or range of addresses to filter, *POLICY* with with `ALLOW` or `BLOCK`, and *NAME* with the filter name\.
 
 ```
-// Load the AWS SDK for Node.js
-var AWS = require('aws-sdk');
-// Set the region 
-AWS.config.update({region: 'REGION'});
+// Import required AWS SDK clients and commands for Node.js
+const {
+  SESClient,
+  CreateReceiptFilterCommand
+} = require("@aws-sdk/client-ses");
 
-// Create createReceiptFilter params
-var params = {
- Filter: {
-  IpFilter: {
-   Cidr: "IP_ADDRESS_OR_RANGE", 
-   Policy: "Allow" | "Block"
+// Set the AWS Region
+const REGION = "REGION"; //e.g. "us-east-1"
+
+// Set the parameters
+const params = {
+  Filter: {
+    IpFilter: {
+      Cidr: "IP_ADDRESS_OR_RANGE", // (in code; either a single IP address (10.0.0.1) or an IP address range in CIDR notation (10.0.0.1/24)),
+      Policy: "POLICY", // 'ALLOW' or 'BLOCK' email traffic from the filtered addressesOptions.
+    },
+    Name: "NAME", // NAME (the filter name)
   },
-  Name: "NAME"
- }
 };
 
+// Create SES service object
+const ses = new SESClient(REGION);
 
-// Create the promise and SES service object
-var sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).createReceiptFilter(params).promise();
-
-// Handle promise's fulfilled/rejected states
-sendPromise.then(
-  function(data) {
-    console.log(data);
-  }).catch(
-    function(err) {
+const run = async () => {
+  try {
+    const data = await ses.send(new CreateReceiptFilterCommand(params));
+    console.log(
+      "Success, IP Address Filter created; requestId:",
+      data.$metadata.requestId
+    );
+  } catch (err) {
     console.error(err, err.stack);
-  });
+  }
+};
+run();
 ```
 
-To run the example, type the following at the command line\. The filter is created in Amazon SES\.
+To run the example, enter the following at the command prompt\. The filter is created in Amazon SES\.
 
 ```
-node ses_createreceiptfilter.js
+ts-node ses_createreceiptfilter.ts // If you prefer JavaScript, enter 'node ses_createreceiptfilter.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_createreceiptfilter.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_createreceiptfilter.ts)\.
 
-## Listing Your IP Address Filters<a name="ses-examples-ip-filters-listing"></a>
+## Listing your IP address filters<a name="ses-examples-ip-filters-listing"></a>
 
-In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_listreceiptfilters.js`\. Configure the SDK as previously shown\.
+In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_listreceiptfilters.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
-Create an empty parameters object\. To call the `listReceiptFilters` method, create a promise for invoking an Amazon SES service object, passing the parameters\. Then handle the `response` in the promise callback\.
+Create an empty parameters object\. To call the `ListReceiptFiltersCommand` method, invoking an Amazon SES service object, passing the parameters\. 
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+**Note**  
+Replace *REGION* with your AWS Region\.
 
 ```
-// Load the AWS SDK for Node.js
-var AWS = require('aws-sdk');
-// Set the region 
-AWS.config.update({region: 'REGION'});
+// Import required AWS SDK clients and commands for Node.js
+const { SESClient, ListReceiptFiltersCommand } = require("@aws-sdk/client-ses");
 
-// Create the promise and SES service object
-var sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).listReceiptFilters({}).promise();
+// Set the AWS Region
+const REGION = "REGION"; //e.g. "us-east-1"
 
-// Handle promise's fulfilled/rejected states
-sendPromise.then(
-  function(data) {
+// Create SES service object
+const ses = new SESClient(REGION);
+
+const run = async () => {
+  try {
+    const data = await ses.send(new ListReceiptFiltersCommand({}));
     console.log(data.Filters);
-  }).catch(
-    function(err) {
+  } catch (err) {
     console.error(err, err.stack);
-  });
+  }
+};
+run();
 ```
 
-To run the example, type the following at the command line\. Amazon SES returns the filter list\.
+To run the example, enter the following at the command prompt\. Amazon SES returns the filter list\.
 
 ```
-node ses_listreceiptfilters.js
+ts-node ses_listreceiptfilters.ts // If you prefer JavaScript, enter 'node ses_listreceiptfilters.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_listreceiptfilters.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/ses_listreceiptfilters.ts)\.
 
-## Deleting an IP Address Filter<a name="ses-examples-ip-filters-deleting"></a>
+## Deleting an IP address filter<a name="ses-examples-ip-filters-deleting"></a>
 
-In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_deletereceiptfilter.js`\. Configure the SDK as previously shown\.
+In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_deletereceiptfilter.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
-Create an object to pass the name of the IP filter to delete\. To call the `deleteReceiptFilter` method, create a promise for invoking an Amazon SES service object, passing the parameters\. Then handle the `response` in the promise callback\.
+Create an object to pass the name of the IP filter to delete\. To call the `DeleteReceiptFilterCommand` method, invoke an Amazon SES client service object, passing the parameters\. 
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+**Note**  
+Replace *REGION* with your AWS Region, and *FILTER\_NAME* with the name of the IP filter to delete\.
 
 ```
-// Load the AWS SDK for Node.js
-var AWS = require('aws-sdk');
-// Set the region 
-AWS.config.update({region: 'REGION'});
+// Import required AWS SDK clients and commands for Node.js
+const {
+  SESClient,
+  DeleteReceiptFilterCommand
+} = require("@aws-sdk/client-ses");
 
-// Create the promise and SES service object
-var sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).deleteReceiptFilter({FilterName: "NAME"}).promise();
+// Set the AWS Region
+const REGION = "REGION"; //e.g. "us-east-1"
 
-// Handle promise's fulfilled/rejected states
-sendPromise.then(
-  function(data) {
+// Set the parameters
+const params = { FilterName: "FILTER_NAME" }; //FILTER_NAME
+
+// Create SES service object
+const ses = new SESClient(REGION);
+
+const run = async () => {
+  try {
+    const data = await ses.send(new DeleteReceiptFilterCommand(params));
     console.log("IP Filter deleted");
-  }).catch(
-    function(err) {
+  } catch (err) {
     console.error(err, err.stack);
-  });
+  }
+};
+run();
 ```
 
-To run the example, type the following at the command line\. The filter is deleted from Amazon SES\.
+To run the example, enter the following at the command prompt\. The filter is deleted from Amazon SES\.
 
 ```
-node ses_deletereceiptfilter.js
+ts-node ses_deletereceiptfilter.ts // If you prefer JavaScript, enter 'node ses_deletereceiptfilter.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/ses/ses_deletereceiptfilter.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_deletereceiptfilter.ts)\.

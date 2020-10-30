@@ -1,4 +1,14 @@
-# Calling Services Asychronously<a name="calling-services-asynchronously"></a>
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# Calling services asychronously<a name="calling-services-asynchronously"></a>
 
 All requests made through the SDK are asynchronous\. This is important to keep in mind when writing browser scripts\. JavaScript running in a web browser typically has just a single execution thread\. After making an asynchronous call to an AWS service, the browser script continues running and in the process can try to execute code that depends on that asynchronous result before it returns\.
 
@@ -10,13 +20,13 @@ async/await
 We recommend that you use this technique as it is the default behavior in V3\.
 
 promise  
-Use this technique in browsers that do not support asynch/await\.
+Use this technique in browsers that do not support async/await\.
 
 callback  
 Avoid using callbacks except in very simple cases\. However, you might find it useful for migration scenarios\.
 
 **Topics**
-+ [Managing Asychronous Calls](making-asynchronous-calls.md)
++ [Managing asychronous calls](making-asynchronous-calls.md)
 + [Using async/await](using-async-await.md)
-+ [Using JavaScript Promises](using-promises.md)
-+ [Using an Anonymous Callback Function](using-a-callback-function.md)
++ [Using JavaScript promises](using-promises.md)
++ [Using an anonymous callback function](using-a-callback-function.md)

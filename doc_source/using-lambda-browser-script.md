@@ -1,12 +1,22 @@
-# Prepare the Browser Script<a name="using-lambda-browser-script"></a>
+--------
 
-This topic is part of a larger tutorial about using the AWS SDK for JavaScript with AWS Lambda functions\. To start at the beginning of the tutorial, see [Tutorial: Creating and Using Lambda Functions](using-lambda-functions.md)\.
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
 
-In this task, you will focus on creating an Amazon Cognito identity pool used to authenticate your browser script code, and then editing the browser script accordingly\.
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# Prepare the browser script<a name="using-lambda-browser-script"></a>
+
+This topic is part of a larger tutorial about using the AWS SDK for JavaScript with AWS Lambda functions\. To start at the beginning of the tutorial, see [Tutorial: Creating and using Lambda functions](using-lambda-functions.md)\.
+
+In this task, you will focus on creating an Amazon Cognito identity pool used to authenticate your browser script code in the `index.ts` file and then editing the browser script code accordingly\.
 
 ![\[Preparing the browser JavaScript\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browser-script.png)![\[Preparing the browser JavaScript\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing the browser JavaScript\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
-## Prepare an Amazon Cognito Identity Pool<a name="identity-pool"></a>
+## Prepare an Amazon Cognito identity pool<a name="identity-pool"></a>
 
 The JavaScript code in the browser script needs authentication to access AWS services\. Within webpages, you typically use Amazon Cognito Identity to do this authentication\. First, create an Amazon Cognito identity pool\.
 
@@ -48,20 +58,20 @@ The JavaScript code in the browser script needs authentication to access AWS ser
 1. Choose **Sample code** in the side menu\. Make a note of the identity pool ID, shown in red text in the console\.  
 ![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/identity-pool-id.png)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
-## Edit the Browser Script<a name="edit-script"></a>
+## Edit the browser script<a name="edit-script"></a>
 
-Next, update the browser script to include the Amazon Cognito identity pool ID created for this application\.
+Next, update the browser script \(in `index.ts` to include the Amazon Cognito identity pool ID created for this application\.
 
 **To prepare the browser script in the webpage**
 
-1. Open `index.html` in the `MyLambdaApp` folder in a text editor\.
+1. In a text editor open `index.ts` in the `MyLambdaApp` folder\.
 
 1. Find this line of code in the browser script\.
 
-   `AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'IDENTITY_POOL_ID'});`
+   `const lambda = new LambdaClient({ REGION: REGION, credentials: fromCognitoIdentityPool({ client: new CognitoIdentityClient({REGION}), identityPoolId: "IDENTITY_POOL_ID" }) });`
 
 1. Replace `IDENTITY_POOL_ID` with the identity pool ID you obtained previously\.
 
-1. Save `index.html`\.
+1. Save `index.ts`\.
 
-Click **next** to continue the tutorial\.
+Choose **next** to continue the tutorial\.

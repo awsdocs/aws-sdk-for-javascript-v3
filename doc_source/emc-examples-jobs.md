@@ -1,4 +1,14 @@
-# Creating and Managing Transcoding Jobs in MediaConvert<a name="emc-examples-jobs"></a>
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# Creating and managing transcoding jobs in MediaConvert<a name="emc-examples-jobs"></a>
 
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 
@@ -9,7 +19,7 @@
 + How to retrieve the JSON for a completed transcoding job\.
 + How to retrieve a JSON array for up to 20 of the most recently created jobs\.
 
-## The Scenario<a name="emc-examples-jobs-scenario"></a>
+## The scenario<a name="emc-examples-jobs-scenario"></a>
 
 In this example, you use a Node\.js module to call MediaConvert to create and manage transcoding jobs\. The code uses the SDK for JavaScript to do this by using these methods of the MediaConvert client class:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/MediaConvert.html#createJob-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/MediaConvert.html#createJob-property)
@@ -17,275 +27,300 @@ In this example, you use a Node\.js module to call MediaConvert to create and ma
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/MediaConvert.html#getJob-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/MediaConvert.html#getJob-property)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/MediaConvert.html#listJobs-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/MediaConvert.html#listJobs-property)
 
-## Prerequisite Tasks<a name="emc-examples-jobs-prerequisites"></a>
+## Prerequisite tasks<a name="emc-examples-jobs-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Install Node\.js\. For more information, see the [Node\.js website](https://nodejs.org)\.
-+ Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading Credentials in Node\.js from the Shared Credentials File](loading-node-credentials-shared.md)\.
-+ Create and configure Amazon S3 buckets that provide storage for job input files and output files\. For details, see [Create Storage for Files](https://docs.aws.amazon.com/mediaconvert/latest/ug/set-up-file-locations.html) in the *AWS Elemental MediaConvert User Guide*\.
-+ Upload the input video to the Amazon S3 bucket you provisioned for input storage\. For a list of supported input video codecs and containers, see [Supported Input Codecs and Containers](https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html) in the *AWS Elemental MediaConvert User Guide*\.
-+ Create an IAM role that gives MediaConvert access to your input files and the Amazon S3 buckets where your output files are stored\. For details, see [Set Up IAM Permissions](https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html) in the *AWS Elemental MediaConvert User Guide*\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/mediaconvert/README.md)\.
+**Note**  
+The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
++ Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
++ Create and configure Amazon S3 buckets that provide storage for job input files and output files\. For details, see [Create storage for files](https://docs.aws.amazon.com/mediaconvert/latest/ug/set-up-file-locations.html) in the *AWS Elemental MediaConvert User Guide*\.
++ Upload the input video to the Amazon S3 bucket you provisioned for input storage\. For a list of supported input video codecs and containers, see [Supported input codecs and containers](https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html) in the *AWS Elemental MediaConvert User Guide*\.
++ Create an IAM role that gives MediaConvert access to your input files and the Amazon S3 buckets where your output files are stored\. For details, see [Set up IAM permissions](https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html) in the *AWS Elemental MediaConvert User Guide*\.
 
 ## Configuring the SDK<a name="emc-examples-jobs-configure-sdk"></a>
 
-Configure the SDK for JavaScript by creating a global configuration object, and then setting the Region for your code\. In this example, the Region is set to `us-west-2`\. Because MediaConvert uses custom endpoints for each account, you must also configure the `AWS.MediaConvert` client class to use your account\-specific endpoint\. To do this, set the `endpoint` parameter on `AWS.config.mediaconvert`\.
+Configure the SDK as previously shown, including downloading the required clients and packages\. Because MediaConvert uses custom endpoints for each account, you must also configure the `MediaConvert` client class to use your account\-specific endpoint\. To do this, set the `endpoint` parameter on `mediaconvert(endpoint)`\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
-// Load the SDK for JavaScript
-var AWS = require('aws-sdk');
-// Set the Region 
-AWS.config.update({region: 'us-west-2'});
-// Set the custom endpoint for your account
-AWS.config.mediaconvert = {endpoint : 'ACCOUNT_ENDPOINT'};
+// Import required AWS-SDK clients and commands for Node.js
+const {
+  MediaConvertClient,
+  CreateJobCommand
+} = require("@aws-sdk/client-mediaconvert");
+// Create a new service object and set MediaConvert to customer endpoint
+const endpoint = { endpoint: "ACCOUNT_ENDPOINT" }; //ACCOUNT_ENDPOINT
 ```
 
-## Defining a Simple Transcoding Job<a name="emc-examples-jobs-spec"></a>
+## Defining a simple transcoding job<a name="emc-examples-jobs-spec"></a>
 
-Create a Node\.js module with the file name `emc_createjob.js`\. Be sure to configure the SDK as previously shown\. Create the JSON that defines the transcode job parameters\.
+Create a Node\.js module with the file name `emc_createjob.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. Create the JSON that defines the transcode job parameters\.
 
 These parameters are quite detailed\. You can use the [AWS Elemental MediaConvert console](https://console.aws.amazon.com/mediaconvert/) to generate the JSON job parameters by choosing your job settings in the console, and then choosing **Show job JSON** at the bottom of the **Job** section\. This example shows the JSON for a simple job\.
 
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+**Note**  
+Replace *ACCOUNT\_ENDPOINT* with your AWS Region, *JOB\_QUEUE\_ARN* with the MediaConvert job queue, *IAM\_ROLE\_ARN* with the Amazon Resource Name \(ARN\) of the IAM role, *OUTPUT\_BUCKET\_NAME* with the destination bucket name \- for example, "s3://OUTPUT\_BUCKET\_NAME/", and *INPUT\_BUCKET\_AND\_FILENAME* with the input bucket and filename \- for example, "s3://INPUT\_BUCKET/FILE\_NAME"\.
+
 ```
-var params = {
-  "Queue": "JOB_QUEUE_ARN",
-  "UserMetadata": {
-    "Customer": "Amazon"
+const params = {
+  Queue: "JOB_QUEUE_ARN", //JOB_QUEUE_ARN
+  UserMetadata: {
+    Customer: "Amazon",
   },
-  "Role": "IAM_ROLE_ARN",
-  "Settings": {
-    "OutputGroups": [
+  Role: "IAM_ROLE_ARN", //IAM_ROLE_ARN
+  Settings: {
+    OutputGroups: [
       {
-        "Name": "File Group",
-        "OutputGroupSettings": {
-          "Type": "FILE_GROUP_SETTINGS",
-          "FileGroupSettings": {
-            "Destination": "s3://OUTPUT_BUCKET_NAME/"
-          }
+        Name: "File Group",
+        OutputGroupSettings: {
+          Type: "FILE_GROUP_SETTINGS",
+          FileGroupSettings: {
+            Destination: "OUTPUT_BUCKET_NAME", //OUTPUT_BUCKET_NAME, e.g., "s3://BUCKET_NAME/"
+          },
         },
-        "Outputs": [
+        Outputs: [
           {
-            "VideoDescription": {
-              "ScalingBehavior": "DEFAULT",
-              "TimecodeInsertion": "DISABLED",
-              "AntiAlias": "ENABLED",
-              "Sharpness": 50,
-              "CodecSettings": {
-                "Codec": "H_264",
-                "H264Settings": {
-                  "InterlaceMode": "PROGRESSIVE",
-                  "NumberReferenceFrames": 3,
-                  "Syntax": "DEFAULT",
-                  "Softness": 0,
-                  "GopClosedCadence": 1,
-                  "GopSize": 90,
-                  "Slices": 1,
-                  "GopBReference": "DISABLED",
-                  "SlowPal": "DISABLED",
-                  "SpatialAdaptiveQuantization": "ENABLED",
-                  "TemporalAdaptiveQuantization": "ENABLED",
-                  "FlickerAdaptiveQuantization": "DISABLED",
-                  "EntropyEncoding": "CABAC",
-                  "Bitrate": 5000000,
-                  "FramerateControl": "SPECIFIED",
-                  "RateControlMode": "CBR",
-                  "CodecProfile": "MAIN",
-                  "Telecine": "NONE",
-                  "MinIInterval": 0,
-                  "AdaptiveQuantization": "HIGH",
-                  "CodecLevel": "AUTO",
-                  "FieldEncoding": "PAFF",
-                  "SceneChangeDetect": "ENABLED",
-                  "QualityTuningLevel": "SINGLE_PASS",
-                  "FramerateConversionAlgorithm": "DUPLICATE_DROP",
-                  "UnregisteredSeiTimecode": "DISABLED",
-                  "GopSizeUnits": "FRAMES",
-                  "ParControl": "SPECIFIED",
-                  "NumberBFramesBetweenReferenceFrames": 2,
-                  "RepeatPps": "DISABLED",
-                  "FramerateNumerator": 30,
-                  "FramerateDenominator": 1,
-                  "ParNumerator": 1,
-                  "ParDenominator": 1
-                }
-              },
-              "AfdSignaling": "NONE",
-              "DropFrameTimecode": "ENABLED",
-              "RespondToAfd": "NONE",
-              "ColorMetadata": "INSERT"
-            },
-            "AudioDescriptions": [
-              {
-                "AudioTypeControl": "FOLLOW_INPUT",
-                "CodecSettings": {
-                  "Codec": "AAC",
-                  "AacSettings": {
-                    "AudioDescriptionBroadcasterMix": "NORMAL",
-                    "RateControlMode": "CBR",
-                    "CodecProfile": "LC",
-                    "CodingMode": "CODING_MODE_2_0",
-                    "RawFormat": "NONE",
-                    "SampleRate": 48000,
-                    "Specification": "MPEG4",
-                    "Bitrate": 64000
-                  }
+            VideoDescription: {
+              ScalingBehavior: "DEFAULT",
+              TimecodeInsertion: "DISABLED",
+              AntiAlias: "ENABLED",
+              Sharpness: 50,
+              CodecSettings: {
+                Codec: "H_264",
+                H264Settings: {
+                  InterlaceMode: "PROGRESSIVE",
+                  NumberReferenceFrames: 3,
+                  Syntax: "DEFAULT",
+                  Softness: 0,
+                  GopClosedCadence: 1,
+                  GopSize: 90,
+                  Slices: 1,
+                  GopBReference: "DISABLED",
+                  SlowPal: "DISABLED",
+                  SpatialAdaptiveQuantization: "ENABLED",
+                  TemporalAdaptiveQuantization: "ENABLED",
+                  FlickerAdaptiveQuantization: "DISABLED",
+                  EntropyEncoding: "CABAC",
+                  Bitrate: 5000000,
+                  FramerateControl: "SPECIFIED",
+                  RateControlMode: "CBR",
+                  CodecProfile: "MAIN",
+                  Telecine: "NONE",
+                  MinIInterval: 0,
+                  AdaptiveQuantization: "HIGH",
+                  CodecLevel: "AUTO",
+                  FieldEncoding: "PAFF",
+                  SceneChangeDetect: "ENABLED",
+                  QualityTuningLevel: "SINGLE_PASS",
+                  FramerateConversionAlgorithm: "DUPLICATE_DROP",
+                  UnregisteredSeiTimecode: "DISABLED",
+                  GopSizeUnits: "FRAMES",
+                  ParControl: "SPECIFIED",
+                  NumberBFramesBetweenReferenceFrames: 2,
+                  RepeatPps: "DISABLED",
+                  FramerateNumerator: 30,
+                  FramerateDenominator: 1,
+                  ParNumerator: 1,
+                  ParDenominator: 1,
                 },
-                "LanguageCodeControl": "FOLLOW_INPUT",
-                "AudioSourceName": "Audio Selector 1"
-              }
-            ],
-            "ContainerSettings": {
-              "Container": "MP4",
-              "Mp4Settings": {
-                "CslgAtom": "INCLUDE",
-                "FreeSpaceBox": "EXCLUDE",
-                "MoovPlacement": "PROGRESSIVE_DOWNLOAD"
-              }
+              },
+              AfdSignaling: "NONE",
+              DropFrameTimecode: "ENABLED",
+              RespondToAfd: "NONE",
+              ColorMetadata: "INSERT",
             },
-            "NameModifier": "_1"
-          }
-        ]
-      }
+            AudioDescriptions: [
+              {
+                AudioTypeControl: "FOLLOW_INPUT",
+                CodecSettings: {
+                  Codec: "AAC",
+                  AacSettings: {
+                    AudioDescriptionBroadcasterMix: "NORMAL",
+                    RateControlMode: "CBR",
+                    CodecProfile: "LC",
+                    CodingMode: "CODING_MODE_2_0",
+                    RawFormat: "NONE",
+                    SampleRate: 48000,
+                    Specification: "MPEG4",
+                    Bitrate: 64000,
+                  },
+                },
+                LanguageCodeControl: "FOLLOW_INPUT",
+                AudioSourceName: "Audio Selector 1",
+              },
+            ],
+            ContainerSettings: {
+              Container: "MP4",
+              Mp4Settings: {
+                CslgAtom: "INCLUDE",
+                FreeSpaceBox: "EXCLUDE",
+                MoovPlacement: "PROGRESSIVE_DOWNLOAD",
+              },
+            },
+            NameModifier: "_1",
+          },
+        ],
+      },
     ],
-    "AdAvailOffset": 0,
-    "Inputs": [
+    AdAvailOffset: 0,
+    Inputs: [
       {
-        "AudioSelectors": {
+        AudioSelectors: {
           "Audio Selector 1": {
-            "Offset": 0,
-            "DefaultSelection": "NOT_DEFAULT",
-            "ProgramSelection": 1,
-            "SelectorType": "TRACK",
-            "Tracks": [
-              1
-            ]
-          }
+            Offset: 0,
+            DefaultSelection: "NOT_DEFAULT",
+            ProgramSelection: 1,
+            SelectorType: "TRACK",
+            Tracks: [1],
+          },
         },
-        "VideoSelector": {
-          "ColorSpace": "FOLLOW"
+        VideoSelector: {
+          ColorSpace: "FOLLOW",
         },
-        "FilterEnable": "AUTO",
-        "PsiControl": "USE_PSI",
-        "FilterStrength": 0,
-        "DeblockFilter": "DISABLED",
-        "DenoiseFilter": "DISABLED",
-        "TimecodeSource": "EMBEDDED",
-        "FileInput": "s3://INPUT_BUCKET_AND_FILE_NAME"
-      }
+        FilterEnable: "AUTO",
+        PsiControl: "USE_PSI",
+        FilterStrength: 0,
+        DeblockFilter: "DISABLED",
+        DenoiseFilter: "DISABLED",
+        TimecodeSource: "EMBEDDED",
+        FileInput: "INPUT_BUCKET_AND_FILENAME", //INPUT_BUCKET_AND_FILENAME, e.g., "s3://BUCKET_NAME/FILE_NAME"
+      },
     ],
-    "TimecodeConfig": {
-      "Source": "EMBEDDED"
-    }
-  }
-};
-```
-
-## Creating a Transcoding Job<a name="emc-examples-jobs-create"></a>
-
-After creating the job parameters JSON, call the `createJob` method by creating a promise for invoking an `AWS.MediaConvert` service object, passing the parameters\. Then handle the response in the promise callback\. The ID of the job created is returned in the response `data`\.
-
-```
-// Create a promise on a MediaConvert object
-var endpointPromise = new AWS.MediaConvert({apiVersion: '2017-08-29'}).createJob(params).promise();
-
-// Handle promise's fulfilled/rejected status
-endpointPromise.then(
-  function(data) {
-    console.log("Job created! ", data);
+    TimecodeConfig: {
+      Source: "EMBEDDED",
+    },
   },
-  function(err) {
+};
+
+//Set the MediaConvert Service Object
+const mediaconvert = new MediaConvertClient(endpoint);
+```
+
+## Creating a transcoding job<a name="emc-examples-jobs-create"></a>
+
+After creating the job parameters JSON, call the asynchronous `run` method to invoke a `MediaConvert` client service object, passing the parameters\. The ID of the job created is returned in the response `data`\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+```
+const run = async () => {
+  try {
+    const data = await mediaconvert.send(new CreateJobCommand(params));
+    console.log("Job created!", data);
+  } catch (err) {
     console.log("Error", err);
   }
-);
-```
-
-To run the example, type the following at the command line\.
-
-```
-node emc_createjob.js
-```
-
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_createjob.js)\.
-
-## Canceling a Transcoding Job<a name="emc-examples-jobs-cancel"></a>
-
-Create a Node\.js module with the file name `emc_canceljob.js`\. Be sure to configure the SDK as previously shown\. Create the JSON that includes the ID of the job to cancel\. Then call the `cancelJob` method by creating a promise for invoking an `AWS.MediaConvert` service object, passing the parameters\. Handle the response in the promise callback\.
-
-```
-// Load the AWS SDK for Node.js
-var AWS = require('aws-sdk');
-// Set the Region 
-AWS.config.update({region: 'us-west-2'});
-// Set MediaConvert to customer endpoint
-AWS.config.mediaconvert = {endpoint : 'ACCOUNT_ENDPOINT'};
-
-
-var params = {
-  Id: 'JOB_ID' /* required */
 };
+run();
+```
 
+To run the example, enter the following at the command prompt\.
 
-// Create a promise on a MediaConvert object
-var endpointPromise = new AWS.MediaConvert({apiVersion: '2017-08-29'}).cancelJob(params).promise();
+```
+ts-node emc_createjob.ts // If you prefer JavaScript, enter 'node emc_createjob.js'
+```
 
-// Handle promise's fulfilled/rejected status
-endpointPromise.then(
-  function(data) {
+This full example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_createjob.ts)\.
+
+## Canceling a transcoding job<a name="emc-examples-jobs-cancel"></a>
+
+Create a Node\.js module with the file name `emc_canceljob.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create the JSON that includes the ID of the job to cancel\. Then call the `CancelJobCommand` method by creating a promise for invoking an `MediaConvert` client service object, passing the parameters\. Handle the response in the promise callback\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+**Note**  
+Replace *ACCOUNT\_ENDPOINT* with the account endpoint, and *JOB\_ID* with the ID of the job to cancel\.
+
+```
+// Import required AWS-SDK clients and commands for Node.js
+const {
+  MediaConvertClient,
+  CancelJobCommand
+} = require("@aws-sdk/client-mediaconvert");
+
+// Set the parameters
+const endpoint = { endpoint: "ACCOUNT_ENDPOINT" }; //ACCOUNT_ENDPOINT
+const params = { Id: "JOB_ID" }; //JOB_ID
+
+// Create MediaConvert service object
+const mediaconvert = new MediaConvertClient(endpoint);
+
+const run = async () => {
+  try {
+    const data = await mediaconvert.send(new CancelJobCommand(params));
     console.log("Job  " + params.Id + " is canceled");
-  },
-  function(err) {
+  } catch (err) {
     console.log("Error", err);
   }
-);
+};
+run();
 ```
 
-To run the example, type the following at the command line\.
+To run the example, enter the following at the command prompt\.
 
 ```
-node ec2_canceljob.js
+ts-node ec2_canceljob.ts // If you prefer JavaScript, enter 'node ec2_canceljob.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_canceljob.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_canceljob.ts)\.
 
-## Listing Recent Transcoding Jobs<a name="emc-examples-jobs-listing"></a>
+## Listing recent transcoding jobs<a name="emc-examples-jobs-listing"></a>
 
-Create a Node\.js module with the file name `emc_listjobs.js`\. Be sure to configure the SDK as previously shown\.
+Create a Node\.js module with the file name `emc_listjobs.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
 
-Create the parameters JSON, including values to specify whether to sort the list in `ASCENDING`, or `DESCENDING` order, the ARN of the job queue to check, and the status of jobs to include\. Then call the `listJobs` method by creating a promise for invoking an `AWS.MediaConvert` service object, passing the parameters\. Handle the response in the promise callback\.
+Create the parameters JSON, including values to specify whether to sort the list in `ASCENDING`, or `DESCENDING` order, the Amazon Resource Name \(ARN\) of the job queue to check, and the status of jobs to include\. Then call the `ListJobsCommand` method by creating a promise for invoking an `MediaConvert` client service object, passing the parameters\. 
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+**Note**  
+Replace *ACCOUNT\_ENDPOINT* with the account endpoint, *QUEUE\_ARN* with the Amazon Resource Name \(ARN\) of the job queue to check, and *STATUS* with the status of the queue\.
 
 ```
-// Load the AWS SDK for Node.js
-var AWS = require('aws-sdk');
-// Set the Region 
-AWS.config.update({region: 'us-west-2'});
-// Set the customer endpoint
-AWS.config.mediaconvert = {endpoint : 'ACCOUNT_ENDPOINT'};
+// Import required AWS-SDK clients and commands for Node.js
+const {
+  MediaConvertClient,
+  ListJobsCommand
+} = require("@aws-sdk/client-mediaconvert");
 
-
-var params = {
+// Set the parameters
+const endpoint = { endpoint: "ACCOUNT_END_POINT" }; //ACCOUNT_END_POINT
+const params = {
   MaxResults: 10,
-  Order: 'ASCENDING',
-  Queue: 'QUEUE_ARN',
-  Status: 'SUBMITTED'
+  Order: "ASCENDING",
+  Queue: "QUEUE_ARN",
+  Status: "STATUS", // e.g., "SUBMITTED"
 };
 
-// Create a promise on a MediaConvert object
-var endpointPromise = new AWS.MediaConvert({apiVersion: '2017-08-29'}).listJobs(params).promise();
+//Set the MediaConvert Service Object
+const mediaconvert = new MediaConvertClient(endpoint);
 
-// Handle promise's fulfilled/rejected status
-endpointPromise.then(
-  function(data) {
-    console.log("Jobs: ", data);
-  },
-  function(err) {
+const run = async () => {
+  try {
+    const data = await mediaconvert.send(new ListJobsCommand(params));
+    console.log("Success. Jobs: ", data.Jobs);
+  } catch (err) {
     console.log("Error", err);
   }
-);
+};
+run();
 ```
 
-To run the example, type the following at the command line\.
+To run the example, enter the following at the command prompt\.
 
 ```
-node emc_listjobs.js
+ts-node emc_listjobs.ts // If you prefer JavaScript, enter 'node emc_listjobs.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascript/example_code/mediaconvert/emc_listjobs.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_listjobs.ts)\.

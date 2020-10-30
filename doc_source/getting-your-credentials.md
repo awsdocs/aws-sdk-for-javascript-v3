@@ -1,10 +1,20 @@
-# Getting Your Credentials<a name="getting-your-credentials"></a>
+--------
 
-When you create an AWS account, your account is provided with root credentials\. Those credentials consist of two access keys:
-+ Access key ID
-+ Secret access key
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
 
-For more information about your access keys, see [Understanding and Getting Your Security Credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html) in the *AWS General Reference*\.
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# Getting your credentials<a name="getting-your-credentials"></a>
+
+When you create an AWS account, your account is provided with root credential, or an access key, which consists of the following:
++ An access key ID
++ A secret access key
+
+For more information about your access keys, see [Understanding and getting your security credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html) in the *AWS General Reference*\.
 
 Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS\. If you don't have access keys, you can create them from the AWS Management Console\. As a best practice, do not use the AWS account root user access keys for any task where it's not required\. Instead, [create a new administrator IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html) with access keys for yourself\.
 
