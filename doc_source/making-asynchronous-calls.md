@@ -1,4 +1,14 @@
-# Managing Asychronous Calls<a name="making-asynchronous-calls"></a>
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# Managing asychronous calls<a name="making-asynchronous-calls"></a>
 
 For example, the home page of an e\-commerce website lets returning customers sign in\. Part of the benefit for customers who sign in is that, after signing in, the site then customizes itself to their particular preferences\. To make this happen:
 

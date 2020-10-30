@@ -1,11 +1,24 @@
-# Uploading Photos to Amazon S3 from a Browser<a name="s3-example-photo-album"></a>
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# Uploading photos to Amazon S3 from a browser<a name="s3-example-photo-album"></a>
 
 ![\[JavaScript code example that applies to browser execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browsericon.png)
 
 **This browser script code example shows:**
 + How to create a browser application that allows users to create photo albums in an Amazon S3 bucket and upload photos into the albums\.
 
-## The Scenario<a name="s3-example-photo-album-scenario"></a>
+**Note**  
+The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
+
+## The scenario<a name="s3-example-photo-album-scenario"></a>
 
 In this example, a simple HTML page provides a browser\-based application for creating photo albums in an Amazon S3 bucket into which you can upload photos\. The application lets you delete photos and albums that you add\.
 
@@ -13,18 +26,19 @@ In this example, a simple HTML page provides a browser\-based application for cr
 
 The browser script uses the SDK for JavaScript to interact with an Amazon S3 bucket\. Use the following methods of the Amazon S3 client class to enable the photo album application: 
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#headObject-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#headObject-property)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#upload-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#upload-property)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#deleteObject-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#deleteObject-property)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#deleteObjects-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#deleteObjects-property)
 
-## Prerequisite Tasks<a name="s3-example-photo-album-scenario-prerequisites"></a>
+## Prerequisite tasks<a name="s3-example-photo-album-scenario-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon S3 bucket that you will use to store the photos in the album\. For more information about creating a bucket in the console, see [Creating a Bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. Make sure you have both **Read** and **Write** permissions on **Objects**\.
-+ In the [Amazon Cognito console](https://console.aws.amazon.com/cognito/), create an Amazon Cognito identity pool using Federated Identities with access enabled for unauthenticated users in the same Region as the Amazon S3 bucket\. You need to include the identity pool ID in the code to obtain credentials for the browser script\. For more information about Amazon Cognito Federated Identities, see [Amazon Cognito Identity Pools \(Federated Identites\)](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html) in the *Amazon Cognito Developer Guide*\.
-+ In the [IAM console](https://console.aws.amazon.com/iam/), find the IAM role created by Amazon Cognito for unauthenticated users\. Add the following policy to grant read and write permissions to an Amazon S3 bucket\. For more information about creating an IAM role, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/src/photoExample/README.md)\.
+**Note**  
+The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
++ In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon S3 bucket that you will use to store the photos in the album\. For more information about creating a bucket in the console, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. Make sure you have both **Read** and **Write** permissions on **Objects**\.
++ In the [Amazon Cognito console](https://console.aws.amazon.com/cognito/), create an Amazon Cognito identity pool using Federated Identities with access enabled for unauthenticated users in the same Region as the Amazon S3 bucket\. You need to include the identity pool ID in the code to obtain credentials for the browser script\. For more information about Amazon Cognito Federated Identities, see [Amazon Cognito identity pools \(federated identites\)](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html) in the *Amazon Cognito Developer Guide*\.
++ In the [IAM console](https://console.aws.amazon.com/iam/), find the IAM role created by Amazon Cognito for unauthenticated users\. Add the following policy to grant read and write permissions to an Amazon S3 bucket\. For more information about creating an IAM role, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
   Use this role policy for the IAM role created by Amazon Cognito for unauthenticated users\.
 **Warning**  
@@ -40,9 +54,11 @@ If you enable access for unauthenticated users, you will grant write access to t
               "s3:DeleteObject",
               "s3:GetObject",
               "s3:ListBucket",
-              "s3:PutObject"
+              "s3:PutObject",
+              "s3:PutObjectAcl"
            ],
            "Resource": [
+              "arn:aws:s3:::BUCKET_NAME"
               "arn:aws:s3:::BUCKET_NAME/*"
            ]
         }
@@ -52,7 +68,7 @@ If you enable access for unauthenticated users, you will grant write access to t
 
 ## Configuring CORS<a name="s3-example-photo-album-cors-configuration"></a>
 
-Before the browser script can access the Amazon S3 bucket, you must first set up its [CORS configuration](browser-js-considerations.md#configuring-cors-s3-bucket) as follows\.
+Before the browser script can access the Amazon S3 bucket, you must first set up its [CORS configuration](w6aac14c39b9.md#configuring-cors-s3-bucket) as follows\.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -69,50 +85,91 @@ Before the browser script can access the Amazon S3 bucket, you must first set up
 </CORSConfiguration>
 ```
 
-## The Web Page<a name="s3-example-photo-album-html"></a>
+## Install the required SDK clients and packages<a name="s3-example-photo-album-install-modules"></a>
 
-The HTML for the photo upload application consists of a <div> element within which the browser script creates the upload user interface\. The first <script> element adds the SDK to the browser script\. The second <script> element adds the external JavaScript file that holds the browser script code\.
+Install the following SDK modules:
+
+**Note**  
+For information on installing SDK modules, see [Installing the SDK for JavaScript](installing-jssdk.md)\.
++ client\-s3
++ client\-cognito\-identity
++ credential\-provider\-cognito\-identity
+
+### Install webpack<a name="s3-example-photo-album-install-webpack"></a>
+
+To use V3 of the AWS SDK for JavaScript in the browser, you require Webpack to bundle the javascript modules and functions\.
+
+To install web pack, run the following in the command line:
+
+```
+npm intall --save-dev webpack
+```
+
+**Important**  
+To view a sample of the package\.json for this example, see the [AWS SDK for JavaScript code samples on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javscript/example_code_v3/s3/src/PhotoExample/package.json)\.
+
+**Note**  
+For information on installing Webpack, see [Bundling applications with webpack](webpack.md)\.
+
+## Defining the webpage<a name="s3-example-photo-album-html"></a>
+
+The HTML for the photo\-viewing application consists of a `<div>` element in which the browser script creates the viewing/uploading interface\. 
+
+The `<script>` element adds the `<main.js>` file, which contains all the required JavaScript for the example\.
+
+**Note**  
+ To generate the `<main.js>` file, see [Running the code](#s3-photos-example-running-the-code) below\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
 <!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
-    <script src="./app.js"></script>
+<head>
+    <script src="./main.js"></script>
     <script>
-       function getHtml(template) {
-          return template.join('\n');
-       }
-       listAlbums();
+        function getHtml(template) {
+            return template.join("\n");
+        }
+        listAlbums();
     </script>
-  </head>
-  <body>
-    <h1>My Photo Albums App</h1>
-    <div id="app"></div>
-  </body>
+</head>
+<body>
+<h1>My photo albums app</h1>
+<div id="app"></div>
+</body>
 </html>
 ```
 
 ## Configuring the SDK<a name="s3-example-photo-album-configure-sdk"></a>
 
-Obtain the credentials needed to configure the SDK by calling the `CognitoIdentityCredentials` method, providing the Amazon Cognito identity pool ID\. Next, create an `AWS.S3` service object\.
+Obtain the credentials needed to configure the SDK by calling the `CognitoIdentityCredentials` method, providing the Amazon Cognito identity pool ID\. Next, create an `S3` client service object\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
-var albumBucketName = "BUCKET_NAME";
-var bucketRegion = "REGION";
-var IdentityPoolId = "IDENTITY_POOL_ID";
+// Load the required clients and packages
+const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
+const {
+  fromCognitoIdentityPool,
+} = require("@aws-sdk/credential-provider-cognito-identity");
+const { S3Client, ListObjectsCommand } = require("@aws-sdk/client-s3");
 
-AWS.config.update({
-  region: bucketRegion,
-  credentials: new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: IdentityPoolId
-  })
+// Set the AWS Region
+const REGION = "REGION"; //REGION
+
+// Initialize the Amazon Cognito credentials provider
+const s3 = new S3Client({
+  region: REGION,
+  credentials: fromCognitoIdentityPool({
+    client: new CognitoIdentityClient({ region }),
+    identityPoolId: "IDENTITY_POOL_ID", // IDENTITY_POOL_ID
+  }),
 });
 
-var s3 = new AWS.S3({
-  apiVersion: "2006-03-01",
-  params: { Bucket: albumBucketName }
-});
+const albumBucketName = "BUCKET_NAME"; //BUCKET_NAME
 ```
 
 Nearly all of the rest of the code in this example is organized into a series of functions that gather and present information about the albums in the bucket, upload and display photos uploaded into albums, and delete photos and albums\. Those functions are:
@@ -123,19 +180,40 @@ Nearly all of the rest of the code in this example is organized into a series of
 + `deleteAlbum`
 + `deletePhoto`
 
-## Listing Albums in the Bucket<a name="s3-example-photo-album-list-albums"></a>
+## Listing albums in the bucket<a name="s3-example-photo-album-list-albums"></a>
 
-The application creates albums in the Amazon S3 bucket as objects whose keys begin with a forward slash character, indicating the object functions as a folder\. To list all the existing albums in the bucket, the application's `listAlbums` function calls the `listObjects` method of the `AWS.S3` service object while using `commonPrefix` so the call returns only objects used as albums\.
+The application creates albums in the Amazon S3 bucket as objects whose keys begin with a forward slash character, indicating the object functions as a folder\. To list all the existing albums in the bucket, the application's `listAlbums` function calls the `listObjects` method of the `S3` client service object while using `commonPrefix` so the call returns only objects used as albums\.
 
-The rest of the function takes the list of albums from the Amazon S3 bucket and generates the HTML needed to display the album list in the webpage\. It also enables deleting and opening individual albums\.
+The rest of the function takes the list of albums from the Amazon S3 bucket and generates the HTML needed to display the album list in the web page\. It also enables deleting and opening individual albums\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
-function listAlbums() {
-  s3.listObjects({ Delimiter: "/" }, function(err, data) {
-    if (err) {
-      return alert("There was an error listing your albums: " + err.message);
+// A utility function to create HTML
+function getHtml(template) {
+  return template.join("\n");
+}
+// Make getHTML function available to the browser
+window.getHTML = getHtml;
+
+// List the photo albums that exist in the bucket
+const listAlbums = async () => {
+  try {
+    const data = await s3.send(
+      new ListObjectsCommand({ Delimiter: "/", Bucket: albumBucketName })
+    );
+
+    if (data.CommonPrefixes === undefined) {
+      const htmlTemplate = [
+        "<p>You don't have any albums. You need to create an album.</p>",
+        "<button onclick=\"createAlbum(prompt('Enter album name:'))\">",
+        "Create new album",
+        "</button>",
+      ];
+      document.getElementById("app").innerHTML = htmlTemplate;
     } else {
-      var albums = data.CommonPrefixes.map(function(commonPrefix) {
+      var albums = data.CommonPrefixes.map(function (commonPrefix) {
         var prefix = commonPrefix.Prefix;
         var albumName = decodeURIComponent(prefix.replace("/", ""));
         return getHtml([
@@ -144,39 +222,48 @@ function listAlbums() {
           "<span onclick=\"viewAlbum('" + albumName + "')\">",
           albumName,
           "</span>",
-          "</li>"
+          "</li>",
         ]);
       });
       var message = albums.length
         ? getHtml([
-            "<p>Click on an album name to view it.</p>",
-            "<p>Click on the X to delete the album.</p>"
+            "<p>Click an album name to view it.</p>",
+            "<p>Click the X to delete the album.</p>",
           ])
-        : "<p>You do not have any albums. Please Create album.";
-      var htmlTemplate = [
+        : "<p>You do not have any albums. You need to create an album";
+      const htmlTemplate = [
         "<h2>Albums</h2>",
         message,
         "<ul>",
         getHtml(albums),
         "</ul>",
         "<button onclick=\"createAlbum(prompt('Enter Album Name:'))\">",
-        "Create New Album",
-        "</button>"
+        "Create new Album",
+        "</button>",
       ];
       document.getElementById("app").innerHTML = getHtml(htmlTemplate);
     }
-  });
-}
+  } catch (err) {
+    return alert("There was an error listing your albums: " + err.message);
+  }
+};
+
+// Make listAlbums function available to the browser
+window.listAlbums = listAlbums;
 ```
 
-## Creating an Album in the Bucket<a name="s3-example-photo-album-create-album"></a>
+## Creating an album in the bucket<a name="s3-example-photo-album-create-album"></a>
 
 To create an album in the Amazon S3 bucket, the application's `createAlbum` function first validates the name given for the new album to ensure it contains suitable characters\. The function then forms an Amazon S3 object key, passing it to the `headObject` method of the Amazon S3 service object\. This method returns the metadata for the specified key, so if it returns data, then an object with that key already exists\.
 
-If the album doesn't already exist, the function calls the `putObject` method of the `AWS.S3` service object to create the album\. It then calls the `viewAlbum` function to display the new empty album\.
+If the album doesn't already exist, the function calls the `putObject` method of the `S3` client service object to create the album\. It then calls the `viewAlbum` function to display the new empty album\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
-function createAlbum(albumName) {
+// Create an album in the bucket
+const createAlbum = async (albumName) => {
   albumName = albumName.trim();
   if (!albumName) {
     return alert("Album names must contain at least one non-space character.");
@@ -184,173 +271,244 @@ function createAlbum(albumName) {
   if (albumName.indexOf("/") !== -1) {
     return alert("Album names cannot contain slashes.");
   }
-  var albumKey = encodeURIComponent(albumName) + "/";
-  s3.headObject({ Key: albumKey }, function(err, data) {
-    if (!err) {
-      return alert("Album already exists.");
-    }
-    if (err.code !== "NotFound") {
-      return alert("There was an error creating your album: " + err.message);
-    }
-    s3.putObject({ Key: albumKey }, function(err, data) {
-      if (err) {
-        return alert("There was an error creating your album: " + err.message);
-      }
-      alert("Successfully created album.");
-      viewAlbum(albumName);
-    });
-  });
-}
+  var albumKey = encodeURIComponent(albumName);
+  try {
+    const key = albumKey + "/";
+    const params = { Bucket: albumBucketName, Key: key };
+    const data = await s3.putObject(params);
+    alert("Successfully created album.");
+    viewAlbum(albumName);
+  } catch (err) {
+    return alert("There was an error creating your album: " + err.message);
+  }
+};
+
+// Make createAlbum function available to the browser
+window.createAlbum = createAlbum;
 ```
 
-## Viewing an Album<a name="s3-example-photo-album-viewing-album"></a>
+## Viewing an album<a name="s3-example-photo-album-viewing-album"></a>
 
-To display the contents of an album in the Amazon S3 bucket, the application's `viewAlbum` function takes an album name and creates the Amazon S3 key for that album\. The function then calls the `listObjects` method of the `AWS.S3` service object to obtain a list of all the objects \(photos\) in the album\.
+To display the contents of an album in the Amazon S3 bucket, the application's `viewAlbum` function takes an album name and creates the Amazon S3 key for that album\. The function then calls the `listObjects` method of the `S3` client service object to obtain a list of all the objects \(photos\) in the album\.
 
-The rest of the function takes the list of objects \(photos\) from the album and generates the HTML needed to display the photos in the webpage\. It also enables deleting individual photos and navigating back to the album list\.
+The rest of the function takes the list of objects \(photos\) from the album and generates the HTML needed to display the photos in the web page\. It also enables deleting individual photos and navigating back to the album list\.
 
 ```
-function viewAlbum(albumName) {
-  var albumPhotosKey = encodeURIComponent(albumName) + "//";
-  s3.listObjects({ Prefix: albumPhotosKey }, function(err, data) {
-    if (err) {
-      return alert("There was an error viewing your album: " + err.message);
-    }
-    // 'this' references the AWS.Response instance that represents the response
-    var href = this.request.httpRequest.endpoint.href;
-    var bucketUrl = href + albumBucketName + "/";
+// View the contents of an album
 
-    var photos = data.Contents.map(function(photo) {
-      var photoKey = photo.Key;
-      var photoUrl = bucketUrl + encodeURIComponent(photoKey);
-      return getHtml([
-        "<span>",
+const viewAlbum = async (albumName) => {
+  const albumPhotosKey = encodeURIComponent(albumName) + "/";
+  try {
+    const data = await s3.send(
+      new ListObjectsCommand({
+        Prefix: albumPhotosKey,
+        Bucket: albumBucketName,
+      })
+    );
+    if (data.Contents.length === 1) {
+      var htmlTemplate = [
+        "<p>You don't have any photos in this album. You need to add photos.</p>",
+        '<input id="photoupload" type="file" accept="image/*">',
+        '<button id="addphoto" onclick="addPhoto(\'' + albumName + "')\">",
+        "Add photo",
+        "</button>",
+        '<button onclick="listAlbums()">',
+        "Back to albums",
+        "</button>",
+      ];
+      document.getElementById("app").innerHTML = getHtml(htmlTemplate);
+    } else {
+      console.log(data);
+      const href = "https://s3." + region + ".amazonaws.com/";
+      const bucketUrl = href + albumBucketName + "/";
+      const photos = data.Contents.map(function (photo) {
+        const photoKey = photo.Key;
+        console.log(photo.Key);
+        const photoUrl = bucketUrl + encodeURIComponent(photoKey);
+        return getHtml([
+          "<span>",
+          "<div>",
+          '<img style="width:128px;height:128px;" src="' + photoUrl + '"/>',
+          "</div>",
+          "<div>",
+          "<span onclick=\"deletePhoto('" +
+            albumName +
+            "','" +
+            photoKey +
+            "')\">",
+          "X",
+          "</span>",
+          "<span>",
+          photoKey.replace(albumPhotosKey, ""),
+          "</span>",
+          "</div>",
+          "</span>",
+        ]);
+      });
+      var message = photos.length
+        ? "<p>Click  the X to delete the photo</p>"
+        : "<p>You don't have any photos in this album. You need to add photos.</p>";
+      const htmlTemplate = [
+        "<h2>",
+        "Album: " + albumName,
+        "</h2>",
+        message,
         "<div>",
-        '<img style="width:128px;height:128px;" src="' + photoUrl + '"/>',
+        getHtml(photos),
         "</div>",
-        "<div>",
-        "<span onclick=\"deletePhoto('" +
-          albumName +
-          "','" +
-          photoKey +
-          "')\">",
-        "X",
-        "</span>",
-        "<span>",
-        photoKey.replace(albumPhotosKey, ""),
-        "</span>",
-        "</div>",
-        "</span>"
-      ]);
-    });
-    var message = photos.length
-      ? "<p>Click on the X to delete the photo</p>"
-      : "<p>You do not have any photos in this album. Please add photos.</p>";
-    var htmlTemplate = [
-      "<h2>",
-      "Album: " + albumName,
-      "</h2>",
-      message,
-      "<div>",
-      getHtml(photos),
-      "</div>",
-      '<input id="photoupload" type="file" accept="image/*">',
-      '<button id="addphoto" onclick="addPhoto(\'' + albumName + "')\">",
-      "Add Photo",
-      "</button>",
-      '<button onclick="listAlbums()">',
-      "Back To Albums",
-      "</button>"
-    ];
-    document.getElementById("app").innerHTML = getHtml(htmlTemplate);
-  });
-}
+        '<input id="photoupload" type="file" accept="image/*">',
+        '<button id="addphoto" onclick="addPhoto(\'' + albumName + "')\">",
+        "Add photo",
+        "</button>",
+        '<button onclick="listAlbums()">',
+        "Back to albums",
+        "</button>",
+      ];
+      document.getElementById("app").innerHTML = getHtml(htmlTemplate);
+      document.getElementsByTagName("img")[0].remove();
+    }
+  } catch (err) {
+    return alert("There was an error viewing your album: " + err.message);
+  }
+};
+// Make viewAlbum function available to the browser
+window.viewAlbum = viewAlbum;
 ```
 
-## Adding Photos to an Album<a name="s3-example-photo-album-adding-photos"></a>
+## Adding photos to an album<a name="s3-example-photo-album-adding-photos"></a>
 
-To upload a photo to an album in the Amazon S3 bucket, the application's `addPhoto` function uses a file picker element in the webpage to identify a file to upload\. It then forms a key for the photo to upload from the current album name and the file name\.
+To upload a photo to an album in the Amazon S3 bucket, the application's `addPhoto` function uses a file picker element in the web page to identify a file to upload\. It then forms a key for the photo to upload from the current album name and the file name\.
 
 The function calls the `upload` method of the Amazon S3 service object to upload the photo\. The `ACL` parameter is set to `public-read` so the application can fetch the photos in an album for display by their URL in the bucket\. After uploading the photo, the function redisplays the album so the uploaded photo appears\.
 
 ```
-function addPhoto(albumName) {
-  var files = document.getElementById("photoupload").files;
-  if (!files.length) {
-    return alert("Please choose a file to upload first.");
-  }
-  var file = files[0];
-  var fileName = file.name;
-  var albumPhotosKey = encodeURIComponent(albumName) + "//";
-
-  var photoKey = albumPhotosKey + fileName;
-
-  // Use S3 ManagedUpload class as it supports multipart uploads
-  var upload = new AWS.S3.ManagedUpload({
-    params: {
+// Add a photo to an album
+const addPhoto = async (albumName) => {
+  const files = document.getElementById("photoupload").files;
+  try {
+    const albumPhotosKey = encodeURIComponent(albumName) + "/";
+    const data = await s3.send(
+      new ListObjectsCommand({
+        Prefix: albumPhotosKey,
+        Bucket: albumBucketName,
+        ACL: "public-read",
+      })
+    );
+    const file = files[0];
+    const fileName = file.name;
+    const photoKey = albumPhotosKey + fileName;
+    const uploadParams = {
       Bucket: albumBucketName,
       Key: photoKey,
       Body: file,
-      ACL: "public-read"
-    }
-  });
-
-  var promise = upload.promise();
-
-  promise.then(
-    function(data) {
+      ACL: "public-read",
+    };
+    try {
+      const data = await s3.putObject(uploadParams);
       alert("Successfully uploaded photo.");
       viewAlbum(albumName);
-    },
-    function(err) {
+    } catch (err) {
       return alert("There was an error uploading your photo: ", err.message);
     }
-  );
-}
-```
-
-## Deleting a Photo<a name="s3-example-photo-album-delete-photo"></a>
-
-To delete a photo from an album in the Amazon S3 bucket, the application's `deletePhoto` function calls the `deleteObject` method of the Amazon S3 service object\. This deletes the photo specified by the `photoKey` value passed to the function\.
-
-```
-function deletePhoto(albumName, photoKey) {
-  s3.deleteObject({ Key: photoKey }, function(err, data) {
-    if (err) {
-      return alert("There was an error deleting your photo: ", err.message);
+  } catch (err) {
+    if (!files.length) {
+      return alert("Choose a file to upload first.");
     }
-    alert("Successfully deleted photo.");
+  }
+};
+// Make addPhoto function available to the browser
+window.addPhoto = addPhoto;
+```
+
+## Deleting a photo<a name="s3-example-photo-album-delete-photo"></a>
+
+To delete a photo from an album in the Amazon S3 bucket, the application's `deletePhoto` function calls the `deleteObject` method of the S3 client service object\. This deletes the photo specified by the `photoKey` value passed to the function\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+```
+// Delete a photo from an album
+const deletePhoto = async (albumName, photoKey) => {
+  try {
+    console.log(photoKey);
+    const params = { Key: photoKey, Bucket: albumBucketName };
+    const data = await s3.deleteObject(params);
+    console.log("Successfully deleted photo.");
     viewAlbum(albumName);
-  });
-}
+  } catch (err) {
+    return alert("There was an error deleting your photo: ", err.message);
+  }
+};
+// Make deletePhoto function available to the browser
+window.deletePhoto = deletePhoto;
 ```
 
-## Deleting an Album<a name="s3-example-photo-album-delete-album"></a>
+## Deleting an album<a name="s3-example-photo-album-delete-album"></a>
 
-To delete an album in the Amazon S3 bucket, the application's `deleteAlbum` function calls the `deleteObjects` method of the Amazon S3 service object\.
+To delete an album in the Amazon S3 bucket, the application's `deleteAlbum` function calls the `deleteObjects` method of the S3 client service object\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
-function deleteAlbum(albumName) {
-  var albumKey = encodeURIComponent(albumName) + "/";
-  s3.listObjects({ Prefix: albumKey }, function(err, data) {
-    if (err) {
-      return alert("There was an error deleting your album: ", err.message);
-    }
-    var objects = data.Contents.map(function(object) {
+// Delete an album from the bucket
+const deleteAlbum = async (albumName) => {
+  const albumKey = encodeURIComponent(albumName) + "/";
+  try {
+    const params = { Bucket: albumBucketName, Prefix: albumKey };
+    const data = await s3.listObjects(params);
+    const objects = data.Contents.map(function (object) {
       return { Key: object.Key };
     });
-    s3.deleteObjects(
-      {
-        Delete: { Objects: objects, Quiet: true }
-      },
-      function(err, data) {
-        if (err) {
-          return alert("There was an error deleting your album: ", err.message);
-        }
-        alert("Successfully deleted album.");
-        listAlbums();
-      }
-    );
-  });
-}
+    try {
+      const params = {
+        Bucket: albumBucketName,
+        Delete: { Objects: objects },
+        Quiet: true,
+      };
+      const data = await s3.deleteObjects(params);
+      listAlbums();
+      return alert("Successfully deleted album.");
+    } catch (err) {
+      return alert("There was an error deleting your album: ", err.message);
+    }
+  } catch (err) {
+    return alert("There was an error deleting your album1: ", err.message);
+  }
+};
+// Make deleteAlbum function available to the browser
+window.deleteAlbum = deleteAlbum;
+```
+
+## Running the code<a name="s3-photos-example-running-the-code"></a>
+
+**To run the code for this example**
+
+1. Save all the code as `s3_PhotoExample.ts`\.
+**Note**  
+This file is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javscript/example_code_v3/s3/src/photoExample/s3_PhotoExample.ts)\.
+
+1. Replace *"REGION"* with your AWS Region, such as 'us\-east\-1'\.
+
+1. Replace *"BUCKET\_NAME"* with your S3 bucket\.
+
+1. Replace *"IDENTITY\_POOL\_ID"* with the IdentityPoolId from the **Sample page** of the Cognito Identity Pool you created for this example\.
+**Note**  
+The *IDENTITY\_POOL\_ID* is displayed in red in the console, as below:  
+
+![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/identity-pool-id.png)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+
+1. Run the following in the command line to bundle the JavaScript for this example in to a file called `<main.js>`:
+
+   ```
+   webpack s3_PhotoExample.ts --mode development --target web --devtool false -o main.js
+   ```
+**Note**  
+For information on installing WebPack, see [Bundling applications with webpack](webpack.md)\.
+
+Run the following in the command line:
+
+```
+node s3_PhotoUploader.ts
 ```

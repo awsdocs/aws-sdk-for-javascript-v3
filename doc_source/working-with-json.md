@@ -1,3 +1,13 @@
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
 # Working with JSON<a name="working-with-json"></a>
 
 JSON is a format for data exchange that is both human\-readable and machine\-readable\. Although the name JSON is an acronym for *JavaScript Object Notation*, the format of JSON is independent of any programming language\.
@@ -13,22 +23,24 @@ JSON represents data in two ways:
 Here is an example of a JSON object that contains an array of objects in which the objects represent cards in a card game\. Each card is defined by two name\-value pairs, one that specifies a unique value to identify that card and another that specifies a URL that points to the corresponding card image\.
 
 ```
-var cards = [{"CardID":"defaultname", "Image":"defaulturl"},
+var cards = [
   {"CardID":"defaultname", "Image":"defaulturl"},
   {"CardID":"defaultname", "Image":"defaulturl"},
   {"CardID":"defaultname", "Image":"defaulturl"},
-  {"CardID":"defaultname", "Image":"defaulturl"}];
+  {"CardID":"defaultname", "Image":"defaulturl"},
+  {"CardID":"defaultname", "Image":"defaulturl"}
+];
 ```
 
-## JSON as Service Object Parameters<a name="json-as-parameters-passed"></a>
+## JSON as service object parameters<a name="json-as-parameters-passed"></a>
 
 Here is an example of simple JSON used to define the parameters of a call to an AWS Lambda service object\.
 
 ```
 const params = {
-   FunctionName : 'slotPull',
-   InvocationType : 'RequestResponse',
-   LogType : 'None'
+   FunctionName : "slotPull",
+   InvocationType : "RequestResponse",
+   LogType : "None"
 };
 ```
 
@@ -38,24 +50,24 @@ When passing parameters to a service object method call, provide the JSON object
 
 ```
 (async function() {
-  const { LambdaClient, InvokeCommand } = require('@aws-sdk/client-lambda')
-  const lambdaClient = new LambdaClient({ region: 'us-west-2' })
+  const { LambdaClient, InvokeCommand } = require("@aws-sdk/client-lambda");
+  const lambdaClient = new LambdaClient({ region: "us-west-2" });
   // create JSON object for service call parameters
-  var params = {
-    FunctionName : 'slotPull',
-    InvocationType : 'RequestResponse',
-    LogType : 'None'
-  }
+  const params = {
+    FunctionName : "slotPull",
+    InvocationType : "RequestResponse",
+    LogType : "None"
+  };
 
   // create InvokeCommand command
-  const command = new InvokeCommand(command)
+  const command = new InvokeCommand(params);
 
   // invoke Lambda function
   try {
-    const response = await lambdaClient.send(params)
-    console.log(response)
+    const response = await lambdaClient.send(command);
+    console.log(response);
   } catch (err) {
     console.err(err);
   }
-})()
+})();
 ```

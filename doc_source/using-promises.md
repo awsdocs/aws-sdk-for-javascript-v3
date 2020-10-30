@@ -1,22 +1,34 @@
-# Using JavaScript Promises<a name="using-promises"></a>
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# Using JavaScript promises<a name="using-promises"></a>
 
 Use the service client's `send` method to make the service call and manage asynchronous flow instead of using callbacks\. The following example shows how to get the names of your Amazon DynamoDB tables in `us-west-2`\.
 
 ```
-const DDB = require('@aws-sdk/client-dynamodb')
-const dbClient = new DDB.DynamoDBClient({ region: 'us-west-2' })
+const { DynamoDBClient, 
+        ListTablesCommand 
+} = require('@aws-sdk/client-dynamodb');
+const dbClient = new DynamoDBClient({ region: 'us-west-2' });
 
 dbClient
-  .send(new DDB.ListTablesCommand({}))
+  .listtables(new ListTablesCommand({}))
   .then(response => {
-    console.log(response.TableNames.join('\n'))
+    console.log(response.TableNames.join('\n'));
   })
-  .catch(error => {
-    console.error(error)
-  })
+  .catch((error) => {
+    console.error(error);
+  });
 ```
 
-## Coordinating Multiple Promises<a name="multiple-promises"></a>
+## Coordinating multiple promises<a name="multiple-promises"></a>
 
 In some situations, your code must make multiple asynchronous calls that require action only when they have all returned successfully\. If you manage those individual asynchronous method calls with promises, you can create an additional promise that uses the `all` method\. 
 
@@ -34,23 +46,6 @@ console.log("Value 2 is " + values[2].toString);
 return values;
 ```
 
-## Browser and Node\.js Support for Promises<a name="browser-node-promise-support"></a>
+## Browser and Node\.js support for promises<a name="browser-node-promise-support"></a>
 
-Support for native JavaScript promises \(ECMAScript 2015\) depends on the JavaScript engine and version in which your code executes\. To help determine the support for JavaScript promises in each environment where your code needs to run, see the [ECMAScript Compatability Table](https://kangax.github.io/compat-table/es6/) on GitHub\.
-
-## Using Other Promise Implementations<a name="using-other-promise-implementations"></a>
-
-In addition to the native promise implementation in ECMAScript 2015, you can also use third\-party promise libraries, including:
-+ [bluebird](http://bluebirdjs.com)
-+ [RSVP](https://github.com/tildeio/rsvp.js/)
-+ [Q](https://github.com/kriskowal/q)
-
-These optional promise libraries can be useful if you need your code to run in environments that don't support the native promise implementation in ECMAScript 5 and ECMAScript 2015\.
-
-To use a third\-party promise library, set a promises dependency on the SDK by calling the `setPromisesDependency` method of the global configuration object\. In browser scripts, make sure to load the third\-party promise library before loading the SDK\. In the following example, the SDK is configured to use the implementation in the `bluebird` promise library\.
-
-```
-AWS.config.setPromisesDependency(require('bluebird'));
-```
-
-To return to using the native promise implementation of the JavaScript engine, call `setPromisesDependency` again, passing a `null` instead of a library name\.
+Support for native JavaScript promises \(ECMAScript 2015\) depends on the JavaScript engine and version in which your code executes\. To help determine the support for JavaScript promises in each environment where your code needs to run, see the [ECMAScript compatability table](https://kangax.github.io/compat-table/es6/) on GitHub\.

@@ -1,4 +1,14 @@
-# Reusing Connections with Keep\-Alive in Node\.js<a name="node-reusing-connections"></a>
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
+# Reusing connections with keep\-alive in Node\.js<a name="node-reusing-connections"></a>
 
 The default Node\.js HTTP/HTTPS agent creates a new TCP connection for every new request\. To avoid the cost of establishing a new connection, the SDK for JavaScript reuses TCP connections\. 
 
@@ -9,13 +19,13 @@ To disable reusing TCP connections, set the `AWS_NODEJS_CONNECTION_REUSE_ENABLED
 You can also disable keeping these connections alive on a per\-service client basis, as shown in the following example for a DynamoDB client\.
 
 ```
-const NodeHttpHandler = require("@aws-sdk/node-http-handler")
-
+const { NodeHttpHandler} = require("@aws-sdk/node-http-handler");
+const { Agent } = require("http");
 const dynamodbClient = new DynamoDBClient({
   requestHandler: new NodeHttpHandler({
     httpAgent: new Agent({keepAlive: false})
   })
-})
+});
 ```
 
 If `keepAlive` is enabled, you can also set the initial delay for TCP Keep\-Alive packets with `keepAliveMsecs`, which by default is 1000 ms\. See the [Node\.js documentation](https://nodejs.org/api/http.html) for details\.

@@ -1,3 +1,13 @@
+--------
+
+This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+
+A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
+
+Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+
+--------
+
 # Configuring maxSockets in Node\.js<a name="node-configuring-maxsockets"></a>
 
 In Node\.js, you can set the maximum number of connections per origin\. If `maxSockets` is set, the low\-level HTTP client queues requests and assigns them to sockets as they become available\.
@@ -7,17 +17,17 @@ This lets you set an upper bound on the number of concurrent requests to a given
 The following example shows how to set `maxSockets` for a DynamoDB client\.
 
 ```
-const dynamodb = require('aws-sdk/clients/dynamodb');
-var https = require('https');
+const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+const { NodeHttpHandler } = require("@aws-sdk/node-http-handler");
+var https = require("https");    
 var agent = new https.Agent({
-   maxSockets: 25
+  maxSockets: 25
 });
 
-var dynamodbClient = new DynamoDB({
-   apiVersion: '2012-08-10'
-   httpOptions:{
-      agent: agent
-   }
+var dynamodbClient = new DynamoDBClient({
+  requestHandler: new NodeHttpHandler({
+    httpsAgent: agent
+ })
 });
 ```
 
