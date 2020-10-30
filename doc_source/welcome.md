@@ -175,7 +175,7 @@ var tableParams = {
 };
 async function run() => {
       try {
-           const data = s3.createTable(tableParams);
+           const data = await s3.createTable(tableParams);
            console.log("Success", data);
       } 
       catch (err) {
@@ -195,7 +195,7 @@ var tableParams = {
 };
 async function run() => {
       try {
-           const data = s3.createTable(tableParams);
+           const data = await s3.createTable(tableParams);
            console.log("Success", data);
       } 
       catch (err) {
