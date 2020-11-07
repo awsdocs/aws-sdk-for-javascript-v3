@@ -98,7 +98,7 @@ For additional information about creating an IAM role, see [Creating a role to d
 
 ### Configure CORS<a name="s3-example-photos-view-cors-configuration"></a>
 
-Before the browser script can access the Amazon S3 bucket, you have to set up its [CORS configuration](w6aac14c39b9.md#configuring-cors-s3-bucket) as follows\.
+Before the browser script can access the Amazon S3 bucket, you have to set up its [CORS configuration](w9aac14c39b9.md#configuring-cors-s3-bucket) as follows\.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>

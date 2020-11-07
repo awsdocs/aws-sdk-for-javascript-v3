@@ -153,7 +153,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 
 // Set the parameters
 const params = {
-  UserName: "ORIGINGAL_USER_NAME", //ORIGINGAL_USER_NAME
+  UserName: "ORIGINAL_USER_NAME", //ORIGINAL_USER_NAME
   NewUserName: "NEW_USER_NAME", //NEW_USER_NAME
 };
 

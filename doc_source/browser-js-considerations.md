@@ -14,5 +14,5 @@ The following topics describe special considerations for using the AWS SDK for J
 
 **Topics**
 + [Building the SDK for Browsers](building-sdk-for-browsers.md)
-+ [Cross\-origin resource sharing \(CORS\)](w6aac14c39b9.md)
++ [Cross\-origin resource sharing \(CORS\)](w9aac14c39b9.md)
 + [Bundling applications with webpack](webpack.md)

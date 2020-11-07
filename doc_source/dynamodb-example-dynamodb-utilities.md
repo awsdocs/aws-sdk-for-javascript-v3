@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 
 --------
 
-# Using the DynamoDB Utilities<a name="dynamodb-example-document-client"></a>
+# Using the DynamoDB Utilities<a name="dynamodb-example-dynamodb-utilities"></a>
 
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 

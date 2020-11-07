@@ -27,4 +27,5 @@ Find the source code for these examples and others in the [AWS Code Examples Rep
 + [Amazon Simple Email Service examples](ses-examples.md)
 + [Amazon Simple Notification Service Examples](sns-examples.md)
 + [Amazon SQS examples](sqs-examples.md)
++ [Amazon Transcribe examples](Transcribe-examples.md)
 + [Amazon Redshift examples](redshift-examples.md)
