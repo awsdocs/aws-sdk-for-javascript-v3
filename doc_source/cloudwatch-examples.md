@@ -15,3 +15,10 @@ Amazon CloudWatch \(CloudWatch\) is a web service that monitors your Amazon Web 
 ![\[Relationship between JavaScript environments, the SDK, and CloudWatch\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-cloudwatch.png)
 
 The JavaScript API for CloudWatch is exposed through the `CloudWatch`, `CloudWatchEvents`, and `CloudWatchLogs` client classes\. For more information about using the CloudWatch client classes, see [Class: CloudWatch](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatch.html), [Class: CloudWatchEvents](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatchEvents.html), and [Class: CloudWatchLogs](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html) in the *Amazon CloudWatch API reference*\.
+
+**Topics**
++ [Creating alarms in Amazon CloudWatch](cloudwatch-examples-creating-alarms.md)
++ [Using alarm actions in Amazon CloudWatch](cloudwatch-examples-using-alarm-actions.md)
++ [Getting metrics from Amazon CloudWatch](cloudwatch-examples-getting-metrics.md)
++ [Sending events to Amazon CloudWatch Events](cloudwatch-examples-sending-events.md)
++ [Using subscription filters in Amazon CloudWatch Logs](cloudwatch-examples-subscriptions.md)

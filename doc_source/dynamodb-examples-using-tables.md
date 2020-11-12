@@ -28,7 +28,7 @@ In this example, you use a series of Node\.js modules to perform basic operation
 ## Prerequisite tasks<a name="dynamodb-examples-using-tables-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
 + Install SDK for JavaScript DynamoDB client\. For more information, see [What's new in Version 3](welcome.md#welcome_whats_new_v3)\.

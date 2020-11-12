@@ -32,7 +32,7 @@ There is also an example that uses the following method of *node\-fetch* to gene
 ## Prerequisite tasks<a name="s3-example-creating-buckets-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
++ Set up a project environment to run Node TypeScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
@@ -329,7 +329,7 @@ Create a variable with the parameters needed to call the `PutObjectCommand` comm
 **Note**  
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
-For more information on creating presigned URLs, see [https://docs.aws.amazon.com/https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html](https://docs.aws.amazon.com/https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html)\.
+For more information on creating presigned URLs, see [https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html)\.
 
 ```
 // Import the required AWS SDK clients and commands for Node.js
@@ -346,7 +346,7 @@ const REGION = "REGION";
 // Set parameters
 let signedUrl;
 let response;
-const signatureVersion = "v4";
+
 // Create a random name for the Amazon Simple Storage Service (Amazon S3) bucket
 const BUCKET = `test-bucket-${Math.ceil(Math.random() * 10 ** 10)}`;
 // Create a random name for object to upload to S3 bucket

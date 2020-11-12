@@ -33,7 +33,7 @@ The HTML for the example:
 </html>
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/PhotoExample/s3_photoExample.html)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/src/s3_PhotoExample.html)\.
 
 The browser script code for the example:
 
@@ -313,4 +313,4 @@ const deleteAlbum = async (albumName) => {
 window.deleteAlbum = deleteAlbum;
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/PhotoExample/s3_photoExample.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/src/s3_PhotoExample.ts)\.

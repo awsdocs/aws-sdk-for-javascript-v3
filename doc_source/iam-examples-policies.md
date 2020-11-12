@@ -32,7 +32,7 @@ For more information about IAM users, see [Overview of access management: Permis
 ## Prerequisite tasks<a name="iam-examples-policies-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
@@ -99,7 +99,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_createpolicy.ts // If you prefer JavaScript, enter 'node iam_createpolicy.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_createpolicy.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_createpolicy.ts)\.
 
 ## Getting an IAM policy<a name="iam-examples-policies-getting"></a>
 
@@ -143,7 +143,7 @@ To run the example, enter the following at the command prompt\.
 t-node iam_getpolicy.ts // If you prefer JavaScript, enter 'node iam_getpolicy.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_GetPolicyCommand.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_GetPolicyCommand.ts)\.
 
 ## Attaching a managed role policy<a name="iam-examples-policies-attaching-role-policy"></a>
 

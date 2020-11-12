@@ -30,7 +30,7 @@ For more information about server certificates, see [Working with server certifi
 ## Prerequisite tasks<a name="iam-examples-server-certificates-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
@@ -75,7 +75,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_listservercers.ts// If you prefer JavaScript, enter 'node ddb_batchgetitem.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_listservercerts.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_listservercerts.ts)\.
 
 ## Getting a server certificate<a name="iam-examples-server-certificates-getting"></a>
 
@@ -119,7 +119,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_getservercert.ts // If you prefer JavaScript, enter 'node iam_getservercert.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_getservercert.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_getservercert.ts)\.
 
 ## Updating a server certificate<a name="iam-examples-server-certificates-updating"></a>
 
@@ -167,7 +167,7 @@ To run the example, enter the following at the command prompt\.
  ts-node iam_updateservercert.ts // If you prefer JavaScript, enter 'node ddb_batchgetitem.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_updateservercert.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_updateservercert.ts)\.
 
 ## Deleting a server certificate<a name="iam-examples-server-certificates-deleting"></a>
 
@@ -209,4 +209,4 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_deleteservercert.ts // If you prefer JavaScript, enter 'node ddb_batchgetitem.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_deleteservercert.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_deleteservercert.ts)\.

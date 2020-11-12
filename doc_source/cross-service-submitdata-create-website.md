@@ -106,7 +106,7 @@ const run = async () => {
 run();
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-service/submit-data-app/src/dynamoAppHelperFiles/upload-files-to-s3.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoAppHelperFiles/upload-files-to-s3.ts)\.
 
 To convert the `S3` bucket to a static web host, in `DynamoDBAppHelperFiles`, create a Node\.js module with the file name `convert-bucket-to-website.ts`\.
 
@@ -122,60 +122,51 @@ ts-node convert-bucket-to-website.ts
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
 const {
-  IAMClient,
-  AttachRolePolicyCommand,
-  CreatePolicyCommand,
-} = require("@aws-sdk/client-iam");
+  S3Client,
+  CreateBucketCommand,
+  PutBucketWebsiteCommand,
+  PutBucketPolicyCommand,
+} = require("@aws-sdk/client-s3");
 
 // Set the AWS Region
 const REGION = "REGION"; //e.g. "us-east-1"
-const bucketName = "BUCKET_NAME";
-const myManagedPolicy = {
+
+// Create params JSON for S3.createBucket
+const bucketName = "BUCKET_NAME"; //BUCKET_NAME
+
+const readOnlyAnonUserPolicy = {
   Version: "2012-10-17",
   Statement: [
     {
-      Sid: "VisualEditor0",
+      Sid: "AddPerm",
       Effect: "Allow",
-      Action: ["sns:Publish", "dynamodb:PutItem"],
-      Resource: "*",
-    },
-    {
-      Sid: "VisualEditor1",
-      Effect: "Allow",
-      Action: "s3:GetObject",
-      Resource: "arn:aws:s3:::" + bucketName + "/*",
+      Principal: "*",
+      Action: ["s3:GetObject"],
+      Resource: [""],
     },
   ],
 };
 
-const params = {
-  PolicyDocument: JSON.stringify(myManagedPolicy),
-  PolicyName: "POLICY_NAME",
+// create selected bucket resource string for bucket policy
+var bucketResource = "arn:aws:s3:::" + bucketName + "/*"; //BUCKET_NAME
+readOnlyAnonUserPolicy.Statement[0].Resource[0] = bucketResource;
+
+// convert policy JSON into string and assign into params
+var bucketPolicyParams = {
+  Bucket: bucketName,
+  Policy: JSON.stringify(readOnlyAnonUserPolicy),
 };
 
-// Create the IAM service object
-var iam = new IAMClient({});
+// Instantiate an S3 client
+const s3 = new S3Client(REGION);
 
 const run = async () => {
   try {
-    // Create the IAM policy
-    const data = await iam.send(new CreatePolicyCommand(params));
-    console.log("Policy created", data.Policy.Arn);
-    const policy = data.Policy.Arn;
-    try {
-      // Set the parameters for attaching the IAM policy to an IAM role
-      const attachParams = {
-        PolicyArn: policy,
-        RoleName: "ROLE_NAME",
-      };
-      // Attach the IAM policy to a role
-      const data = await iam.send(new AttachRolePolicyCommand(attachParams));
-      console.log("Policy attached successfully");
-    } catch (err) {
-      console.log("Unable to attach policy to role", err);
-    }
+    const response = await s3.send(
+      new PutBucketPolicyCommand(bucketPolicyParams)
+    );
+    console.log("Success, permissions added to bucket", response);
   } catch (err) {
     console.log("Error", err);
   }
@@ -183,4 +174,4 @@ const run = async () => {
 run();
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-service/submit-data-app/src/dynamoAppHelperFiles/convert-bucket-to-website.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoAppHelperFiles/convert-bucket-to-website.ts)\.

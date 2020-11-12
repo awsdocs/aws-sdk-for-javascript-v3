@@ -14,4 +14,7 @@ Amazon Redshift is a fully managed, petabyte\-scale data warehouse service in th
 
 ![\[Relationship between JavaScript environments, the SDK, and Amazon Redshift\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-redshift.png)
 
-The JavaScript API for Amazon Redshift is exposed through the `RedShift` client class\. For more information about using the `RedShift` client class, see the [Amazon Redshift API Reference guide\.](Amazon Redshift APIReference/Welcome.html)
+The JavaScript API for Amazon Redshift is exposed through the [Redshift](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Redshift.html) client class\.
+
+**Topics**
++ [Amazon Redshift examples](redshift-examples-section.md)

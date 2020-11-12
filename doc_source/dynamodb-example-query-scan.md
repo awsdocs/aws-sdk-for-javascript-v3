@@ -26,7 +26,7 @@ In this example, you use a series of Node\.js modules to identify one or more it
 ## Prerequisite tasks<a name="dynamodb-example-table-query-scan-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
@@ -45,7 +45,7 @@ The primary key for the table is composed of the following attributes:
 + `Season`
 + `Episode`
 
-You can run the code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/QueryExample/ddb_createtable_tv.ts) to create the table that this query targets, and the code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/QueryExample/ddb_batchwriteritem_tv.ts) to populate the table\.
+You can run the code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/QueryExample/ddb_createtable_tv.ts) to create the table that this query targets, and the code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/QueryExample/ddb_batchwriteitem_tv.ts) to populate the table\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js

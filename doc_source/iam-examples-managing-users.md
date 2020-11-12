@@ -31,7 +31,7 @@ For more information about IAM users, see [IAM users](https://docs.aws.amazon.co
 ## Prerequisite tasks<a name="iam-examples-managing-users-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
@@ -90,7 +90,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_createuser.ts // If you prefer JavaScript, enter 'node iam_createuser.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_createuser.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_createuser.ts)\.
 
 ## Listing users in Your Account<a name="iam-examples-managing-users-listing-users"></a>
 
@@ -135,7 +135,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_listusers.ts // If you prefer JavaScript, enter 'node iam_listusers.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_listusers.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_listusers.ts)\.
 
 ## Updating a user's name<a name="iam-examples-managing-users-updating-users"></a>
 
@@ -177,7 +177,7 @@ To run the example, enter the following at the command prompt, specifying the us
 node iam_updateuser.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_updateuser.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_updateuser.ts)\.
 
 ## Deleting a user<a name="iam-examples-managing-users-deleting-users"></a>
 
@@ -230,4 +230,4 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_deleteuser.ts // If you prefer JavaScript, enter 'node iam_deleteuser.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_deleteuser.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_deleteuser.ts)\.

@@ -29,7 +29,7 @@ For more information about IAM account aliases, see [Your AWS account ID and its
 ## Prerequisite tasks<a name="iam-examples-account-aliases-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
@@ -74,7 +74,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_createaccountalias.ts // If you prefer JavaScript, enter 'node iam_createaccountalias.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_createaccountalias.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_createaccountalias.ts)\.
 
 ## Listing account aliases<a name="iam-examples-account-aliases-listing"></a>
 
@@ -116,7 +116,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_listaccountaliases.ts // If you prefer JavaScript, enter 'node iam_listaccountaliases.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_listaccountaliases.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_listaccountaliases.ts)\.
 
 ## Deleting an account alias<a name="iam-examples-account-aliases-deleting"></a>
 
@@ -158,4 +158,4 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_deleteaccountalias.ts // If you prefer JavaScript, enter 'node iam_deleteaccountalias.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_deleteaccountalias.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_deleteaccountalias.ts)\.

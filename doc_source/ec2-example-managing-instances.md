@@ -33,7 +33,7 @@ For more information about the lifecycle of Amazon EC2 instances, see [Instance 
 ## Prerequisite tasks<a name="ec2-example-managing-instances-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ec2/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ec2/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
@@ -76,7 +76,7 @@ To run the example, enter the following at the command prompt\.
 ts-node ec2_describeinstances.ts // If you prefer JavaScript, enter 'node ec2_describeinstances.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/src/ec2_describeinstances.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_describeinstances.ts)\.
 
 ## Managing instance monitoring<a name="ec2-example-managing-instances-monitoring"></a>
 
@@ -134,7 +134,7 @@ To run the example, enter the following at the command prompt, specifying `ON` t
 ts-node ec2_monitorinstances.ts ON
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/src/ec2_monitorinstances.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_monitorinstances.ts)\.
 
 ## Starting and stopping instances<a name="ec2-example-managing-instances-starting-stopping"></a>
 
@@ -195,7 +195,7 @@ To run the example, enter the following at the command prompt specifying `START`
 ts-node ec2_startstopinstances.ts
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/src/ec2_startstopinstances.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_startstopinstances.ts)\.
 
 ## Rebooting instances<a name="ec2-example-managing-instances-rebooting"></a>
 
@@ -239,4 +239,4 @@ To run the example, enter the following at the command prompt\.
 ts-node ec2_rebootinstances.ts // If you prefer JavaScript, enter 'node ec2_rebootinstances.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/src/ec2_rebootinstances.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_rebootinstances.ts)\.

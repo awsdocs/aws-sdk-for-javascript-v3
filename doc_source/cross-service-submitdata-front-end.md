@@ -51,7 +51,7 @@ In `DynamoDBApp`, create a file named `index.html`\. The `script` element adds t
 </html>
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-service/submit-data-app/src/dynamoApp/index.html)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoApp/index.html)\.
 
 Create a file named `error.html`\.
 
@@ -68,4 +68,4 @@ Create a file named `error.html`\.
 </html>
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-service/submit-data-app/src/dynamoApp/error.html)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoApp/error.html)\.
