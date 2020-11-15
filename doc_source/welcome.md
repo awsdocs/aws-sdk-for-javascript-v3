@@ -169,13 +169,13 @@ The following example uses the V2 `createBucket` command to create a DynamoDB ta
 
 ```
 const {DynamoDB} = require('@aws-sdk/client-dynamodb');
-const DymamoDB = new DynamoDB({region: 'us-west-2'});
+const dymamoDB = new DynamoDB({region: 'us-west-2'});
 var tableParams = {
     TableName : TABLE_NAME
 };
 async function run() => {
       try {
-           const data = s3.createTable(tableParams);
+           const data = dynamoDB.createTable(tableParams);
            console.log("Success", data);
       } 
       catch (err) {
@@ -189,13 +189,13 @@ The following example uses the V2 `createBucket` command to create a DynamoDB ta
 
 ```
 const {DynamoDB} = require('@aws-sdk/client-dynamodb');
-const DymamoDB = new DynamoDB({region: 'us-west-2'});
+const dymamoDB = new DynamoDB({region: 'us-west-2'});
 var tableParams = {
     TableName : TABLE_NAME
 };
 async function run() => {
       try {
-           const data = s3.createTable(tableParams);
+           const data = dynamoDB.createTable(tableParams);
            console.log("Success", data);
       } 
       catch (err) {
