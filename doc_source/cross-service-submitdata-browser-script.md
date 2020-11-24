@@ -16,9 +16,7 @@ In this task, you will create the browser script\.
 
 To create the browser script for this example, in `DynamoDBApp`, create a Node\.js module with the file name `create_cognito_id_pool.ts`, complete it, and bundle the JavaScript using webpack\.
 
-First, make sure to configure the SDK as previously shown, including installing the required clients and packages\. In `create_cognito_id_pool.ts`, load the required clients modules⁠ 
-
-— `CognitoIdentityClient`, `fromCognitoIdentityPool`, `DynamoDB`, and `SNSClient`⁠ — and commands\. Create an `S3` client service object, and initialize the Amazon Cognito credentials provider to provide the required credentials\. Then create a `Cognito` client service object, and initialize the Amazon Cognito credentials provider to provide the required credentials\.
+First, make sure to configure the SDK as previously shown, including installing the required clients and packages\. In `create_cognito_id_pool.ts`, load the required clients modules⁠— `CognitoIdentityClient`, `fromCognitoIdentityPool`, `DynamoDB`, and `SNSClient`⁠ — and commands\. Create an `S3` client service object, and initialize the Amazon Cognito credentials provider to provide the required credentials\. Then create a `Cognito` client service object, and initialize the Amazon Cognito credentials provider to provide the required credentials\.
 
 **Note**  
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
@@ -124,10 +122,12 @@ const submitData = async () => {
 window.submitData = submitData;
 ```
 
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoApp/add_data.ts)\.
+
 Finally, run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`:
 
 ```
-webpack s3_PhotoExample.ts --mode development --target web --devtool false -o main.js
+webpack add_data.ts --mode development --target web --devtool false -o main.js
 ```
 
 **Note**  

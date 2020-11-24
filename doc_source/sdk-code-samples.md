@@ -21,7 +21,6 @@ Find the source code for these examples and others in the [AWS Code Examples Rep
 + [AWS Elemental MediaConvert examples](emc-examples.md)
 + [Amazon S3 Glacier examples](glacier-examples.md)
 + [AWS Identity and Access Management examples](iam-examples.md)
-+ [Amazon Kinesis Example](kinesis-examples.md)
 + [AWS Lambda examples](lambda-examples.md)
 + [Amazon S3 examples](s3-examples.md)
 + [Amazon Simple Email Service examples](ses-examples.md)

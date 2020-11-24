@@ -245,4 +245,6 @@ const post = async (params) => {
 };
 ```
 
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/lambda/src/ddb-table-populate.ts)\.
+
 Choose **next** to continue the tutorial\.
