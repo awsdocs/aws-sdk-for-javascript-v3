@@ -187,7 +187,7 @@ var tableParams = {
 };
 async function run() => {
       try {
-           const data = dynamoDB.createTable(tableParams);
+           const data = await dynamoDB.createTable(tableParams);
            console.log("Success", data);
       } 
       catch (err) {
