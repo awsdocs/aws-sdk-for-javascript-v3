@@ -57,6 +57,18 @@ const {
 } = require('@aws-sdk/client-dynamodb')
 ```
 
+**Important**  
+You should not import submodules into modules\. For example, the following code might result in errors\.  
+
+```
+const {CognitoIdentity} = require("@aws-sdk/client-cognito-identity/CognitoIdentity")
+```
+The following is the correct code\.  
+
+```
+const {CognitoIdentity} = require("@aws-sdk/client-cognito-identity")
+```
+
 #### Comparing code size<a name="welcome_whats_new_v3_modularized_packages_code_size"></a>
 
 In Version 2 \(V2\), a simple code example that lists all of your Amazon DynamoDB tables in the `us-west-2` Region might look like the following\.
@@ -169,13 +181,13 @@ The following example uses the V2 `createBucket` command to create a DynamoDB ta
 
 ```
 const {DynamoDB} = require('@aws-sdk/client-dynamodb');
-const DymamoDB = new DynamoDB({region: 'us-west-2'});
+const dymamoDB = new DynamoDB({region: 'us-west-2'});
 var tableParams = {
     TableName : TABLE_NAME
 };
 async function run() => {
       try {
-           const data = await s3.createTable(tableParams);
+           const data = await dynamoDB.createTable(tableParams);
            console.log("Success", data);
       } 
       catch (err) {
@@ -189,13 +201,13 @@ The following example uses the V2 `createBucket` command to create a DynamoDB ta
 
 ```
 const {DynamoDB} = require('@aws-sdk/client-dynamodb');
-const DymamoDB = new DynamoDB({region: 'us-west-2'});
+const dymamoDB = new DynamoDB({region: 'us-west-2'});
 var tableParams = {
     TableName : TABLE_NAME
 };
 async function run() => {
       try {
-           const data = await s3.createTable(tableParams);
+           const data = dynamoDB.createTable(tableParams);
            console.log("Success", data);
       } 
       catch (err) {

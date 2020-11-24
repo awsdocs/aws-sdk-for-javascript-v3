@@ -33,7 +33,7 @@ In this example, you use a series of Node\.js modules to verify and manage Amazo
 ## Prerequisite tasks<a name="ses-examples-verifying-identities-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up a project environment to run Node TypeScript examples\. For more information, see[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ses/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ses/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
@@ -132,7 +132,7 @@ To run the example, enter the following at the command prompt\. The domain is ad
 ts-node ses_verifyemailidentity.ts // If you prefer JavaScript, enter 'node ses_verifyemailidentity.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/ses_verifyemailidentity.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_verifyemailidentity.ts)\.
 
 ## Verifying a Domain identity<a name="ses-examples-verifying-domains"></a>
 
@@ -179,7 +179,7 @@ To run the example, enter the following at the command prompt\. The domain is ad
 ts-node ses_verifydomainidentity.ts  // If you prefer JavaScript, enter 'node ses_verifydomainidentity.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/ses_verifydomainidentity.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_verifydomainidentity.ts)\.
 
 ## Deleting identities<a name="ses-examples-deleting-identities"></a>
 

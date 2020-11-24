@@ -25,7 +25,7 @@ This diagram illustrates most of the elements in this application and how they r
 
 ## Prerequisites<a name="using-lambda-prerequisites"></a>
 
-Before you begin the tutorial, set up a project environment to run Node TypeScript examples\. For more information, see[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/lambda/README.md)\. 
+Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/lambda/README.md)\. 
 
 This environment contains the `MyLambdaApp` directory that contains browser assets that are used by the application, the `slotpull.js` file that contains the Node\.js code that's used in the Lambda function, and several setup scripts\. In this tutorial, you run the setup scripts, use `webpack` module bundler to parse your application code, and upload all the browser asset files to an Amazon S3 bucket you provision for this application\. As part of creating the Lambda function, you also modify the Node\.js code in `slotpull.js` before uploading it to the Amazon S3 bucket\.
 

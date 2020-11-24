@@ -18,9 +18,6 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 + How to create an Amazon Simple Storage Service \(Amazon S3\) service object from the `S3` client class\.
 + How to create an Amazon S3 bucket and upload an object to that bucket\.
 
-**Note**  
-You can develop Node\.js applications using the SDK for JavaScript in the AWS Cloud9 IDE\. For an example of how to use AWS Cloud9 for Node\.js development, see [Using AWS Cloud9 with the AWS SDK for JavaScript](cloud9-javascript.md)
-
 ## The scenario<a name="getting-started-nodejs-scenario"></a>
 
 The example shows how to set up and run a simple Node\.js module that creates an Amazon S3 bucket, then adds a text object to it\. 
@@ -28,7 +25,7 @@ The example shows how to set up and run a simple Node\.js module that creates an
 ## Prerequisite tasks<a name="getting-started-nodejs-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions [on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these example can also be run in JavaScript\.
 

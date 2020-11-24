@@ -33,7 +33,7 @@ The browser script uses the SDK for JavaScript to interact with an Amazon S3 buc
 ## Prerequisite tasks<a name="s3-example-photo-album-scenario-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/src/photoExample/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
 + In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon S3 bucket that you will use to store the photos in the album\. For more information about creating a bucket in the console, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. Make sure you have both **Read** and **Write** permissions on **Objects**\.
@@ -68,7 +68,7 @@ If you enable access for unauthenticated users, you will grant write access to t
 
 ## Configuring CORS<a name="s3-example-photo-album-cors-configuration"></a>
 
-Before the browser script can access the Amazon S3 bucket, you must first set up its [CORS configuration](w6aac14c39b9.md#configuring-cors-s3-bucket) as follows\.
+Before the browser script can access the Amazon S3 bucket, you must first set up its [CORS configuration](cors.md#configuring-cors-s3-bucket) as follows\.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -106,7 +106,7 @@ npm intall --save-dev webpack
 ```
 
 **Important**  
-To view a sample of the package\.json for this example, see the [AWS SDK for JavaScript code samples on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javscript/example_code_v3/s3/src/PhotoExample/package.json)\.
+To view a sample of the package\.json for this example, see the [AWS SDK for JavaScript code samples on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/package.json)\.
 
 **Note**  
 For information on installing Webpack, see [Bundling applications with webpack](webpack.md)\.
@@ -487,7 +487,7 @@ window.deleteAlbum = deleteAlbum;
 
 1. Save all the code as `s3_PhotoExample.ts`\.
 **Note**  
-This file is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javscript/example_code_v3/s3/src/photoExample/s3_PhotoExample.ts)\.
+This file is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/src/s3_PhotoExample.ts)\.
 
 1. Replace *"REGION"* with your AWS Region, such as 'us\-east\-1'\.
 

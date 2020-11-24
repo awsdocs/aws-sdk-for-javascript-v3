@@ -22,8 +22,6 @@ To create the table, enter the following at the command prompt\.
 ts-node create_table.ts
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-service/submit-data-app/src/dynamoAppHelperFiles/create-table.ts)\.
-
 **Note**  
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
@@ -76,6 +74,8 @@ const run = async () => {
 run();
 ```
 
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoAppHelperFiles/create-table.ts)\.
+
 To update the table, create a Node\.js module with the file name `create_table.ts`\.
 
 In `DynamoDBAppHelperFiles`, create an object for the parameters for creating the identity pool, replacing *REGION* with the AWS Region and *TABLE\_NAME* with a name of the table\.
@@ -89,8 +89,6 @@ To update the table, enter the following at the command prompt\.
 ```
 ts-node update_table.ts
 ```
-
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-service/submit-data-app/src/dynamoAppHelperFiles/update-table.ts)\.
 
 **Note**  
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
@@ -127,3 +125,5 @@ const run = async () => {
 };
 run();
 ```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoAppHelperFiles/update-table.ts)\.

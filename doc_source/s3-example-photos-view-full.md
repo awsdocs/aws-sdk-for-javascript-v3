@@ -30,7 +30,7 @@ The HTML for the example:
 </html>
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/PhotoViewer/s3_PhotoViewerV3.html)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/src/s3_PhotoViewer.html)\.
 
 The following is the browser script code for the example\.
 
@@ -169,4 +169,4 @@ const viewAlbum = async (albumName) => {
 window.viewAlbum = viewAlbum;
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/PhotoViewer/s3_PhotoViewerV3.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/src/s3_PhotoViewer.ts)\.

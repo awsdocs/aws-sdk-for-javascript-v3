@@ -28,7 +28,7 @@ In this example, you use a series of Node\.js modules to publish notification me
 ## Prerequisite Tasks<a name="sns-examples-subscribing-unubscribing-topics-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up a project environment to run Node TypeScript examples\. For more information, see[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
@@ -230,7 +230,7 @@ To run the example, enter the following at the command prompt\.
 ts-node sns_subscribeapp.ts // If you prefer JavaScript, enter 'node sns_subscribeapp.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/sns_subscribeapp.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/src/sns_subscribeapp.ts)\.
 
 ## Subscribing a Lambda Function to a Topic<a name="sns-examples-subscribing-lambda"></a>
 

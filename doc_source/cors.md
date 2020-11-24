@@ -8,9 +8,7 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 
 --------
 
-# Cross\-origin resource sharing \(CORS\)<a name="w6aac14c39b9"></a>
-
-## Cross\-origin resource sharing \(CORS\)<a name="cors"></a>
+# Cross\-origin resource sharing \(CORS\)<a name="cors"></a>
 
 Cross\-origin resource sharing, or CORS, is a security feature of modern web browsers\. It enables web browsers to negotiate which domains can make requests of external websites or services\. 
 
@@ -20,7 +18,7 @@ CORS determines whether to allow sharing of resources in a cross\-origin request
 + The specific domain that makes the request 
 + The type of HTTP request being made \(GET, PUT, POST, DELETE and so on\)
 
-### How CORS works<a name="how-cors-works"></a>
+## How CORS works<a name="how-cors-works"></a>
 
 In the simplest case, your browser script makes a GET request for a resource from a server in another domain\. Depending on the CORS configuration of that server, if the request is from a domain that's authorized to submit GET requests, the cross\-origin server responds by returning the requested resource\.
 
@@ -28,11 +26,11 @@ If either the requesting domain or the type of HTTP request is not authorized, t
 
 ![\[Process flow for CORS requests\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/cors-overview.png)
 
-### Is CORS configuration required<a name="the-need-for-cors-configuration"></a>
+## Is CORS configuration required<a name="the-need-for-cors-configuration"></a>
 
 Amazon S3 buckets require CORS configuration before you can perform operations on them\. In some JavaScript environments CORS might not be enforced and therefore configuring CORS is unnecessary\. For example, if you host your application from an Amazon S3 bucket and access resources from `*.s3.amazonaws.com` or some other specific endpoint, your requests won't access an external domain\. Therefore, this configuration doesn't require CORS\. In this case, CORS is still used for services other than Amazon S3\.
 
-### Configuring CORS for an Amazon S3 bucket<a name="configuring-cors-s3-bucket"></a>
+## Configuring CORS for an Amazon S3 bucket<a name="configuring-cors-s3-bucket"></a>
 
 You can configure an Amazon S3 bucket to use CORS in the Amazon S3 console\.
 
@@ -51,7 +49,7 @@ A CORS configuration is an XML file that contains a series of rules within a `<C
 
 For example configurations, see [How do I configure CORS on my bucket?](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html#how-do-i-enable-cors) in the *Amazon Simple Storage Service Developer Guide*\.
 
-### CORS configuration example<a name="cors-configuration-example"></a>
+## CORS configuration example<a name="cors-configuration-example"></a>
 
 The following CORS configuration example allows a user to view, add, remove, or update objects inside of a bucket from the domain `example.org`\. However, we recommend that you scope the `<AllowedOrigin>` to the domain of your website\. You can specify `"*"` to allow any origin\.
 

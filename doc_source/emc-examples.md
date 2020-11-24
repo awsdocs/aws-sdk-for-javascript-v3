@@ -16,5 +16,7 @@ AWS Elemental MediaConvert is a file\-based video transcoding service with broad
 
 The JavaScript API for MediaConvert is exposed through the `MediaConvert` client class\. For more information, see [Class: MediaConvert](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/MediaConvert.html) in the API Reference\.
 
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+**Topics**
++ [Getting your account\-specific endpoint for MediaConvert](emc-examples-getendpoint.md)
++ [Creating and managing transcoding jobs in MediaConvert](emc-examples-jobs.md)
++ [Using job templates in MediaConvert](emc-examples-templates.md)

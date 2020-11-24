@@ -13,68 +13,7 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 Making requests to AWS service clients is straightforward\. Version 3 \(V3\) of the SDK for JavaScript enables you to send requests\. 
 
 **Note**  
-You can also perform operations using version 2 \(V2\) commands when using the V3 of the SDK for JavaScript\. For more information, see [ Using V2 commands  To use V2 commands in the ^SDK for JavaScript, you import the full AWS Service packages, as demonstrated in the following code\. 
-
-```
-const {DynamoDB} = require('@aws-sdk/client-dynamodb');
-```  To call V2 commands in the recommended async/await pattern, use the following syntax\.  
-
-```
-client.command(parameters)
-``` The following example uses the V2 `createBucket` command to create a DynamoDB table using the recommended async/await pattern\. 
-
-```
-const {DynamoDB} = require('@aws-sdk/client-dynamodb');
-const DymamoDB = new DynamoDB({region: 'us-west-2'});
-var tableParams = {
-    TableName : TABLE_NAME
-};
-async function run() => {
-      try {
-           const data = s3.createTable(tableParams);
-           console.log("Success", data);
-      } 
-      catch (err) {
-           console.log("Error", err);
-      }
-};
-run();
-``` The following example uses the V2 `createBucket` command to create a DynamoDB table using the recommended async/await pattern\. 
-
-```
-const {DynamoDB} = require('@aws-sdk/client-dynamodb');
-const DymamoDB = new DynamoDB({region: 'us-west-2'});
-var tableParams = {
-    TableName : TABLE_NAME
-};
-async function run() => {
-      try {
-           const data = s3.createTable(tableParams);
-           console.log("Success", data);
-      } 
-      catch (err) {
-           console.log("Error", err);
-      }
-};
-run();
-``` The following example uses the V2 `createBucket` command to create a DynamoDB table using the c pattern\. 
-
-```
-const {S3} = require('@aws-sdk/client-s3');
-const s3 = new S3({region: 'us-west-2'});
-var bucketParams = {
-    Bucket : BUCKET_NAME
-};
-function run(){
-         s3.createBucket(bucketParams, function(err, data) {
-         if (err) {
-         console.log("Error", err);
-         } else {
-         console.log("Success", data.Location);
-         }
-    })
-};
-``` ](welcome.md#using_v2_commands)\.
+You can also perform operations using version 2 \(V2\) commands when using the V3 of the SDK for JavaScript\. For more information, see [Using V2 commands](welcome.md#using_v2_commands)\.
 
 **To send a request:**
 

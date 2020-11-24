@@ -99,7 +99,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_createpolicy.ts // If you prefer JavaScript, enter 'node iam_createpolicy.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_createpolicy.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_createpolicy.ts)\.
 
 ## Getting an IAM policy<a name="iam-examples-policies-getting"></a>
 
@@ -140,10 +140,10 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-t-node iam_getpolicy.ts // If you prefer JavaScript, enter 'node iam_getpolicy.js'
+ts-node iam_getpolicy.ts // If you prefer JavaScript, enter 'node iam_getpolicy.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_GetPolicyCommand.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_getpolicy.ts)\.
 
 ## Attaching a managed role policy<a name="iam-examples-policies-attaching-role-policy"></a>
 
@@ -207,8 +207,10 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node iam_attachrolepolicy.ts // If you prefer JavaScript, enter 'node iam_attacholepolicy.js'
+ts-node iam_attachrolepolicy.ts // If you prefer JavaScript, enter 'node iam_attachrolepolicy.js'
 ```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_attachrolepolicy.ts)\.
 
 ## Detaching a managed role policy<a name="iam-examples-policies-detaching-role-policy"></a>
 
@@ -276,3 +278,5 @@ To run the example, enter the following at the command prompt\.
 ```
 ts-node iam_detachrolepolicy.ts // If you prefer JavaScript, enter 'node iam_detachrolepolicy.js'
 ```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_detachrolepolicy.ts)\.

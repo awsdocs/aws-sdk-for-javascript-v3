@@ -90,7 +90,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_createuser.ts // If you prefer JavaScript, enter 'node iam_createuser.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_createuser.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_createuser.ts)\.
 
 ## Listing users in Your Account<a name="iam-examples-managing-users-listing-users"></a>
 
@@ -135,7 +135,7 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_listusers.ts // If you prefer JavaScript, enter 'node iam_listusers.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_listusers.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_listusers.ts)\.
 
 ## Updating a user's name<a name="iam-examples-managing-users-updating-users"></a>
 
@@ -153,7 +153,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 
 // Set the parameters
 const params = {
-  UserName: "ORIGINGAL_USER_NAME", //ORIGINGAL_USER_NAME
+  UserName: "ORIGINAL_USER_NAME", //ORIGINAL_USER_NAME
   NewUserName: "NEW_USER_NAME", //NEW_USER_NAME
 };
 
@@ -177,7 +177,7 @@ To run the example, enter the following at the command prompt, specifying the us
 node iam_updateuser.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_updateuser.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_updateuser.ts)\.
 
 ## Deleting a user<a name="iam-examples-managing-users-deleting-users"></a>
 
@@ -230,4 +230,4 @@ To run the example, enter the following at the command prompt\.
 ts-node iam_deleteuser.ts // If you prefer JavaScript, enter 'node iam_deleteuser.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/iam_deleteuser.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_deleteuser.ts)\.

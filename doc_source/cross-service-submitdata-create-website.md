@@ -106,7 +106,7 @@ const run = async () => {
 run();
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-service/submit-data-app/src/dynamoAppHelperFiles/upload-files-to-s3.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoAppHelperFiles/upload-files-to-s3.ts)\.
 
 To convert the `S3` bucket to a static web host, in `DynamoDBAppHelperFiles`, create a Node\.js module with the file name `convert-bucket-to-website.ts`\.
 
@@ -174,4 +174,4 @@ const run = async () => {
 run();
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-service/submit-data-app/src/dynamoAppHelperFiles/convert-bucket-to-website.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoAppHelperFiles/convert-bucket-to-website.ts)\.

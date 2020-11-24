@@ -31,7 +31,7 @@ For more information about the Amazon EC2 key pairs, see [Amazon EC2 key pairs](
 ## Prerequisite tasks<a name="ec2-example-key-pairs-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ec2/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ec2/README.md)\.
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
 + Install SDK for JavaScript Amazon EC2 client\. For more information, see [What's new in Version 3](welcome.md#welcome_whats_new_v3)\.
@@ -74,7 +74,7 @@ To run the example, enter the following at the command prompt\.
 ts-node ec2_describekeypairs.ts // If you prefer JavaScript, enter 'node ec2_describekeypairs.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/src/ec2_describekeypairs.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_describekeypairs.ts)\.
 
 ## Creating a key pair<a name="ec2-example-key-pairs-creating"></a>
 
@@ -116,7 +116,7 @@ To run the example, enter the following at the command prompt\.
 ts-node ec2_createkeypair.ts // If you prefer JavaScript, enter 'node ec2_createkeypair.js'
 ```
 
-The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/src/ec2_createkeypair.ts)\.
+The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_createkeypair.ts)\.
 
 ## Deleting a key pair<a name="ec2-example-key-pairs-deleting"></a>
 
@@ -157,4 +157,4 @@ To run the example, enter the following at the command prompt\.
 ts-node ec2_deletekeypair.ts // If you prefer JavaScript, enter 'node ec2_deletekeypair.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/src/ec2_deletekeypair.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_deletekeypair.ts)\.

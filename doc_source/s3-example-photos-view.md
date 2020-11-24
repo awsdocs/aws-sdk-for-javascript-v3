@@ -35,7 +35,7 @@ In this example, you must use the same AWS Region for both the Amazon S3 bucket 
 
 ### Set up your local environment<a name="s3-example-photos-view-prereq-environment"></a>
 
-Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/src/photoViewer/README.md)\.
+Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/README.md)\.
 
 **Note**  
 The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
@@ -98,7 +98,7 @@ For additional information about creating an IAM role, see [Creating a role to d
 
 ### Configure CORS<a name="s3-example-photos-view-cors-configuration"></a>
 
-Before the browser script can access the Amazon S3 bucket, you have to set up its [CORS configuration](w6aac14c39b9.md#configuring-cors-s3-bucket) as follows\.
+Before the browser script can access the Amazon S3 bucket, you have to set up its [CORS configuration](cors.md#configuring-cors-s3-bucket) as follows\.
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -156,7 +156,7 @@ npm install --save-dev webpack
 ```
 
 **Important**  
-To view a sample of the `package.json`for this example, see the [AWS SDK for JavaScript code samples on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javscript/example_code_v3/s3/src/PhotoViewer/package.json)\.
+To view a sample of the `package.json`for this example, see the [AWS SDK for JavaScript code samples on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/package.json)\.
 
 **Note**  
 For information on installing Webpack, see [Bundling applications with webpack](webpack.md)\.
@@ -356,7 +356,7 @@ window.viewAlbum = viewAlbum;
 
 1. Save all the code as `s3_PhotoViewer.ts`\.
 **Note**  
-This file is available on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javscript/example_code_v3/s3/src/photoViewer/s3_PhotoViewer.ts)\.
+This file is available on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/src/s3_PhotoViewer.ts)\.
 
 1. Replace *"REGION"* with your AWS Region, such as `us-west-2`\.
 
@@ -376,8 +376,8 @@ The *IDENTITY\_POOL\_ID* is displayed in red on the console as shown\.
 **Note**  
 For information about installing `webpack`, see [Bundling applications with webpack](webpack.md)\.
 
-Run the following in the command line:
+1. Run the following in the command line:
 
-```
-node s3_PhotoViewer.ts
-```
+   ```
+   node s3_PhotoViewer.ts
+   ```

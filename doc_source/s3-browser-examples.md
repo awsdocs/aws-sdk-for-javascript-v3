@@ -13,3 +13,7 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 The following topics show two examples of how the AWS SDK for JavaScript can be used in the browser to interact with Amazon S3 buckets\.
 + The first shows a simple scenario in which the existing photos in an Amazon S3 bucket can be viewed by any \(unauthenticated\) user\.
 + The second shows a more complex scenario in which users are allowed to perform operations on photos in the bucket such as upload, delete, and so on\. 
+
+**Topics**
++ [Viewing photos in an Amazon S3 bucket from a browser](s3-example-photos-view.md)
++ [Uploading photos to Amazon S3 from a browser](s3-example-photo-album.md)
