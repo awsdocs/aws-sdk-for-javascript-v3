@@ -30,7 +30,6 @@ The following table describes the important changes in the V3 release of the *AW
 | [Amazon Simple Email Service service examples updated](ses-examples.md) | Updated Amazon Simple Email Service service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon S3 Glacier service examples updated](glacier-examples.md) | Updated Amazon S3 Glacier service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon Redshift service examples updated](redshift-examples.md) | Updated Amazon Redshift service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
-| [Amazon Kinesis service examples updated](kinesis-examples.md) | Updated Amazon Kinesis service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon Elastic Compute Cloud service examples updated](ec2-examples.md) | Updated Amazon Elastic Compute Cloud service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon DynamoDB service examples updated](dynamodb-examples.md) | Updated Amazon DynamoDB service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon CloudWatch service examples updated](cloudwatch-examples.md) | Updated Amazon CloudWatch service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
