@@ -188,7 +188,7 @@ After you create the presigner object, call the `getSynthesizeSpeechUrl` method 
 Finally, run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`:
 
 ```
-./node_modules/.bin/webpack polly.ts --mode development --target web --devtool false -o main.js
+./node_modules/.bin/webpack --entry ./polly.ts --mode development --target web --devtool false -o main.js
 ```
 
 **Note**  
