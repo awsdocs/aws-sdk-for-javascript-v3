@@ -188,12 +188,11 @@ After you create the presigner object, call the `getSynthesizeSpeechUrl` method 
 Finally, run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`:
 
 ```
-./node_modules/.bin/webpack --entry ./polly.js --mode development --target web --devtool false -o main.js
+./node_modules/.bin/webpack --entry ./polly.js --mode development --target web -o main.js
 ```
 
 **Note**  
-For information about installing webpack, see [Bundling applications with webpack](webpack.md)\.
-
+For information about installing webpack, see [Bundling applications wi
 The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/polly/src/polly.js)\.
 
 ## Step 6: Run the Example<a name="getting-started-browser-run-sample"></a>
