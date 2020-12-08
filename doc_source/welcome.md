@@ -314,7 +314,7 @@ You can browse the SDK for JavaScript examples in the [AWS Code Example Reposito
 ### Resources<a name="welcome_resources"></a>
 
 In addition to this guide, the following online resources are available for SDK for JavaScript developers:
-+ [AWS SDK for JavaScript API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/)
++ [AWS SDK for JavaScript API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/)
 + [JavaScript Developer Blog](https://aws.amazon.com/blogs/developer/category/programing-language/javascript/)
 + [AWS JavaScript Forum](https://forums.aws.amazon.com/forum.jspa?forumID=148)
 + [JavaScript examples in the AWS Code Catalog](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-javascript.html)
