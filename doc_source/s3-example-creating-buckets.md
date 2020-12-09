@@ -47,7 +47,6 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 ```
 // Import required AWS SDK clients and commands for Node.js
 const { S3Client, ListBucketsCommand } = require("@aws-sdk/client-s3");
-
 // Set the AWS region
 const REGION = "REGION"; //e.g. "us-east-1"
 
@@ -661,4 +660,8 @@ To run the example, type the following at the command line\.
 node s3_get_presignedURL_v3.js
 ```
 
+<<<<<<< HEAD
 This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/src/s3_get_presignedURL.ts)\.
+=======
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/src/s3_put_presignedURL.ts)\.
+>>>>>>> Import S3Client in ListBucketsCommand example
