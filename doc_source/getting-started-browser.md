@@ -192,8 +192,9 @@ Finally, run the following at the command prompt to bundle the JavaScript for th
 ```
 
 **Note**  
-For information about installing webpack, see [Bundling applications wi
-The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/polly/src/polly.js)\.
+For information about installing webpack, see [Bundling applications with webpack](webpack.md)\.
+
+The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/polly/src/polly.ts)\.
 
 ## Step 6: Run the Example<a name="getting-started-browser-run-sample"></a>
 
