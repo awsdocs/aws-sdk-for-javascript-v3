@@ -84,13 +84,13 @@ function run(){
 Here is a function call in V2 using a `promise`\.
 
 ```
-const data await v2client.command(params).promise()
+const data = await v2client.command(params).promise()
 ```
 
 Here is the V3 version\.
 
 ```
-const data await v2client.command(params)
+const data = await v2client.command(params)
 ```
 
 ## Path 3 examples<a name="path3-examples"></a>
@@ -98,7 +98,7 @@ const data await v2client.command(params)
 The following command installs the AWS Service package for Amazon S3\.
 
 ```
-npm install @aws-sdk/client-s3; 
+npm install @aws-sdk/client-s3
 ```
 
 The following code loads only the Amazon S3 client, reducing the overhead\.
