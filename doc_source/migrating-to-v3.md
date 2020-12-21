@@ -77,6 +77,7 @@ function run() {
     }
   });
 }
+run();
 ```
 
 ## Path 2 example<a name="path2-examples"></a>
