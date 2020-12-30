@@ -177,7 +177,7 @@ const {DynamoDB} = require('@aws-sdk/client-dynamodb');
 client.command(parameters)
 ```
 
-The following example uses the V2 `createBucket` command to create a DynamoDB table using the recommended async/await pattern\.
+The following example uses the V2 `createTable` command to create a DynamoDB table using the recommended async/await pattern\.
 
 ```
 const {DynamoDB} = require('@aws-sdk/client-dynamodb');
@@ -197,27 +197,7 @@ async function run() => {
 run();
 ```
 
-The following example uses the V2 `createBucket` command to create a DynamoDB table using the recommended async/await pattern\.
-
-```
-const {DynamoDB} = require('@aws-sdk/client-dynamodb');
-const dymamoDB = new DynamoDB({region: 'us-west-2'});
-var tableParams = {
-    TableName : TABLE_NAME
-};
-async function run() => {
-      try {
-           const data = dynamoDB.createTable(tableParams);
-           console.log("Success", data);
-      } 
-      catch (err) {
-           console.log("Error", err);
-      }
-};
-run();
-```
-
-The following example uses the V2 `createBucket` command to create a DynamoDB table using the c pattern\.
+The following example uses the V2 `createBucket` command to create an S3 bucket using the c pattern\.
 
 ```
 const {S3} = require('@aws-sdk/client-s3');
