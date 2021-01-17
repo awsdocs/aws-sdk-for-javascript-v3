@@ -151,6 +151,7 @@ const run = async () => {
     console.log("File Error", err);
   });
   uploadParams.Key = path.basename(file);
+  uploadParams.Body = fileStream;
   // call S3 to retrieve upload file to specified bucket
   try {
     const data = await s3.send(new PutObjectCommand(uploadParams));
