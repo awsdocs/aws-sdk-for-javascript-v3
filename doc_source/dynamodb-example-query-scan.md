@@ -36,7 +36,7 @@ The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency th
 
 This example queries a table that contains episode information about a video series, returning the episode titles and subtitles of second season episodes past episode 9 that contain a specified phrase in their subtitle\.
 
-Create a Node\.js module with the file name `ddb_query.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client servicec object\. Create a JSON object containing the parameters needed to query the table, which in this example includes the table name, the `ExpressionAttributeValues` needed by the query, a `KeyConditionExpression` that uses those values to define which items the query returns, and the names of attribute values to return for each item\. Call the `QueryCommand` method of the DynamoDB service object\.
+Create a Node\.js module with the file name `ddb_query.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to query the table, which in this example includes the table name, the `ExpressionAttributeValues` needed by the query, a `KeyConditionExpression` that uses those values to define which items the query returns, and the names of attribute values to return for each item\. Call the `QueryCommand` method of the DynamoDB service object\.
 
 **Note**  
 Replace *REGION* with your AWS Region\.
