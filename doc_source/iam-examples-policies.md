@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -21,11 +19,11 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 You grant permissions to a user by creating a *policy*, which is a document that lists the actions that a user can perform and the resources those actions can affect\. Any actions or resources that are not explicitly allowed are denied by default\. Policies can be created and attached to users, groups of users, roles assumed by users, and resources\.
 
 In this example, a series of Node\.js modules are used to manage policies in IAM\. The Node\.js modules use the SDK for JavaScript to create and delete policies as well as attaching and detaching role policies using these methods of the `IAM` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#createPolicy-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#createPolicy-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#GetPolicyCommand-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#GetPolicyCommand-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#ListAttachedRolePoliciesCommand-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#ListAttachedRolePoliciesCommand-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#AttachRolePolicyCommand-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#AttachRolePolicyCommand-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#DetachRolePolicyCommand-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#DetachRolePolicyCommand-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/updateusercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/updateusercommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/getpolicycommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/getpolicycommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/listattachedrolepoliciescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/listattachedrolepoliciescommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/attachrolepolicycommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/attachrolepolicycommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/detachrolepolicycommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/detachrolepolicycommand.html)
 
 For more information about IAM users, see [Overview of access management: Permissions and policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_access-management.html) in the *IAM User Guide*\.
 
@@ -34,7 +32,7 @@ For more information about IAM users, see [Overview of access management: Permis
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create an IAM role to which you can attach policies\. For more information about creating roles, see [Creating IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) in the *IAM User Guide*\.
 
@@ -53,7 +51,7 @@ const { IAMClient, CreatePolicyCommand } = require("@aws-sdk/client-iam");
 const REGION = "REGION"; //e.g. "us-east-1"
 
 // Create IAM service object
-const iam = new IAMClient(REGION);
+const iam = new IAMClient({ region: REGION });
 
 // Set the parameters
 const myManagedPolicy = {
@@ -124,7 +122,7 @@ const params = {
 };
 
 // Create IAM service object
-const iam = new IAMClient(REGION);
+const iam = new IAMClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -170,10 +168,10 @@ const ROLENAME = "ROLE_NAME";
 const paramsRoleList = { RoleName: ROLENAME }; //ROLE_NAME
 
 // Create IAM service object
-const iam = new IAMClient(REGION);
+const iam = new IAMClient({ region: REGION });
 
 const run = async () => {
-  const iam = new IAMClient(REGION);
+  const iam = new IAMClient({ region: REGION });
   try {
     const data = await iam.send(
       new ListAttachedRolePoliciesCommand(paramsRoleList)
@@ -239,7 +237,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const paramsRoleList = { RoleName: "ROLE_NAME" }; //ROLE_NAME
 
 // Create IAM service object
-const iam = new IAMClient(REGION);
+const iam = new IAMClient({ region: REGION });
 
 const run = async () => {
   // Load the AWS SDK for Node.js

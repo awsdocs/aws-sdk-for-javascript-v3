@@ -1,20 +1,18 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
 # Amazon Redshift examples<a name="redshift-examples-section"></a>
 
 In this example, a series of Node\.js modules are used to create, modify, describe the parameters of, and then delete Amazon Redshift clusters using the following methods of the `Redshift` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/ AWS/Redshift.html#createCluster-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/ AWS/Redshift.html#createCluster-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/ AWS/Redshift.html#modifyCluster-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/ AWS/Redshift.html#modifyCluster-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/ AWS/Redshift.html#describeCluster-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/ AWS/Redshift.html#describeCluster-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/ AWS/Redshift.html#deleteCluster-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/ AWS/Redshift.html#deleteCluster-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-redshift/classes/createclustercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-redshift/classes/createclustercommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-redshift/classes/modifyclustercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-redshift/classes/modifyclustercommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-redshift/classes/describeclusterscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-redshift/classes/describeclusterscommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-redshift/classes/deleteclustercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-redshift/classes/deleteclustercommand.html)
 
 For more information about Amazon Redshift users, see the [Amazon Redshift getting started guide](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html)\.
 
@@ -23,7 +21,7 @@ For more information about Amazon Redshift users, see the [Amazon Redshift getti
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/redshift/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 ## Creating an Amazon Redshift cluster<a name="redshift-create-cluster"></a>
@@ -64,7 +62,7 @@ const params = {
 };
 
 // Create an Amazon Redshift client service object
-const redshift = new RedshiftClient(REGION);
+const redshift = new RedshiftClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -116,7 +114,7 @@ const params = {
 };
 
 // Create an Amazon Redshift client service object
-const redshift = new RedshiftClient(REGION);
+const redshift = new RedshiftClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -164,7 +162,7 @@ const params = {
 };
 
 // Create an Amazon Redshift client service object
-const redshift = new RedshiftClient(REGION);
+const redshift = new RedshiftClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -214,7 +212,7 @@ const params = {
 };
 
 // Create an Amazon Redshift client service object
-const redshift = new RedshiftClient(REGION);
+const redshift = new RedshiftClient({ region: REGION });
 
 const run = async () => {
   try {

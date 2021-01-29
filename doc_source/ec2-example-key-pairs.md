@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -22,9 +20,9 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 Amazon EC2 uses public–key cryptography to encrypt and decrypt login information\. Public–key cryptography uses a public key to encrypt data, then the recipient uses the private key to decrypt the data\. The public and private keys are known as a *key pair*\.
 
 In this example, you use a series of Node\.js modules to perform several Amazon EC2 key pair management operations\. The Node\.js modules use the SDK for JavaScript to manage instances by using these methods of the Amazon EC2 client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#createKeyPair-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#createKeyPair-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#deleteKeyPair-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#deleteKeyPair-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeKeyPairs-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/EC2.html#describeKeyPairs-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ec2/classes/createkeypaircommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ec2/classes/createkeypaircommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ec2/classes/deletekeypaircommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ec2/classes/deletekeypaircommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ec2/classes/describekeypairscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ec2/classes/describekeypairscommand.html)
 
 For more information about the Amazon EC2 key pairs, see [Amazon EC2 key pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key pairs.html) in the *Amazon EC2 User Guide for Linux Instances* or [Amazon EC2 key pairs and Windows Instances](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-key pairs.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
@@ -33,7 +31,7 @@ For more information about the Amazon EC2 key pairs, see [Amazon EC2 key pairs](
 To set up and run this example, first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ec2/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Install SDK for JavaScript Amazon EC2 client\. For more information, see [What's new in Version 3](welcome.md#welcome_whats_new_v3)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
@@ -55,7 +53,7 @@ const { EC2Client, DescribeKeyPairsCommand } = require("@aws-sdk/client-ec2");
 const REGION = "REGION"; //e.g. "us-east-1"
 
 // Create EC2 service object
-const ec2client = new EC2Client(REGION);
+const ec2client = new EC2Client({ region: REGION });
 
 const run = async () => {
   try {
@@ -97,7 +95,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { KeyName: "MY_KEY_PAIR" }; //MY_KEY_PAIR
 
 // Create EC2 service object
-const ec2client = new EC2Client(REGION);
+const ec2client = new EC2Client({ region: REGION });
 
 const run = async () => {
   try {
@@ -138,7 +136,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { KeyName: "KEY_PAIR_NAME" }; //KEY_PAIR_NAME
 
 // Create EC2 service object
-const ec2client = new EC2Client(REGION);
+const ec2client = new EC2Client({ region: REGION });
 
 const run = async () => {
   try {

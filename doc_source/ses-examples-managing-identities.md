@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -20,22 +18,22 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 
 An Amazon SES *identity* is an email address or domain that Amazon SES uses to send email\. Amazon SES requires you to verify your email identities, confirming that you own them and preventing others from using them\.
 
-For details on how to verify email addresses and domains in Amazon SES, see [Verifying email addresses and domains in Amazon SES](Amazon Simple Email Service Developer Guideverify-addresses-and-domains.html) in the Amazon Simple Email Service Developer Guide\. For information about sending authorization in Amazon SES, see [Overview of Amazon SES sending authorization](Amazon Simple Email Service Developer Guidesending-authorization-overview.html)\.
+For details on how to verify email addresses and domains in Amazon SES, see [Verifying email addresses and domains in Amazon SES](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html) in the Amazon Simple Email Service Developer Guide\. For information about sending authorization in Amazon SES, see [Overview of Amazon SES sending authorization](Amazon Simple Email Service Developer Guidesending-authorization-overview.html)\.
 
 ## The scenario<a name="ses-examples-verifying-identities-scenario"></a>
 
 In this example, you use a series of Node\.js modules to verify and manage Amazon SES identities\. The Node\.js modules use the SDK for JavaScript to verify email addresses and domains, using these methods of the `SES` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#listIdentities-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#listIdentities-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#deleteIdentity-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#deleteIdentity-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#verifyEmailIdentity-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#verifyEmailIdentity-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#verifyDomainIdentity-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#verifyDomainIdentity-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/listidentitiescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/listidentitiescommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/deleteidentitycommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/deleteidentitycommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/emailidentitycommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/emailidentitycommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/verifydomainidentitycommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/verifydomainidentitycommand.html)
 
 ## Prerequisite tasks<a name="ses-examples-verifying-identities-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ses/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 ## Listing your identities<a name="ses-examples-listing-identities"></a>
@@ -66,7 +64,7 @@ var params = {
 };
 
 // Create SES service object
-const ses = new SESClient(REGION);
+const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -113,7 +111,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { EmailAddress: "ADDRESS@DOMAIN.EXT" }; //ADDRESS@DOMAIN.EXT; e.g., name@example.com
 
 // Create SES service object
-const ses = new SESClient(REGION);
+const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -160,7 +158,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { Domain: "DOMAIN_NAME" }; //DOMAIN_NAME
 
 // Create SES service object
-const ses = new SESClient(REGION);
+const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -207,7 +205,7 @@ const params = {
 }; // IDENTITY_NAME
 
 // Create SES service object
-const ses = new SESClient(REGION);
+const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {

@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -14,7 +12,7 @@ Amazon Simple Email Service \(Amazon SES\) is a cloud\-based email sending servi
 
 ![\[Relationship between JavaScript environments, the SDK, and Amazon SES\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-ses.png)
 
-The JavaScript API for Amazon SES is exposed through the `SES` client class\. For more information about using the Amazon SES client class, see [Class: SES](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html) in the API Reference\.
+The JavaScript API for Amazon SES is exposed through the `SES` client class\. For more information about using the Amazon SES client class, see [Class: SES](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/ses.html) in the API Reference\.
 
 **Topics**
 + [Managing Amazon SES identities](ses-examples-managing-identities.md)
