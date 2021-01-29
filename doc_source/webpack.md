@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -26,15 +24,18 @@ To install the `webpack` module bundler, you must first have npm, the Node\.js p
 npm install --save-dev webpack
 ```
 
-You might also need to install a `webpack` plugin that allows it to load JSON files\. Enter the following command to install the JSON loader plugin\.
+To use the `path` module for working with file and directory paths, which is installed automatically with webpack, you might need to install the Node\.js `path-browserify` package\. 
 
 ```
-npm install --save-dev json-loader
+npm install --save-dev path-browserify
 ```
 
 ## Configuring webpack<a name="webpack-configuring"></a>
 
-By default, `webpack` searches for a JavaScript file named `webpack.config.js` in your project's root directory\. This file specifies your configuration options\. The following is an example of a `webpack.config.js` configuration file\.
+By default, Webpack searches for a JavaScript file named `webpack.config.js` in your project's root directory\. This file specifies your configuration options\. The following is an example of a `webpack.config.js` configuration file for WebPack version 5\.0\.0 and later\.
+
+**Note**  
+Webpack configuration requirments vary depending on the version of Webpack you install\. For more information, see the [Webpack documentation](https://webpack.js.org/configuration/)\. 
 
 ```
 // Import path for resolving file paths
@@ -42,31 +43,29 @@ var path = require("path");
 module.exports = {
   // Specify the entry point for our app.
   entry: [path.join(__dirname, "browser.js")],
-  // Specify the output file containing our bundled code
+  // Specify the output file containing our bundled code.
   output: {
     path: __dirname,
     filename: 'bundle.js'
   },
-  module: {
-    /**
-      * Tell webpack how to load 'json' files. 
-      * When webpack encounters a 'require()' statement
-      * where a 'json' file is being imported, it will use
-      * the json-loader.  
-      */
-    loaders: [
-      {
-        test: /\.json$/, 
-        loaders: ['json']
-      }
-    ]
+   // Enable WebPack to use the 'path' package.
+   reoslve:{
+  fallback: { path: require.resolve("path-browserify"}
   }
+   /**
+   * In Webpack version v2.0.0 and earlier, you must tell 
+   * webpack how to use "json-loader" to load 'json' files.
+   * To do this Enter 'npm --save-dev install json-loader' at the 
+   * command line to install the "json-loader' package, and include the 
+   * following entry in your webpack.config.js.
+   module: {
+    rules: [{test: /\.json$/, use: use: "json-loader"}]
+  }
+  **/
 };
 ```
 
 In this example, `browser.js` is specified as the *entry point*\. The *entry point* is the file `webpack` uses to begin searching for imported modules\. The file name of the output is specified as `bundle.js`\. This output file will contain all the JavaScript the application needs to run\. If the code specified in the entry point imports or requires other modules, such as the SDK for JavaScript, that code is bundled without needing to specify it in the configuration\.
-
-The configuration in the `json-loader` plugin that was installed earlier specifies to `webpack` how to import \.json files\. By default, `webpack` only supports JavaScript but uses loaders to add support for importing other file types\. Because the SDK for JavaScript makes extensive use of \.json files, `webpack` throws an error when generating the bundle if `json-loader` isn't included\.
 
 ## Running webpack<a name="webpack-running"></a>
 
@@ -91,12 +90,11 @@ The following is an example `package.json` file that demonstrates adding `webpac
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-iam": "^1.0.0-gamma.6",
-    "@aws-sdk/client-s3": "^1.0.0-gamma.6"
+    "@aws-sdk/client-iam": "^3.0.0",
+    "@aws-sdk/client-s3": "^3.3.0"
   },
   "devDependencies": {
-    "json-loader": "^0.5.4",
-    "webpack": "^1.13.2"
+    "webpack": "^5.0.0"
   }
 }
 ```
@@ -140,28 +138,28 @@ This is useful when running a Node\.js application in an environment where disk 
 // Import path for resolving file paths
 var path = require("path");
 module.exports = {
-  // Specify the entry point for our app
-  entry: [path.join(__dirname, "node.js")],
-  // Specify the output file containing our bundled code
+  // Specify the entry point for our app.
+  entry: [path.join(__dirname, "browser.js")],
+  // Specify the output file containing our bundled code.
   output: {
     path: __dirname,
-    filename: "bundle.js"
+    filename: 'bundle.js'
   },
-  // Let webpack know to generate a Node.js bundle
+  // Let webpack know to generate a Node.js bundle.
   target: "node",
-  module: {
-    /**
-      * Tell webpack how to load JSON files.
-      * When webpack encounters a 'require()' statement
-      * where a JSON file is being imported, it will use
-      * the json-loader
-      */
-    loaders: [
-      {
-        test: /\.json$/, 
-        loaders: ['json']
-      }
-    ]
+   // Enable WebPack to use the 'path' package.
+   resolve:{
+  fallback: { path: require.resolve("path-browserify"}
   }
-}
+   /**
+   * In Webpack version v2.0.0 and earlier, you must tell 
+   * webpack how to use "json-loader" to load 'json' files.
+   * To do this Enter 'npm --save-dev install json-loader' at the 
+   * command line to install the "json-loader' package, and include the 
+   * following entry in your webpack.config.js.
+   module: {
+    rules: [{test: /\.json$/, use: use: "json-loader"}]
+  }
+  **/
+};
 ```

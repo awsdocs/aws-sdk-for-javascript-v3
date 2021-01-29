@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -30,7 +28,7 @@ Set up the project environment to run these Node TypeScript examples, and instal
 This environment contains the `MyLambdaApp` directory that contains browser assets that are used by the application, the `slotpull.js` file that contains the Node\.js code that's used in the Lambda function, and several setup scripts\. In this tutorial, you run the setup scripts, use `webpack` module bundler to parse your application code, and upload all the browser asset files to an Amazon S3 bucket you provision for this application\. As part of creating the Lambda function, you also modify the Node\.js code in `slotpull.js` before uploading it to the Amazon S3 bucket\.
 
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 
 The tutorial should take about 30 minutes to complete\.
 
@@ -47,9 +45,9 @@ To create this application you'll need resources from multiple services that mus
 
 1. [Prepare the browser script code](using-lambda-browser-script.md)\.
 
-1. [Create a Lambda execution role in IAM](using-lambda-iam-role-setup.md)\.
-
 1. [Create and populate an Amazon DynamoDB table](using-lambda-ddb-setup.md)\.
+
+1. [Create a Lambda execution role in IAM](using-lambda-iam-role-setup.md)\.
 
 1. [Prepare and create the Lambda function](using-lambda-function-prep.md)\.
 

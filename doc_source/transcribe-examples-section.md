@@ -1,19 +1,17 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
 # Amazon Transcribe examples<a name="transcribe-examples-section"></a>
 
 In this example, a series of Node\.js modules are used to create,list, and delete transcription jobs using the following methods of the `TranscribeService` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#startTranscriptionJob-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#startTranscriptionJob-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#listTranscriptionJobs-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#listTranscriptionJobs-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#deleteTranscriptionJob-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#deleteTranscriptionJob-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/starttranscriptionjobcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/starttranscriptionjobcommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/listtranscriptionjobscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/listtranscriptionjobscommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/deletetranscriptionjobcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/deletetranscriptionjobcommand.html)
 
 For more information about Amazon Transcribe users, see the [Amazon Transcribe developer guide](https://docs.aws.amazon.com//transcribe/latest/dg/what-is-transcribe.html)\.
 
@@ -22,7 +20,7 @@ For more information about Amazon Transcribe users, see the [Amazon Transcribe d
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/transcribe/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 ## Starting an Amazon Transcribe job<a name="transcribe-start-transcription"></a>
@@ -38,12 +36,16 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *REGION* with your AWS Region, and *MEDICAL\_JOB\_NAME* with a name for the transcription job\. For *OUTPUT\_BUCKET\_NAME* specify the Amazon S3 bucket where the output is saved\. For *JOB\_TYPE* specify types of job\. For *SOURCE\_LOCATION* specify the location of the source file\. For *SOURCE\_FILE\_LOCATION* specify the location of the input media file\.
 
 ```
+// Import the required AWS SDK clients and commands for Node.js
 const {
   TranscribeClient,
   StartTranscriptionJobCommand,
 } = require("@aws-sdk/client-transcribe");
 
-const client = new TranscribeClient({ region: "REGION" });
+// Set the AWS Region
+const REGION = "REGION"; // For example, "us-east-1"
+
+// Set the parameters
 const params = {
   TranscriptionJobName: "JOB_NAME",
   LanguageCode: "LANGUAGE_CODE", // For example, 'en-US'
@@ -53,6 +55,9 @@ const params = {
     // For example, "https://transcribe-demo.s3-REGION.amazonaws.com/hello_world.wav"
   },
 };
+
+// Create an Amazon Transcribe service client object
+const client = new TranscribeClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -86,15 +91,24 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *REGION* with your AWS Region, and *KEY\_WORD* with a keyword that the returned jobs name must contain\.
 
 ```
+// Import the required AWS SDK clients and commands for Node.js
+
 const {
   TranscribeClient,
   ListTranscriptionJobsCommand,
 } = require("@aws-sdk/client-transcribe");
 
-const client = new TranscribeClient({ region: "REGION" });
+// Set the AWS Region
+const REGION = "REGION"; // For example, "us-east-1"
+
+// Set the parameters
 const params = {
-  JobNameContains: "KEY_WORD" // Returns only transcription job names containing this string
+  JobNameContains: "KEYWORD" // Not required. Returns only transcription
+  // job names containing this string
 };
+
+// Create an Amazon Transcribe service client object
+const client = new TranscribeClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -128,15 +142,22 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *REGION* with your AWS Region, *JOB\_NAME* with the name of the job to delete\. 
 
 ```
+// Import the required AWS SDK clients and commands for Node.js
 const {
   TranscribeClient,
-  DeleteTranscriptionJobCommand,
+  DeleteTranscriptionJobCommand
 } = require("@aws-sdk/client-transcribe");
 
-const client = new TranscribeClient({ region: "eu-west-1" });
+// Set the AWS Region
+const REGION = "REGION"; // For example, "us-east-1"
+
+// Set the parameters
 const params = {
-  TranscriptionJobName: "JOB_NAME" // For example, 'transciption_demo'
+  TranscriptionJobName: "JOB_NAME", // Required. For example, 'transciption_demo'
 };
+
+// Create an Amazon Transcribe service client object
+const client = new TranscribeClient({ region: REGION });
 
 const run = async () => {
   try {

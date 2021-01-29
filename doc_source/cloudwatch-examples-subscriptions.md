@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -20,9 +18,9 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 Subscriptions provide access to a real\-time feed of log events from CloudWatch Logs and deliver that feed to other services, such as an Amazon Kinesis stream or AWS Lambda, for custom processing, analysis, or loading to other systems\. A subscription filter defines the pattern to use for filtering which log events are delivered to your AWS resource\.
 
 In this example, a series of Node\.js modules are used to list, create, and delete a subscription filter in CloudWatch Logs\. The destination for the log events is a Lambda function\. The Node\.js modules use the SDK for JavaScript to manage subscription filters using these methods of the `CloudWatchLogs` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html#putSubscriptionFilters-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html#putSubscriptionFilters-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html#describeSubscriptionFilters-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html#describeSubscriptionFilters-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html#deleteSubscriptionFilter-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CloudWatchLogs.html#deleteSubscriptionFilter-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/putsubscriptionfiltercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/putsubscriptionfiltercommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/describesubscriptionfiltercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/describesubscriptionfiltercommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/deletesubscriptionfiltercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/deletesubscriptionfiltercommand.html)
 
 For more information about CloudWatch Logs subscriptions, see [Real\-time processing of log data with subscriptions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions.html) in the *Amazon CloudWatch Logs User Guide*\.
 
@@ -34,7 +32,7 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cloudwatch/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create an AWS Lambda function as the destination for log events\. You will need to use the Amazon Resource Name \(ARN\) of this function\. For more information about setting up a Lambda function, see [Subscription filters with Lambda](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#LambdaFunctionExample) in the *Amazon CloudWatch Logs User Guide*\.
 + Create an IAM role whose policy grants permission to invoke the Lambda function you created and grants full access to CloudWatch Logs or apply the following policy to the execution role you create for the Lambda function\. For more information about creating an IAM role, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
@@ -91,7 +89,7 @@ const params = {
 };
 
 // Create CloudWatch service object
-const cwl = new CloudWatchLogsClient(REGION);
+const cwl = new CloudWatchLogsClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -141,7 +139,7 @@ const params = {
 };
 
 // Create CloudWatch service object
-const cwl = new CloudWatchLogsClient(REGION);
+const cwl = new CloudWatchLogsClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -188,7 +186,7 @@ const params = {
 };
 
 // Create CloudWatch service object
-const cwl = new CloudWatchLogsClient(REGION);
+const cwl = new CloudWatchLogsClient({ region: REGION });
 
 const run = async () => {
   try {

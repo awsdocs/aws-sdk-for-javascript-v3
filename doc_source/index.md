@@ -1,7 +1,7 @@
 # AWS SDK for JavaScript Developer Guide for SDK Version 3
 
 -----
-*****Copyright &copy; 2020 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; 2021 Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -18,6 +18,7 @@ Amazon's trademarks and trade dress may not be used in
 + [Getting started with the AWS SDK for JavaScript](getting-started.md)
    + [Getting started in a browser script](getting-started-browser.md)
    + [Getting started in Node.js](getting-started-nodejs.md)
+   + [Getting started in React Native](getting-started-react-native.md)
 + [Setting up the SDK for JavaScript](setting-up.md)
    + [Prerequisites](jssdk-prerequisites.md)
       + [Setting up an AWS Node.js environment](setting-up-node.md)
@@ -92,6 +93,15 @@ Amazon's trademarks and trade dress may not be used in
       + [Working with IAM server certificates](iam-examples-server-certificates.md)
       + [Managing IAM account aliases](iam-examples-account-aliases.md)
    + [AWS Lambda examples](lambda-examples.md)
+      + [Tutorial: Create and using Lambda functions](lambda-create-table-example.md)
+         + [Create the AWS resources](lambda-create-table-provision-resources.md)
+         + [Create the HTML](lambda-create-table-create-html.md)
+         + [Prepare the browser script](lambda-create-table-browser-script.md)
+         + [Create the Lambda function](lambda-create-table-create-lambda-function.md)
+         + [Deploy the Lambda function](lambda-create-table-deploy-function.md)
+         + [Run the app](lambda-create-table-run.md)
+         + [Delete the resources](lambda-create-table-destroy.md)
+   + [Amazon Polly examples](polly-examples.md)
    + [Amazon S3 examples](s3-examples.md)
       + [Amazon S3 browser examples](s3-browser-examples.md)
          + [Viewing photos in an Amazon S3 bucket from a browser](s3-example-photos-view.md)
@@ -143,6 +153,12 @@ Amazon's trademarks and trade dress may not be used in
       + [Create the browser script](cross-service-submitdata-browser-script.md)
       + [Hosting the app on Amazon S3](cross-service-submitdata-create-website.md)
       + [Run the app](cross-service-submitdata-run-app.md)
+   + [Build a transcription app with authenticated users](transcribe-app.md)
+      + [Create the AWS resources](transcribe-app-provision-resources.md)
+      + [Create the HTML](transcribe-app-create-html.md)
+      + [Prepare the browser script](transcribe-app-browser-script.md)
+      + [Run the app](transcribe-app-run.md)
+      + [Delete the AWS resources](transcribe-app-destroy.md)
 + [Security for this AWS Product or Service](security.md)
    + [Data protection in this AWS product or service](data-protection.md)
    + [Identity and Access Management for this AWS Product or Service](security-iam.md)

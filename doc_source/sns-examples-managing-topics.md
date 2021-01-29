@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -21,18 +19,18 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 ## The Scenario<a name="sns-examples-managing-topics-scenario"></a>
 
 In this example, you use a series of Node\.js modules to create, list, and delete Amazon SNS topics, and to handle topic attributes\. The Node\.js modules use the SDK for JavaScript to manage topics using these methods of the `SNS` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#createTopic-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#createTopic-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#listTopics-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#listTopics-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#deleteTopic-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#deleteTopic-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#getTopicAttributes-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#getTopicAttributes-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#setTopicAttributes-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#setTopicAttributes-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/createtopiccommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/createtopiccommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/listtopiccommands.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/listtopiccommands.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/deletetopiccommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/deletetopiccommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/gettopicattributecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/gettopicattributecommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/settopicattributescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/settopicattributescommand.html)
 
 ## Prerequisite Tasks<a name="sns-examples-managing-topics-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 ## Creating a Topic<a name="sns-examples-managing-topics-createtopic"></a>
@@ -58,7 +56,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { Name: "TOPIC_NAME" }; //TOPIC_NAME
 
 // Create SNS service object
-const sns = new SNSClient(REGION);
+const sns = new SNSClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -99,7 +97,7 @@ const { SNSClient, ListTopicsCommand } = require("@aws-sdk/client-sns");
 const REGION = "REGION"; //e.g. "us-east-1"
 
 // Create SNS service object
-const sns = new SNSClient(REGION);
+const sns = new SNSClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -139,7 +137,7 @@ Replace *REGION* with your AWS Region, and *TOPIC\_ARN* with the Amazon Resource
 const { SNSClient, DeleteTopicCommand } = require("@aws-sdk/client-sns");
 
 // Create SNS service object
-const sns = new SNSClient(REGION);
+const sns = new SNSClient({ region: REGION });
 
 // Set the AWS Region
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -189,7 +187,7 @@ const REGION = "region"; //e.g. "us-east-1"
 const params = { TopicArn: "TOPIC_ARN" }; // TOPIC_ARN
 
 // Create SNS service object
-const sns = new SNSClient(REGION);
+const sns = new SNSClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -237,7 +235,7 @@ const params = {
 };
 
 // Create SNS service object
-const sns = new SNSClient(REGION);
+const sns = new SNSClient({ region: REGION });
 
 const run = async () => {
   try {
