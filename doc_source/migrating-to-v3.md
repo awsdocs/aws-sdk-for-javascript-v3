@@ -82,13 +82,13 @@ function run(){
 Here is a function call in V2 using a `promise`\.
 
 ```
-const data await v2client.command(params).promise()
+const data = await v2client.command(params).promise();
 ```
 
 Here is the V3 version\.
 
 ```
-const data await v2client.command(params)
+const data = await v2client.command(params);
 ```
 
 ## Path 3 examples<a name="path3-examples"></a>
@@ -128,7 +128,7 @@ var bucketParams = {
     Bucket : BUCKET_NAME
 };
 async function run() => {
-      try{
+      try {
            const data = await s3.send(new CreateBucketCommand(bucketParams));
            console.log("Success", data);
       } 
