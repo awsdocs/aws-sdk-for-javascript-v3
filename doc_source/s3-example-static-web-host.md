@@ -170,7 +170,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node s3_deletebucketwebsite.ts // If you prefer JavaScript, enter 'node s3_deletebucketwebsite..js' 
+ts-node s3_deletebucketwebsite.ts // If you prefer JavaScript, enter 'node s3_deletebucketwebsite.js' 
 ```
 
 This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_deletebucketwebsite.ts)\.
