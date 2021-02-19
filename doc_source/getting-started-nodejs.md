@@ -72,7 +72,7 @@ You can add dependencies to the `package.json` and install them by running `npm 
    ```
 The `package.json` dependencies are automatically updated\.
 
-## Step 4: Write the Node\.js code<a name="getting-started-nodejs-js-code"></a>
+## Step 2: Write the Node\.js code<a name="getting-started-nodejs-js-code"></a>
 
 Create a file named `sample.ts` to contain the example code\. Begin by adding the `require` function calls to include the Amazon S3 package\.
 
@@ -124,7 +124,7 @@ run();
 
 The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/src/sample.ts)\.
 
-## Step 5: Run the example<a name="getting-started-nodejs-run-sample"></a>
+## Step 3: Run the example<a name="getting-started-nodejs-run-sample"></a>
 
 Enter the following command to run the example\.
 
