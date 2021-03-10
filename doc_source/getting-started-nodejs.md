@@ -44,8 +44,8 @@ For details about using `package.json` in a Node\.js project, see [What is the f
      "main": "index.js",
      "dependencies": {
       "@aws-sdk/client-s3": "^3.3.0",
-       "@aws-sdk/node-http-handler": "^^3.3.0",
-       "@aws-sdk/types": "^^3.3.0",
+       "@aws-sdk/node-http-handler": "^3.3.0",
+       "@aws-sdk/types": "^3.3.0",
        "ts-node": "^9.0.0"
      },
      "devDependencies": {
