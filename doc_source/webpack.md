@@ -49,8 +49,8 @@ module.exports = {
     filename: 'bundle.js'
   },
    // Enable WebPack to use the 'path' package.
-   reoslve:{
-  fallback: { path: require.resolve("path-browserify"}
+   resolve:{
+  fallback: { path: require.resolve("path-browserify")}
   }
    /**
    * In Webpack version v2.0.0 and earlier, you must tell 
@@ -149,7 +149,7 @@ module.exports = {
   target: "node",
    // Enable WebPack to use the 'path' package.
    resolve:{
-  fallback: { path: require.resolve("path-browserify"}
+  fallback: { path: require.resolve("path-browserify")}
   }
    /**
    * In Webpack version v2.0.0 and earlier, you must tell 
