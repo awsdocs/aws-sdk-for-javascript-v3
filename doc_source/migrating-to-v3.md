@@ -82,13 +82,13 @@ function run(){
 Here is a function call in V2 using a `promise`\.
 
 ```
-const data await v2client.command(params).promise()
+const data = await v2client.command(params).promise()
 ```
 
 Here is the V3 version\.
 
 ```
-const data await v2client.command(params)
+const data = await v3client.command(params)
 ```
 
 ## Path 3 examples<a name="path3-examples"></a>
@@ -124,10 +124,10 @@ The following example creates an Amazon S3 bucket using the async/await pattern,
 ```
 const {S3Client, CreateBucketCommand} = require('@aws-sdk/client-s3');
 const s3 = new S3Client({region: 'us-west-2'});
-var bucketParams = {
+const bucketParams = {
     Bucket : BUCKET_NAME
 };
-async function run() => {
+async function run() {
       try{
            const data = await s3.send(new CreateBucketCommand(bucketParams));
            console.log("Success", data);
