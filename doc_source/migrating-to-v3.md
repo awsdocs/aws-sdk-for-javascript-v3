@@ -29,6 +29,8 @@ Follow path 1 and use the async/await programming model\.
 
 ------
 
+For notable changes from AWS SDK for JavaScript v2 to v3, refer [Upgrading Notes (2.x to 3.x)](https://github.com/aws/aws-sdk-js-v3/blob/main/UPGRADING.md)
+
 The following sections describe these paths in detail, with examples\.
 
 ## Path 1 example<a name="path1-examples"></a>
