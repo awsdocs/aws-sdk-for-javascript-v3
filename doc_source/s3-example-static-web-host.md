@@ -42,8 +42,6 @@ If the selected bucket has no website configuration, that information is returne
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
- */
-
 // Import required AWS SDK clients and commands for Node.js
 const { S3Client, GetBucketWebsiteCommand } = require("@aws-sdk/client-s3");
 
@@ -172,7 +170,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node s3_deletebucketwebsite.ts // If you prefer JavaScript, enter 'node s3_deletebucketwebsite..js' 
+ts-node s3_deletebucketwebsite.ts // If you prefer JavaScript, enter 'node s3_deletebucketwebsite.js' 
 ```
 
 This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_deletebucketwebsite.ts)\.
