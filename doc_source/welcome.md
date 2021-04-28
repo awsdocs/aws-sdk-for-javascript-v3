@@ -1,16 +1,16 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
 # What is the AWS SDK for JavaScript?<a name="welcome"></a>
 
 Welcome to the AWS SDK for JavaScript Developer Guide\. This guide provides general information about setting up and configuring the AWS SDK for JavaScript\. It also walks you through examples and tutorial of running various AWS services using the AWS SDK for JavaScript\.
+
+The [AWS SDK for JavaScript v3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) provides a JavaScript API for AWS services\. You can use the JavaScript API to build libraries or applications for [Node\.js](https://nodejs.org/en/) or the browser\.
 
 ![\[Relationship between JavaScript environments, the SDK, and Amazon Web Services\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/sdk-overview-v3.png)
 
@@ -177,7 +177,7 @@ const {DynamoDB} = require('@aws-sdk/client-dynamodb');
 client.command(parameters)
 ```
 
-The following example uses the V2 `createBucket` command to create a DynamoDB table using the recommended async/await pattern\.
+The following example uses the V2 `createTable` command to create a DynamoDB table using the recommended async/await pattern\.
 
 ```
 const {DynamoDB} = require('@aws-sdk/client-dynamodb');
@@ -187,7 +187,7 @@ var tableParams = {
 };
 async function run() => {
       try {
-           const data = await dynamoDB.createTable(tableParams);
+           const data = await dymamoDB.createTable(tableParams);
            console.log("Success", data);
       } 
       catch (err) {
@@ -197,27 +197,7 @@ async function run() => {
 run();
 ```
 
-The following example uses the V2 `createBucket` command to create a DynamoDB table using the recommended async/await pattern\.
-
-```
-const {DynamoDB} = require('@aws-sdk/client-dynamodb');
-const dymamoDB = new DynamoDB({region: 'us-west-2'});
-var tableParams = {
-    TableName : TABLE_NAME
-};
-async function run() => {
-      try {
-           const data = dynamoDB.createTable(tableParams);
-           console.log("Success", data);
-      } 
-      catch (err) {
-           console.log("Error", err);
-      }
-};
-run();
-```
-
-The following example uses the V2 `createBucket` command to create a DynamoDB table using the c pattern\.
+The following example uses the V2 `createBucket` command to create an Amazon S3 bucket using the callback pattern\.
 
 ```
 const {S3} = require('@aws-sdk/client-s3');
@@ -314,7 +294,7 @@ You can browse the SDK for JavaScript examples in the [AWS Code Example Reposito
 ### Resources<a name="welcome_resources"></a>
 
 In addition to this guide, the following online resources are available for SDK for JavaScript developers:
-+ [AWS SDK for JavaScript API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/)
++ [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html)
 + [JavaScript Developer Blog](https://aws.amazon.com/blogs/developer/category/programing-language/javascript/)
 + [AWS JavaScript Forum](https://forums.aws.amazon.com/forum.jspa?forumID=148)
 + [JavaScript examples in the AWS Code Catalog](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-javascript.html)

@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -16,7 +14,7 @@ This section walks you through an example that demonstrate how to run version 3 
 Running V3 in the browser is slightly different from version 2 \(V2\)\. For more information, see [Using browsers in V3](welcome.md#v3_browsers)\.
 
 For other examples of using \(V3\) of the SDK for JavaScript with the Node\.js in the browser, see:
-+  [Viewing photos in an Amazon S3 bucket from a browser](s3-example-photos-view.md)\.
++  [Viewing photos in an Amazon S3 bucket from a browser](s3-example-photos-view.md)
 +  [Uploading photos to Amazon S3 from a browser](s3-example-photo-album.md)
 +  [Tutorial: Build an app to submit data to DynamoDB](cross-service-example-submitting-data.md)
 
@@ -39,12 +37,12 @@ You must run this example in a browser that supports HTML 5 audio to playback th
 ![\[Illustration of how a browser script interacts with Amazon Cognito Identity and Amazon Polly services\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browserscenario.png)
 
 The browser script uses the SDK for JavaScript to synthesize text by using the following APIs:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityCredentials.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CognitoIdentityCredentials.html) constructor
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly/Presigner.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly/Presigner.html) constructor
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly/Presigner.html#getSynthesizeSpeechUrl-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Polly/Presigner.html#getSynthesizeSpeechUrl-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cognito-identity/classes/cognitoidentityclient.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cognito-identity/classes/cognitoidentityclient.html) constructor
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-polly/classes/polly.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-polly/classes/polly.html) constructor
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_polly_request_presigner.html#getsynthesizespeechurl-1](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_polly_request_presigner.html#getsynthesizespeechurl-1)
 
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so this example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency this example is presented in TypeScript\. TypeScript extends JavaScript, so this example can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 
 ## Step 1: Create an Amazon Cognito Identity Pool<a name="getting-started-browser-create-identity-pool"></a>
 
@@ -190,7 +188,7 @@ After you create the presigner object, call the `getSynthesizeSpeechUrl` method 
 Finally, run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`:
 
 ```
-webpack polly.ts --mode development --target web --devtool false -o main.js
+./node_modules/.bin/webpack --entry ./polly.js --mode development --target web
 ```
 
 **Note**  

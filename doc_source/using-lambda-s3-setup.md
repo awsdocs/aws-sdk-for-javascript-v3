@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -19,11 +17,13 @@ For this application, the first thing you need to create is an Amazon S3 bucket 
 The `slotassets` directory contains the Node\.js script `s3-bucket-setup.ts` that creates the Amazon S3 bucket and sets the website configuration\. 
 
 **To create and configure the Amazon S3 bucket that the tutorial application uses**
-+ At the command line, type the following command, where *BUCKET\_NAME* is the name for the bucket\.
++ In the Node\.js script `s3-bucket-setup.ts` replace *BUCKET\_NAME* with a globally unique bucket name\.
 
-  `node s3-bucket-setup.ts BUCKET_NAME`
+  At the command line, enter the following command\.
 
-  The bucket name must be globally unique\. If the command succeeds, the script displays the URL of the new bucket\. Make a note of this URL because you'll use it later\.
+  `node s3-bucket-setup.ts `
+
+  If the command succeeds, the script displays the URL of the new bucket\. Make a note of this URL because you'll use it later\.
 
 ## Setup script<a name="using-lambda-s3-script"></a>
 
@@ -87,7 +87,7 @@ const bucketPolicyParams = {
 };
 
 // Instantiate an S3 client
-const s3 = new S3Client(REGION);
+const s3 = new S3Client({ region: REGION });
 
 const run = async () => {
   try {

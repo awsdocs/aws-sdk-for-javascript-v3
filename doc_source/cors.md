@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -34,6 +32,11 @@ Amazon S3 buckets require CORS configuration before you can perform operations o
 
 You can configure an Amazon S3 bucket to use CORS in the Amazon S3 console\.
 
+If you are configuring CORS in the S3 console, you must use JSON to create a CORS configuration\. The new S3 console only supports JSON CORS configurations\. 
+
+**Important**  
+In the new S3 console, the CORS configuration must be JSON\.
+
 1. In the Amazon S3 console, find the bucket you want to configure and select its check box\.
 
 1. In the pane that opens, choose **Permissions**\.
@@ -53,6 +56,12 @@ For example configurations, see [How do I configure CORS on my bucket?](https://
 
 The following CORS configuration example allows a user to view, add, remove, or update objects inside of a bucket from the domain `example.org`\. However, we recommend that you scope the `<AllowedOrigin>` to the domain of your website\. You can specify `"*"` to allow any origin\.
 
+**Important**  
+In the new S3 console, the CORS configuration must be JSON\.
+
+------
+#### [ XML ]
+
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
@@ -69,6 +78,34 @@ The following CORS configuration example allows a user to view, add, remove, or 
   </CORSRule>
 </CORSConfiguration>
 ```
+
+------
+#### [ JSON ]
+
+```
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "HEAD",
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE"
+        ],
+        "AllowedOrigins": [
+            "https://www.example.org"
+        ],
+        "ExposeHeaders": [
+             "ETag",
+             "x-amz-meta-custom-header"]
+    }
+]
+```
+
+------
 
 This configuration does not authorize the user to perform actions on the bucket\. It enables the browser's security model to allow a request to Amazon S3\. Permissions must be configured through bucket permissions or IAM role permissions\.
 

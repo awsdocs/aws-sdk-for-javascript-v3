@@ -1,19 +1,17 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
 # Amazon Transcribe medical examples<a name="transcribe-medical-examples-section"></a>
 
 In this example, a series of Node\.js modules are used to create,list, and delete medical transcription jobs using the following methods of the `TranscribeService` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#startMedicalTranscriptionJob-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#startMedicalTranscriptionJob-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#listMedicalTranscriptionJobs-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#listMedicalTranscriptionJobs-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#deleteMedicalTranscriptionJob-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#deleteMedicalTranscriptionJob-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/starttranscriptionjobcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/starttranscriptionjobcommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/listtranscriptionjobscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/listtranscriptionjobscommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/deletetranscriptionjobcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/deletetranscriptionjobcommand.html)
 
 For more information about Amazon Transcribe users, see the [Amazon Transcribe developer guide](https://docs.aws.amazon.com//transcribe/latest/dg/what-is-transcribe.html)\.
 
@@ -22,7 +20,7 @@ For more information about Amazon Transcribe users, see the [Amazon Transcribe d
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/transcribe/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 ## Starting an Amazon Transcribe medical transcription job<a name="transcribe-start-medical-transcription"></a>
@@ -57,8 +55,8 @@ const params = {
   MediaFormat: "SOURCE_FILE_FORMAT", // For example, 'wav'
   Media: {
     MediaFileUri: "SOURCE_FILE_LOCATION",
-    // Required. The S3 object location of the input media file. The URI must be in the same AWS Region
-    // as the API endpoint that you are calling. For example,
+    // The S3 object location of the input media file. The URI must be in the same region
+    // as the API endpoint that you are calling.For example,
     // "https://transcribe-demo.s3-REGION.amazonaws.com/hello_world.wav"
   }
 };
