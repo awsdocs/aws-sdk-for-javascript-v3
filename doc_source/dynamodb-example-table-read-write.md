@@ -126,7 +126,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 ## Deleting an item<a name="dynamodb-example-table-read-write-deleting-an-item"></a>
 
-Create a Node\.js module with the file name `ddb_deleteitem.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to delete an item, which in this example includes the name of the table and both the key name and value for the item you're deleting\. Call the `DeleDteItemCommand` method of the DynamoDB client service object\.
+Create a Node\.js module with the file name `ddb_deleteitem.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to delete an item, which in this example includes the name of the table and both the key name and value for the item you're deleting\. Call the `DeleteItemCommand` method of the DynamoDB client service object\.
 
 **Note**  
 Replace *REGION* with your AWS Region, and *TABLE\_NAME* with the name of the table\.
