@@ -87,13 +87,15 @@ run();
 Here is a function call in V2 using a `promise`\.
 
 ```
-const data = await v2Client.command(params).promise();
+const data = await v2client.command(params).promise()
+
 ```
 
 Here is the V3 version\.
 
 ```
 const data = await v3Client.command(params);
+
 ```
 
 ## Path 3 examples<a name="path3-examples"></a>
@@ -142,5 +144,5 @@ const run = async () => {
     console.log("Error", err);
   }
 };
-
 await run();
+
