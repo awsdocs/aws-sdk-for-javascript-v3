@@ -44,8 +44,8 @@ For details about using `package.json` in a Node\.js project, see [What is the f
      "main": "index.js",
      "dependencies": {
       "@aws-sdk/client-s3": "^3.3.0",
-       "@aws-sdk/node-http-handler": "^^3.3.0",
-       "@aws-sdk/types": "^^3.3.0",
+       "@aws-sdk/node-http-handler": "^3.3.0",
+       "@aws-sdk/types": "^3.3.0",
        "ts-node": "^9.0.0"
      },
      "devDependencies": {
@@ -72,7 +72,7 @@ You can add dependencies to the `package.json` and install them by running `npm 
    ```
 The `package.json` dependencies are automatically updated\.
 
-## Step 4: Write the Node\.js code<a name="getting-started-nodejs-js-code"></a>
+## Step 2: Write the Node\.js code<a name="getting-started-nodejs-js-code"></a>
 
 Create a file named `sample.ts` to contain the example code\. Begin by adding the `require` function calls to include the Amazon S3 package\.
 
@@ -124,12 +124,12 @@ run();
 
 The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/src/sample.ts)\.
 
-## Step 5: Run the example<a name="getting-started-nodejs-run-sample"></a>
+## Step 3: Run the example<a name="getting-started-nodejs-run-sample"></a>
 
 Enter the following command to run the example\.
 
 ```
-node sample.js
+node sample.ts
 ```
 
 If the upload is successful, you'll see a confirmation message at the command prompt\. You can also find the bucket and the uploaded text object in the [Amazon S3 console](https://console.aws.amazon.com/s3/)\.
