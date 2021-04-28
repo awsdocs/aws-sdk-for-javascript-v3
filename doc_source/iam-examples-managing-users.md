@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -20,11 +18,11 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 ## The scenario<a name="iam-examples-managing-users-scenario"></a>
 
 In this example, a series of Node\.js modules are used to create and manage users in IAM\. The Node\.js modules use the SDK for JavaScript to create, delete, and update users using these methods of the `IAM` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#createUser-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#createUser-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#listUsers-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#listUsers-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#updateUser-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#updateUser-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#getUser-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#getUser-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#deleteUser-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/IAM.html#deleteUser-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/createusercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/createusercommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/listuserscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/listuserscommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/updateusercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/updateusercommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/getusercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/getusercommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/deleteusercommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/deleteusercommand.html)
 
 For more information about IAM users, see [IAM users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) in the *IAM User Guide*\.
 
@@ -33,7 +31,7 @@ For more information about IAM users, see [IAM users](https://docs.aws.amazon.co
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 ## Creating a user<a name="iam-examples-managing-users-creating-users"></a>
@@ -63,7 +61,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { UserName: "USER_NAME" }; //USER_NAME
 
 // Create IAM service object
-const iam = new IAMClient(REGION);
+const iam = new IAMClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -113,7 +111,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { MaxItems: 10 };
 
 // Create IAM service object
-const iam = new IAMClient(REGION);
+const iam = new IAMClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -158,7 +156,7 @@ const params = {
 };
 
 // Create IAM service object
-const iam = new IAMClient(REGION);
+const iam = new IAMClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -206,7 +204,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { UserName: "USER_NAME" }; //USER_NAME
 
 // Create IAM service object
-const iam = new IAMClient(REGION);
+const iam = new IAMClient({ region: REGION });
 
 const run = async () => {
   try {

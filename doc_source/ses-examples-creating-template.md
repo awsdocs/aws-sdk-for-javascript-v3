@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -22,18 +20,18 @@ Amazon SES enables you ro send personalized email messages using email templates
 ## The scenario<a name="ses-examples-creating-template-scenario"></a>
 
 In this example, you use a series of Node\.js modules to work with email templates\. The Node\.js modules use the SDK for JavaScript to create and use email templates using these methods of the `SES` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#listTemplates-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#listTemplates-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#createTemplate-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#createTemplate-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#getTemplate-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#getTemplate-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#deleteTemplate-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#deleteTemplate-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#updateTemplate-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SES.html#updateTemplate-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/listtemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/listtemplatescommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/createtemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/createtemplatescommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/gettemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/gettemplatescommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/deletetemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/deletetemplatescommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/updatetemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/updatetemplatescommand.html)
 
 ## Prerequisite tasks<a name="ses-examples-creating-template-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ses/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about creating a credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 ## Listing your email templates<a name="ses-examples-listing-templates"></a>
@@ -59,7 +57,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { MaxItems: "ITEMS_COUNT" }; //ITEMS_COUNT
 
 // Create SES service object
-const ses = new SESClient(REGION);
+const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -103,12 +101,12 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { TemplateName: "TEMPLATE_NAME" };
 
 // Create SES service object
-const ses = new SESClient(REGION);
+const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {
     const data = await ses.send(new GetTemplateCommand(params));
-    console.log("Success. Template:", data.Template);
+    console.log("Success. Template:", data.Template.SubjectPart);
   } catch (err) {
     console.error(err, err.stack);
   }
@@ -157,7 +155,7 @@ const params = {
 };
 
 // Create SES service object
-const ses = new SESClient(REGION);
+const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -211,7 +209,7 @@ const params = {
 };
 
 // Create SES service object
-const ses = new SESClient(REGION);
+const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -255,7 +253,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 const params = { TemplateName: "TEMPLATE_NAME" };
 
 // Create SES service object
-const ses = new SESClient(REGION);
+const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {

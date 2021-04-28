@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -20,10 +18,10 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 ## About the example<a name="sqs-examples-using-queues-scenario"></a>
 
 In this example, a series of Node\.js modules are used to work with queues\. The Node\.js modules use the SDK for JavaScript to enable queues to call the following methods of the `SQS` client class:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SQS.html#listQueues-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SQS.html#listQueues-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SQS.html#createQueue-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SQS.html#createQueue-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SQS.html#getQueueUrl-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SQS.html#getQueueUrl-property)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SQS.html#deleteQueue-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SQS.html#deleteQueue-property)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/listqueuescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/listqueuescommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/createqueuecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/createqueuecommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/getqueueurlcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/getqueueurlcommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/deletequeuecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/deletequeuecommand.html)
 
 For more information about Amazon SQS messages, see [How queues work](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-how-it-works.html) in the *Amazon Simple Queue Service Developer Guide*\.
 
@@ -32,7 +30,7 @@ For more information about Amazon SQS messages, see [How queues work](https://do
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sqs/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 ## Listing your queues<a name="sqs-examples-using-queues-listing-queues"></a>
@@ -53,7 +51,7 @@ const { SQSClient, ListQueuesCommand } = require("@aws-sdk/client-sqs");
 const REGION = "region"; //e.g. "us-east-1"
 
 // Create SQS service object
-const sqs = new SQSClient(REGION);
+const sqs = new SQSClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -101,7 +99,7 @@ const params = {
 };
 
 // Create SQS service object
-const sqs = new SQSClient(REGION);
+const sqs = new SQSClient({ region: REGION });
 
 const run = async () => {
   try {
@@ -140,14 +138,14 @@ const { SQSClient, GetQueueUrlCommand } = require("@aws-sdk/client-sqs");
 const REGION = "REGION"; //e.g. "us-east-1"
 
 // Set the parameters
-const params = { QueueName: "SQS_QUEUE_NAME" }; //SQS_QUEUE_NAME
+const params = { QueueName: "SQS_QUEUE_NAME" };
 
-// Create SQS service object
-const sns = new SQSClient(REGION);
+// Create Amazon Simple Queue Service (Amazon SQS) service object
+const sqs = new SQSClient({ region: REGION });
 
 const run = async () => {
   try {
-    const data = await sns.send(new GetQueueUrlCommand(params));
+    const data = await sqs.send(new GetQueueUrlCommand(params));
     console.log("Success, SQS queue URL:", data.QueueUrl);
   } catch (err) {
     console.log("Error", err);
@@ -185,7 +183,7 @@ const REGION = "region"; //e.g. "us-east-1"
 const params = { QueueUrl: "SQS_QUEUE_URL" }; //SQS_QUEUE_URL e.g., 'https://sqs.REGION.amazonaws.com/ACCOUNT-ID/QUEUE-NAME'
 
 // Create SQS service object
-const sns = new SQSClient(REGION);
+const sns = new SQSClient({ region: REGION });
 
 const run = async () => {
   try {

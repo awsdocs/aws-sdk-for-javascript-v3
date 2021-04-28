@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -46,7 +44,7 @@ const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
 const {
   fromCognitoIdentityPool,
 } = require("@aws-sdk/credential-provider-cognito-identity");
-const { S3Client, ListObjectsCommand } = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand, ListObjectsCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 
 // Set the AWS Region
 const REGION = "REGION"; //REGION
@@ -55,7 +53,7 @@ const REGION = "REGION"; //REGION
 const s3 = new S3Client({
   region: REGION,
   credentials: fromCognitoIdentityPool({
-    client: new CognitoIdentityClient({ region }),
+    client: new CognitoIdentityClient({ region: REGION }),
     identityPoolId: "IDENTITY_POOL_ID", // IDENTITY_POOL_ID
   }),
 });
@@ -73,7 +71,7 @@ window.getHTML = getHtml;
 const listAlbums = async () => {
   try {
     const data = await s3.send(
-      new ListObjectsCommand({ Delimiter: "/", Bucket: albumBucketName })
+        new ListObjectsCommand({ Delimiter: "/", Bucket: albumBucketName })
     );
 
     if (data.CommonPrefixes === undefined) {
@@ -98,11 +96,11 @@ const listAlbums = async () => {
         ]);
       });
       var message = albums.length
-        ? getHtml([
+          ? getHtml([
             "<p>Click an album name to view it.</p>",
             "<p>Click the X to delete the album.</p>",
           ])
-        : "<p>You do not have any albums. You need to create an album";
+          : "<p>You do not have any albums. You need to create an album.";
       const htmlTemplate = [
         "<h2>Albums</h2>",
         message,
@@ -137,7 +135,7 @@ const createAlbum = async (albumName) => {
   try {
     const key = albumKey + "/";
     const params = { Bucket: albumBucketName, Key: key };
-    const data = await s3.putObject(params);
+    const data = await s3.send(new PutObjectCommand(params));
     alert("Successfully created album.");
     viewAlbum(albumName);
   } catch (err) {
@@ -155,10 +153,10 @@ const viewAlbum = async (albumName) => {
   const albumPhotosKey = encodeURIComponent(albumName) + "/";
   try {
     const data = await s3.send(
-      new ListObjectsCommand({
-        Prefix: albumPhotosKey,
-        Bucket: albumBucketName,
-      })
+        new ListObjectsCommand({
+          Prefix: albumPhotosKey,
+          Bucket: albumBucketName,
+        })
     );
     if (data.Contents.length === 1) {
       var htmlTemplate = [
@@ -174,7 +172,7 @@ const viewAlbum = async (albumName) => {
       document.getElementById("app").innerHTML = getHtml(htmlTemplate);
     } else {
       console.log(data);
-      const href = "https://s3." + region + ".amazonaws.com/";
+      const href = "https://s3." + REGION + ".amazonaws.com/";
       const bucketUrl = href + albumBucketName + "/";
       const photos = data.Contents.map(function (photo) {
         const photoKey = photo.Key;
@@ -187,10 +185,10 @@ const viewAlbum = async (albumName) => {
           "</div>",
           "<div>",
           "<span onclick=\"deletePhoto('" +
-            albumName +
-            "','" +
-            photoKey +
-            "')\">",
+          albumName +
+          "','" +
+          photoKey +
+          "')\">",
           "X",
           "</span>",
           "<span>",
@@ -201,8 +199,8 @@ const viewAlbum = async (albumName) => {
         ]);
       });
       var message = photos.length
-        ? "<p>Click  the X to delete the photo</p>"
-        : "<p>You don't have any photos in this album. You need to add photos.</p>";
+          ? "<p>Click the X to delete the photo.</p>"
+          : "<p>You don't have any photos in this album. You need to add photos.</p>";
       const htmlTemplate = [
         "<h2>",
         "Album: " + albumName,
@@ -236,11 +234,10 @@ const addPhoto = async (albumName) => {
   try {
     const albumPhotosKey = encodeURIComponent(albumName) + "/";
     const data = await s3.send(
-      new ListObjectsCommand({
-        Prefix: albumPhotosKey,
-        Bucket: albumBucketName,
-        ACL: "public-read",
-      })
+        new ListObjectsCommand({
+          Prefix: albumPhotosKey,
+          Bucket: albumBucketName
+        })
     );
     const file = files[0];
     const fileName = file.name;
@@ -248,11 +245,10 @@ const addPhoto = async (albumName) => {
     const uploadParams = {
       Bucket: albumBucketName,
       Key: photoKey,
-      Body: file,
-      ACL: "public-read",
+      Body: file
     };
     try {
-      const data = await s3.putObject(uploadParams);
+      const data = await s3.send(new PutObjectCommand(uploadParams));
       alert("Successfully uploaded photo.");
       viewAlbum(albumName);
     } catch (err) {
@@ -273,7 +269,7 @@ const deletePhoto = async (albumName, photoKey) => {
   try {
     console.log(photoKey);
     const params = { Key: photoKey, Bucket: albumBucketName };
-    const data = await s3.deleteObject(params);
+    const data = await s3.send(new DeleteObjectCommand(params));
     console.log("Successfully deleted photo.");
     viewAlbum(albumName);
   } catch (err) {
@@ -289,7 +285,7 @@ const deleteAlbum = async (albumName) => {
   const albumKey = encodeURIComponent(albumName) + "/";
   try {
     const params = { Bucket: albumBucketName, Prefix: albumKey };
-    const data = await s3.listObjects(params);
+    const data = await s3.send(new ListObjectsCommand(params));
     const objects = data.Contents.map(function (object) {
       return { Key: object.Key };
     });
@@ -299,7 +295,7 @@ const deleteAlbum = async (albumName) => {
         Delete: { Objects: objects },
         Quiet: true,
       };
-      const data = await s3.deleteObjects(params);
+      const data = await s3.send(new DeleteObjectCommand(params));
       listAlbums();
       return alert("Successfully deleted album.");
     } catch (err) {

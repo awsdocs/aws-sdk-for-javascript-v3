@@ -1,10 +1,8 @@
 --------
 
-This is a preview version of the Developer Guide for the AWS SDK for JavaScript Version 3 \(V3\)\.
+Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
 
-A preview version of the AWS SDK for JavaScript V3 is available on [Github](https://github.com/aws/aws-sdk-js-v3)\.
-
-Help us improve the AWS SDK for JavaScript documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
 
 --------
 
@@ -16,7 +14,7 @@ Help us improve the AWS SDK for JavaScript documentation by providing feedback u
 + How to create a photo album in an Amazon Simple Storage Service \(Amazon S3\) bucket and allow unauthenticated users to view the photos\.
 
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 
 ## The scenario<a name="s3-example-photos-view-scenario"></a>
 
@@ -38,7 +36,7 @@ In this example, you must use the same AWS Region for both the Amazon S3 bucket 
 Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/README.md)\.
 
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 
 ### Create the bucket<a name="s3-example-photos-view-prereq-bucket"></a>
 
@@ -49,7 +47,7 @@ As you create the Amazon S3 bucket, be sure to do the following:
 + Choose an AWS Region to create the bucket in\. This must be the same Region that you'll use to create an Amazon Cognito identity pool in a subsequent prerequisite task, [Create an identity pool](#s3-example-photos-view-prereq-idpool)\.
 + In the **Create Bucket** wizard, on the **Create Bucket** page, in the **Bucket settings for block public access** section, clear these boxes: **Block public access to buckets and objects granted through new access control lists \(ACLs\)** and **Block public access to buckets and objects granted through any acess control lists \(ACLs\)**\.
 
-  For information about how to check and configure bucket permissions, see [Setting bucket and object access permissions](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/set-permissions.html) in the *Amazon Simple Storage Service Console User Guide*\.
+  For information about how to check and configure bucket permissions, see [Setting permissions for website access](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
 ### Create an identity pool<a name="s3-example-photos-view-prereq-idpool"></a>
 
@@ -100,6 +98,32 @@ For additional information about creating an IAM role, see [Creating a role to d
 
 Before the browser script can access the Amazon S3 bucket, you have to set up its [CORS configuration](cors.md#configuring-cors-s3-bucket) as follows\.
 
+**Important**  
+In the new S3 console, the CORS configuration must be JSON\.
+
+------
+#### [ JSON ]
+
+```
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "HEAD",
+            "GET"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ]
+    }
+]
+```
+
+------
+#### [ XML ]
+
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
@@ -111,6 +135,8 @@ Before the browser script can access the Amazon S3 bucket, you have to set up it
     </CORSRule>
 </CORSConfiguration>
 ```
+
+------
 
 ### Create albums and upload photos<a name="s3-example-photos-view-create-albums"></a>
 
@@ -206,7 +232,7 @@ const REGION = "region"; //e.g., 'us-east-1'
 const s3 = new S3Client({
   region: REGION,
   credentials: fromCognitoIdentityPool({
-    client: new CognitoIdentityClient({ REGION }),
+    client: new CognitoIdentityClient({ region: REGION }),
     identityPoolId: "IDENTITY_POOL_ID", // IDENTITY_POOL_ID e.g., eu-west-1:xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx
   }),
 });
