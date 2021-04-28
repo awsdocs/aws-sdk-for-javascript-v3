@@ -29,6 +29,8 @@ Follow path 1 and use the async/await programming model\.
 
 ------
 
+For notable changes from AWS SDK for JavaScript v2 to v3, refer [Upgrading Notes (2.x to 3.x)](https://github.com/aws/aws-sdk-js-v3/blob/main/UPGRADING.md)
+
 The following sections describe these paths in detail, with examples\.
 
 ## Path 1 example<a name="path1-examples"></a>
@@ -85,13 +87,13 @@ run();
 Here is a function call in V2 using a `promise`\.
 
 ```
-const data await v2client.command(params).promise()
+const data = await v2Client.command(params).promise();
 ```
 
 Here is the V3 version\.
 
 ```
-const data await v2client.command(params)
+const data = await v3Client.command(params);
 ```
 
 ## Path 3 examples<a name="path3-examples"></a>
@@ -99,7 +101,7 @@ const data await v2client.command(params)
 The following command installs the AWS Service package for Amazon S3\.
 
 ```
-npm install @aws-sdk/client-s3; 
+npm install @aws-sdk/client-s3
 ```
 
 The following code loads only the Amazon S3 client, reducing the overhead\.
@@ -140,6 +142,5 @@ const run = async () => {
     console.log("Error", err);
   }
 };
-await run();
 
-```
+await run();
