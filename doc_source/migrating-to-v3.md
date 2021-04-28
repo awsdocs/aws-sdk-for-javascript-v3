@@ -44,7 +44,7 @@ npm install @aws-sdk/client-s3
 The following code loads the Amazon S3 service\.
 
 ```
-const {S3} = require('@aws-sdk/client-s3');
+const { S3 } = require("@aws-sdk/client-s3");
 ```
 
 **Note**  
@@ -53,7 +53,7 @@ To use this approach you must import the full AWS Service packages, `S3` in this
 The following code creates an Amazon S3 service object in the `us-west-2` Region\.
 
 ```
-const s3 = new S3({region: 'us-west-2'});
+const client = new S3({ region: "us-west-2" });
 ```
 
 The following code creates and Amazon S3 bucket using a callback function, using the following syntax from V2\.
@@ -63,20 +63,23 @@ client.command(parameters)
 ```
 
 ```
-const {S3} = require('@aws-sdk/client-s3');
-const s3 = new S3({region: 'us-west-2'});
-var bucketParams = {
-    Bucket : BUCKET_NAME
+const { S3 } = require("@aws-sdk/client-s3");
+const client = new S3({ region: "us-west-2" });
+
+const bucketParams = {
+  Bucket: BUCKET_NAME,
 };
-function run(){
-         s3.createBucket(bucketParams, function(err, data) {
-         if (err) {
-         console.log("Error", err);
-         } else {
-         console.log("Success", data.Location);
-         }
-    })
-};
+
+function run() {
+  client.createBucket(bucketParams, function (err, data) {
+    if (err) {
+      console.log("Error", err);
+    } else {
+      console.log("Success", data.Location);
+    }
+  });
+}
+run();
 ```
 
 ## Path 2 example<a name="path2-examples"></a>
@@ -104,15 +107,15 @@ npm install @aws-sdk/client-s3
 The following code loads only the Amazon S3 client, reducing the overhead\.
 
 ```
-const {S3Client, CreateBucketCommand} = require('@aws-sdk/client-s3');
+const { S3Client, CreateBucketCommand } = require("@aws-sdk/client-s3");
 ```
 
- If you install only the client of a package, you must also import the V3 commands you want to use\. In this case, the code imports the `CreateBucketCommand`, which enables you to create and Amazon S3 bucket\. You can browse the available commands in your project's `node-modules/@aws-sdk/client-PACKAGE_NAME/commands` folder\. 
+If you install only the client of a package, you must also import the V3 commands you want to use\. In this case, the code imports the `CreateBucketCommand`, which enables you to create and Amazon S3 bucket\. You can browse the available commands in your project's `node-modules/@aws-sdk/client-PACKAGE_NAME/commands` folder\. 
 
 The following code creates an Amazon S3 service client object in the `us-west-2` Region\. 
 
 ```
-const s3 = new S3Client({region: 'us-west-2'});
+const client = new S3Client({ region: "us-west-2" });
 ```
 
 To call imported commands the recommended async/await pattern, you must import the commands you want to use, and use the following syntax to run the command\.
@@ -124,19 +127,20 @@ To call imported commands the recommended async/await pattern, you must import t
 The following example creates an Amazon S3 bucket using the async/await pattern, using only the client of the Amazon S3 service package to reduce overhead\.
 
 ```
-const {S3Client, CreateBucketCommand} = require('@aws-sdk/client-s3');
-const s3 = new S3Client({region: 'us-west-2'});
-var bucketParams = {
-    Bucket : BUCKET_NAME
+const { S3Client, CreateBucketCommand } = require("@aws-sdk/client-s3");
+const client = new S3({ region: "us-west-2" });
+
+const bucketParams = {
+  Bucket: BUCKET_NAME,
 };
-async function run() => {
-      try{
-           const data = await s3.send(new CreateBucketCommand(bucketParams));
-           console.log("Success", data);
-      } 
-      catch (err) {
-           console.log("Error", err);
-      }
+
+const run = async () => {
+  try {
+    const data = await client.send(new CreateBucketCommand(bucketParams));
+    console.log("Success", data);
+  } catch (err) {
+    console.log("Error", err);
+  }
 };
-run();
-```
+
+await run();
