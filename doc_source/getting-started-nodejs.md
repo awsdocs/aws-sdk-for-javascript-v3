@@ -44,8 +44,8 @@ For details about using `package.json` in a Node\.js project, see [What is the f
      "main": "index.js",
      "dependencies": {
       "@aws-sdk/client-s3": "^3.3.0",
-       "@aws-sdk/node-http-handler": "^^3.3.0",
-       "@aws-sdk/types": "^^3.3.0",
+       "@aws-sdk/node-http-handler": "^3.3.0",
+       "@aws-sdk/types": "^3.3.0",
        "ts-node": "^9.0.0"
      },
      "devDependencies": {
@@ -129,7 +129,7 @@ The example code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Enter the following command to run the example\.
 
 ```
-node sample.js
+node sample.ts
 ```
 
 If the upload is successful, you'll see a confirmation message at the command prompt\. You can also find the bucket and the uploaded text object in the [Amazon S3 console](https://console.aws.amazon.com/s3/)\.
