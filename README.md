@@ -4,7 +4,7 @@ To view this documentation, start with the [Index](doc_source/index.md).
 
 This repository contains the open source version of the official [AWS SDK for JavaScript V3 developer guide, version 3](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html).
 
-The source code for the AWS SDK for JavaScript 2.0 is also on GitHub at https://github.com/aws/aws-sdk-js-v3.
+The source code for the AWS SDK for JavaScript 3.0 is also on GitHub at https://github.com/aws/aws-sdk-js-v3.
 
 ## Recent Updates
 
