@@ -88,7 +88,6 @@ Here is a function call in V2 using a `promise`\.
 
 ```
 const data = await v2client.command(params).promise()
-
 ```
 
 Here is the V3 version\.
@@ -129,6 +128,7 @@ To call imported commands the recommended async/await pattern, you must import t
 The following example creates an Amazon S3 bucket using the async/await pattern, using only the client of the Amazon S3 service package to reduce overhead\.
 
 ```
+
 const { S3Client, CreateBucketCommand } = require("@aws-sdk/client-s3");
 const client = new S3({ region: "us-west-2" });
 
@@ -145,4 +145,3 @@ const run = async () => {
   }
 };
 await run();
-
