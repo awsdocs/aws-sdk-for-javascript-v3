@@ -34,7 +34,7 @@ The code examples in this tutorial import and use the required AWS Service V3 pa
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/transcribe-app/README.md)\. 
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
-## Tutorial steps<a name="transcribe-app-procedures"></a>
+## Steps<a name="transcribe-app-procedures"></a>
 
 **To build the app:**
 

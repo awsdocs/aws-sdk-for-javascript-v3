@@ -8,6 +8,6 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Run the app<a name="lambda-create-table-run"></a>
 
-This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Tutorial: Create and using Lambda functions](lambda-create-table-example.md)\.
+This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](lambda-create-table-example.md)\.
 
 Open the `index.html` in the Amazon S3 bucket that hosts the application\. To do this, go open the Amazon S3 bucket in the console, select the bucket, and choose the **Object URL**\.

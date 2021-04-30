@@ -29,6 +29,6 @@ var dynamodbClient = new DynamoDBClient({
 });
 ```
 
-When using the default of `https`, the SDK takes the `maxSockets` value from the `globalAgent`\. If the `maxSockets` value is not defined or is `Infinity`, the SDK assumes a `maxSockets` value of 50\.
+When using the default of `https`, the SDK takes the `maxSockets` value from the `globalAgent`\. If the `maxSockets` value is not defined, the SDK assumes a `maxSockets` value of 50\.
 
 For more information about setting `maxSockets` in Node\.js, see the [Node\.js online documentation](https://nodejs.org/dist/latest-v4.x/docs/api/http.html#http_agent_maxsockets)\.

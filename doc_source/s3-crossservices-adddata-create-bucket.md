@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Create an Amazon S3 bucket<a name="s3-crossservices-adddata-create-bucket"></a>
 
-This topic is part of a larger tutorial about using the AWS SDK for JavaScript with AWS Lambda functions\. To start at the beginning of the tutorial, see [Tutorial: Creating and using Lambda functions](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sdk-cross-service-example-submitting-data.html)\. 
+This topic is part of a larger tutorial about using the AWS SDK for JavaScript with AWS Lambda functions\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sdk-cross-service-example-submitting-data.html)\. 
 
 In this task, you create an Amazon S3 bucket using the AWS SDK for JavaScript\. Alternatively, you can create it through the AWS Management Console\. For more information, see the [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)\. 
 

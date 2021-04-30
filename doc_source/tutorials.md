@@ -6,14 +6,19 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Tutorials for the AWS SDK for JavaScript<a name="tutorials"></a>
+# Cross\-service examples for the AWS SDK for JavaScript<a name="tutorials"></a>
 
 The SDK for JavaScript enables you to use multiple AWS services in cooperation with each other to develop complex and sophisticated solutions\. This section of the AWS SDK for JavaScript demonstrates several such solutions\.
 
-The following tutorials show you how to perform different tasks related to using the AWS SDK for JavaScript\.
+The following cross\-service examples show you how to perform different tasks related to using the AWS SDK for JavaScript\.
 
 **Topics**
-+ [Tutorial: Setting up Node\.js on an Amazon EC2 instance](setting-up-node-on-ec2-instance.md)
-+ [Tutorial: Creating and using Lambda functions](using-lambda-functions.md)
-+ [Tutorial: Build an app to submit data to DynamoDB](cross-service-example-submitting-data.md)
++ [Setting up Node\.js on an Amazon EC2 instance](setting-up-node-on-ec2-instance.md)
++ [Build an app to submit data to DynamoDB](cross-service-example-submitting-data.md)
 + [Build a transcription app with authenticated users](transcribe-app.md)
++ [Invoking Lambda with API Gateway](api-gateway-invoking-lambda-example.md)
++ [Creating AWS serverless workflows using AWS SDK for JavaScript](serverless-step-functions-example.md)
++ [Creating scheduled events to execute Lambda functions](scheduled-events-invoking-lambda-example.md)
++ [Creating and using Lambda functions](lambda-create-table-example.md)
++ [Building an Amazon Lex chatbot](lex-bot-example.md)
++ [Creating an example messaging application](messaging-app.md)

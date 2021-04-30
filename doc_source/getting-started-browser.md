@@ -16,7 +16,7 @@ Running V3 in the browser is slightly different from version 2 \(V2\)\. For more
 For other examples of using \(V3\) of the SDK for JavaScript with the Node\.js in the browser, see:
 +  [Viewing photos in an Amazon S3 bucket from a browser](s3-example-photos-view.md)
 +  [Uploading photos to Amazon S3 from a browser](s3-example-photo-album.md)
-+  [Tutorial: Build an app to submit data to DynamoDB](cross-service-example-submitting-data.md)
++  [Build an app to submit data to DynamoDB](cross-service-example-submitting-data.md)
 
 ![\[JavaScript code example that applies to browser execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browsericon.png)
 
@@ -188,7 +188,7 @@ After you create the presigner object, call the `getSynthesizeSpeechUrl` method 
 Finally, run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`:
 
 ```
-webpack polly.js --mode development --target web --devtool false -o main.js
+./node_modules/.bin/webpack --entry ./polly.js --mode development --target web --devtool false -o main.js
 ```
 
 **Note**  

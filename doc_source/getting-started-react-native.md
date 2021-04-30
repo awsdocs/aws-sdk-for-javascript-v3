@@ -267,7 +267,7 @@ Inside the function App:
 + The methods `createBucket` and `deleteBucket` create and delete the specified bucket, respectively\.
 + The React Native View displays a text input field for the user to specify an Amazon S3 bucket name, and buttons to create and delete the specified Amazon S3 bucket\.
 
-The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/reactnative/app.js)\.
+The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/reactnative/App.js)\.
 
 ## Step 6: Run the Example<a name="getting-started-react-native-run-sample"></a>
 

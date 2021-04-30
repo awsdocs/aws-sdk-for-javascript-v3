@@ -54,7 +54,7 @@ FB.login(function (response) {
       region: "us-west-2",
       credentials: fromCognitoIdentityPool({
         client: cognitoIdentityClient,
-        IdentityPoolId: 'IDENTITY_POOL_ID',
+        identityPoolId: 'IDENTITY_POOL_ID',
         Logins: {
            "graph.facebook.com': 'response.authResponse.accessToken"
         },

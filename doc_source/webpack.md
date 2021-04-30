@@ -49,16 +49,16 @@ module.exports = {
     filename: 'bundle.js'
   },
    // Enable WebPack to use the 'path' package.
-   reoslve:{
-  fallback: { path: require.resolve("path-browserify"}
+   resolve:{
+  fallback: { path: require.resolve("path-browserify")}
   }
-   /**
-   * In Webpack version v2.0.0 and earlier, you must tell 
-   * webpack how to use "json-loader" to load 'json' files.
-   * To do this Enter 'npm --save-dev install json-loader' at the 
-   * command line to install the "json-loader' package, and include the 
-   * following entry in your webpack.config.js.
-   module: {
+  /**
+  * In Webpack version v2.0.0 and earlier, you must tell 
+  * webpack how to use "json-loader" to load 'json' files.
+  * To do this Enter 'npm --save-dev install json-loader' at the 
+  * command line to install the "json-loader' package, and include the 
+  * following entry in your webpack.config.js.
+  * module: {
     rules: [{test: /\.json$/, use: use: "json-loader"}]
   }
   **/
@@ -126,7 +126,7 @@ To use the bundle in a browser script, you can incorporate the bundle using a `<
 
 ## Bundling for Node\.js<a name="webpack-nodejs-bundles"></a>
 
-You can use `webpack` to generate bundles that run in Node\.js by specifying `webpack` as a target in the configuration\.
+You can use `webpack` to generate bundles that run in Node\.js by specifying `node` as a target in the configuration\.
 
 ```
 target: "node"

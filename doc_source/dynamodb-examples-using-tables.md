@@ -11,13 +11,13 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 
 **This Node\.js code example shows:**
-+ How to create ad manage tables used to store and retrieve data from DynamoDB\.
++ How to create and manage tables used to store and retrieve data from DynamoDB\.
 
 ## The scenario<a name="dynamodb-examples-using-tables-scenario"></a>
 
-Similar to other database systems, DynamoDB stores data in tables\. A DynamoDB table is a collection of data that's organized into items that are analogous to rows\. To store or access data in DynamoDB, you create ad work with tables\.
+Similar to other database systems, DynamoDB stores data in tables\. A DynamoDB table is a collection of data that's organized into items that are analogous to rows\. To store or access data in DynamoDB, you create and work with tables\.
 
-In this example, you use a series of Node\.js modules to perform basic operations with a DynamoDB table\. The code uses the SDK for JavaScript to create ad work with tables by using these methods of the `DynamoDB` client class:
+In this example, you use a series of Node\.js modules to perform basic operations with a DynamoDB table\. The code uses the SDK for JavaScript to create and work with tables by using these methods of the `DynamoDB` client class:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/classes/createtablecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/classes/createtablecommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/classes/listtablescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/classes/listtablescommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/classes/describetablecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-dynamodb/classes/describetablecommand.html)
