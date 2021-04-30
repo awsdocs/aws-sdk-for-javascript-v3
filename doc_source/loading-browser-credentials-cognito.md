@@ -55,7 +55,7 @@ FB.login(function (response) {
       credentials: fromCognitoIdentityPool({
         client: cognitoIdentityClient,
         identityPoolId: 'IDENTITY_POOL_ID',
-        Logins: {
+        logins: {
            "graph.facebook.com': 'response.authResponse.accessToken"
         },
       }),

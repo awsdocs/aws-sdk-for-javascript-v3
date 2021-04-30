@@ -42,8 +42,6 @@ If the selected bucket has no website configuration, that information is returne
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
- */
-
 // Import required AWS SDK clients and commands for Node.js
 const { S3Client, GetBucketWebsiteCommand } = require("@aws-sdk/client-s3");
 

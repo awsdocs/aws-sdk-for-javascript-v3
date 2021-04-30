@@ -283,6 +283,8 @@ const s3 = new S3Client({ region: REGION });
 const run = async () => {
   // Add the required 'Key' parameter using the 'path' module.
   uploadParams.Key = path.basename(file);
+  uploadParams.Body = fileStream;
+  // call S3 to retrieve upload file to specified bucket
   try {
     const data = await s3.send(new PutObjectCommand(uploadParams));
     console.log("Success", data);
@@ -671,5 +673,5 @@ To run the example, type the following at the command line\.
 ```
 node s3_get_presignedURL_v3.js
 ```
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/src/s3_put_presignedURL.ts)\.
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/src/s3_get_presignedURL.ts)\.
