@@ -74,13 +74,15 @@ The `package.json` dependencies are automatically updated\.
 
 ## Step 2: Write the Node\.js code<a name="getting-started-nodejs-js-code"></a>
 
-Create a file named `sample.ts` to contain the example code\. Begin by adding the `require` function calls to include the Amazon S3 package\.
+Create a file named `sample.js` to contain the example code\. Begin by adding the `require` function calls to include the Amazon S3 package\.
 
-Create an Amazon S3 bucket in the Amazon Console\. For more information, see [Create an Amazon Amazon S3 bucket](https://docs.aws.amazon.com/quickstarts/latest/s3backup/step-1-create-bucket.html)\.
+First, define the parameters by replacing *BUCKET\_NAME* with the name of the bucket, *KEY* with the name of the new object, *BODY* with some content for the new object\.
 
-Then add a name for the `Key` parameter used to upload an object to the bucket\.
+Next, create an Amazon S3 client object\. Then create an async wrapper function that runs two try/catch statements in sequence\. The first try/catch statement creates the bucket, and the second creates and uploads the new object\. 
 
-Create the `PutObjectCommand` object to encapsulate the properties of the associated `S3` service object requests\. Call the `send` command with the `CreateBucketCommand` and `PutObjectCommand` objects to create a new Amazon S3 bucket and upload the object to it\.
+To create the bucket, you create a constant that runs the `CreateBucketCommand` using the `.send` method using the async/await pattern, passing in the name of the new bucket\. The await keyword blocks execution of all the code that follows until the bucket is created\. If an error occurs, the first `catch` statement returns an error\. 
+
+To create and upload an object to the new bucket after it is created, you create a constant that runs the `PutObjectCommand`, also using the `.send` method using the async/await pattern, and passing in the bucket, key, and body peramters\. If an error occurs, the second `catch` statement returns an error\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js

@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Delete the resources<a name="lambda-create-table-destroy"></a>
 
-This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Tutorial: Create and using Lambda functions](lambda-create-table-example.md)\.
+This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](lambda-create-table-example.md)\.
 
 When you finish the tutorial, you should delete the resources so you do not incur any unnecessary charges\. You can do this by deleting the AWS CloudFormation stack you created in the [Create the AWS resources ](lambda-create-table-provision-resources.md) topic of this tutorial\.
 

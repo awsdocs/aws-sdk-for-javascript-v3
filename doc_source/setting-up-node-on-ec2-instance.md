@@ -6,7 +6,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Tutorial: Setting up Node\.js on an Amazon EC2 instance<a name="setting-up-node-on-ec2-instance"></a>
+# Setting up Node\.js on an Amazon EC2 instance<a name="setting-up-node-on-ec2-instance"></a>
 
 A common scenario for using Node\.js with the SDK for JavaScript is to set up and run a Node\.js web application on an Amazon Elastic Compute Cloud \(Amazon EC2\) instance\. In this tutorial, you will create a Linux instance, connect to it using SSH, and then install Node\.js to run on that instance\. 
 

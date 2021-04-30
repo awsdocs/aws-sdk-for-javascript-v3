@@ -8,11 +8,11 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Deploy the Lambda function<a name="lambda-create-table-deploy-function"></a>
 
-This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Tutorial: Create and using Lambda functions](lambda-create-table-example.md)\.
+This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](lambda-create-table-example.md)\.
 
 In the root of your project, create a `lambda-function-setup.ts` file, and paste the content below into it\.
 
-Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket you uploaded the ZIP version of your Lambda function to\. Replace *KEY* with the name of name the ZIP version of your Lambda function\. Replace *ROLE* with the Amazon Resource Number \(ARN\) of the IAM role you created in the [Create the AWS resources ](lambda-create-table-provision-resources.md) topic of this tutorial\. Replace *LAMBDA\_FUNCTION* with the same name you gave the function in the `/Lambda/index.ts` in the [](lambda-create-table-browser-script.md) topic of this tutorial\.
+Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket you uploaded the ZIP version of your Lambda function to\. Replace *KEY* with the name of name the ZIP version of your Lambda function\. Replace *ROLE* with the Amazon Resource Number \(ARN\) of the IAM role you created in the [Create the AWS resources ](lambda-create-table-provision-resources.md) topic of this tutorial\. Replace *LAMBDA\_FUNCTION* with the same name you gave the function in the `/Lambda/index.ts` in the [Prepare the browser script](lambda-create-table-browser-script.md) topic of this tutorial\.
 
 ```
 // Load the Lambda client.
@@ -24,7 +24,7 @@ const {
 //Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 
-// Instantiate an Amazon Lambda client service object.
+// Instantiate an AWS Lambda client service object.
 const lambda = new LambdaClient({ region: REGION });
 
 // Set the parameters.

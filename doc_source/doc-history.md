@@ -15,7 +15,6 @@ The following table describes the important changes in the V3 release of the *AW
 
 | Change | Description | Date | 
 | --- |--- |--- |
-| [Updated AWS Lambda tutorial](using-lambda-functions.md) | Updated tutorial that builds a browser\-based game to AWS SDK for JavaScript V3\.  | October 20, 2020 | 
 | [Updated AWS Lambda tutorial](cross-service-example-submitting-data.md) | Added tutorial demonstrating how to build a browser\-based application for submitting data to a Amazon DynamoDB table\.  | October 20, 2020 | 
 | [Setting credentials in Node\.js topic updated](configuring-the-jssdk.md) | Update topic about setting credentials in Node\.js for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Migrating to V3](migrating-to-v3.md) | Added topic to describe how to migrate to AWS SDK for JavaScript V3\. | October 20, 2020 | 
@@ -28,6 +27,8 @@ The following table describes the important changes in the V3 release of the *AW
 | [Amazon Simple Email Service service examples updated](ses-examples.md) | Updated Amazon Simple Email Service service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon S3 Glacier service examples updated](glacier-examples.md) | Updated Amazon S3 Glacier service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon Redshift service examples updated](redshift-examples.md) | Updated Amazon Redshift service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
+| [Amazon Lex service examples updated](lex-examples.md) | Updated Amazon Lex service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
+| [Amazon Kinesis service examples updated](kinesis-examples.md) | Updated Amazon Kinesis service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon Elastic Compute Cloud service examples updated](ec2-examples.md) | Updated Amazon Elastic Compute Cloud service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon DynamoDB service examples updated](dynamodb-examples.md) | Updated Amazon DynamoDB service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon CloudWatch service examples updated](cloudwatch-examples.md) | Updated Amazon CloudWatch service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 

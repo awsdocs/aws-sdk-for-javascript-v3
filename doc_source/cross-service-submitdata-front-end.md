@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Create a front\-end page for the app<a name="cross-service-submitdata-front-end"></a>
 
-This topic is part of a larger tutorial about using the AWS SDK for JavaScript with AWS Lambda functions\. To start at the beginning of the tutorial, see [Tutorial: Creating and using Lambda functions](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sdk-cross-service-example-submitting-data.html)\. 
+This topic is part of a larger tutorial about using the AWS SDK for JavaScript with AWS Lambda functions\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sdk-cross-service-example-submitting-data.html)\. 
 
 In this task, you create the front\-end browser page for the app, for which you require two HTML pages, `index.html` and `error.html`\. `index.html` is the landing page, and `error.html` displays if an error occurs\.
 

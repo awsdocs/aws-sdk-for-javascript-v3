@@ -6,7 +6,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Tutorial: Build an app to submit data to DynamoDB<a name="cross-service-example-submitting-data"></a>
+# Build an app to submit data to DynamoDB<a name="cross-service-example-submitting-data"></a>
 
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 
@@ -30,7 +30,7 @@ Complete the following prerequisite tasks:
 The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
-## Tutorial steps<a name="s3-crossservice-tutorial-steps"></a>
+## Steps<a name="s3-crossservice-tutorial-steps"></a>
 
 To create this application, you need resources from multiple services that must be connected and configured in both the code of the browser script and the Node\.js code\.
 

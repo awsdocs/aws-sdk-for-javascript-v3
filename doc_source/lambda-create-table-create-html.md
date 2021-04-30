@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Create the HTML<a name="lambda-create-table-create-html"></a>
 
-This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Tutorial: Create and using Lambda functions](lambda-create-table-example.md)\.
+This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](lambda-create-table-example.md)\.
 
 First, create a `LambdaApp` folder\. In this folder, create an `index.html` file, and copy and paste the content below into it\. Upload the `index.html` file to the Amazon S3 bucket you created in the [Create the AWS resources ](lambda-create-table-provision-resources.md) topic of this tutorial\.
 

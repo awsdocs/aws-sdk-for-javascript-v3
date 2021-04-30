@@ -29,7 +29,9 @@ Follow path 1 and use the async/await programming model\.
 
 ------
 
-For notable changes from AWS SDK for JavaScript v2 to v3, refer [Upgrading Notes (2.x to 3.x)](https://github.com/aws/aws-sdk-js-v3/blob/main/UPGRADING.md)
+**Important**  
+For information about significant changes from AWS SDK for JavaScript v2 to v3, please see [Upgrading Notes \(2\.x to 3\.x\)](https://github.com/aws/aws-sdk-js-v3/blob/main/UPGRADING.md) on GitHub\.
+
 
 The following sections describe these paths in detail, with examples\.
 
@@ -53,8 +55,9 @@ To use this approach you must import the full AWS Service packages, `S3` in this
 The following code creates an Amazon S3 service object in the `us-west-2` Region\.
 
 ```
-const client = new S3({ region: "us-west-2" });
-```
+
+const client = new S3({region: 'us-west-2'});
+
 
 The following code creates and Amazon S3 bucket using a callback function, using the following syntax from V2\.
 
@@ -87,14 +90,13 @@ run();
 Here is a function call in V2 using a `promise`\.
 
 ```
-const data = await v2client.command(params).promise()
+const data =  await v2client.command(params).promise()
 ```
 
 Here is the V3 version\.
 
 ```
 const data = await v3Client.command(params);
-
 ```
 
 ## Path 3 examples<a name="path3-examples"></a>
@@ -116,7 +118,7 @@ If you install only the client of a package, you must also import the V3 command
 The following code creates an Amazon S3 service client object in the `us-west-2` Region\. 
 
 ```
-const client = new S3Client({ region: "us-west-2" });
+const client = new S3Client({region: 'us-west-2'});
 ```
 
 To call imported commands the recommended async/await pattern, you must import the commands you want to use, and use the following syntax to run the command\.
@@ -128,20 +130,19 @@ To call imported commands the recommended async/await pattern, you must import t
 The following example creates an Amazon S3 bucket using the async/await pattern, using only the client of the Amazon S3 service package to reduce overhead\.
 
 ```
-
-const { S3Client, CreateBucketCommand } = require("@aws-sdk/client-s3");
-const client = new S3({ region: "us-west-2" });
-
+const {S3Client, CreateBucketCommand} = require('@aws-sdk/client-s3');
+const client = new S3Client({region: 'us-west-2'});
 const bucketParams = {
-  Bucket: BUCKET_NAME,
+    Bucket : BUCKET_NAME
 };
 
 const run = async () => {
-  try {
-    const data = await client.send(new CreateBucketCommand(bucketParams));
-    console.log("Success", data);
-  } catch (err) {
-    console.log("Error", err);
-  }
+      try{
+        const data = await client.send(new CreateBucketCommand(bucketParams));
+        console.log("Success", data);
+      } catch (err) {
+        console.log("Error", err);
+      }
 };
 await run();
+```

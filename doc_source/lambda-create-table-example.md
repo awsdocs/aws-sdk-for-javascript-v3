@@ -6,7 +6,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Tutorial: Create and using Lambda functions<a name="lambda-create-table-example"></a>
+# Creating and using Lambda functions<a name="lambda-create-table-example"></a>
 
 The tutorial describes how to create and execute from the browser a Lambda function that creates a DynamoDB table\.
 

@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Prepare the browser script<a name="lambda-create-table-browser-script"></a>
 
-This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Tutorial: Create and using Lambda functions](lambda-create-table-example.md)\.
+This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](lambda-create-table-example.md)\.
 
 In the `LambdaApp` folder, create a file name `index.ts`, and paste the content below into it\.
 
@@ -31,13 +31,13 @@ const REGION = "REGION"; // e.g., 'us-east-2'
 
 // Set the parmaeters.
 const params={
-  // The name of the Amazon Lambda function.
+  // The name of the AWS Lambda function.
   FunctionName: "LAMBDA_FUNCTION",
   InvocationType: "RequestResponse",
   LogType: "None"
 }
 
-// Create an Amazon Lambda client service object that initializes the Amazon Cognito credentials provider.
+// Create an AWS Lambda client service object that initializes the Amazon Cognito credentials provider.
 const lambda = new LambdaClient({
   region: REGION,
   credentials: fromCognitoIdentityPool({

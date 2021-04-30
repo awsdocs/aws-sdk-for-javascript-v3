@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Create the AWS resources<a name="lambda-create-table-provision-resources"></a>
 
-This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Tutorial: Create and using Lambda functions](lambda-create-table-example.md)\.
+This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](lambda-create-table-example.md)\.
 
 This tutorial requires the following resources\.
 +  An Amazon Cognito identity pool with an unauthenticated user role\.
@@ -45,7 +45,7 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
 1. Copy and paste the code below into `describe-stack-resources.ts`\.
 
    ```
-   // Load the AWS SDK for Node.js
+   // Load the AWS SDK for JavaScript
    const {
      CloudFormationClient,
      DescribeStackResourcesCommand,

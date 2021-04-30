@@ -6,7 +6,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# What is the AWS SDK for JavaScript?<a name="welcome"></a>
+# What's the AWS SDK for JavaScript?<a name="welcome"></a>
 
 Welcome to the AWS SDK for JavaScript Developer Guide\. This guide provides general information about setting up and configuring the AWS SDK for JavaScript\. It also walks you through examples and tutorial of running various AWS services using the AWS SDK for JavaScript\.
 
@@ -37,12 +37,12 @@ In addition, the SDK is written in TypeScript, which has many advantages, such a
 Version 2 of the SDK for JavaScript \(V2\) required you to use the entire AWS SDK, as follows\.
 
 ```
-var AWS = require("aws-sdk");
+varAWS  = require("aws-sdk");
 ```
 
 Loading the entire SDK isn’t an issue if your application is using many AWS services\. However, if you need to use only a few AWS services, it means increasing the size of your application with code you don't need or use\.
 
-In V3, you can load and use only Comparing individual AWS Services you need\. This is shown in the following example, which gives you access to Amazon DynamoDB \(DynamoDB\)\.
+In V3, you can load and use only the individual AWS Services you need\. This is shown in the following example, which gives you access to Amazon DynamoDB \(DynamoDB\)\.
 
 ```
 const {DynamoDB} = require("@aws-sdk/client-dynamodb");
@@ -110,7 +110,7 @@ V3 looks like the following\.
 })();
 ```
 
-The `aws-sdk` package adds about 40 MB to your application\. Replacing `var AWS = require("aws-sdk")` with `const {DynamoDB} = require("@aws-sdk/client-dynamodb")` reduces that overhead to about 3 MB\. Restricting the import to just the DynamoDB client and `ListTablesCommand` command reduces the overhead to less than 100 KB\.
+The `aws-sdk` package adds about 40 MB to your application\. Replacing `varAWS = require("aws-sdk")` with `const {DynamoDB} = require("@aws-sdk/client-dynamodb")` reduces that overhead to about 3 MB\. Restricting the import to just the DynamoDB client and `ListTablesCommand` command reduces the overhead to less than 100 KB\.
 
 ```
 // Load the DynamoDB client and ListTablesCommand command for Node.js
@@ -301,7 +301,7 @@ In addition to this guide, the following online resources are available for SDK 
 + [AWS Code Example Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code)
 + [Gitter channel](https://gitter.im/aws/aws-sdk-js)
 + [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=aws-sdk-js)
-+ [Stack Overflow questions tagged aws\-sdk\-js](https://stackoverflow.com/questions/tagged/aws-sdk-js?sort=newest)
++ [Stack Overflow questions taggedAWS \-sdk\-js](https://stackoverflow.com/questions/tagged/aws-sdk-js?sort=newest)
 + GitHub
   + [SDK Source](https://github.com/aws/aws-sdk-js-v3/)
   + [Documentation Source](https://github.com/awsdocs/aws-sdk-for-javascript-v3)

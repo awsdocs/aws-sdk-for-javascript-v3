@@ -42,14 +42,11 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 // Import required AWS SDK clients and commands for Node.js
 const { S3Client, GetBucketAclCommand } = require("@aws-sdk/client-s3/");
 
-// Set the AWS region
-const REGION = "region"; //e.g. "us-east-1"
-
-// Create the parameters for calling
+// Create the parameters.
 const bucketParams = { Bucket: "BUCKET_NAME" };
 
-// Create S3 service object
-const s3 = new S3Client({ region: REGION });
+// Create an Amazon S3 service client object.
+const s3 = new S3Client({});
 
 const run = async () => {
   try {

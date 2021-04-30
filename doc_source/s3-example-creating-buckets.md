@@ -22,6 +22,7 @@ In this example, a series of Node\.js modules are used to obtain a list of exist
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/createbucketcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/createbucketcommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/listobjectscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/listobjectscommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putobjectcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putobjectcommand.html)
++  [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/uploadpartcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/uploadpartcommand.html), and [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/completemultipartuploadcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/completemultipartuploadcommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getobjectcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getobjectcommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deletebucketcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deletebucketcommand.html)
 
@@ -73,7 +74,7 @@ ts-node s3_listbuckets.ts // If you prefer JavaScript, enter 'node s3_listbucket
 
 This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_listbuckets.ts)\.
 
-## Creating an Amazon S3 bucket<a name="s3-example-creating-buckets-new-bucket"></a>
+## Creating an Amazon S3 bucket \(with import/require inline\)<a name="s3-example-creating-buckets-new-bucket-2"></a>
 
 Create a Node\.js module with the file name `s3_createbucket.ts`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. The module will take a single command\-line argument to specify a name for the new bucket\.
 
@@ -83,8 +84,10 @@ Add a variable to hold the parameters used to call the `createBucket` method of 
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Get required modules using node.js 'require'. Delete this if using 'ES6' import method.
 const { S3Client, CreateBucketCommand } = require("@aws-sdk/client-s3");
+// Get required modules using 'ES6' import method. Delete this if using node.js 'require'.
+import { S3Client, CreateBucketCommand } from "@aws-sdk/client-s3";
 
 // Set the AWS region
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -97,12 +100,12 @@ const s3 = new S3Client({ region: REGION });
 
 //Attempt to create the bucket
 const run = async () => {
-  try {
-    const data = await s3.send(new CreateBucketCommand(bucketParams));
-    console.log("Success", data.$metadata.httpHeaders.location);
-  } catch (err) {
-    console.log("Error", err);
-  }
+    try {
+        const data = await s3.send(new CreateBucketCommand(bucketParams));
+        console.log("Success", data.$metadata.httpHeaders.location);
+    } catch (err) {
+        console.log("Error", err);
+    }
 };
 run();
 ```
@@ -115,11 +118,97 @@ ts-node s3_createbucket.ts // If you prefer JavaScript, enter 'node s3_listbucke
 
 This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_createbucket.ts)\.
 
+## Creating an Amazon S3 bucket<a name="s3-example-creating-buckets-new-bucket"></a>
+
+Create a Node\.js module with the file name `s3_createbucket.ts`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. The module will take a single command\-line argument to specify a name for the new bucket\.
+
+Add a variable to hold the parameters used to call the `createBucket` method of the Amazon S3 client service object, including the name for the newly created bucket\. The callback function logs the new bucket's location to the console after Amazon S3 successfully creates it\.
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+------
+#### [ ES6 ]
+
+```
+const { S3Client, CreateBucketCommand } = require("@aws-sdk/client-s3");
+```
+
+```
+// Set the AWS region
+const REGION = "REGION"; //e.g. "us-east-1"
+
+// Set the bucket parameters
+const bucketParams = { Bucket: "BUCKET_NAME" };
+
+// Create S3 service object
+const s3 = new S3Client({ region: REGION });
+
+//Attempt to create the bucket
+const run = async () => {
+    try {
+        const data = await s3.send(new CreateBucketCommand(bucketParams));
+        console.log("Success", data.$metadata.httpHeaders.location);
+    } catch (err) {
+        console.log("Error", err);
+    }
+};
+run();
+```
+
+------
+#### [ CommonJS ]
+
+```
+import { S3Client, CreateBucketCommand } from "@aws-sdk/client-s3"
+```
+
+```
+// Set the AWS region
+const REGION = "REGION"; //e.g. "us-east-1"
+
+// Set the bucket parameters
+const bucketParams = { Bucket: "BUCKET_NAME" };
+
+// Create S3 service object
+const s3 = new S3Client({ region: REGION });
+
+//Attempt to create the bucket
+const run = async () => {
+    try {
+        const data = await s3.send(new CreateBucketCommand(bucketParams));
+        console.log("Success", data.$metadata.httpHeaders.location);
+    } catch (err) {
+        console.log("Error", err);
+    }
+};
+run();
+```
+
+------
+
+To run the example, enter the following at the command prompt\.
+
+```
+ts-node s3_createbucket.ts // If you prefer JavaScript, enter 'node s3_listbuckets.js'
+```
+
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_createbucket.ts)\.
+
 ## Uploading a file to an Amazon S3 bucket<a name="s3-example-creating-buckets-upload-file"></a>
 
-Create a Node\.js module with the file name `s3_upload.ts`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. The module will take two command\-line arguments, the first one to specify the destination bucket and the second to specify the file to upload\.
+This section describes how to:
++ Create a new object and upload it to an Amazon S3 bucket\.
++ Upload an existing object to an Amazon S3 bucket\.
 
-Create a variable with the parameters needed to call the `PutObjectCommand` method of the Amazon S3 service object\. Provide the name of the target bucket in the `Bucket` parameter\. The `Key` parameter is set to the name of the selected file, which you can obtain using the Node\.js `path` module\. The `Body` parameter is set to the contents of the file, which you can obtain using `createReadStream` from the Node\.js `fs` module\.
+### Create and upload an object to an Amazon S3 bucket<a name="s3-example-upload-new-object"></a>
+
+Create a Node\.js module with the file name `s3_create_and_upload_object.ts`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. 
+
+Create a variable with the parameters needed to call the `PutObjectCommand` method of the Amazon S3 service object\. Provide the name of the target bucket in the `Bucket` parameter\. For the `Key` parameter, provide a name for the object\. 
+
+**Note**  
+To create a directory for the object, use the format `DIRECTORY_NAME/OBJECT_NAME`\.
 
 **Note**  
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
@@ -127,27 +216,72 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 ```
 // Import required AWS SDK clients and commands for Node.js
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
-const path = require("path");
-const fs = require("fs");
 
 // Set the AWS region
 const REGION = "REGION"; //e.g. "us-east-1"
 
-// Set the parameters
-const uploadParams = { Bucket: "BUCKET_NAME", Key: "KEY", Body: "BODY" }; //BUCKET_NAME, KEY (the name of the selected file),
-// BODY (the contents of the uploaded file - leave blank/remove to retain contents of original file.)
-const file = "FILE_NAME"; //FILE_NAME (the name of the file to upload (if you don't specify KEY))
+// Set the parameters.
+const uploadParams = {
+  Bucket: "BUCKET_NAME",
+  // Specify the name of the new object. For example, 'index.html'.
+  // To create a directory for the object, use '/'. For example, 'myApp/package.json'.
+  Key: "OBJECT_NAME",
+  // Content of the new object.
+  Body: "BODY"
+};
 
-// Create S3 service object
+// Create Amazon S3 service client object.
 const s3 = new S3Client({ region: REGION });
 
-// call S3 to retrieve upload file to specified bucket
+// Create and upload the object to the specified Amazon S3 bucket.
 const run = async () => {
-  // Configure the file stream and obtain the upload parameters
-  const fileStream = fs.createReadStream(file);
-  fileStream.on("error", function (err) {
-    console.log("File Error", err);
-  });
+  try {
+    const data = await s3.send(new PutObjectCommand(uploadParams));
+    console.log(
+        "Successfully uploaded object: " + uploadParams.Bucket + "/" + uploadParams.Key
+    );
+  } catch (err) {
+    console.log("Error", err);
+  }
+};
+run();
+```
+
+To run the example, enter the following at the command prompt\.
+
+```
+ts-node s3_create_and_upload_object.ts // If you prefer JavaScript, enter 'node s3_create_and_upload_object.js' 
+```
+
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_create_and_upload_object.ts)\.
+
+### Upload an existing object to an Amazon S3 bucket<a name="s3-example-upload-existing-object"></a>
+
+Create a Node\.js module with the file name `s3_upload_object.ts`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. 
+
+Create a variable with the parameters needed to call the `PutObjectCommand` method of the Amazon S3 service object\. Provide the name of the target bucket in the `Bucket` parameter\. Provide the name of the existing object and the path to it\. The `Key` parameter is set to the name of the selected file, which you can obtain using the Node\.js `path` module\. 
+
+**Note**  
+This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+```
+// Import required AWS SDK clients and commands for Node.js.
+const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
+const path = require("path");
+
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+
+// Set the parameters
+const uploadParams = { Bucket: "BUCKET_NAME" };
+const file = "OBJECT_PATH_AND_NAME"; // Path to and name of object. For example '../myFiles/index.js'.
+
+// Create an Amazon S3 service client object.
+const s3 = new S3Client({ region: REGION });
+
+// Upload file to specified bucket.
+const run = async () => {
+  // Add the required 'Key' parameter using the 'path' module.
   uploadParams.Key = path.basename(file);
   uploadParams.Body = fileStream;
   // call S3 to retrieve upload file to specified bucket
@@ -164,10 +298,10 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node s3_upload.ts // If you prefer JavaScript, enter 'node s3_listbuckets.js' 
+ts-node s3_upload_object.ts // If you prefer JavaScript, enter 'node s3_upload_object.js' 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_putobject.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_upload_object.ts)\.
 
 ## Getting a file from an Amazon S3 bucket<a name="s3-example-creating-buckets-get-object"></a>
 
@@ -177,6 +311,9 @@ Create a variable with the parameters needed to call the `GetObjectCommand` meth
 
 **Note**  
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+
+```
+```
 
 To run the example, enter the following at the command prompt\.
 
@@ -340,7 +477,7 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 
 This section demonstrated how to create presigned URLs to get and put objects in Amazon S3 buckets\.
 
-### Configuring Amazon S3 buckets<a name="s3-create-presigendurl-get"></a>
+### Create a presigned URL to upload objects to an Amazon S3 bucket<a name="s3-create-presigendurl-put"></a>
 
 Create a Node\.js module with the file name `s3_presignedURL_v3.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. 
 
@@ -362,177 +499,59 @@ const {
   PutObjectCommand,
   DeleteBucketCommand,
 } = require("@aws-sdk/client-s3");
-const { S3RequestPresigner } = require("@aws-sdk/s3-request-presigner");
-const { createRequest } = require("@aws-sdk/util-create-request");
-const { formatUrl } = require("@aws-sdk/util-format-url");
-const fetch = require("node-fetch");
+const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
 // Set the AWS Region
 const REGION = "REGION";
 
 // Set parameters
 // Create a random names for the Amazon Simple Storage Service (Amazon S3) bucket and key
-const clientParams = {
+const params = {
   Bucket: `test-bucket-${Math.ceil(Math.random() * 10 ** 10)}`,
   Key: `test-object-${Math.ceil(Math.random() * 10 ** 10)}`,
-  Body: "BODY"
+  Body: "BODY",
 };
 
-// Create Amazon S3 client object
+// Create an Amazon S3 service client object.
 const s3Client = new S3({ region: REGION });
-
-//Create an S3RequestPresigner object
-//To avoid redundant construction parameters when instantiating the Amazon S3 presigner,
-// spread the configuration of an existing Amazon S3 client and supply it to the
-// presigner's constructor.
-const signedRequest = new S3RequestPresigner(s3Client.config);
 
 const run = async () => {
   try {
-    //Create an S3 bucket
-    console.log(`Creating bucket ${clientParams.Bucket}`);
-    await s3Client.send(
-        new CreateBucketCommand({ Bucket: clientParams.Bucket })
-    );
-    console.log(`Waiting for "${clientParams.Bucket}" bucket creation...`);
+    // Create an Amazon S3 bucket.
+    console.log(`Creating bucket ${params.Bucket}`);
+    await s3Client.send(new CreateBucketCommand({ Bucket: params.Bucket }));
+    console.log(`Waiting for "${params.Bucket}" bucket creation...`);
   } catch (err) {
     console.log("Error creating bucket", err);
   }
   try {
-    // Create request
-    const request = await createRequest(
-        s3Client,
-        new PutObjectCommand(clientParams)
-    );
-    // Create and format presigned URL
-    const signedUrl = formatUrl(
-        await signedRequest.presign(request, {
-          // Supply expiration in second
-          expiresIn: 60 * 60 * 24
-        })
-    );
+    // Create the command.
+    const command = new PutObjectCommand(params);
+
+    // Create the presigned URL.
+    const signedUrl = await getSignedUrl(s3Client, command, {
+      expiresIn: 3600,
+    });
     console.log(
-        `\nPutting "${clientParams.Key}" using signedUrl with body "${clientParams.Body}" in v3`
+      `\nPutting "${params.Key}" using signedUrl with body "${params.Body}" in v3`
     );
     console.log(signedUrl);
   } catch (err) {
     console.log("Error creating presigned URL", err);
   }
   try {
-    // Delete the object
-    console.log(`\nDeleting object "${clientParams.Key}" from bucket`);
-    await s3Client.send(new DeleteObjectCommand({Bucket:clientParams.Bucket, Key:clientParams.Key}));
-  } catch (err) {
-    console.log("Error deleting object", err);
-  }
-  try {
-    // Delete the bucket
-    console.log(`\nDeleting bucket ${clientParams.Bucket}`);
-    await s3Client.send(new DeleteBucketCommand({Bucket:clientParams.Bucket}));
-  } catch (err) {
-    console.log("Error deleting bucket", err);
-  }
-};
-run();
-```
-
-To run the example, type the following at the command line\.
-
-```
-node s3_presignedURL_v3.js
-```
-
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/src/s3_put_presignedURL.ts)\.
-
-### Create a presigned URL to Put Objects<a name="s3-create-presigendurl-put"></a>
-
-Create a Node\.js module with the file name `s3_presignedURL_v3.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. 
-
-Create a function that creates a bucket and an object to upload, creates a presigned url to upload the object, and then uploads the object\. In this example, the object and bucket are automatically deleted to ensure you don't incur any unnecessary expense\.
-
-Create a variable with the parameters needed to call the `PutObjectCommand` command of the Amazon S3 service object\. In the code, enter the *REGION*\. The bucket name, filename, or key, body, and duration to expiration are prepopulated in this example\.
-
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-For more information on creating presigned URLs, see [https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html)\.
-
-```
-// Import the required AWS SDK clients and commands for Node.js
-const {
-  S3,
-  CreateBucketCommand,
-  DeleteObjectCommand,
-  PutObjectCommand,
-  DeleteBucketCommand,
-} = require("@aws-sdk/client-s3");
-const { S3RequestPresigner } = require("@aws-sdk/s3-request-presigner");
-const { createRequest } = require("@aws-sdk/util-create-request");
-const { formatUrl } = require("@aws-sdk/util-format-url");
-const fetch = require("node-fetch");
-
-// Set the AWS Region
-const REGION = "REGION";
-
-// Set parameters
-// Create a random names for the Amazon Simple Storage Service (Amazon S3) bucket and key
-const clientParams = {
-  Bucket: `test-bucket-${Math.ceil(Math.random() * 10 ** 10)}`,
-  Key: `test-object-${Math.ceil(Math.random() * 10 ** 10)}`,
-  Body: "BODY"
-};
-
-// Create Amazon S3 client object
-const s3Client = new S3({ region: REGION });
-
-//Create an S3RequestPresigner object
-//To avoid redundant construction parameters when instantiating the Amazon S3 presigner,
-// spread the configuration of an existing Amazon S3 client and supply it to the
-// presigner's constructor.
-const signedRequest = new S3RequestPresigner(s3Client.config);
-
-const run = async () => {
-  try {
-    //Create an S3 bucket
-    console.log(`Creating bucket ${clientParams.Bucket}`);
+    // Delete the object.
+    console.log(`\nDeleting object "${params.Key}" from bucket`);
     await s3Client.send(
-        new CreateBucketCommand({ Bucket: clientParams.Bucket })
+      new DeleteObjectCommand({ Bucket: params.Bucket, Key: params.Key })
     );
-    console.log(`Waiting for "${clientParams.Bucket}" bucket creation...`);
-  } catch (err) {
-    console.log("Error creating bucket", err);
-  }
-  try {
-    // Create request
-    const request = await createRequest(
-        s3Client,
-        new PutObjectCommand(clientParams)
-    );
-    // Create and format presigned URL
-    const signedUrl = formatUrl(
-        await signedRequest.presign(request, {
-          // Supply expiration in second
-          expiresIn: 60 * 60 * 24
-        })
-    );
-    console.log(
-        `\nPutting "${clientParams.Key}" using signedUrl with body "${clientParams.Body}" in v3`
-    );
-    console.log(signedUrl);
-  } catch (err) {
-    console.log("Error creating presigned URL", err);
-  }
-  try {
-    // Delete the object
-    console.log(`\nDeleting object "${clientParams.Key}" from bucket`);
-    await s3Client.send(new DeleteObjectCommand({Bucket:clientParams.Bucket, Key:clientParams.Key}));
   } catch (err) {
     console.log("Error deleting object", err);
   }
   try {
-    // Delete the bucket
-    console.log(`\nDeleting bucket ${clientParams.Bucket}`);
-    await s3Client.send(new DeleteBucketCommand({Bucket:clientParams.Bucket}));
+    // Delete the Amazon S3 bucket.
+    console.log(`\nDeleting bucket ${params.Bucket}`);
+    await s3Client.send(new DeleteBucketCommand({ Bucket: params.Bucket }));
   } catch (err) {
     console.log("Error deleting bucket", err);
   }
@@ -562,96 +581,89 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 For more information on creating presigned URLs, see [https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html](https://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html)\.
 
 ```
+// Import the required AWS SDK clients and commands for Node.js
 const {
- S3,
- CreateBucketCommand,
- PutObjectCommand,
- GetObjectCommand,
- DeleteObjectCommand,
- DeleteBucketCommand,
+  S3,
+  CreateBucketCommand,
+  PutObjectCommand,
+  GetObjectCommand,
+  DeleteObjectCommand,
+  DeleteBucketCommand,
 } = require("@aws-sdk/client-s3");
-const { S3RequestPresigner } = require("@aws-sdk/s3-request-presigner");
-const { createRequest } = require("@aws-sdk/util-create-request");
-const { formatUrl } = require("@aws-sdk/util-format-url");
-const fetch = require("node-fetch");
+const { getSignedUrl  } = require("@aws-sdk/s3-request-presigner");
+
 
 // Set parameters
-// Create a random names for the Amazon Simple Storage Service (Amazon S3) bucket and key
+// Create random names for the Amazon Simple Storage Service (Amazon S3) bucket and key.
 const params = {
- Bucket: `test-bucket-${Math.ceil(Math.random() * 10 ** 10)}`,
- Key: `test-object-${Math.ceil(Math.random() * 10 ** 10)}`,
- Body: "BODY",
- Region: "REGION"
+  Bucket: `test-bucket-${Math.ceil(Math.random() * 10 ** 10)}`,
+  Key: `test-object-${Math.ceil(Math.random() * 10 ** 10)}`,
+  Body: "BODY",
+  Region: "REGION"
 };
 
-// Create Amazon S3 client object
+// Create an Amazon S3 client object.
 const s3Client = new S3({ region: params.Region });
 
-// Create an S3RequestPresigner object
-const signedRequest = new S3RequestPresigner(s3Client.config);
-
 const run = async () => {
- let signedUrl;
- let response;
- // Create Amazon Simple Storage Service (Amazon S3) bucket
- try {
- console.log(`Creating bucket ${params.Bucket}`);
- const data = await s3Client.send(
- new CreateBucketCommand({ Bucket: params.Bucket })
- );
- console.log(`Waiting for "${params.Bucket}" bucket creation...\n`);
- } catch (err) {
- console.log("Error creating bucket", err);
- }
- // Put object in Amazon S3 bucket
- try {
- console.log(`Putting object "${params.Key}" in bucket`);
- const data = await s3Client.send(
- new PutObjectCommand({ Bucket: params.Bucket, Key: params.Key, Body: params.Body })
- );
- } catch (err) {
- console.log("Error putting object", err);
- }
- // Create presigned URL
- try {
- // Create request
- const request = await createRequest(s3Client, new GetObjectCommand(params));
- // Create and format presigned URL
- const signedUrl = formatUrl(
- await signedRequest.presign(request, {
- // Supply expiration in seconds
- expiresIn: 60 * 60 * 24,
- })
- );
- console.log(
- `\nPutting "${params.Key}" using signedUrl with body "${params.Body}"`
- );
- console.log(signedUrl);
- response = await fetch(signedUrl);
- console.log(
- `\nResponse returned by signed URL: ${await response.text()}\n`
- );
- } catch (err) {
- console.log("Error creating presigned URL", err);
- }
- // Delete object
- try {
- console.log(`\nDeleting object "${params.Key}" from bucket`);
- const data = await s3Client.send(new
- DeleteObjectCommand({ Bucket: params.Bucket, Key: params.Key })
- );
- } catch (err) {
- console.log("Error deleting object", err);
- }
- // Delete bucket
- try {
- console.log(`\nDeleting bucket ${params.Bucket}`);
- const data = await s3Client.send(new
- DeleteBucketCommand({ Bucket: params.Bucket, Key: params.Key })
- );
- } catch (err) {
- console.log("Error deleting object", err);
- }
+  // Create an Amazon S3 bucket.
+  try {
+    console.log(`Creating bucket ${params.Bucket}`);
+    const data = await s3Client.send(
+        new CreateBucketCommand({ Bucket: params.Bucket })
+    );
+    console.log(`Waiting for "${params.Bucket}" bucket creation...\n`);
+  } catch (err) {
+    console.log("Error creating bucket", err);
+  }
+  // Put the object in the Amazon S3 bucket.
+  try {
+    console.log(`Putting object "${params.Key}" in bucket`);
+    const data = await s3Client.send(
+        new PutObjectCommand({
+          Bucket: params.Bucket,
+          Key: params.Key,
+          Body: params.Body,
+        })
+    );
+  } catch (err) {
+    console.log("Error putting object", err);
+  }
+  // Create a presigned URL.
+  try {
+    // Create the command.
+    const command = new GetObjectCommand(params);
+
+    // Create the presigned URL.
+    const signedUrl = await getSignedUrl(s3Client, command, {
+      expiresIn: 3600,
+    });
+    console.log(
+        `\nGetting "${params.Key}" using signedUrl with body "${params.Body}" in v3`
+    );
+    console.log(signedUrl);
+  }
+  catch (err) {
+    console.log("Error creating presigned URL", err);
+  }
+  // Delete the object.
+  try {
+    console.log(`\nDeleting object "${params.Key}" from bucket`);
+    const data = await s3Client.send(
+        new DeleteObjectCommand({ Bucket: params.Bucket, Key: params.Key })
+    );
+  } catch (err) {
+    console.log("Error deleting object", err);
+  }
+  // Delete the bucket.
+  try {
+    console.log(`\nDeleting bucket ${params.Bucket}`);
+    const data = await s3Client.send(
+        new DeleteBucketCommand({ Bucket: params.Bucket, Key: params.Key })
+    );
+  } catch (err) {
+    console.log("Error deleting object", err);
+  }
 };
 run();
 ```

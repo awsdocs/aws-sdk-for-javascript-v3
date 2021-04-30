@@ -15,7 +15,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 ## The scenario<a name="iam-examples-server-certificates-scenario"></a>
 
-To enable HTTPS connections to your website or application on AWS, you need an SSL/TLS *server certificate*\. To use a certificate that you obtained from an external provider with your website or application on AWS, you must upload the certificate to IAM or import it into AWS Certificate Manager\.
+To enable HTTPS connections to your website or application on AWS, you need an SSL/TLS *server certificate*\. To use a certificate that you obtained from an external provider with your website or application onAWS , you must upload the certificate to IAM or import it into AWS Certificate Manager\.
 
 In this example, a series of Node\.js modules are used to handle server certificates in IAM\. The Node\.js modules use the SDK for JavaScript to manage server certificates using these methods of the `IAM` client class:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/listservercertificatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/listservercertificatescommand.html)
