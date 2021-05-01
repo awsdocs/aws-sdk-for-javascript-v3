@@ -37,7 +37,7 @@ In addition, the SDK is written in TypeScript, which has many advantages, such a
 Version 2 of the SDK for JavaScript \(V2\) required you to use the entire AWS SDK, as follows\.
 
 ```
-varAWS  = require("aws-sdk");
+var AWS = require("aws-sdk");
 ```
 
 Loading the entire SDK isn’t an issue if your application is using many AWS services\. However, if you need to use only a few AWS services, it means increasing the size of your application with code you don't need or use\.
@@ -54,7 +54,7 @@ Not only can you load and use individual AWS services, but you can also load and
 const {
   DynamoDBClient,
   ListTablesCommand
-} = require('@aws-sdk/client-dynamodb')
+} = require("@aws-sdk/client-dynamodb")
 ```
 
 **Important**  
@@ -83,7 +83,7 @@ var ddb = new AWS.DynamoDB({apiVersion: "2006-03-01"});
 // Call DynamoDB to retrieve the list of tables
 ddb.listTables({Limit:10}, function(err, data) {
   if (err) {
-    console.log("Error", err.code);
+    console.log("Error ", err.code);
   } else {
     console.log("Tables names are ", data.TableNames);
   }
@@ -94,10 +94,11 @@ V3 looks like the following\.
 
 ```
 (async function () {
-   const { DynamoDBClient, 
-           ListTablesCommand 
-   }= require('@aws-sdk/client-dynamodb');
-   const dbclient = new DynamoDBClient({ region: 'us-west-2'});
+   const { 
+     DynamoDBClient, 
+     ListTablesCommand 
+   } = require("@aws-sdk/client-dynamodb");
+   const dbclient = new DynamoDBClient({ region: "us-west-2" });
  
   try {
     const results = await dbclient.send(new ListTablesCommand);
@@ -117,7 +118,7 @@ The `aws-sdk` package adds about 40 MB to your application\. Replacing `varAWS
 const { 
   DynamoDBClient, 
   ListTablesCommand 
-} = require('@aws-sdk/client-dynamodb');
+} = require("@aws-sdk/client-dynamodb");
 const dbclient = new DynamoDBClient({});
 ```
 
@@ -149,17 +150,17 @@ For example, the following example creates a DynamoDB table using the recommende
 const {DynamoDB, CreateTableCommand} = require('@aws-sdk/client-dynamodb');
 const dynamodb = new DynamoDB({region: 'us-west-2'});
 var tableParams = {
-    Table : TABLE_NAME
+    Table : 'TABLE_NAME'
 };
-async function run() => {
-      try{
+async function run() {
+      try {
            const data = await dynamodb.send(new CreateTableCommand(tableParams));
            console.log("Success", data);
       } 
       catch (err) {
            console.log("Error", err);
       }
-};
+}
 run();
 ```
 
@@ -183,9 +184,9 @@ The following example uses the V2 `createTable` command to create a DynamoDB tab
 const {DynamoDB} = require('@aws-sdk/client-dynamodb');
 const dymamoDB = new DynamoDB({region: 'us-west-2'});
 var tableParams = {
-    TableName : TABLE_NAME
+    TableName : 'TABLE_NAME'
 };
-async function run() => {
+async function run() {
       try {
            const data = await dymamoDB.createTable(tableParams);
            console.log("Success", data);
@@ -193,7 +194,7 @@ async function run() => {
       catch (err) {
            console.log("Error", err);
       }
-};
+}
 run();
 ```
 
@@ -203,17 +204,17 @@ The following example uses the V2 `createBucket` command to create an Amazon S3 
 const {S3} = require('@aws-sdk/client-s3');
 const s3 = new S3({region: 'us-west-2'});
 var bucketParams = {
-    Bucket : BUCKET_NAME
+    Bucket : 'BUCKET_NAME'
 };
-function run(){
-         s3.createBucket(bucketParams, function(err, data) {
-         if (err) {
-         console.log("Error", err);
-         } else {
-         console.log("Success", data.Location);
-         }
-    })
-};
+function run() {
+   s3.createBucket(bucketParams, (err, data) => {
+      if (err) {
+         console.log(`Error ${err}`);
+      } else {
+         console.log(`Success ${data.Location}`);
+      }
+   })
+}
 ```
 
 ### New middleware stack<a name="welcome_whats_new_v3_middleware_stack"></a>
@@ -226,7 +227,7 @@ The following example adds a custom header to a Amazon DynamoDB client \(which w
 
 ```
 dbclient.middlewareStack.add(
-  (next, context) => args => {
+  (next, context) => (args) => {
     args.request.headers["Custom-Header"] = "value";
     return next(args);
   },
