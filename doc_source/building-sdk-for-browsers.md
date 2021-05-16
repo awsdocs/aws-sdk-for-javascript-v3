@@ -15,4 +15,4 @@ If you work with the SDK outside of an environment that enforces CORS in your br
 ## Using the SDK Builder to Build the SDK for JavaScript<a name="using-the-sdk-builder"></a>
 
 **Note**  
-Amazon Web Services version 3 \(V3\) no longer supports Browser Builder\. To mimimize bandwidth useage of browser applications, we recommend you import named modules, and bundle them to reduce size\. For more information about bundling, see [Bundling applications with webpack](webpack.md)\.
+Amazon Web Services version 3 \(V3\) no longer supports Browser Builder\. To mimimize bandwidth usage of browser applications, we recommend you import named modules, and bundle them to reduce size\. For more information about bundling, see [Bundling applications with webpack](webpack.md)\.
