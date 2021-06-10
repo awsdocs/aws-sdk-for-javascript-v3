@@ -100,7 +100,7 @@ For information about*webpack*, see [Bundling applications with webpack](webpack
 **Important**  
 Notice the output is named `index.js`\. This is because Lambda functions must have an `index.js` handler to work\.
 
-1. Compress the bundled output file, `index.js`, into a ZIP file named `my-lambda-function.zip`\.
+1. Compress the bundled output file, `index.js`, into a ZIP file named `mylambdafunction.zip`\.
 
 1. Upload `mylambdafunction.zip` to the Amazon S3 bucket you created in the [Create the AWS resources ](api-gateway-invoking-lambda-provision-resources.md) topic of this tutorial\. 
 
