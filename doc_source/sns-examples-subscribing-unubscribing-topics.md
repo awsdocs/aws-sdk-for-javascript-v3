@@ -20,7 +20,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 In this example, you use a series of Node\.js modules to publish notification messages to Amazon SNS topics\. The Node\.js modules use the SDK for JavaScript to manage topics using these methods of the `SNS` client class:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/listsubscriptionsbytopiccommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/listsubscriptionsbytopiccommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/subscribecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/subscribecommand.html)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/lconfirmsubscriptionccommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/lconfirmsubscriptionccommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/confirmsubscriptioncommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/confirmsubscriptioncommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/unsubscribecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/unsubscribecommand.html)
 
 ## Prerequisite Tasks<a name="sns-examples-subscribing-unubscribing-topics-prerequisites"></a>
