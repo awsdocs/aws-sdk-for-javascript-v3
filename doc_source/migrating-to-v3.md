@@ -10,6 +10,8 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 There are a number of migration paths to the SDK for JavaScript version 3 \(V3\)\. To take full advantage of the reduction in capacity potential of V3, we recommend using path 3\.
 
+SDK for JavaScript version 3 also comes with modernized interfaces for client configurations and utilities(e.g. credentials, S3 multipart upload, DynamoDB document client, waiters). You can find what changed in v2 and their v3 equivalents for each of changes in [the SDK upgrading guide](https://github.com/aws/aws-sdk-js-v3/blob/main/UPGRADING.md). 
+
 ------
 #### [ Path 1 ]
 
