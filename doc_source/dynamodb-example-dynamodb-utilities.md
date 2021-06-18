@@ -41,7 +41,7 @@ These examples import and use the required AWS Service V3 package clients, V3 co
 
 Create a Node\.js module with the file name `ddbdoc_get_item.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/util-dynamodb`, which is a package that provides utilities to `@aws-sdk/dynamodb`\. Create a JSON object containing the parameters needed get an item from the table, which in this example includes the name of the table, the name of the hash key in that table, and the value of the hash key for the item you want to get\. Use the `marshall` command of the `@aws-sdk/util-dynamodb` package to convert the object into a DynamoDB record\. Call the `getItem` method of the DynamoDB client\. Use the `unmarshall` command of the `@aws-sdk/util-dynamodb` package to convert the Dynamo record into a JavaScript object\.
 
-```
+```js
 // Import required AWS SDK clients and commands for Node.js
 const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
@@ -92,7 +92,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 Create a Node\.js module with the file name `ddbdoc_put_item.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/util-dynamodb`, which is a package that provides utilities to `@aws-sdk/dynamodb`\. Create a JSON object containing the parameters needed to write an item to the table, which in this example includes the name of the table and a description of the item to add or update that includes the hashkey and value and names and values for attributes to set on the item\. Use the `marshall` command of the `@aws-sdk/util-dynamodb` package to convert the object into a DynamoDB record\. Call the `putItem` method of the DynamoDB client\.
 
-```
+```js
 // Import required AWS SDK clients and commands for Node.js
 const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
@@ -140,7 +140,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 Create a Node\.js module with the file name `ddbdoc_update_item.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/util-dynamodb`, which is a package that provides utilities to `@aws-sdk/dynamodb`\. Create a JSON object containing the parameters needed to write an item to the table, which in this example includes the name of the table, the key of the item to update, a set of `UpdateExpressions` that define the attributes of the item to update with tokens you assign values to in the `ExpressionAttributeValues` parameters\. Use the `marshall` command of the `@aws-sdk/util-dynamodb` package to convert the object into a DynamoDB record\.Call the `updateItem` method of the DynamoDB client\.
 
-```
+```js
 // Import required AWS SDK clients and commands for Node.js
 const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
@@ -197,7 +197,7 @@ This example queries a table that contains episode information about a video ser
 
 Create a Node\.js module with the file name `ddbdoc_query_item.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/util-dynamodb`, which is a package that provides utilities to `@aws-sdk/dynamodb`\. Create a JSON object containing the parameters needed to query the table, which in this example includes the table name, the `ExpressionAttributeValues` needed by the query, and a `KeyConditionExpression` that uses those values to define which items the query returns\. Use the `marshall` command of the `@aws-sdk/util-dynamodb` package to convert the object into a DynamoDB record\. Call the `query` method of the DynamoDB client\.
 
-```
+```js
 // Import required AWS SDK clients and commands for Node.js
 const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
@@ -251,7 +251,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 Create a Node\.js module with the file name `ddbdoc_delete_item.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/util-dynamodb`, which is a package that provides utilities to `@aws-sdk/dynamodb`\. To access DynamoDB, create a `DynamoDB` object\. Create a JSON object containing the parameters needed to delete an item in the table, which in this example includes the name of the table and the name and value of the hashkey of the item you want to delete\. Use the `marshall` command of the `@aws-sdk/util-dynamodb` package to convert the object into a DynamoDB record\. Call the `deleteItem` method of the DynamoDB client\.
 
-```
+```js
 // Import required AWS SDK clients and commands for Node.js
 const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 const { marshall, unmarshall } = require("@aws-sdk/util-dynamodb");
