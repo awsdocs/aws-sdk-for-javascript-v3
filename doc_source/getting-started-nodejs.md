@@ -131,7 +131,7 @@ The example code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Enter the following command to run the example\.
 
 ```
-node sample.ts
+node sample.js
 ```
 
 If the upload is successful, you'll see a confirmation message at the command prompt\. You can also find the bucket and the uploaded text object in the [Amazon S3 console](https://console.aws.amazon.com/s3/)\.
