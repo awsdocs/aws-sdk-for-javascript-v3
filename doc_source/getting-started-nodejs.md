@@ -124,7 +124,7 @@ const run = async () => {
 run();
 ```
 
-The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/src/sample.ts)\.
+The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/src/sample.js)\.
 
 ## Step 3: Run the example<a name="getting-started-nodejs-run-sample"></a>
 
