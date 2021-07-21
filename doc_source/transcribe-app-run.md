@@ -16,9 +16,9 @@ You can the view the app at the location below\.
 DOMAIN/login?client_id=APP_CLIENT_ID&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=REDIRECT_URL
 ```
 
-Amazon Cognito makes it easy to run the app by providing a link in the AWS console\. Simply navigate to the App client setting of your Amazon Cognito user pool, and select the **Launch Hosted UI**\. The URL for the app has the following format\.
+Amazon Cognito makes it easy to run the app by providing a link in the AWS Web Services Management Console\. Simply navigate to the App client setting of your Amazon Cognito user pool, and select the **Launch Hosted UI**\. The URL for the app has the following format\.
 
 **Important**  
 The Hosted UI defaults to a response type of 'code'\. However, this tutorial is designed for the 'token' response type, so you have to change it\.
 
-![\[Launch your hosted UI.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/launch_hosted_ui.png)![\[Launch your hosted UI.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Launch your hosted UI.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Launch your hosted UI.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Launch your hosted UI.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Launch your hosted UI.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)

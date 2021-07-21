@@ -28,34 +28,43 @@ The JSON required to create a transcoding job in MediaConvert is detailed, conta
 
 To set up and run this example, first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/mediaconvert/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create an IAM role that gives MediaConvert access to your input files and the Amazon S3 buckets where your output files are stored\. For details, see [Set up IAM permissions](https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html) in the *AWS Elemental MediaConvert User Guide*\.
 
+**Important**  
+These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
+However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+
 ## Creating a job template<a name="emc-examples-templates-create"></a>
 
-Create a Node\.js module with the file name `emc_create_jobtemplate.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
+Create a `libs` directory, and create a Node\.js module with the file name `emcClient.js`\. Copy and paste the code below into it, which creates the MediaConvert client object\. Replace *REGION* with your AWS Region\. Replace *ENDPOINT* with your MediaConvert account endpoint, which you can on the **Account** page in the MediaConvert console\. 
+
+```
+import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
+// Set the AWS Region.
+const REGION = "REGION";
+//Set the account end point.
+const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
+//Set the MediaConvert Service Object
+const emcClient = new MediaConvertClient(ENDPOINT);
+export { emcClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/libs/emcClient.js)\.
+
+Create a Node\.js module with the file name `emc_create_jobtemplate.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
 
 Specify the parameters JSON for template creation\. You can use most of the JSON parameters from a previous successful job to specify the `Settings` values in the template\. This example uses the job settings from [Creating and managing transcoding jobs in MediaConvert](emc-examples-jobs.md)\.
 
 Call the `CreateJobTemplateCommand` method by creating a promise for invoking an `MediaConvert` client service object, passing the parameters\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *ACCOUNT\_END\_POINT* with the account endpoint, *JOB\_QUEUE\_ARN* with the Amazon Resource Name \(ARN\) of the job queue to check, and *BUCKET\_NAME* with the name of the destination Amazon S3 bucket \- for example, "s3://BUCKET\_NAME/"\. 
+Replace *JOB\_QUEUE\_ARN* with the Amazon Resource Name \(ARN\) of the job queue to check, and *BUCKET\_NAME* with the name of the destination Amazon S3 bucket \- for example, "s3://BUCKET\_NAME/"\. 
 
 ```
 // Import required AWS-SDK clients and commands for Node.js
-const {
-  MediaConvertClient,
-  CreateJobTemplateCommand
-} = require("@aws-sdk/client-mediaconvert");
-
-// Set the parameters
-const endpoint = { endpoint: "ACCOUNT_END_POINT" }; //ACCOUNT_END_POINT
+import { CreateJobTemplateCommand } from "@aws-sdk/client-mediaconvert";
+import { emcClient }  from "./libs/emcClient.js";
 
 const params = {
   Category: "YouTube Jobs",
@@ -185,14 +194,12 @@ const params = {
   },
 };
 
-//Set the MediaConvert Service Object
-const mediaconvert = new MediaConvertClient(endpoint);
-
 const run = async () => {
   try {
     // Create a promise on a MediaConvert object
-    const data = await mediaconvert.send(new CreateJobTemplateCommand(params));
+    const data = await emcClient.send(new CreateJobTemplateCommand(params));
     console.log("Success!", data);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -203,32 +210,39 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node emc_create_jobtemplate.ts // If you prefer JavaScript, enter 'node emc_create_jobtemplate.js'
+node emc_create_jobtemplate.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_create_jobtemplate.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_create_jobtemplate.js)\.
 
 ## Creating a transcoding job from a job template<a name="emc-examples-templates-createjob"></a>
 
-Create a Node\.js module with the file name `emc_template_createjob.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
+Create a `libs` directory, and create a Node\.js module with the file name `emcClient.js`\. Copy and paste the code below into it, which creates the MediaConvert client object\. Replace *REGION* with your AWS Region\. Replace *ENDPOINT* with your MediaConvert account endpoint, which you can on the **Account** page in the MediaConvert console\. 
+
+```
+import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
+// Set the AWS Region.
+const REGION = "REGION";
+//Set the account end point.
+const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
+//Set the MediaConvert Service Object
+const emcClient = new MediaConvertClient(ENDPOINT);
+export { emcClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/libs/emcClient.js)\.
+
+Create a Node\.js module with the file name `emc_template_createjob.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create the job creation parameters JSON, including the name of the job template to use, and the `Settings` to use that are specific to the job you're creating\. Then call the `CreateJobsCommand` method by creating a promise for invoking an `MediaConvert` client service object, passing the parameters\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *ACCOUNT\_END\_POINT* with the account endpoint, *JOB\_QUEUE\_ARN* with the Amazon Resource Name \(ARN\) of the job queue to check, *KEY\_PAIR\_NAME* with, *TEMPLATE\_NAME* with, *ROLE\_ARN* with the Amazon Resource Name \(ARN\) of the role, and * INPUT\_BUCKET\_AND\_FILENAME* with the input bucket and filename \- for example, "s3://BUCKET\_NAME/FILE\_NAME"\.
+Replace *JOB\_QUEUE\_ARN* with the Amazon Resource Name \(ARN\) of the job queue to check, *KEY\_PAIR\_NAME* with, *TEMPLATE\_NAME* with, *ROLE\_ARN* with the Amazon Resource Name \(ARN\) of the role, and * INPUT\_BUCKET\_AND\_FILENAME* with the input bucket and filename \- for example, "s3://BUCKET\_NAME/FILE\_NAME"\.
 
 ```
 // Import required AWS-SDK clients and commands for Node.js
-const {
-  MediaConvertClient,
-  CreateJobCommand
-} = require("@aws-sdk/client-mediaconvert");
-
-//Set the parameters
-const endpoint = { endpoint: "ACCOUNT_END_POINT" }; //ACCOUNT_END_POINT
+import { CreateJobCommand } from  "@aws-sdk/client-mediaconvert";
+import { emcClient } from  "./libs/emcClient.js";
 
 const params = {
   Queue: "QUEUE_ARN", //QUEUE_ARN
@@ -261,13 +275,11 @@ const params = {
   },
 };
 
-//Set the MediaConvert Service Object
-const mediaconvert = new MediaConvertClient(endpoint);
-
 const run = async () => {
   try {
-    const data = await mediaconvert.send(new CreateJobCommand(params));
+    const data = await emcClient.send(new CreateJobCommand(params));
     console.log("Success! ", data);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -278,32 +290,36 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node emc_template_createjob.ts // If you prefer JavaScript, enter 'node emc_template_createjob.js'
+node emc_template_createjob.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_template_createjob.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_template_createjob.js)\.
 
 ## Listing your job templates<a name="emc-examples-templates-listing"></a>
 
-Create a Node\.js module with the file name `emc_listtemplates.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
+Create a `libs` directory, and create a Node\.js module with the file name `emcClient.js`\. Copy and paste the code below into it, which creates the MediaConvert client object\. Replace *REGION* with your AWS Region\. Replace *ENDPOINT* with your MediaConvert account endpoint, which you can on the **Account** page in the MediaConvert console\. 
+
+```
+import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
+// Set the AWS Region.
+const REGION = "REGION";
+//Set the account end point.
+const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
+//Set the MediaConvert Service Object
+const emcClient = new MediaConvertClient(ENDPOINT);
+export { emcClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/libs/emcClient.js)\.
+
+Create a Node\.js module with the file name `emc_listtemplates.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object to pass the request parameters for the `listTemplates` method of the `MediaConvert` client class\. Include values to determine what templates to list \(`NAME`, `CREATION DATE`, `SYSTEM`\), how many to list, and their sort order\. To call the `ListTemplatesCommand` method, create a promise for invoking an MediaConvert client service object, passing the parameters\. 
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *ACCOUNT\_END\_POINT* with the account endpoint\.
-
 ```
 // Import required AWS-SDK clients and commands for Node.js
-const {
-  MediaConvertClient,
-  ListJobTemplatesCommand
-} = require("@aws-sdk/client-mediaconvert");
-
-// Set the parameters
-const endpoint = { endpoint: "ACCOUNT_END_POINT" }; //ACCOUNT_END_POINT
+import { ListJobTemplatesCommand } from  "@aws-sdk/client-mediaconvert";
+import { emcClient } from "./libs/emcClient.js";
 
 const params = {
   ListBy: "NAME",
@@ -311,13 +327,11 @@ const params = {
   Order: "ASCENDING",
 };
 
-//Set the MediaConvert Service Object
-const mediaconvert = new MediaConvertClient(endpoint);
-
 const run = async () => {
   try {
-    const data = await mediaconvert.send(new ListJobTemplatesCommand(params));
+    const data = await emcClient.send(new ListJobTemplatesCommand(params));
     console.log("Success ", data.JobTemplates);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -328,41 +342,48 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node emc_listtemplates.ts // If you prefer JavaScript, enter 'node emc_listtemplates.js'
+node emc_listtemplates.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_template_createjob.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_template_createjob.js)\.
 
 ## Deleting a job template<a name="emc-examples-templates-delete"></a>
+
+Create a `libs` directory, and create a Node\.js module with the file name `emcClient.js`\. Copy and paste the code below into it, which creates the MediaConvert client object\. Replace *REGION* with your AWS Region\. Replace *ENDPOINT* with your MediaConvert account endpoint, which you can on the **Account** page in the MediaConvert console\. 
+
+```
+import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
+// Set the AWS Region.
+const REGION = "REGION";
+//Set the account end point.
+const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
+//Set the MediaConvert Service Object
+const emcClient = new MediaConvertClient(ENDPOINT);
+export { emcClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/libs/emcClient.js)\.
 
 Create a Node\.js module with the file name `emc_deletetemplate.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object to pass the name of the job template you want to delete as parameters for the `DeleteJobTemplateCommand` method of the `MediaConvert` client class\. To call the `DeleteJobTemplateCommand` method, create a promise for invoking an MediaConvert client service object, passing the parameters\. 
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ```
 // Import required AWS-SDK clients and commands for Node.js
-const {
-  MediaConvertClient,
-  DeleteJobTemplateCommand,
-} = require("@aws-sdk/client-mediaconvert");
+import { DeleteJobTemplateCommand } from  "@aws-sdk/client-mediaconvert";
+import { emcClient } from  "./libs/emcClient.js";
 
 // Set the parameters
-const endpoint = { endpoint: "ACCOUNT_END_POINT" }; //ACCOUNT_END_POINT
-const params = { Name: "TEMPLATE_NAME" }; //TEMPLATE_NAME
-
-//Set the MediaConvert Service Object
-const mediaconvert = new MediaConvertClient(endpoint);
+const params = { Name: "test" }; //TEMPLATE_NAME
 
 const run = async () => {
   try {
-    const data = await mediaconvert.send(new DeleteJobTemplateCommand(params));
+    const data = await emcClient.send(new DeleteJobTemplateCommand(params));
     console.log(
       "Success, template deleted! Request ID:",
       data.$metadata.requestId
     );
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -373,7 +394,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node emc_deletetemplate.ts // If you prefer JavaScript, enter 'node emc_deletetemplate.js'
+node emc_deletetemplate.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_deletetemplate.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_deletetemplate.js)\.

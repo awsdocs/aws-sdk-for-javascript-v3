@@ -10,9 +10,9 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](lambda-create-table-example.md)\.
 
-In the root of your project, create a `lambda-function-setup.ts` file, and paste the content below into it\.
+In the root of your project, create a `lambda-function-setup.js` file, and paste the content below into it\.
 
-Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket you uploaded the ZIP version of your Lambda function to\. Replace *KEY* with the name of name the ZIP version of your Lambda function\. Replace *ROLE* with the Amazon Resource Number \(ARN\) of the IAM role you created in the [Create the AWS resources ](lambda-create-table-provision-resources.md) topic of this tutorial\. Replace *LAMBDA\_FUNCTION* with the same name you gave the function in the `/Lambda/index.ts` in the [Prepare the browser script](lambda-create-table-browser-script.md) topic of this tutorial\.
+Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket you uploaded the ZIP version of your Lambda function to\. Replace *KEY* with the name of name the ZIP version of your Lambda function\. Replace *ROLE* with the Amazon Resource Number \(ARN\) of the IAM role you created in the [Create the AWS resources ](lambda-create-table-provision-resources.md) topic of this tutorial\. Replace *LAMBDA\_FUNCTION* with the same name you gave the function in the `/Lambda/index.js` in the [Prepare the browser script](lambda-create-table-browser-script.md) topic of this tutorial\.
 
 ```
 // Load the Lambda client.
@@ -54,7 +54,9 @@ run();
 Enter the following at the command line to deploy the Lambda function\.
 
 ```
-ts-node lambda-function-setup.ts
+node lambda-function-setup.js
 ```
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/lambda/lambda_create_function/src/lambda-function-setup.ts)\.
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/lambda/lambda_create_function/src/lambda-function-setup.js)\.
+
+To run the app, open the `index.html` in the Amazon S3 bucket that hosts the application\. To do this, go open the Amazon S3 bucket in the console, select the bucket, and choose the **Object URL**\.

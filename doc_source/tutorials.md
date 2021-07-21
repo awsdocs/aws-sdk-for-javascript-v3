@@ -18,7 +18,7 @@ The following cross\-service examples show you how to perform different tasks re
 + [Build a transcription app with authenticated users](transcribe-app.md)
 + [Invoking Lambda with API Gateway](api-gateway-invoking-lambda-example.md)
 + [Creating AWS serverless workflows using AWS SDK for JavaScript](serverless-step-functions-example.md)
-+ [Creating scheduled events to execute Lambda functions](scheduled-events-invoking-lambda-example.md)
++ [Creating scheduled events to execute AWS Lambda functions](scheduled-events-invoking-lambda-example.md)
 + [Creating and using Lambda functions](lambda-create-table-example.md)
 + [Building an Amazon Lex chatbot](lex-bot-example.md)
 + [Creating an example messaging application](messaging-app.md)

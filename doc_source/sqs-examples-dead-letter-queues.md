@@ -25,30 +25,40 @@ For more information about Amazon SQS dead\-letter queues, see [Using Amazon SQS
 ## Prerequisite tasks<a name="sqs-examples-dead-letter-queues-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sqs/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create an Amazon SQS queue to serve as a dead\-letter queue\. For an example of creating a queue, see [Using queues in Amazon SQS](sqs-examples-using-queues.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Configuring source queues<a name="sqs-examples-dead-letter-queues-configuring-source-queues"></a>
 
 After you create a queue to act as a dead\-letter queue, you must configure the other queues that route unprocessed messages to the dead\-letter queue\. To do this, specify a redrive policy that identifies the queue to use as a dead\-letter queue and the maximum number of receives by individual messages before they are routed to the dead\-letter queue\.
 
-Create a Node\.js module with the file name `sqs_deadletterqueue.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access Amazon SQS, create an `SQS` service object\. Create a JSON object containing the parameters needed to update queue attributes, including the `RedrivePolicy` parameter that specifies both the ARN of the dead\-letter queue, as well as the value of `maxReceiveCount`\. Also specify the URL source queue you want to configure\. Call the `SetQueueAttributesCommand` method\.
+Create a `libs` directory, and create a Node\.js module with the file name `sqsClient.js`\. Copy and paste the code below into it, which creates the Amazon SQS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SQSClient } from "@aws-sdk/client-sqs";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const sqsClient = new SQSClient({ region: REGION });
+export  { sqsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/libs/sqsClient.js)\.
+
+Create a Node\.js module with the file name `sqs_deadletterqueue.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to update queue attributes, including the `RedrivePolicy` parameter that specifies both the ARN of the dead\-letter queue, as well as the value of `maxReceiveCount`\. Also specify the URL source queue you want to configure\. Call the `SetQueueAttributesCommand` method\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *SQS\_QUEUE\_URL* with the URL of the SQS queue, and *DEAD\_LETTER\_QUEUE\_ARN* with the ARN of the dead letter queue\.
+Replace *SQS\_QUEUE\_URL* with the URL of the SQS queue, and *DEAD\_LETTER\_QUEUE\_ARN* with the ARN of the dead letter queue\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SQSClient, SetQueueAttributesCommand } = require("@aws-sdk/client-sqs");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { SetQueueAttributesCommand } from  "@aws-sdk/client-sqs";
+import { sqsClient } from  "./libs/sqsClient.js";
 
 // Set the parameters
 var params = {
@@ -60,16 +70,11 @@ var params = {
   QueueUrl: "SQS_QUEUE_URL", //SQS_QUEUE_URL
 };
 
-// Create SQS service object
-const sqs = new SQSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sqs.send(new SetQueueAttributesCommand(params));
-    console.log(
-      "Success, source queues configured. RequestID:",
-      data.$metadata.requestId
-    );
+    const data = await sqsClient.send(new SetQueueAttributesCommand(params));
+    console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -80,7 +85,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sqs_deadletterqueue.ts // If you prefer JavaScript, enter 'sqs_deadletterqueue.js'
+node sqs_deadletterqueue.js // If you prefer JavaScript, enter 'sqs_deadletterqueue.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs//src/sqs_deadletterqueue.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs//src/sqs_deadletterqueue.js)\.

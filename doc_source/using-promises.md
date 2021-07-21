@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Using JavaScript promises<a name="using-promises"></a>
 
-Use the service client's `send` method to make the service call and manage asynchronous flow instead of using callbacks\. The following example shows how to get the names of your Amazon DynamoDB tables in `us-west-2`\.
+Use the service client's AWS SDK for JavaScript v3 method \( `ListTablesCommand` \)to make the service call and manage asynchronous flow instead of using callbacks\. The following example shows how to get the names of your Amazon DynamoDB tables in `us-west-2`\.
 
 ```
 const { DynamoDBClient, 

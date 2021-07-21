@@ -12,13 +12,13 @@ Welcome to the AWS SDK for JavaScript Developer Guide\. This guide provides gene
 
 The [AWS SDK for JavaScript v3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) provides a JavaScript API for AWS services\. You can use the JavaScript API to build libraries or applications for [Node\.js](https://nodejs.org/en/) or the browser\.
 
-![\[Relationship between JavaScript environments, the SDK, and Amazon Web Services\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/sdk-overview-v3.png)
+
 
 ## Maintenance and support for SDK major versions<a name="sdks-major-versions-maintenance-support"></a>
 
-For information about maintenance and support for SDK major versions and their underlying dependencies, see the following in the [AWS SDKs and Tools Shared Configuration and Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/overview.html):
-+ [AWS SDKs and Tools Maintenance Policy](https://docs.aws.amazon.com/credref/latest/refdocs/maint-policy.html)
-+ [AWS SDKs and Tools Version Support Matrix](https://docs.aws.amazon.com/credref/latest/refdocs/version-support-matrix.html)
+For information about maintenance and support for SDK major versions and their underlying dependencies, see the following in the [AWS SDKs and Tools Reference Guide](https://docs.aws.amazon.com/sdkref/latest/guide/overview.html):
++ [AWS SDKs and tools maintenance policy](https://docs.aws.amazon.com/sdkref/latest/guide/maint-policy.html)
++ [AWS SDKs and tools version support matrix](https://docs.aws.amazon.com/sdkref/latest/guide/version-support-matrix.html)
 
 ## What's new in Version 3<a name="welcome_whats_new_v3"></a>
 
@@ -37,7 +37,7 @@ In addition, the SDK is written in TypeScript, which has many advantages, such a
 Version 2 of the SDK for JavaScript \(V2\) required you to use the entire AWS SDK, as follows\.
 
 ```
-varAWS  = require("aws-sdk");
+var AWS  = require("aws-sdk");
 ```
 
 Loading the entire SDK isn’t an issue if your application is using many AWS services\. However, if you need to use only a few AWS services, it means increasing the size of your application with code you don't need or use\.
@@ -165,7 +165,7 @@ run();
 
 ##### Using V2 commands<a name="using_v2_commands"></a>
 
-To use V2 commands in the ^SDK for JavaScript, you import the full AWS Service packages, as demonstrated in the following code\.
+To use V2 commands in the SDK for JavaScript, you import the full AWS Service packages, as demonstrated in the following code\.
 
 ```
 const {DynamoDB} = require('@aws-sdk/client-dynamodb');

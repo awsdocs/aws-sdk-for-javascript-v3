@@ -17,15 +17,9 @@ Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket you uploaded the ZI
 ```
 // Load the required Lambda client and commands.
 const {
-  LambdaClient,
-  CreateFunctionCommand,
-} = require("@aws-sdk/client-lambda");
-
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-
-// Instantiate an Lambda client service object.
-const lambda = new LambdaClient({ region: REGION });
+  CreateFunctionCommand
+} = require ( "@aws-sdk/client-lambda" );
+const { lambdaClient} = require ( "./libs/lambdaClient.js );
 
 // Set the parameters.
 const params = {
@@ -44,7 +38,7 @@ const params = {
 
 const run = async () => {
   try {
-    const data = await lambda.send(new CreateFunctionCommand(params));
+    const data = await lambdaClient.send(new CreateFunctionCommand(params));
     console.log("Success", data); // successful response
   } catch (err) {
     console.log("Error", err); // an error occurred
@@ -56,7 +50,7 @@ run();
 Enter the following at the command line to deploy the Lambda function\.
 
 ```
-ts-node lambda-function-setup.ts
+node lambda-function-setup.ts
 ```
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-api-gateway/src/helper-functions/lambda-function-setup.ts)\.
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-api-gateway/src/helper-functions/lambda-function-setup.js)\.

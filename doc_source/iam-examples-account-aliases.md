@@ -28,37 +28,46 @@ For more information about IAM account aliases, see [Your AWS account ID and its
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Creating an account alias<a name="iam-examples-account-aliases-creating"></a>
 
-Create a Node\.js module with the file name `iam_createaccountalias.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access IAM, create an `IAM` client service object\. Create a JSON object containing the parameters needed to create an account alias, which includes the alias to create\. Call the `CreateAccountAliasCommand` method of the `IAM` client service object\.
+Create a `libs` directory, and create a Node\.js module with the file name `iamClient.js`\. Copy and paste the code below into it, which creates the IAM client object\. Replace *REGION* with your AWS Region\.
+
+```
+import { IAMClient } from "@aws-sdk/client-iam";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an IAM service client object.
+const iamClient = new IAMClient({ region: REGION });
+export { iamClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/libs/iamClient.js)\.
+
+Create a Node\.js module with the file name `iam_createaccountalias.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to create an account alias, which includes the alias to create\. Call the `CreateAccountAliasCommand` method of the `IAM` client service object\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, and *ACCOUNT\_ALIAS* with the alias to create\.
+Replace *ACCOUNT\_ALIAS* with the alias to create\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { IAMClient, CreateAccountAliasCommand } = require("@aws-sdk/client-iam");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { iamClient } from "./libs/iamClient.js";
+import { CreateAccountAliasCommand } from "@aws-sdk/client-iam";
 
 // Set the parameters
-const accountAlias = { AccountAlias: "ACCOUNT_ALIAS" }; //ACCOUNT_ALIAS
-
-// Create IAM service object
-const iam = new IAMClient({ region: REGION });
+const params = { AccountAlias: "ACCOUNT_ALIAS" }; //ACCOUNT_ALIAS
 
 const run = async () => {
   try {
-    const data = await iam.send(new CreateAccountAliasCommand(accountAlias));
+    const data = await iamClient.send(new CreateAccountAliasCommand(params));
     console.log("Success", data);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -69,38 +78,41 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node iam_createaccountalias.ts // If you prefer JavaScript, enter 'node iam_createaccountalias.js'
+node iam_createaccountalias.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_createaccountalias.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_createaccountalias.js)\.
 
 ## Listing account aliases<a name="iam-examples-account-aliases-listing"></a>
 
-Create a Node\.js module with the file name `iam_listaccountaliases.ts`\. Be sure to configure the SDK as client previously shown, including downloading the required clients and packages\. To access IAM, create an `IAM` service object\. Create a JSON object containing the parameters needed to list account aliases, which includes the maximum number of items to return\. Call the `ListAccountAliasesCommand` method of the `IAM` client service object\.
+Create a `libs` directory, and create a Node\.js module with the file name `iamClient.js`\. Copy and paste the code below into it, which creates the IAM client object\. Replace *REGION* with your AWS Region\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+```
+import { IAMClient } from "@aws-sdk/client-iam";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an IAM service client object.
+const iamClient = new IAMClient({ region: REGION });
+export { iamClient };
+```
 
-**Note**  
-Replace *REGION* with your AWS Region\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/libs/iamClient.js)\.
+
+Create a Node\.js module with the file name `iam_listaccountaliases.js`\. Be sure to configure the SDK as client previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to list account aliases, which includes the maximum number of items to return\. Call the `ListAccountAliasesCommand` method of the `IAM` client service object\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { IAMClient, ListAccountAliasesCommand } = require("@aws-sdk/client-iam");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { iamClient } from "./libs/iamClient.js";
+import { ListAccountAliasesCommand } from "@aws-sdk/client-iam";
 
 // Set the parameters
 const params = { MaxItems: 5 };
 
-// Create IAM service object
-const iam = new IAMClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await iam.send(new ListAccountAliasesCommand(params));
+    const data = await iamClient.send(new ListAccountAliasesCommand(params));
     console.log("Success", data);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -111,38 +123,44 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node iam_listaccountaliases.ts // If you prefer JavaScript, enter 'node iam_listaccountaliases.js'
+node iam_listaccountaliases.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_listaccountaliases.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_listaccountaliases.js)\.
 
 ## Deleting an account alias<a name="iam-examples-account-aliases-deleting"></a>
 
-Create a Node\.js module with the file name `iam_deleteaccountalias.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access IAM, create an `IAM` service object\. Create a JSON object containing the parameters needed to delete an account alias, which includes the alias you want deleted\. Call the `DeleteAccountAliasCommand` method of the `IAM` service object\.
+Create a `libs` directory, and create a Node\.js module with the file name `iamClient.js`\. Copy and paste the code below into it, which creates the IAM client object\. Replace *REGION* with your AWS Region\.
+
+```
+import { IAMClient } from "@aws-sdk/client-iam";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an IAM service client object.
+const iamClient = new IAMClient({ region: REGION });
+export { iamClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/libs/iamClient.js)\.
+
+Create a Node\.js module with the file name `iam_deleteaccountalias.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to delete an account alias, which includes the alias you want deleted\. Call the `DeleteAccountAliasCommand` method of the `IAM` service object\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *ALIAS* with the name of the alias you want to delete\.
+Replace *ALIAS* with the name of the alias you want to delete\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { IAMClient, DeleteAccountAliasCommand } = require("@aws-sdk/client-iam");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { iamClient } from "./libs/iamClient.js";
+import { DeleteAccountAliasCommand } from "@aws-sdk/client-iam";
 
 // Set the parameters
 const params = { AccountAlias: "ALIAS" }; // ALIAS
 
-// Create IAM service object
-const iam = new IAMClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await iam.send(new DeleteAccountAliasCommand(params));
+    const data = await iamClient.send(new DeleteAccountAliasCommand(params));
     console.log("Success", data);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -153,7 +171,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node iam_deleteaccountalias.ts // If you prefer JavaScript, enter 'node iam_deleteaccountalias.js'
+node iam_deleteaccountalias.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_deleteaccountalias.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_deleteaccountalias.js)\.

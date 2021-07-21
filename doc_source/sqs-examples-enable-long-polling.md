@@ -32,25 +32,38 @@ To set up and run this example, you must first complete these tasks:
 
 Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sqs/README.md)\.
 **Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
+The AWS SDK for JavaScript \(V3\) is written in JavaScript, so for consistency these examples are presented in JavaScript\. JavaScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Enabling long polling when creating a queue<a name="sqs-examples-enable-long-polling-on-queue-creation"></a>
 
-Create a Node\.js module with the file name `sqs_longpolling_createqueue.ts`\. Be sure to configure the SDK as previously shown\. To access Amazon SQS, create an `SQS` client service object\. Create a JSON object containing the parameters needed to create a queue, including a non\-zero value for the `ReceiveMessageWaitTimeSeconds` parameter\. Call the `CreateQueueCommand` method\. Long polling is then enabled for the queue\.
+Create a `libs` directory, and create a Node\.js module with the file name `sqsClient.js`\. Copy and paste the code below into it, which creates the Amazon SQS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SQSClient } from "@aws-sdk/client-sqs";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const sqsClient = new SQSClient({ region: REGION });
+export  { sqsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/libs/sqsClient.js)\.
+
+Create a Node\.js module with the file name `sqs_longpolling_createqueue.js`\. Be sure to configure the SDK as previously shown\. Create a JSON object containing the parameters needed to create a queue, including a non\-zero value for the `ReceiveMessageWaitTimeSeconds` parameter\. Call the `CreateQueueCommand` method\. Long polling is then enabled for the queue\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, and *SQS\_QUEUE\_URL* with the URL of the SQS queue\.
+Replace and *SQS\_QUEUE\_URL* with the URL of the SQS queue\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SQSClient, CreateQueueCommand } = require("@aws-sdk/client-sqs");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { CreateQueueCommand } from  "@aws-sdk/client-sqs";
+import { sqsClient } from  "./libs/sqsClient.js";
 
 // Set the parameters
 const params = {
@@ -60,16 +73,11 @@ const params = {
   },
 };
 
-// Create SQS service object
-const sqs = new SQSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sqs.send(new CreateQueueCommand(params));
-    console.log(
-      "Success, new SQS queue created. SQS queue URL:",
-      data.QueueUrl
-    );
+    const data = await sqsClient.send(new CreateQueueCommand(params));
+    console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
     console.error(err, err.stack);
   }
@@ -80,27 +88,35 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sqs_longpolling_createqueue.ts // If you prefer JavaScript, enter 'sqs_longpolling_createqueue.js'
+node sqs_longpolling_createqueue.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/sqs_longpolling_createqueue.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/sqs_longpolling_createqueue.js)\.
 
 ## Enabling long polling on an existing queue<a name="sqs-examples-enable-long-polling-existing-queue"></a>
 
-Create a Node\.js module with the file name `sqs_longpolling_existingqueue.ts`\. Be sure to configure the SDK as previously shown\. To access Amazon SQS, create an `SQS` client service object\. Create a JSON object containing the parameters needed to set the attributes of the queue, including a non\-zero value for the `ReceiveMessageWaitTimeSeconds` parameter and the URL of the queue\. Call the `SetQueueAttributesCommand` method\. Long polling is then enabled for the queue\.
+Create a `libs` directory, and create a Node\.js module with the file name `sqsClient.js`\. Copy and paste the code below into it, which creates the Amazon SQS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SQSClient } from "@aws-sdk/client-sqs";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const sqsClient = new SQSClient({ region: REGION });
+export  { sqsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/libs/sqsClient.js)\.
+
+Create a Node\.js module with the file name `sqs_longpolling_existingqueue.js`\. Be sure to configure the SDK as previously shown\. Create a JSON object containing the parameters needed to set the attributes of the queue, including a non\-zero value for the `ReceiveMessageWaitTimeSeconds` parameter and the URL of the queue\. Call the `SetQueueAttributesCommand` method\. Long polling is then enabled for the queue\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *SQS\_QUEUE\_URL* with the URL of the SQS queue, and *ReceiveMessageWaitTimeSeconds* with the number of seconds to wait before the message is received\.
+Replace *SQS\_QUEUE\_URL* with the URL of the SQS queue, and *ReceiveMessageWaitTimeSeconds* with the number of seconds to wait before the message is received\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SQSClient, SetQueueAttributesCommand } = require("@aws-sdk/client-sqs");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { SetQueueAttributesCommand } from  "@aws-sdk/client-sqs";
+import { sqsClient } from  "./libs/sqsClient.js";
 
 // Set the parameters
 const params = {
@@ -110,16 +126,11 @@ const params = {
   QueueUrl: "SQS_QUEUE_URL", //SQS_QUEUE_URL; e.g., 'https://sqs.REGION.amazonaws.com/ACCOUNT-ID/QUEUE-NAME'
 };
 
-// Create SQS service object
-const sqs = new SQSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sqs.send(new SetQueueAttributesCommand(params));
-    console.log(
-      "Success, longpolling enabled on queue. RequestID:",
-      data.$metadata.requestId
-    );
+    const data = await sqsClient.send(new SetQueueAttributesCommand(params));
+    console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
     console.error(err, err.stack);
   }
@@ -130,25 +141,35 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sqs_longpolling_existingqueue.ts // If you prefer JavaScript, enter 'sqs_longpolling_existingqueue.js'
+node sqs_longpolling_existingqueue.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/sqs_longpolling_existingqueue.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/sqs_longpolling_existingqueue.js)\.
 
 ## Enabling long polling on message receipt<a name="sqs-examples-enable-long-polling-on-receive-message"></a>
 
-Create a Node\.js module with the file name `sqs_longpolling_receivemessage.ts`\. Be sure to configure the SDK as previously shown\. To access Amazon SQS, create an `SQS` client service object\. Create a JSON object containing the parameters needed to receive messages, including a non\-zero value for the `WaitTimeSeconds` parameter and the URL of the queue\. Call the `ReceiveMessageCommand` method\.
+Create a `libs` directory, and create a Node\.js module with the file name `sqsClient.js`\. Copy and paste the code below into it, which creates the Amazon SQS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SQSClient } from "@aws-sdk/client-sqs";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const sqsClient = new SQSClient({ region: REGION });
+export  { sqsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/libs/sqsClient.js)\.
+
+Create a Node\.js module with the file name `sqs_longpolling_receivemessage.js`\. Be sure to configure the SDK as previously shown\. Create a JSON object containing the parameters needed to receive messages, including a non\-zero value for the `WaitTimeSeconds` parameter and the URL of the queue\. Call the `ReceiveMessageCommand` method\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-Replace *REGION* with your AWS Region, *SQS\_QUEUE\_URL* with the URL of the SQS queue, *MaxNumberOfMessages* with the maximum number of messages, and *WaitTimeSeconds* with the time to wait \(in seconds\)\.
+Replace *SQS\_QUEUE\_URL* with the URL of the SQS queue, *MaxNumberOfMessages* with the maximum number of messages, and *WaitTimeSeconds* with the time to wait \(in seconds\)\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SQSClient, ReceiveMessageCommand } = require("@aws-sdk/client-sqs");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { ReceiveMessageCommand } from  "@aws-sdk/client-sqs";
+import { sqsClient } from  "./libs/sqsClient.js";
 
 // Set the parameters
 const queueURL = "SQS_QUEUE_URL"; // SQS_QUEUE_URL
@@ -160,13 +181,11 @@ const params = {
   WaitTimeSeconds: 20,
 };
 
-// Create SQS service object
-const sqs = new SQSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sqs.send(new ReceiveMessageCommand(params));
+    const data = await sqsClient.send(new ReceiveMessageCommand(params));
     console.log("Success, ", data);
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -177,7 +196,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sqs_longpolling_receivemessae.ts // If you prefer JavaScript, enter 'sqs_longpolling_receivemessage.js'
+node sqs_longpolling_receivemessage.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/sqs_longpolling_receivemessage.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/sqs_longpolling_receivemessage.js)\.

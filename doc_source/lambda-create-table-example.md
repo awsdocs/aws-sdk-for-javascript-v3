@@ -12,13 +12,9 @@ The tutorial describes how to create and execute from the browser a Lambda funct
 
 The tutorial should take about 20 minutes to complete\.
 
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
-
-**Note**  
-The code examples in this tutorial import and use the required AWS Service V3 package clients, V3 commands, and use the `send` method in an async/await pattern\. You can create these examples using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 **To build the app:**
+
+1. [Prerequisite tasks ](#lambda-create-table-prerequisites)
 
 1. [Create the AWS resources ](lambda-create-table-provision-resources.md)
 
@@ -30,14 +26,13 @@ The code examples in this tutorial import and use the required AWS Service V3 pa
 
 1. [Deploy the Lambda function ](lambda-create-table-deploy-function.md)
 
-1. [Run the app](lambda-create-table-run.md)
-
 1. [Delete the resources](lambda-create-table-destroy.md)
 
 ## Prerequisite tasks<a name="lambda-create-table-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/lambda/lambda_create_function/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+This example uses CommonJS sytax, as Lambda does not currently support ECMAScript 6 \(ES6\) syntax\. For more information, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)

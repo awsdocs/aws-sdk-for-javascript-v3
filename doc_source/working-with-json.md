@@ -12,7 +12,7 @@ JSON is a format for data exchange that is both human\-readable and machine\-rea
 
 The AWS SDK for JavaScript uses JSON to send data to service objects when making requests and receives data from service objects as JSON\. For more information about JSON, see [json\.org](https://json.org)\.
 
-![\[Showing the general format and parts of JSON.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/json-format.png)
+
 
 JSON represents data in two ways:
 + As an *object*, which is an unordered collection of name\-value pairs\. An object is defined within left \(`{`\) and right \(`}`\) braces\. Each name\-value pair begins with the name, followed by a colon, followed by the value\. Name\-value pairs are comma separated\.

@@ -15,21 +15,20 @@ This tutorial requires the following resources\.
 +  An IAM role named `lambda-support` used to invoke Lamdba functions\. This role has policies that enable it to invoke the Amazon DynamoDB and Amazon Simple Email Service services from a Lambda function\. 
 +  An IAM role named `workflow-support` used to invoke the workflow\.
 + An Amazon S3 bucket to host the Lambda functions\.
-**Important**  
-This Amazon S3 bucket allows READ \(LIST\) public access, which enables anyone to list the objects within the bucket and potentially misuse the information\. If you do not delete this Amazon S3 bucket immediately after completing the tutorial, we highly recommend you comply with the [Security Best Practices in Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/compM.html) in the *Amazon Simple Storage Service Developer Guide*\. 
 
-You can create these resources manually, but we recommend provisioning these resources using the AWS Cloud Development Kit \(AWS CDK\) as described in this tutorial\.
+You can create these resources manually, but we recommend provisioning these resources using the AWS Cloud Development Kit \(CDK\) \(AWS CDK\) as described in this tutorial\.
 
-**Note**  
-The AWS CDK is a software development framework that enables you to define cloud application resources\. For more information, see the [AWS Cloud Development Kit \(AWS CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/home.html)\.
+## Create the AWS resources using the AWS CloudFormation<a name="api-gateway-invoking-lambda-resources-cli"></a>
 
-## Create the AWS resources using the AWS CLI<a name="api-gateway-invoking-lambda-resources-cli"></a>
+AWS CloudFormation enables you to create and provision AWS infrastructure deployments predictably and repeatedly\. For more information about AWS CloudFormation, see the [AWS CloudFormation developer guide\.](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)\.
 
-To run the stack using the AWS CLI:
+To create the AWS CloudFormation stack:
 
 1. Install and configure the AWS CLI following the instructions in the [AWS CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)\.
 
-1. Create a file named `setup.yaml` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-step-functions/setup.yaml) into it\.
+1. Create a file named `setup.yaml` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-step-functions/setup.yaml) into it\. 
+**Note**  
+The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/resources/cdk/lambda_api_step_functions)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
 
 1. Run the following command from the command line, replacing *STACK\_NAME* with a unique name for the stack\.
 **Important**  
@@ -41,7 +40,7 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
 
    For more information on the `create-stack` command parameters, see the [AWS CLI Command Reference guide](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack.html), and the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\.
 
-## Create the AWS resources using the AWS Management Console;<a name="api-gateway-invoking-lambda-resources-console"></a>
+## Create the AWS resources using the Amazon Web Services Management Console;<a name="api-gateway-invoking-lambda-resources-console"></a>
 
 To create resources for the app in the console, follow the instructions in the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)\. Use the template provided create a file named `setup.yaml`, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-step-functions/setup.yaml)\.
 

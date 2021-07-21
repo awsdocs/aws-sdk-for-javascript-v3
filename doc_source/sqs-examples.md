@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 Amazon Simple Queue Service \(SQS\) is a fast, reliable, scalable, fully managed message queuing service\. Amazon SQS lets you decouple the components of a cloud application\. Amazon SQS includes standard queues with high throughput and at\-least\-once processing, and FIFO queues that provide first\-in, first\-out \(FIFO\) delivery and exactly\-once processing\.
 
-![\[Relationship between JavaScript environments, the SDK, and Amazon SQS\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-sqs.png)
+
 
 The JavaScript API for Amazon SQS is exposed through the `SQS` client class\. For more information about using the Amazon SQS; client class, see [Class: SQS](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/sqs.html) in the API Reference\.
 

@@ -15,31 +15,28 @@ You can use the API Gateway console to create a rest endpoint for the Lambda fun
 1. Sign in to the [Amazon API Gateway console](https://console.aws.amazon.com/apigateway)\.
 
 1. Under Rest API, choose **Build**\.  
-![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/apigateway_example/picRest.png)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Select **New API**\.  
-![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/apigateway_example/PicNewAPI.png)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
-
-1. Select **New API**\.  
-![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/apigateway_example/PicNewAPI.png)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Specify **Employee** as the API name and provide a description\.  
-![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/apigateway_example/picEmployeeAPI.png)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Choose **Create API**\.
 
 1. Choose **Resources** under the **Employee** section\.  
-![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/apigateway_example/picResources.png)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. In the name field, specify **employees**\.
 
 1. Choose **Create Resources**\.
 
 1. From the **Actions** dropdown, choose **Create Resources**\.  
-![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/apigateway_example/picCreateResources.png)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Choose **/employees**, select **Create Method** from the **Actions**, then select **GET** from the drop\-down menu below **/employees**\. Choose the checkmark icon\.  
-![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/apigateway_example/picGet.png)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Choose **Lambda function** and enter **mylambdafunction** as the Lambda function name\. Choose **Save **\.  
-![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/apigateway_example/picLambda.png)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[DynamoDB table\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)

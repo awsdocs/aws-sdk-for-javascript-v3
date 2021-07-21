@@ -48,9 +48,6 @@ const params = {
 
 First create an async/await function called `sendText` to publish a text message using the Amazon SNS `PublishCommand`\. Then, add a `try` block pattern that scans the DynamoDB table for employees with their work anniversry today, and then calls the `sendText` function to send these employees a text message\. If an error occurs the `catch` block is called\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 The following code snippet shows this step\. \(See [Bundling the Lambda function](#scheduled-events-invoking-lambda-full) for the full example\.\)
 
 ```
@@ -86,7 +83,7 @@ exports.handler = async (event, context, callback) => {
 
 ## Bundling the Lambda function<a name="scheduled-events-invoking-lambda-full"></a>
 
-This topic describes how to bundle the `mylambdafunction.ts` and the required AWS SDK for JavaScript modules for this example into a bundled file called `index.js`\. 
+This topic describes how to bundle the `mylambdafunction.js` and the required AWS SDK for JavaScript modules for this example into a bundled file called `index.js`\. 
 
 1. If you haven't already, follow the [Prerequisite tasks](scheduled-events-invoking-lambda-prerequisites.md) for this example to install webpack\. 
 **Note**  
@@ -95,7 +92,7 @@ For information about*webpack*, see [Bundling applications with webpack](webpack
 1. Run the the following in the command line to bundle the JavaScript for this example into a file called `<index.js>` :
 
    ```
-   webpack mylambdafunction.ts --mode development --libraryTarget commonjs2 --target node --devtool false -o index.js
+   webpack mylamdbafunction.js --mode development --target node --devtool false --output-library-target umd -o index.js
    ```
 **Important**  
 Notice the output is named `index.js`\. This is because Lambda functions must have an `index.js` handler to work\.
@@ -104,7 +101,7 @@ Notice the output is named `index.js`\. This is because Lambda functions must ha
 
 1. Upload `mylambdafunction.zip` to the Amazon S3 bucket you created in the [Create the AWS resources ](scheduled-events-invoking-lambda-provision-resources.md) topic of this tutorial\. 
 
-Here is the complete browser script code for `mylambdafunction.ts`\.
+Here is the complete browser script code for `mylambdafunction.js`\.
 
 ```
 "use strict";

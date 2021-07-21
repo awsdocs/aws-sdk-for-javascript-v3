@@ -12,7 +12,13 @@ The topics in this section contain examples of how to use the AWS SDK for JavaSc
 
 Find the source code for these examples and others in the [AWS Code Examples Repository on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples)\. To propose a new code example for the AWS documentation team to consider producing, create a request\. The team is looking to produce code examples that cover broader scenarios and use cases, versus simple code snippets that cover only individual API calls\. For instructions, see the *Proposing new code examples* section in the [Readme on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/README.rst)\.
 
+**Important**  
+These examples use ECMAScript6 import/export syntax\.   
+This require Node\.js version 14\.17 or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md) for conversion guidelines\.
+
 **Topics**
++ [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
 + [Amazon CloudWatch examples](cloudwatch-examples.md)
 + [Amazon DynamoDB examples](dynamodb-examples.md)
 + [Amazon EC2 examples](ec2-examples.md)

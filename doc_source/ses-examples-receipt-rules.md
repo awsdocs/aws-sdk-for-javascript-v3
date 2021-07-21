@@ -30,9 +30,12 @@ In this example, a series of Node\.js modules are used to send email in a variet
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ses/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Creating an Amazon S3 receipt rule<a name="ses-examples-creatingreceipt-rules"></a>
 
@@ -40,23 +43,32 @@ Each receipt rule for Amazon SES contains an ordered list of actions\. This exam
 
 For Amazon SES to write email to an Amazon S3 bucket, create a bucket policy that gives `PutObject` permission to Amazon SES\. For information about creating this bucket policy, see [Give Amazon SES permission to write to your Amazon S3 bucket ](Amazon Simple Email Service Developer Guidereceiving-email-permissions.html#receiving-email-permissions-s3.html) in the Amazon Simple Email Service Developer Guide\.
 
-In this example, use a Node\.js module to create a receipt rule in Amazon SES to save received messages in an Amazon S3 bucket\. Create a Node\.js module with the file name `ses_createreceiptrule.ts`\. Configure the SDK as previously shown\.
+In this example, use a Node\.js module to create a receipt rule in Amazon SES to save received messages in an Amazon S3 bucket\. 
+
+Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SESClient }  from  "@aws-sdk/client-ses";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SES service object.
+const sesClient = new SESClient({ region: REGION });
+export  { sesClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
+
+Create a Node\.js module with the file name `ses_createreceiptrule.js`\. Configure the SDK as previously shown\.
 
 Create a parameters object to pass the values needed to create for the receipt rule set\. To call the `CreateReceiptRuleSetCommand` method, invoke an Amazon SES service object, passing the parameters\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *S3\_BUCKET\_NAME* with the name of the Amazon S3 bucket, *EMAIL\_ADDRESS \| DOMAIN* with the email, or domain, *RULE\_NAME* with the name of the rule, and *RULE\_SET\_NAME* with the name of the ruleset\.
+Replace *S3\_BUCKET\_NAME* with the name of the Amazon S3 bucket, *EMAIL\_ADDRESS \| DOMAIN* with the email, or domain, *RULE\_NAME* with the name of the rule, and *RULE\_SET\_NAME* with the name of the ruleset\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SESClient, CreateReceiptRuleCommand } = require("@aws-sdk/client-ses");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1" // REGION
-
+import { CreateReceiptRuleCommand }  from "@aws-sdk/client-ses";
+import { sesClient } from "./libs/sesClient.js";
 // Set the parameters
 const params = {
   Rule: {
@@ -80,15 +92,13 @@ const params = {
   RuleSetName: "RULE_SET_NAME", // RULE_SET_NAME
 };
 
-// Create SES service object
-const ses = new SESClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await ses.send(new CreateReceiptRuleCommand(params));
-    console.log("Rule created; requestId:", data.$metadata.requestId);
+    const data = await sesClient.send(new CreateReceiptRuleCommand(params));
+    console.log("Rule created", data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -97,45 +107,37 @@ run();
 To run the example, enter the following at the command prompt\. Amazon SES creates the receipt rule\.
 
 ```
-ts-node ses_createreceiptrule.ts // If you prefer JavaScript, enter 'node ses_createreceiptrule.js'
+node ses_createreceiptrule.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_createreceiptrule.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_createreceiptrule.js)\.
 
 ## Deleting a receipt rule<a name="ses-examples-deletingreceipt-rules"></a>
 
-In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_deletereceiptrule.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_deletereceiptrule.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create a parameters object to pass the name for the receipt rule to delete\. To call the `DeleteReceiptRuleCommand` method, invoke an Amazon SES service object, passing the parameters\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *RULE\_NAME* with the name of the rule, and *RULE\_SET\_NAME* with the rule set name\.
+Replace *RULE\_NAME* with the name of the rule, and *RULE\_SET\_NAME* with the rule set name\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SESClient, DeleteReceiptRuleCommand } = require("@aws-sdk/client-ses");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
-
+import { DeleteReceiptRuleCommand }  from "@aws-sdk/client-ses";
+import { sesClient } from "./libs/sesClient.js";
 // Set the deleteReceiptRule params
 var params = {
   RuleName: "RULE_NAME", // RULE_NAME
   RuleSetName: "RULE_SET_NAME", // RULE_SET_NAME
 };
 
-// Create SES service object
-const ses = new SESClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await ses.send(new DeleteReceiptRuleCommand(params));
-    console.log("Receipt Rule Deleted");
+    const data = await sesClient.send(new DeleteReceiptRuleCommand(params));
+    console.log("Success.", data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -144,48 +146,39 @@ run();
 To run the example, enter the following at the command prompt\. Amazon SES creates the receipt rule set list\.
 
 ```
-ts-node ses_deletereceiptrule.ts // If you prefer JavaScript, enter 'node ses_deletereceiptrule.js'
+node ses_deletereceiptrule.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_deletereceiptrule.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_deletereceiptrule.js)\.
 
 ## Creating a receipt rule set<a name="ses-examples-creatingreceiptrulesets"></a>
 
-In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_createreceiptruleset.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_createreceiptruleset.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create a parameters object to pass the name for the new receipt rule set\. To call the `CreateReceiptRuleSetCommand` method, invoke an Amazon SES client service object, passing the parameters\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
 Replace *REGION* with your AWS Region, *RULE\_SET\_NAME* with the rule set name\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  SESClient,
+import {
   CreateReceiptRuleSetCommand
-} = require("@aws-sdk/client-ses");
-
-// Set the AWS Region
-const REGION = "region"; //e.g. "us-east-1" // REGION
-
+} from "@aws-sdk/client-ses";
+import { sesClient } from "./libs/sesClient.js";
 // Set the parameters
 const params = { RuleSetName: "RULE_SET_NAME" }; //RULE_SET_NAME
 
-// Create SES service object
-const ses = new SESClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await ses.send(new CreateReceiptRuleSetCommand(params));
+    const data = await sesClient.send(new CreateReceiptRuleSetCommand(params));
     console.log(
-      "Success, receipt rule created; requestId",
-      data.$metadata.requestId
+      "Success",
+      data
     );
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -194,42 +187,34 @@ run();
 To run the example, enter the following at the command prompt\. Amazon SES creates the receipt rule set list\.
 
 ```
-ts-node ses_createreceiptruleset.ts // If you prefer JavaScript, enter 'node ses_createreceiptruleset.js'
+node ses_createreceiptruleset.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_createreceiptruleset.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_createreceiptruleset.js)\.
 
 ## Deleting a receipt rule set<a name="ses-examples-deletingreceiptrulesets"></a>
 
-In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_deletereceiptruleset.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to send email with Amazon SES\. Create a Node\.js module with the file name `ses_deletereceiptruleset.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object to pass the name for the receipt rule set to delete\. To call the `DeleteReceiptRuleSetCommand` method, invoke an Amazon SES client service object, passing the parameters\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *RULE\_SET\_NAME* with the rule set name\.
+Replace *RULE\_SET\_NAME* with the rule set name\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SESClient, DeleteReceiptRuleSetCommand } = require("@aws-sdk/client-ses");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
-
+import { DeleteReceiptRuleSetCommand }  from "@aws-sdk/client-ses";
+import { sesClient } from "./libs/sesClient.js";
 // Set the parameters
 const params = { RuleSetName: "RULE_SET_NAME" }; //RULE_SET_NAME
 
-// Create SES service object
-const ses = new SESClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await ses.send(new DeleteReceiptRuleSetCommand(params));
-    console.log("Success, rule set deleted", data);
+    const data = await sesClient.send(new DeleteReceiptRuleSetCommand(params));
+    console.log("Success.", data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -238,7 +223,7 @@ run();
 To run the example, enter the following at the command prompt\. Amazon SES creates the receipt rule set list\.
 
 ```
-ts-node ses_deletereceiptruleset.ts // If you prefer JavaScript, enter 'node ses_deletereceiptruleset.js'
+node ses_deletereceiptruleset.js // If you prefer JavaScript, enter 'node ses_deletereceiptruleset.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_deletereceiptruleset.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_deletereceiptruleset.js)\.

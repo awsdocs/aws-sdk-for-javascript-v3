@@ -22,30 +22,43 @@ In this example, you use a series of Node\.js modules to publish messages from A
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Publishing a Message to an SNS Topic<a name="sns-examples-publishing-text-messages"></a>
 
-In this example, use a Node\.js module to publish a message to an Amazon SNS topic\. Create a Node\.js module with the file name `sns_publishtotopic.ts`\. Configure the SDK as previously shown\.
+In this example, use a Node\.js module to publish a message to an Amazon SNS topic\.
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+ Create a Node\.js module with the file name `sns_publishtotopic.js`\. Configure the SDK as previously shown\.
 
 Create an object containing the parameters for publishing a message, including the message text and the Amazon Resource Name \(ARN\) of the Amazon SNStopic\. For details on available SMS attributes, see [SetSMSAttributes](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/SNS.html#setSMSAttributes-property)\.
 
 Pass the parameters to the `PublishCommand` method of the `SNS` client class\. create an asynchronous function invoking an Amazon SNS client service object, passing the parameters object\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *MESSAGE\_TEXT* with the message text, and *TOPIC\_ARN* with the ARN of the SNS topic\.
+Replace *MESSAGE\_TEXT* with the message text, and *TOPIC\_ARN* with the ARN of the SNS topic\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, PublishCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "region"; //e.g. "us-east-1"
+import {PublishCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 var params = {
@@ -53,16 +66,13 @@ var params = {
   TopicArn: "TOPIC_ARN", //TOPIC_ARN
 };
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new PublishCommand(params));
-    console.log("Message sent to the topic");
-    console.log("MessageID is " + data.MessageId);
+    const data = await snsClient.send(new PublishCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -71,7 +81,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_publishtotopic.ts // If you prefer JavaScript, enter 'node sns_publishtotopic.js'
+node sns_publishtotopic.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_publishtotopic.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_publishtotopic.js)\.

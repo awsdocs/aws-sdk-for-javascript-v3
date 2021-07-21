@@ -12,7 +12,7 @@ This topic is part of a tutorial that create an AWS application that sends and r
 
 In this topic, you create a the browser script for the app\. When you have created the browser script, you bundle it into a file called `main.js` as described in [Bundling the JavaScript](#messaging-app-bundle)\.
 
-Create a file named `index.ts`\. Copy and paste the code from [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/message-app/js/index.html) into it\.
+Create a file named `index.js`\. Copy and paste the code from [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/message-app/js/index.js) into it\.
 
 This code is explained in the following sections: 
 
@@ -26,36 +26,38 @@ This code is explained in the following sections:
 
 ## Configuration<a name="messagining-app-script-config"></a>
 
-Import the required AWS SDK for JavaScript modules and commands\. Create clients for Amazon Lex, Amazon Comprehend, and Amazon Translate\. Replace *REGION* with AWS Region, and *IDENTITY\_POOL\_ID* with the ID of the identity pool you created in the [Create the AWS resources ](lex-bot-provision-resources.md)\. To retrieve this identity pool ID, open the identity pool in the Amazon Cognito console, choose **Edit identity pool**, and choose **Sample code** in the side menu\. The identity pool ID is shown in red text in the console\.
+First, create a `libs` directory create the required Amazon SQS client object by creating a files named `sqsClient.js`\. Replace *REGION* and *IDENTITY\_POOL\_ID* in each\. 
 
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/identity-pool-id.png)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
-
- Replace *SQS\_QUEUE\_NAME* with the name of the Amazon SQS Queue you created in the [Create the AWS resources ](messaging-app-provision-resources.md)\.
+**Note**  
+Use the ID of the Amazon Cognito identity pool you created in [Create the AWS resources ](messaging-app-provision-resources.md)\.
 
 ```
-const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
-const {
-  fromCognitoIdentityPool,
-} = require("@aws-sdk/credential-provider-cognito-identity");
-const {
-  SQSClient,
-  GetQueueUrlCommand,
-  SendMessageCommand,
-  ReceiveMessageCommand,
-  PurgeQueueCommand,
-} = require("@aws-sdk/client-sqs");
-
-const REGION = "REGION"; // For example, "us-east-1".
-const IdentityPoolId = "IDENTITY_POOL_ID"; // The Amazon Cognito Identity Pool ID.
-const QueueName = "SQS_QUEUE_NAME"; // The Amazon SQS queue name, which must end in .fifo for this example.
-
+import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
+import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
+import {SQSClient} from "@aws-sdk/client-sqs"'
+const REGION = "REGION"; //e.g. "us-east-1"
+const IdentityPoolId = "IDENTITY_POOL_ID";
 const sqsClient = new SQSClient({
   region: REGION,
   credentials: fromCognitoIdentityPool({
     client: new CognitoIdentityClient({ region: REGION }),
-    identityPoolId: IdentityPoolId,
+    identityPoolId: IdentityPoolId
   }),
 });
+```
+
+In the `index.js`, import the required AWS SDK for JavaScript modules and commands\. Replace *SQS\_QUEUE\_NAME* with the name of the Amazon SQS Queue you created in the [Create the AWS resources ](messaging-app-provision-resources.md)\.
+
+```
+import {
+  GetQueueUrlCommand,
+  SendMessageCommand,
+  ReceiveMessageCommand,
+  PurgeQueueCommand,
+} from "@aws-sdk/client-sqs";
+import { sqsClient } from "./libs/sqsClient.js";
+
+const QueueName = "SQS_QUEUE_NAME"; // The Amazon SQS queue name, which must end in .fifo for this example.
 ```
 
 ## populateChat<a name="messagining-app-script-onload"></a>
@@ -256,9 +258,9 @@ window.purge = purge;
 
 ### Bundling the JavaScript<a name="messaging-app-bundle"></a>
 
-This comlete browser script code is available [here on GitHub\.](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/message-app/js/index.html)\.
+This comlete browser script code is available [here on GitHub\.](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/message-app/js/index.js)\.
 
-Now use webpack to bundle the `index.ts` and AWS SDK for JavaScript modules into a single file, `main.js`\.
+Now use webpack to bundle the `index.js` and AWS SDK for JavaScript modules into a single file, `main.js`\.
 
 1. If you haven't already, follow the [Prerequisites](messaging-app-prerequisites.md) for this example to install webpack\. 
 **Note**  
@@ -267,5 +269,5 @@ For information about*webpack*, see [Bundling applications with webpack](webpack
 1. Run the the following in the command line to bundle the JavaScript for this example into a file called `<index.js>` :
 
    ```
-   webpack index.ts --mode development --libraryTarget commonjs2 --target web --devtool false -o main.js
+   webpack index.js --mode development --target web --devtool false -o main.js
    ```

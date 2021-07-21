@@ -24,34 +24,46 @@ For more information about access control lists for Amazon S3 buckets, see [ Man
 ## Prerequisite tasks<a name="s3-manage-bucket-access-prereqs"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up a project environment to run Node TypeScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
++ Set up a project environment to run Node JavaScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Retrieving the current bucket Access Control List<a name="s3-example-access-permissions-get-acl"></a>
 
-Create a Node\.js module with the file name `s3_getbucketacl.ts`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. 
+Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+
+```
+import { S3Client} from "@aws-sdk/client-s3";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon S3 service client object.
+const s3Client = new S3Client({ region: REGION });
+export { s3Client };
+```
+
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/libs/s3Client.js)\.
+
+Create a Node\.js module with the file name `s3_getbucketacl.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. 
 
 Create an `S3Client` client service object\. The only parameter you need to pass is the name of the selected bucket when calling the `GetBucketAclCommand` method\. The current access control list configuration is returned by Amazon S3 in the `data` parameter passed to the callback function\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { S3Client, GetBucketAclCommand } = require("@aws-sdk/client-s3/");
+import { GetBucketAclCommand } from "@aws-sdk/client-s3/";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
 
 // Create the parameters.
-const bucketParams = { Bucket: "BUCKET_NAME" };
+export const bucketParams = { Bucket: "BUCKET_NAME" };
 
-// Create an Amazon S3 service client object.
-const s3 = new S3Client({});
-
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await s3.send(new GetBucketAclCommand(bucketParams));
+    const data = await s3Client.send(new GetBucketAclCommand(bucketParams));
     console.log("Success", data.Grants);
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -62,26 +74,35 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
- ts-node s3_getbucketacl.ts // If you prefer JavaScript, enter 'node s3_getbucketacl.js'
+ node s3_getbucketacl.js 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_getbucketacl.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_getbucketacl.js)\.
 
 ## Attaching Access Control List permissions to an Amazon S3 bucket<a name="s3-example-access-permissions-put-acl"></a>
 
-Create a Node\.js module with the file name `s3_putbucketacl.ts`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. 
-
-Create an `S3` client service object\. Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket\. Replace *GRANTEE\_1* and *GRANTEE\_2* with users you want to grant respective access contol permission\. 
-
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-/ Import required AWS SDK clients and commands for Node.js.
+import { S3Client} from "@aws-sdk/client-s3";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon S3 service client object.
+const s3Client = new S3Client({ region: REGION });
+export { s3Client };
+```
+
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/libs/s3Client.js)\.
+
+Create a Node\.js module with the file name `s3_putbucketacl.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. 
+
+Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket\. Replace *GRANTEE\_1* and *GRANTEE\_2* with users you want to grant respective access contol permission\. 
+
+```
+/ Import required AWS SDK; clients and commands for Node.js.
 const { S3Client, PutBucketAclCommand } = require("@aws-sdk/client-s3");
 
-// Set the parameters. For more information,
-// see https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putBucketAcl-property.
+// Set the parameters. 
 const bucketParams = {
     Bucket: "BUCKET_NAME",
     // 'GrantFullControl' allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
@@ -111,7 +132,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
- ts-node s3_putbucketacl.ts // If you prefer JavaScript, enter 'node s3_putbucketacl.js'
+ node s3_putbucketacl.js 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_putbucketacl.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_putbucketacl.js)\.

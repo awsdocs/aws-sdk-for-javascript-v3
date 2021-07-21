@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 Amazon S3 Glacier is a secure cloud storage service for data archiving and long\-term backup\. The service is optimized for infrequently accessed data where a retrieval time of several hours is suitable\.
 
-![\[Relationship between JavaScript environments, the SDK, and S3 Glacier\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-glacier.png)
+
 
 The JavaScript API for Amazon S3 Glacier is exposed through the `Glacier` client class\. For more information about using the S3 Glacier client class, see [Class: Glacier](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-glacier/classes/glacier.html) in the API reference\.
 

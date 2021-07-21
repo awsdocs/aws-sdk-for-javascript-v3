@@ -29,41 +29,52 @@ In this example, you use a series of Node\.js modules to create, list, and delet
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Creating a Topic<a name="sns-examples-managing-topics-createtopic"></a>
 
-In this example, use a Node\.js module to create an Amazon SNS topic\. Create a Node\.js module with the file name `sns_createtopic.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to create an Amazon SNS topic\. 
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_createtopic.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object to pass the `Name` for the new topic to the `CreateTopicCommand` method of the `SNS` client class\. To call the `CreateTopicCommand` method, create an asynchronous function invoking an Amazon SNS service object, passing the parameters object\. The `data` returned contains the ARN of the topic\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *TOPIC\_NAME* with the name of the topic\.
+Replace *TOPIC\_NAME* with the name of the topic\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, CreateTopicCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {CreateTopicCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = { Name: "TOPIC_NAME" }; //TOPIC_NAME
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new CreateTopicCommand(params));
-    console.log("Topic ARN is " + data.TopicArn);
+    const data = await snsClient.send(new CreateTopicCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -72,39 +83,44 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_createtopic.ts // If you prefer JavaScript, enter 'node sns_createtopic.js'
+node sns_createtopic.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_createtopic.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_createtopic.js)\.
 
 ## Listing Your Topics<a name="sns-examples-managing-topics-listtopics"></a>
 
-In this example, use a Node\.js module to list all Amazon SNS topics\. Create a Node\.js module with the file name `sns_listtopics.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to list all Amazon SNS topics\. 
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_listtopics.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an empty object to pass to the `ListTopicsCommand` method of the `SNS` client class\. To call the `ListTopicsCommand` method, create an asynchronous function invoking an Amazon SNS service object, passing the parameters object\. The `data` returned contains an array of your topic Amazon Resource Names \(ARNs\)\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region\.
-
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, ListTopicsCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
-
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
+import {ListTopicsCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 const run = async () => {
   try {
-    const data = await sns.send(new ListTopicsCommand({}));
-    console.log(data.Topics);
+    const data = await snsClient.send(new ListTopicsCommand({}));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -113,44 +129,52 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_listtopics.ts // If you prefer JavaScript, enter 'node sns_listtopics.js'
+node sns_listtopics.js 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_listtopics.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_listtopics.js)\.
 
 ## Deleting a Topic<a name="sns-examples-managing-topics-deletetopic"></a>
 
-In this example, use a Node\.js module to delete an Amazon SNS topic\. Create a Node\.js module with the file name `sns_deletetopic.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to delete an Amazon SNS topic\. 
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_deletetopic.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object containing the `TopicArn` of the topic to delete to pass to the `DeleteTopicCommand` method of the `SNS` client class\. To call the `DeleteTopicCommand` method, create an asynchronous function invoking an Amazon SNS client service object, passing the parameters object\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, and *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) of the topic you are deleting\.
+Replace *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) of the topic you are deleting\.
 
 ```
 // Load the AWS SDK for Node.js
 
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, DeleteTopicCommand } = require("@aws-sdk/client-sns");
-
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {DeleteTopicCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = { TopicArn: "TOPIC_ARN" }; //TOPIC_ARN
 
 const run = async () => {
   try {
-    const data = await sns.send(new DeleteTopicCommand(params));
-    console.log("Topic Deleted");
+    const data = await snsClient.send(new DeleteTopicCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -159,42 +183,50 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_deletetopic.ts // If you prefer JavaScript, enter 'node sns_deletetopic.js'
+node sns_deletetopic.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_deletetopic.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_deletetopic.js)\.
 
 ## Getting Topic Attributes<a name="sns-examples-managing-topicsgetttopicattributes"></a>
 
-In this example, use a Node\.js module to retrieve attributes of an Amazon SNS topic\. Create a Node\.js module with the file name `sns_gettopicattributes.ts`\. Configure the SDK as previously shown\.
+In this example, use a Node\.js module to retrieve attributes of an Amazon SNS topic\.
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_gettopicattributes.js`\. Configure the SDK as previously shown\.
 
 Create an object containing the `TopicArn` of a topic to delete to pass to the `GetTopicAttributesCommand` method of the `SNS` client class\. To call the `GetTopicAttributesCommand` method, invoking an Amazon SNS client service object, passing the parameters object\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *TOPIC\_ARN* with the ARN of the topic\.
+Replace *TOPIC\_ARN* with the ARN of the topic\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, GetTopicAttributesCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "region"; //e.g. "us-east-1"
+import {GetTopicAttributesCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = { TopicArn: "TOPIC_ARN" }; // TOPIC_ARN
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new GetTopicAttributesCommand(params));
-    console.log("Success. Attributes:", data.Attributes);
+    const data = await snsClient.send(new GetTopicAttributesCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -203,29 +235,39 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_gettopicattributes.ts // If you prefer JavaScript, enter 'node sns_gettopicattributes.js'
+node sns_gettopicattributes.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_gettopicattributes.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_gettopicattributes.js)\.
 
 ## Setting Topic Attributes<a name="sns-examples-managing-topicsstttopicattributes"></a>
 
-In this example, use a Node\.js module to set the mutable attributes of an Amazon SNS topic\. Create a Node\.js module with the file name `sns_settopicattributes.ts`\. Configure the SDK as previously shown\.
+In this example, use a Node\.js module to set the mutable attributes of an Amazon SNS topic\. 
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_settopicattributes.js`\. Configure the SDK as previously shown\.
 
 Create an object containing the parameters for the attribute update, including the `TopicArn` of the topic whose attributes you want to set, the name of the attribute to set, and the new value for that attribute\. You can set only the `Policy`, `DisplayName`, and `DeliveryPolicy` attributes\. Pass the parameters to the `SetTopicAttributesCommand` method of the `SNS` client class\. To call the `SetTopicAttributesCommand` method, create an asynchronous function invoking an Amazon SNS cleint service object, passing the parameters object\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *ATTRIBUTE\_NAME* with the name of the attribute you are setting, *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) of the topic whose attributes you want to set, and *NEW\_ATTRIBUTE\_VALUE* with the new value for that attribute\.
+Replace *ATTRIBUTE\_NAME* with the name of the attribute you are setting, *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) of the topic whose attributes you want to set, and *NEW\_ATTRIBUTE\_VALUE* with the new value for that attribute\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, SetTopicAttributesCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {SetTopicAttributesCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = {
@@ -234,15 +276,13 @@ const params = {
   AttributeValue: "NEW_ATTRIBUTE_VALUE", //NEW_ATTRIBUTE_VALUE
 };
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new SetTopicAttributesCommand(params));
-    console.log("Success, attributed updated", data);
+    const data = await snsClient.send(new SetTopicAttributesCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -251,7 +291,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_settopicattributes.ts // If you prefer JavaScript, enter 'node sns_settopicattributes.js'
+node sns_settopicattributes.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_settopicattributes.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_settopicattributes.js)\.

@@ -22,44 +22,53 @@ In this example, you use a Node\.js module to call MediaConvert and retrieve you
 
 To set up and run this example, first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/mediaconvert/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create an IAM role that gives MediaConvert access to your input files and the Amazon S3 buckets where your output files are stored\. For details, see [Set up IAM permissions](https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html) in the *AWS Elemental MediaConvert User Guide*\.
 
+**Important**  
+This example uses ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
+However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+
 ## Getting your endpoint URL<a name="emc-example-getendpoint-url"></a>
 
-Create a Node\.js module with the file name `emc_getendpoint.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
+Create a `libs` directory, and create a Node\.js module with the file name `emcClientGet.js`\. Copy and paste the code below into it, which creates the MediaConvert client object\. Replace *REGION* with your AWS Region\. 
+
+```
+import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
+// Set the AWS Region.
+const REGION = "REGION";
+//Set the account end point.
+const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
+//Set the MediaConvert Service Object
+const emcClient = new MediaConvertClient(ENDPOINT);
+export { emcClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/libs/emcClient.js)\.
+
+Create a Node\.js module with the file name `emc_getendpoint.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object to pass the empty request parameters for the `DescribeEndpointsCommand` method of the MediaConvert client class\. To call the `DescribeEndpointsCommand` method, create a promise for invoking an MediaConvert client service object, passing the parameters\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *ACCOUNT\_ENDPOINT* with your AWS Region, *AMI\_ID* with the ID of the AMI to run, and *KEY\_PAIR\_NAME* of the key pair to assign to the AMI ID\.
+Replace *AMI\_ID* with the ID of the AMI to run, and *KEY\_PAIR\_NAME* of the key pair to assign to the AMI ID\.
 
 ```
 // Import required AWS-SDK clients and commands for Node.js
-const {
-  MediaConvertClient,
-  DescribeEndpointsCommand
-} = require("@aws-sdk/client-mediaconvert");
+import { DescribeEndpointsCommand } from  "@aws-sdk/client-mediaconvert";
+import { emcClientGet } from  "./libs/emcClientGet.js";
 
 //set the parameters
-const endpoint = { endpoint: "ACCOUNT_END_POINT" }; //ACCOUNT_END_POINT
 const params = { MaxResults: 0 };
-
-//Set the MediaConvert Service Object
-const mediaconvert = new MediaConvertClient(endpoint);
 
 const run = async () => {
   try {
     // Load the required SDK for JavaScript modules
     // Create a new service object and set MediaConvert to customer endpoint
     const params = { MaxResults: 0 };
-    const data = await mediaconvert.send(new DescribeEndpointsCommand(params));
+    const data = await emcClientGet.send(new DescribeEndpointsCommand(params));
     console.log("Your MediaConvert endpoint is ", data.Endpoints);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -70,7 +79,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node emc_getendpoint.ts // If you prefer JavaScript, enter 'node emc_getendpoint.js'
+node emc_getendpoint.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_getendpoint.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/emc_getendpoint.js)\.

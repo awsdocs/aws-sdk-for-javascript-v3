@@ -25,39 +25,50 @@ For more information about using an Amazon S3 bucket as a static web host, see [
 ## Prerequisite tasks<a name="s3-example-static-web-host-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up a project environment to run Node TypeScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
++ Set up a project environment to run Node JavaScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Retrieving the current bucket website configuration<a name="s3-example-static-web-host-get-website"></a>
 
-Create a Node\.js module with the file name `s3_getbucketwebsite.ts`\. The module takes a single command\-line argument that specifies the bucket whose website configuration you want\. Configure the SDK as previously shown, including installing the required clients and packages\.
+Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
-Create an `S3` client service object\. Create a function that retrieves the current bucket website configuration for the bucket selected in the bucket list\. The only parameter you need to pass is the name of the selected bucket when calling the `GetBucketWebsiteCommand` method\. If the bucket currently has a website configuration, that configuration is returned by Amazon S3 in the `data` parameter passed to the callback function\.
+```
+import { S3Client} from "@aws-sdk/client-s3";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon S3 service client object.
+const s3Client = new S3Client({ region: REGION });
+export { s3Client };
+```
+
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/libs/s3Client.js)\.
+
+Create a Node\.js module with the file name `s3_getbucketwebsite.js`\. The module takes a single command\-line argument that specifies the bucket whose website configuration you want\. Configure the SDK as previously shown, including installing the required clients and packages\.
+
+Create a function that retrieves the current bucket website configuration for the bucket selected in the bucket list\. The only parameter you need to pass is the name of the selected bucket when calling the `GetBucketWebsiteCommand` method\. If the bucket currently has a website configuration, that configuration is returned by Amazon S3 in the `data` parameter passed to the callback function\.
 
 If the selected bucket has no website configuration, that information is returned to the callback function in the `err` parameter\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ```
-// Import required AWS SDK clients and commands for Node.js
-const { S3Client, GetBucketWebsiteCommand } = require("@aws-sdk/client-s3");
+ */
 
-// Set the AWS region
-const REGION = "REGION"; //e.g. "us-east-1"
+// Import required AWS SDK clients and commands for Node.js
+import { GetBucketWebsiteCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
 
 // Create the parameters for calling
-const bucketParams = { Bucket: "BUCKET_NAME" };
+export const bucketParams = { Bucket: "BUCKET_NAME" };
 
-// Create S3 service object
-const s3 = new S3Client({ region: REGION });
-
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await s3.send(new GetBucketWebsiteCommand(bucketParams));
+    const data = await s3Client.send(new GetBucketWebsiteCommand(bucketParams));
     console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -68,32 +79,40 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node s3_getbucketwebsite.ts // If you prefer JavaScript, enter 'node s3_getbucketwebsite.js'
+node s3_getbucketwebsite.js 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_getbucketwebsite.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_getbucketwebsite.js)\.
 
 ## Setting a bucket website configuration<a name="s3-example-static-web-host-set-website"></a>
 
-Create a Node\.js module with the file name `s3_setbucketwebsite.ts`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. 
+Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+
+```
+import { S3Client} from "@aws-sdk/client-s3";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon S3 service client object.
+const s3Client = new S3Client({ region: REGION });
+export { s3Client };
+```
+
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/libs/s3Client.js)\.
+
+Create a Node\.js module with the file name `s3_setbucketwebsite.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. 
 
 Create a function that applies a bucket website configuration\. The configuration allows the selected bucket to serve as a static web host\. Website configurations are specified in JSON\. First, create a JSON object that contains all the values to specify the website configuration, except for the `Key` value that identifies the error document, and the `Suffix` value that identifies the index document\.
 
 Insert the values of the text input elements into the JSON object\. Prepare the parameters for the `PutBucketWebsiteCommand` method, including the name of the bucket and the JSON website configuration\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { S3Client, PutBucketWebsiteCommand } = require("@aws-sdk/client-s3");
-
-// Set the AWS region
-const REGION = "region"; //e.g. "us-east-1"
+import { PutBucketWebsiteCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
 
 // Create the parameters for the bucket
-const bucketParams = { Bucket: "BUCKET_NAME" };
-const staticHostParams = {
+export const bucketParams = { Bucket: "BUCKET_NAME" };
+export const staticHostParams = {
   Bucket: bucketParams,
   WebsiteConfiguration: {
     ErrorDocument: {
@@ -105,19 +124,17 @@ const staticHostParams = {
   },
 };
 
-// Create S3 service object
-const s3 = new S3Client({ region: REGION });
-
-const run = async () => {
+export const run = async () => {
   // Insert specified bucket name and index and error documents into params JSON
-  // from command line arguments
+  //} from command line arguments
   staticHostParams.Bucket = bucketParams;
   staticHostParams.WebsiteConfiguration.IndexDocument.Suffix = "INDEX_PAGE"; // the index document inserted into params JSON
   staticHostParams.WebsiteConfiguration.ErrorDocument.Key = "ERROR_PAGE"; // : the error document inserted into params JSON
   // set the new website configuration on the selected bucket
   try {
-    const data = await s3.send(new PutBucketWebsiteCommand(staticHostParams));
+    const data = await s3Client.send(new PutBucketWebsiteCommand(staticHostParams));
     console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -128,37 +145,43 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node s3_setbucketwebsite.ts // If you prefer JavaScript, enter 'node s3_setbucketwebsite.js' 
+node s3_setbucketwebsite.js 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_setbucketwebsite.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_setbucketwebsite.js)\.
 
 ## Deleting a bucket website configuration<a name="s3-example-static-web-host-delete-website"></a>
+
+Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+
+```
+import { S3Client} from "@aws-sdk/client-s3";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon S3 service client object.
+const s3Client = new S3Client({ region: REGION });
+export { s3Client };
+```
+
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/libs/s3Client.js)\.
 
 Create a Node\.js module with the file name `s3_deletebucketwebsite.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. 
 
 Create a function that deletes the website configuration for the selected bucket\. The only parameter you need to pass when calling the `DeleteBucketWebsiteCommand` method is the name of the selected bucket\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ```
 // Import required AWS SDK clients and commands for Node.js
 
-const { S3Client, DeleteBucketWebsiteCommand } = require("@aws-sdk/client-s3");
-
-// Set the AWS region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { DeleteBucketWebsiteCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
 
 // Create the parameters for calling
-const bucketParams = { Bucket: "BUCKET_NAME" };
+export const bucketParams = { Bucket: "BUCKET_NAME" };
 
-// Create S3 service object
-const s3 = new S3Client({ region: REGION });
-
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await s3.send(new DeleteBucketWebsiteCommand(bucketParams));
+    const data = await s3Client.send(new DeleteBucketWebsiteCommand(bucketParams));
+    return data; // For unit tests.
     console.log("Success", data);
   } catch (err) {
     console.log("Error", err);
@@ -170,7 +193,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node s3_deletebucketwebsite.ts // If you prefer JavaScript, enter 'node s3_deletebucketwebsite.js' 
+node s3_deletebucketwebsite.js 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_deletebucketwebsite.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_deletebucketwebsite.js)\.

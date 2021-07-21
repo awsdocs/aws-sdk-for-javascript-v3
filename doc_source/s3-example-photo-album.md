@@ -13,14 +13,11 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 **This browser script code example shows:**
 + How to create a browser application that allows users to create photo albums in an Amazon S3 bucket and upload photos into the albums\.
 
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
-
 ## The scenario<a name="s3-example-photo-album-scenario"></a>
 
 In this example, a simple HTML page provides a browser\-based application for creating photo albums in an Amazon S3 bucket into which you can upload photos\. The application lets you delete photos and albums that you add\.
 
-![\[JavaScript in a browser script using Amazon S3 buckets for photo albums.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/s3-photo-album-example.png)
+
 
 The browser script uses the SDK for JavaScript to interact with an Amazon S3 bucket\. Use the following methods of the Amazon S3 client class to enable the photo album application: 
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putobjectcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putobjectcommand.html)
@@ -31,8 +28,6 @@ The browser script uses the SDK for JavaScript to interact with an Amazon S3 buc
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon S3 bucket that you will use to store the photos in the album\. For more information about creating a bucket in the console, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. Make sure you have both **Read** and **Write** permissions on **Objects**\. For more information about setting bucket permissions, see [Setting permissions for website access](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html)\.
 + In the [Amazon Cognito console](https://console.aws.amazon.com/cognito/), create an Amazon Cognito identity pool using Federated Identities with access enabled for unauthenticated users in the same Region as the Amazon S3 bucket\. You need to include the identity pool ID in the code to obtain credentials for the browser script\. For more information about Amazon Cognito Federated Identities, see [Amazon Cognito identity pools \(federated identites\)](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html) in the *Amazon Cognito Developer Guide*\.
 + In the [IAM console](https://console.aws.amazon.com/iam/), find the IAM role created by Amazon Cognito for unauthenticated users\. Add the following policy to grant read and write permissions to an Amazon S3 bucket\. For more information about creating an IAM role, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
@@ -68,7 +63,7 @@ If you enable access for unauthenticated users, you will grant write access to t
 Before the browser script can access the Amazon S3 bucket, you must first set up its [CORS configuration](cors.md#configuring-cors-s3-bucket) as follows\.
 
 **Important**  
-In the new S3 console, the CORS configuration must be JSON\.
+In Amazon S3 on the new AWS Web Services Management console, the CORS configuration must be JSON\.
 
 ------
 #### [ JSON ]
@@ -187,7 +182,7 @@ const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
 const {
   fromCognitoIdentityPool,
 } = require("@aws-sdk/credential-provider-cognito-identity");
-const { S3Client, PutObjectCommand, ListObjectsCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand, ListObjectsCommand, DeleteObjectCommand, DeleteObjectsCommand } = require("@aws-sdk/client-s3");
 
 // Set the AWS Region
 const REGION = "REGION"; //REGION
@@ -452,10 +447,7 @@ window.addPhoto = addPhoto;
 
 ## Deleting a photo<a name="s3-example-photo-album-delete-photo"></a>
 
-To delete a photo from an album in the Amazon S3 bucket, the application's `deletePhoto` function calls the `DeleteObjectCommand` method of the S3 client service object\. This deletes the photo specified by the `photoKey` value passed to the function\.
-
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+To delete a photo from an album in the Amazon S3 bucket, the application's `deletePhoto` function calls the `DeleteObjectCommand` method of the Amazon S3 client service object\. This deletes the photo specified by the `photoKey` value passed to the function\.
 
 ```
 // Delete a photo from an album
@@ -476,10 +468,7 @@ window.deletePhoto = deletePhoto;
 
 ## Deleting an album<a name="s3-example-photo-album-delete-album"></a>
 
-To delete an album in the Amazon S3 bucket, the application's `deleteAlbum` function calls the `deleteObjects` method of the S3 client service object\.
-
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+To delete an album in the Amazon S3 bucket, the application's `deleteAlbum` function calls the `deleteObjects` method of the Amazon S3 client service object\.
 
 ```
 // Delete an album from the bucket
@@ -497,7 +486,7 @@ const deleteAlbum = async (albumName) => {
         Delete: { Objects: objects },
         Quiet: true,
       };
-      const data = await s3.send(new DeleteObjectCommand(params));
+      const data = await s3.send(new DeleteObjectsCommand(params));
       listAlbums();
       return alert("Successfully deleted album.");
     } catch (err) {
@@ -521,13 +510,13 @@ This file is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 
 1. Replace *"REGION"* with your AWS Region, such as 'us\-east\-1'\.
 
-1. Replace *"BUCKET\_NAME"* with your S3 bucket\.
+1. Replace *"BUCKET\_NAME"* with your Amazon S3 bucket\.
 
-1. Replace *"IDENTITY\_POOL\_ID"* with the IdentityPoolId from the **Sample page** of the Cognito Identity Pool you created for this example\.
+1. Replace *"IDENTITY\_POOL\_ID"* with the IdentityPoolId from the **Sample page** of the Amazon Cognito Identity Pool you created for this example\.
 **Note**  
 The *IDENTITY\_POOL\_ID* is displayed in red in the console, as below:  
 
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/identity-pool-id.png)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Run the following in the command line to bundle the JavaScript for this example in to a file called `<main.js>`:
 

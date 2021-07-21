@@ -24,36 +24,39 @@ In this example, a series of Node\.js modules are used to get metrics from Cloud
 
 For more information about CloudWatch metrics, see [Using Amazon CloudWatch metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/working_with_metrics.html) in the *Amazon CloudWatch User Guide*\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ## Prerequisite tasks<a name="cloudwatch-examples-getting-metrics-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cloudwatch/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
+However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
 
 ## Listing metrics<a name="cloudwatch-examples-getting-metrics-listing"></a>
 
-Create a Node\.js module with the file name `cw_listmetrics.ts`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. To access CloudWatch, create n `CloudWatch` client service object\. Create a JSON object containing the parameters needed to list metrics within the `AWS/Logs` namespace\. Call the `ListMetricsCommand` method to list the `IncomingLogEvents` metric\.
+Create a `libs` directory, and create a Node\.js module with the file name `cloudWatchClient.js`\. Copy and paste the code below into it, which creates the CloudWatch client object\. Replace *REGION* with your AWS region\.
 
-**Note**  
-Replace *REGION* with your AWS Region\.
+```
+import { CloudWatchClient } from "@aws-sdk/client-cloudwatch";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon CloudWatch service client object.
+export const cwClient = new CloudWatchClient({ region: REGION });
+```
+
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchClient.js)\.
+
+Create a Node\.js module with the file name `listMetrics.js`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. Create a JSON object containing the parameters needed to list metrics\. Call the `ListMetricsCommand` method to list the `IncomingLogEvents` metric\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  CloudWatchClient,
-  ListMetricsCommand
-} = require("@aws-sdk/client-cloudwatch");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { ListMetricsCommand } from "@aws-sdk/client-cloudwatch";
+import { cwClient } from "./libs/cloudWatchClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   Dimensions: [
     {
       Name: "LogGroupName" /* required */,
@@ -63,50 +66,50 @@ const params = {
   Namespace: "AWS/Logs",
 };
 
-// Create CloudWatch service object
-const cw = new CloudWatchClient({ region: REGION });
-
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await cw.send(new ListMetricsCommand(params));
+    const data = await cwClient.send(new ListMetricsCommand(params));
     console.log("Success. Metrics:", JSON.stringify(data.Metrics));
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
 };
-run();
+// Uncomment this line to run execution within this file.
+// run();
 ```
 
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node cw_listmetrics.ts // If you prefer JavaScript, enter 'node cw_listmetrics.js'
+node listMetrics.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/cw_listmetrics.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/listMetrics.js)\.
 
 ## Submitting custom metrics<a name="cloudwatch-examples-getting-metrics-publishing-custom"></a>
 
-Create a Node\.js module with the file name `cw_putmetricdata.ts`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. To access CloudWatch, create an `CloudWatch` client service object\. Create a JSON object containing the parameters needed to submit a data point for the `PAGES_VISITED` custom metric\. Call the `PutMetricDataCommand` method\.
+Create a `libs` directory, and create a Node\.js module with the file name `cloudWatchClient.js`\. Copy and paste the code below into it, which creates the CloudWatch client object\. Replace *REGION* with your AWS region\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+```
+import { CloudWatchClient } from "@aws-sdk/client-cloudwatch";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon CloudWatch service client object.
+export const cwClient = new CloudWatchClient({ region: REGION });
+```
 
-**Note**  
-Replace *REGION* with your AWS Region\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchClient.js)\.
+
+Create a Node\.js module with the file name `putMetricData.js`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. Create a JSON object containing the parameters needed to submit a data point for the `PAGES_VISITED` custom metric\. Call the `PutMetricDataCommand` method\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  CloudWatchClient,
-  PutMetricDataCommand,
-} = require("@aws-sdk/client-cloudwatch");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { PutMetricDataCommand } from "@aws-sdk/client-cloudwatch";
+import { cwClient } from "./libs/cloudWatchClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   MetricData: [
     {
       MetricName: "PAGES_VISITED",
@@ -123,24 +126,23 @@ const params = {
   Namespace: "SITE/TRAFFIC",
 };
 
-// Create CloudWatch service object
-const cw = new CloudWatchClient({ region: REGION });
-
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await cw.send(new PutMetricDataCommand(params));
+    const data = await cwClient.send(new PutMetricDataCommand(params));
     console.log("Success", data.$metadata.requestId);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
 };
-run();
+// Uncomment this line to run execution within this file.
+// run();
 ```
 
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node cw_putmetricdata.ts // If you prefer JavaScript, enter 'node cw_putmetricdata.js'
+node putMetricData.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/cw_putmetricdata.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/putMetricData.js)\.

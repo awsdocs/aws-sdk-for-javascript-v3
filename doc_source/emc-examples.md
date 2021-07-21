@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 AWS Elemental MediaConvert is a file\-based video transcoding service with broadcast\-grade features\. You can use it to create assets for broadcast and for video\-on\-demand \(VOD\) delivery across the internet\. For more information, see the [https://docs.aws.amazon.com/mediaconvert/latest/ug/](https://docs.aws.amazon.com/mediaconvert/latest/ug/)\.
 
-![\[Relationship between JavaScript environments, the SDK, and MediaConvert\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-mediaconvert.png)
+
 
 The JavaScript API for MediaConvert is exposed through the `MediaConvert` client class\. For more information, see [Class: MediaConvert](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ec2/classes/ec2.html) in the API Reference\.
 

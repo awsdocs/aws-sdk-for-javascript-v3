@@ -31,27 +31,38 @@ For more information about IAM users, see [Overview of access management: Permis
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these example can also be run in JavaScript\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create an IAM role to which you can attach policies\. For more information about creating roles, see [Creating IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html) in the *IAM User Guide*\.
 
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
+
 ## Creating an IAM policy<a name="iam-examples-policies-creating"></a>
 
-Create a Node\.js module with the file name `iam_createpolicy.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access IAM, create an `IAM` client service object\. Create two JSON objects, one containing the policy document to create and the other containing the parameters needed to create the policy, which includes the policy JSON and the name to give the policy\. Be sure to stringify the policy JSON object in the parameters\. Call the `CreatePolicyCommand` method of the `IAM` client service object\.
+Create a `libs` directory, and create a Node\.js module with the file name `iamClient.js`\. Copy and paste the code below into it, which creates the IAM client object\. Replace *REGION* with your AWS Region\.
+
+```
+import { IAMClient } from "@aws-sdk/client-iam";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an IAM service client object.
+const iamClient = new IAMClient({ region: REGION });
+export { iamClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/libs/iamClient.js)\.
+
+Create a Node\.js module with the file name `iam_createpolicy.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create two JSON objects, one containing the policy document to create and the other containing the parameters needed to create the policy, which includes the policy JSON and the name to give the policy\. Be sure to stringify the policy JSON object in the parameters\. Call the `CreatePolicyCommand` method of the `IAM` client service object\.
 
 **Note**  
-Replace *REGION* with your AWS Region, *RESOURCE\_ARN* with the Amazon Resource Name \(ARN\) of the resource you want to grant the permissions to, and *DYNAMODB\_POLICY\_NAME* with the name of the DynamoDB policy name\.
+Replace *RESOURCE\_ARN* with the Amazon Resource Name \(ARN\) of the resource you want to grant the permissions to, and *DYNAMODB\_POLICY\_NAME* with the name of the DynamoDB policy name\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { IAMClient, CreatePolicyCommand } = require("@aws-sdk/client-iam");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
-
-// Create IAM service object
-const iam = new IAMClient({ region: REGION });
+import { iamClient } from "./libs/iamClient.js";
+import { CreatePolicyCommand } from "@aws-sdk/client-iam";
 
 // Set the parameters
 const myManagedPolicy = {
@@ -82,8 +93,9 @@ const params = {
 
 const run = async () => {
   try {
-    const data = await iam.send(new CreatePolicyCommand(params));
+    const data = await iamClient.send(new CreatePolicyCommand(params));
     console.log("Success", data);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -94,40 +106,43 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node iam_createpolicy.ts // If you prefer JavaScript, enter 'node iam_createpolicy.js'
+node iam_createpolicy.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_createpolicy.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_createpolicy.js)\.
 
 ## Getting an IAM policy<a name="iam-examples-policies-getting"></a>
 
-Create a Node\.js module with the file name `iam_getpolicy.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access IAM, create an `IAM` client service object\. Create a JSON object containing the parameters needed retrieve a policy, which is the ARN of the policy to get\. Call the `GetPolicyCommand` method of the `IAM` client service object\. Write the policy description to the console\.
+Create a `libs` directory, and create a Node\.js module with the file name `iamClient.js`\. Copy and paste the code below into it, which creates the IAM client object\. Replace *REGION* with your AWS Region\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+```
+import { IAMClient } from "@aws-sdk/client-iam";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an IAM service client object.
+const iamClient = new IAMClient({ region: REGION });
+export { iamClient };
+```
 
-**Note**  
-Replace *REGION* with your AWS Region\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/libs/iamClient.js)\.
+
+Create a Node\.js module with the file name `iam_getpolicy.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed retrieve a policy, which is the ARN of the policy to get\. Call the `GetPolicyCommand` method of the `IAM` client service object\. Write the policy description to the console\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { IAMClient, GetPolicyCommand } = require("@aws-sdk/client-iam");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { iamClient } from "./libs/iamClient.js";
+import { GetPolicyCommand } from "@aws-sdk/client-iam";
 
 // Set the parameters
 const params = {
   PolicyArn: "arn:aws:iam::aws:policy/AWSLambdaExecute",
 };
 
-// Create IAM service object
-const iam = new IAMClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await iam.send(new GetPolicyCommand(params));
-    console.log("Success", data.Policy.Description);
+    const data = await iamClient.send(new GetPolicyCommand(params));
+    console.log("Success", data);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -138,44 +153,54 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node iam_getpolicy.ts // If you prefer JavaScript, enter 'node iam_getpolicy.js'
+node iam_getpolicy.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_getpolicy.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_getpolicy.js)\.
 
 ## Attaching a managed role policy<a name="iam-examples-policies-attaching-role-policy"></a>
 
-Create a Node\.js module with the file name `iam_attachrolepolicy.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access IAM, create an `IAM` client service object\. Create a JSON object containing the parameters needed to get a list of managed IAM policies attached to a role, which consists of the name of the role\. Provide the role name as a command\-line parameter\. Call the `ListAttachedRolePoliciesCommand` method of the `IAM` client service object, which returns an array of managed policies to the callback function\.
+Create a `libs` directory, and create a Node\.js module with the file name `iamClient.js`\. Copy and paste the code below into it, which creates the IAM client object\. Replace *REGION* with your AWS Region\.
+
+```
+import { IAMClient } from "@aws-sdk/client-iam";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an IAM service client object.
+const iamClient = new IAMClient({ region: REGION });
+export { iamClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/libs/iamClient.js)\.
+
+Create a Node\.js module with the file name `iam_attachrolepolicy.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to get a list of managed IAM policies attached to a role, which consists of the name of the role\. Provide the role name as a command\-line parameter\. Call the `ListAttachedRolePoliciesCommand` method of the `IAM` client service object, which returns an array of managed policies to the callback function\.
 
 Check the array members to see if the policy to attach to the role is already attached\. If the policy is not attached, call the `AttachRolePolicyCommand` method to attach it\. 
 
 **Note**  
-Replace *REGION* with your AWS Region, and *ROLE\_NAME* with the name of the role to attach\.
+Replace *ROLE\_NAME* with the name of the role to attach\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  IAMClient,
+import { iamClient } from "./libs/iamClient.js";
+import {
   ListAttachedRolePoliciesCommand,
-  AttachRolePolicyCommand
-} = require("@aws-sdk/client-iam");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+  AttachRolePolicyCommand,
+} from "@aws-sdk/client-iam";
 
 // Set the parameters
 const ROLENAME = "ROLE_NAME";
 const paramsRoleList = { RoleName: ROLENAME }; //ROLE_NAME
-
-// Create IAM service object
-const iam = new IAMClient({ region: REGION });
-
+const params = {
+  PolicyArn: "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
+  RoleName: ROLENAME,
+};
 const run = async () => {
-  const iam = new IAMClient({ region: REGION });
   try {
-    const data = await iam.send(
+    const data = await iamClient.send(
       new ListAttachedRolePoliciesCommand(paramsRoleList)
     );
+    return data;
     const myRolePolicies = data.AttachedPolicies;
     myRolePolicies.forEach(function (val, index, array) {
       if (myRolePolicies[index].PolicyName === "AmazonDynamoDBFullAccess") {
@@ -186,12 +211,9 @@ const run = async () => {
       }
     });
     try {
-      const params = {
-        PolicyArn: "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
-        RoleName: ROLENAME,
-      };
-      const data = await iam.send(new AttachRolePolicyCommand(params));
+      const data = await iamClient.send(new AttachRolePolicyCommand(params));
       console.log("Role attached successfully");
+      return data;
     } catch (err) {
       console.log("Error", err);
     }
@@ -205,48 +227,50 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node iam_attachrolepolicy.ts // If you prefer JavaScript, enter 'node iam_attachrolepolicy.js'
+node iam_attachrolepolicy.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_attachrolepolicy.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_attachrolepolicy.js)\.
 
 ## Detaching a managed role policy<a name="iam-examples-policies-detaching-role-policy"></a>
 
-Create a Node\.js module with the file name `iam_detachrolepolicy.ts`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access IAM, create an `IAM` client service object\. Create a JSON object containing the parameters needed to get a list of managed IAM policies attached to a role, which consists of the name of the role\. Provide the role name as a command\-line parameter\. Call the `ListAttachedRolePoliciesCommand` method of the `IAM` client service object, which returns an array of managed policies in the callback function\.
+Create a `libs` directory, and create a Node\.js module with the file name `iamClient.js`\. Copy and paste the code below into it, which creates the IAM client object\. Replace *REGION* with your AWS Region\.
+
+```
+import { IAMClient } from "@aws-sdk/client-iam";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an IAM service client object.
+const iamClient = new IAMClient({ region: REGION });
+export { iamClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/libs/iamClient.js)\.
+
+Create a Node\.js module with the file name `iam_detachrolepolicy.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to get a list of managed IAM policies attached to a role, which consists of the name of the role\. Provide the role name as a command\-line parameter\. Call the `ListAttachedRolePoliciesCommand` method of the `IAM` client service object, which returns an array of managed policies in the callback function\.
 
 Check the array members to see if the policy to detach from the role is attached\. If the policy is attached, call the `DetachRolePolicyCommand` method to detach it\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *ROLE\_NAME* with the name of the role to detach\.
+Replace *ROLE\_NAME* with the name of the role to detach\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  IAMClient,
+import { iamClient } from "./libs/iamClient.js";
+import {
   ListAttachedRolePoliciesCommand,
-  DetachRolePolicyCommand
-} = require("@aws-sdk/client-iam");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+  DetachRolePolicyCommand,
+} from "@aws-sdk/client-iam";
 
 // Set the parameters
-const paramsRoleList = { RoleName: "ROLE_NAME" }; //ROLE_NAME
-
-// Create IAM service object
-const iam = new IAMClient({ region: REGION });
+const params = { RoleName: "ROLE_NAME" }; //ROLE_NAME
 
 const run = async () => {
-  // Load the AWS SDK for Node.js
-
-  // Create IAM service object
   try {
-    const data = await iam.send(
-      new ListAttachedRolePoliciesCommand(paramsRoleList)
+    const data = await iamClient.send(
+      new ListAttachedRolePoliciesCommand(params)
     );
+    return data;
     const myRolePolicies = data.AttachedPolicies;
     myRolePolicies.forEach(function (val, index, array) {
       if (myRolePolicies[index].PolicyName === "AmazonDynamoDBFullAccess") {
@@ -255,7 +279,9 @@ const run = async () => {
           paramsRoleList,
         };
         try {
-          const results = iam.send(new DetachRolePolicyCommand(paramsRoleList));
+          const results = iamClient.send(
+            new DetachRolePolicyCommand(paramsRoleList)
+          );
           console.log("Policy detached from role successfully");
           process.exit();
         } catch (err) {
@@ -274,7 +300,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node iam_detachrolepolicy.ts // If you prefer JavaScript, enter 'node iam_detachrolepolicy.js'
+node iam_detachrolepolicy.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_detachrolepolicy.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/iam/src/iam_detachrolepolicy.js)\.

@@ -32,7 +32,7 @@ The following table describes the important changes in the V3 release of the *AW
 | [Amazon Elastic Compute Cloud service examples updated](ec2-examples.md) | Updated Amazon Elastic Compute Cloud service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon DynamoDB service examples updated](dynamodb-examples.md) | Updated Amazon DynamoDB service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon CloudWatch service examples updated](cloudwatch-examples.md) | Updated Amazon CloudWatch service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
-| [AWS Lambda service examples updated](lambda-examples.md) | Updated AWS Lambda service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
-| [AWS Identity and Access Management service examples updated](iam-examples.md) | Updated AWS Identity and Access Management service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [AWS Elemental MediaConvert service examples updated](emc-examples.md) | Updated AWS Elemental MediaConvert service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
+| [AWS Identity and Access Management service examples updated](iam-examples.md) | Updated AWS Identity and Access Management service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
+| [AWS Lambda service examples updated](lambda-examples.md) | Updated AWS Lambda service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [AWS SDK for JavaScript V3 Developer Guide preview](#doc-history) | Released pre\-release version of the AWS SDK for JavaScript V3 Developer Guide\. | October 19, 2020 | 

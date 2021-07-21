@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Getting started in a browser script<a name="getting-started-browser"></a>
 
-This section walks you through an example that demonstrate how to run version 3 \(V3\) of the SDK for JavaScript in the browser\. 
+This section walks you through an example that demonstrates how to run version 3 \(V3\) of the SDK for JavaScript in the browser\. 
 
 **Note**  
 Running V3 in the browser is slightly different from version 2 \(V2\)\. For more information, see [Using browsers in V3](welcome.md#v3_browsers)\.
@@ -34,15 +34,12 @@ This example shows you how to set up and run a browser script that takes text, s
 **Note**  
 You must run this example in a browser that supports HTML 5 audio to playback the synthesized speech\.
 
-![\[Illustration of how a browser script interacts with Amazon Cognito Identity and Amazon Polly services\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browserscenario.png)
+
 
 The browser script uses the SDK for JavaScript to synthesize text by using the following APIs:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cognito-identity/classes/cognitoidentityclient.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cognito-identity/classes/cognitoidentityclient.html) constructor
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-polly/classes/polly.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-polly/classes/polly.html) constructor
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_polly_request_presigner.html#getsynthesizespeechurl-1](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_polly_request_presigner.html#getsynthesizespeechurl-1)
-
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency this example is presented in TypeScript\. TypeScript extends JavaScript, so this example can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 
 ## Step 1: Create an Amazon Cognito Identity Pool<a name="getting-started-browser-create-identity-pool"></a>
 
@@ -52,7 +49,7 @@ In this exercise, we will only work with the unauthenticated user role to keep t
 
 **To create an Amazon Cognito Identity pool**
 
-1. Sign in to the AWS Management Console and open the Amazon Cognito console at [https://console\.aws\.amazon\.com/cognito/\.](https://console.aws.amazon.com/cognito/)
+1. Sign in to the AWSManagement Console and open the Amazon Cognito console at [Amazon Web Services Console\.](https://console.aws.amazon.com/cognito/)
 
 1. Choose **Manage Identity Pools** on the console opening page\.
 
@@ -80,7 +77,7 @@ To enable browser script access to Amazon Polly for speech synthesis, use the un
 
 **To add an Amazon Polly policy to the IAM role associated with unauthenticated users**
 
-1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Sign in to the AWSManagement Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
 1. In the navigation panel on the left of the page, choose **Roles**\.
 
@@ -90,7 +87,7 @@ To enable browser script access to Amazon Polly for speech synthesis, use the un
 
 1. In the **Attach Permissions** page for this role, find and then select the check box for **AmazonPollyFullAccess**\.
 **Note**  
-You can use this process to enable access to any Amazon or AWS service\.
+You can use this process to enable access to any AWS service\.
 
 1. Choose **Attach policy**\.
 
@@ -102,7 +99,7 @@ Set up the project environment to run these Node TypeScript examples, and instal
 
 ## Step 4: Create the HTML Page<a name="getting-started-browser-create-html"></a>
 
-The sample app consists of a single HTML page that contains the user interface, and a JavaScript file that contains the required JavsScript\. To begin, create an HTML document and copy the following contents into it\. The page includes an input field and button, an `<audio>` element to play the synthesized speech, and a `<p>` element to display messages\. \(Note that the full example is shown at the bottom of this page\.\)
+The sample app consists of a single HTML page that contains the user interface, and a JavaScript file that contains the required JavaScript\. To begin, create an HTML document and copy the following contents into it\. The page includes an input field and button, an `<audio>` element to play the synthesized speech, and a `<p>` element to display messages\. \(Note that the full example is shown at the bottom of this page\.\)
 
 The `<script>` element adds the `main.js` file, which contains all the required JavaScript for the example\.
 
@@ -121,7 +118,22 @@ For information on installing Webpack, see [https://docs.aws.amazon.com/sdk-for-
 
 ## Step 5: Write the JavaScript<a name="getting-started-browser-write-sample"></a>
 
-Copy the following program and paste it into a file named `polly.js`\.
+Create a file named `polly.js`, and paste the code below into it\. The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/polly/src/polly.js)\. The code first imports the required AWS SDK clients and commands\. Then it creates the `Polly` service client object, specifying the credentials for the SDK\. To synthesize speech with Amazon Polly, it provides a variety of parameters including the sound format of the output, the sampling rate, the ID of the voice to use, and the text to play back\. When you initially create the parameters, set the `Text:` parameter to an empty string; the `Text:` parameter will be set to the value you retrieve from the `<input>` element in the webpage\.
+
+Next, it creates a function named `speakText()` that is be invoked as an event handler by the button\. Amazon Polly returns synthesized speech as an audio stream\. The easiest way to play that audio in a browser is to have Amazon Polly make the audio available at a presigned URL you can then set as the `src` attribute of the `<audio>` element in the webpage\.
+
+Next it create thes `Presigner` object you'll use to create the presigned URL from which the synthesized speech audio can be retrieved\. You must pass the speech parameters that you defined as well as the `Polly` service object that you created to the `Polly.Presigner` constructor\.
+
+After it creates the presigner object, it calls the `getSynthesizeSpeechUrl` method of that object, passing the speech parameters\. If successful, this method returns the URL of the synthesized speech, which the code then assign to the `<audio>` element for playback\.
+
+Finally, from your project folder containing `polly.js` run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`:
+
+```
+webpack --entry polly.js --mode development --target web --devtool false -o main.js
+```
+
+**Note**  
+For information about installing webpack, see [Bundling applications with webpack](webpack.md)\.
 
 ```
 const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
@@ -147,17 +159,6 @@ const speechParams = {
   TextType: "TEXT_TYPE", // For example, "text"
   VoiceId: "POLLY_VOICE" // For example, "Matthew"
 };
-```
-
-First import the required AWS SDK clients and commands\.
-
-Then create the `Polly` service client object, specifying the credentials for the SDK\.
-
-To synthesize speech with Amazon Polly, you must provide a variety of parameters including the sound format of the output, the sampling rate, the ID of the voice to use, and the text to play back\. When you initially create the parameters, set the `Text:` parameter to an empty string; the `Text:` parameter will be set to the value you retrieve from the `<input>` element in the webpage\.
-
-Next, create a function named `speakText()` that will be invoked as an event handler by the button\.
-
-```
 const speakText = async () => {
     // Update the Text parameter with the text entered by the user
     speechParams.Text = document.getElementById("textEntry").value;
@@ -179,28 +180,11 @@ const speakText = async () => {
 window.speakText = speakText;
 ```
 
-Amazon Polly returns synthesized speech as an audio stream\. The easiest way to play that audio in a browser is to have Amazon Polly make the audio available at a presigned URL you can then set as the `src` attribute of the `<audio>` element in the webpage\.
-
-Create a new `Polly` service object\. Then create the `Presigner` object you'll use to create the presigned URL from which the synthesized speech audio can be retrieved\. You must pass the speech parameters that you defined as well as the `Polly` service object that you created to the `Polly.Presigner` constructor\.
-
-After you create the presigner object, call the `getSynthesizeSpeechUrl` method of that object, passing the speech parameters\. If successful, this method returns the URL of the synthesized speech, which you then assign to the `<audio>` element for playback\.
-
-Finally, run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`:
-
-```
-./node_modules/.bin/webpack --entry ./polly.js --mode development --target web
-```
-
-**Note**  
-For information about installing webpack, see [Bundling applications with webpack](webpack.md)\.
-
-The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/polly/src/polly.ts)\.
-
 ## Step 6: Run the Example<a name="getting-started-browser-run-sample"></a>
 
 To run the example app, load `polly.html` into a web browser\. The app should look similar to the following\.
 
-![\[Web application browser interface\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browsergetstarted.png)
+
 
 Enter a phrase you want turned to speech in the input box, then choose **Synthesize**\. When the audio is ready to play, a message appears\. Use the audio player controls to hear the synthesized speech\.
 

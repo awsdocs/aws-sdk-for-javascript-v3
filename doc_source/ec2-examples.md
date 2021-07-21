@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 Amazon Elastic Compute Cloud \(Amazon EC2\) is a web service that provides virtual server hosting in the cloud\. It is designed to make web\-scale cloud computing easier for developers by providing resizeable compute capacity\.
 
-![\[Relationship between JavaScript environments, the SDK, and Amazon EC2\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-ec2.png)
+
 
 The JavaScript API for Amazon EC2 is exposed through the `EC2` client class\. For more information about using the Amazon EC2 client class, see [Class: EC2](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ec2/classes/ec2.html) in the API Reference\.
 

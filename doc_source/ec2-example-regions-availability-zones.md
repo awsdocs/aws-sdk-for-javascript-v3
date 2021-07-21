@@ -26,35 +26,39 @@ For more information about Regions and Availability Zones, see [Regions and Avai
 ## Prerequisite tasks<a name="ec2-example-regions-availability-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ec2/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
+However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
 
 ## Describing Regions and Availability Zones<a name="ec2-example-regions-availability-describing"></a>
 
-Create a Node\.js module with the file name `ec2_describeregionsandzones.ts`\. Be sure to configure the SDK as previously shown\. To access Amazon EC2, create an `EC2` service object\. Create an empty JSON object to pass as parameters, which returns all available descriptions\. Then call the `DescribeRegionsCommand` and `DescribeAvailabilityZonesCommand` methods\.
+Create a `libs` directory, and create a Node\.js module with the file name `ec2Client.js`\. Copy and paste the code below into it, which creates the Amazon EC2 client object\. Replace *REGION* with your AWS Region\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+```
+const  { EC2Client } = require( "@aws-sdk/client-ec2");
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create anAmazon EC2 service client object.
+const ec2Client = new EC2Client({ region: REGION });
+module.exports = { ec2Client };
+```
 
-**Note**  
-Replace *REGION* with your AWS Region\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/libs/ec2Client.js)\.
+
+Create a Node\.js module with the file name `ec2_describeregionsandzones.js`\. Be sure to configure the SDK as previously shown\. Create an empty JSON object to pass as parameters, which returns all available descriptions\. Then call the `DescribeRegionsCommand` and `DescribeAvailabilityZonesCommand` methods\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { EC2Client, DescribeRegionsCommand } = require("@aws-sdk/client-ec2");
-
-// Set the AWS region
-const REGION = "REGION"; //e.g. "us-east-1"
-
-// Create EC2 service object
-const ec2client = new EC2Client({ region: REGION });
+import { DescribeRegionsCommand } from "@aws-sdk/client-ec2";
+import { ec2Client } from "./libs/ec2Client";
 
 const run = async () => {
   try {
-    const data = await ec2client.send(new DescribeRegionsCommand({}));
+    const data = await ec2Client.send(new DescribeRegionsCommand({}));
     console.log("Availability Zones: ", data.Regions);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -65,7 +69,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node ec2_describeregionsandzones.ts // If you prefer JavaScript, enter 'node ec2_describeregionsandzone.js'
+node ec2_describeregionsandzones.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_describeregionsandzones.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_describeregionsandzones.js)\.

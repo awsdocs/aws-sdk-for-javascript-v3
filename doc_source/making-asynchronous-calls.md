@@ -20,4 +20,3 @@ If these tasks execute synchronously, then each must finish before the next can 
 
 To keep the website from freezing under those conditions, call the database asychronously\. After the database call executes, sending your asynchronous request, your code continues to execute as expected\. If you don't properly manage the response of an asynchronous call, your code can attempt to use information it expects back from the database when that data isn't available yet\.
 
-![\[Showing difference between synchronous and asynchronous execution.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/async-vs-sync.png)

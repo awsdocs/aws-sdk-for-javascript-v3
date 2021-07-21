@@ -41,7 +41,7 @@ To perform these tutorials, you need to create an AWS Identity and Access Manage
 
 **To create and use credentials**
 
-1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Sign in to the AWSManagement Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
 1. Choose **Users**, and then choose **Add user**\.
 
@@ -90,7 +90,7 @@ In this exercise, we will only work with the unauthenticated user role to keep t
 
 **To create an Amazon Cognito Identity pool**
 
-1. Sign in to the AWS Management Console and open the Amazon Cognito console at [https://console\.aws\.amazon\.com/cognito/\.](https://console.aws.amazon.com/cognito/)
+1. Sign in to the AWSManagement Console and open the Amazon Cognito console at [Amazon Web Services Console\.](https://console.aws.amazon.com/cognito/)
 
 1. Choose **Manage Identity Pools** on the console opening page\.
 
@@ -118,7 +118,7 @@ To enable browser script access to Amazon S3 to create and delete an Amazon S3 b
 
 **To add an Amazon S3 policy to the IAM role associated with unauthenticated users**
 
-1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Sign in to the AWSManagement Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
 1. In the navigation panel on the left of the page, choose **Roles**\.
 
@@ -128,7 +128,7 @@ To enable browser script access to Amazon S3 to create and delete an Amazon S3 b
 
 1. In the **Attach Permissions** page for this role, find and then select the check box for **AmazonS3FullAccess**\.
 **Note**  
-You can use this process to enable access to any Amazon or AWS service\.
+You can use this process to enable access to any AWS service\.
 
 1. Choose **Attach policy**\.
 
@@ -168,102 +168,102 @@ Add the following code to the `App.js`\.
 
 ```
 import React, { useState } from "javascriptv3/example_code/reactnative/App";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-
-import {
-  S3Client,
-  CreateBucketCommand,
-  DeleteBucketCommand,
-} from "@aws-sdk/client-s3";
-import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
-import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
-
-const App = () => {
-  const [bucketName, setBucketName] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  // Replace REGION with the appropriate AWS Region, such as 'us-east-1'.
-  const region = "REGION";
-  const client = new S3Client({
-    region,
-    credentials: fromCognitoIdentityPool({
-      client: new CognitoIdentityClient({ region }),
-      // Replace IDENTITY_POOL_ID with an appropriate Amazon Cognito Identity Pool ID for, such as 'us-east-1:xxxxxx-xxx-4103-9936-b52exxxxfd6'.
-      identityPoolId: "IDENTITY_POOL_ID",
-    }),
-  });
-
-  const createBucket = async () => {
-    setSuccessMsg("");
-    setErrorMsg("");
-
-    try {
-      await client.send(new CreateBucketCommand({ Bucket: bucketName }));
-      setSuccessMsg(`Bucket "${bucketName}" created.`);
-    } catch (e) {
-      setErrorMsg(e);
-    }
-  };
-
-  const deleteBucket = async () => {
-    setSuccessMsg("");
-    setErrorMsg("");
-
-    try {
-      await client.send(new DeleteBucketCommand({ Bucket: bucketName }));
-      setSuccessMsg(`Bucket "${bucketName}" deleted.`);
-    } catch (e) {
-      setErrorMsg(e);
-    }
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={{ color: "green" }}>
-	{successMsg ? `Success: ${successMsg}` : ``}
-      </Text>
-      <Text style={{ color: "red" }}>
-	{errorMsg ? `Error: ${errorMsg}` : ``}
-      </Text>
-      <View>
-	<TextInput
-	  style={styles.textInput}
-	  onChangeText={(text) => setBucketName(text)}
-	  autoCapitalize={"none"}
-	  value={bucketName}
-	  placeholder={"Enter Bucket Name"}
-	/>
-	<Button
-	  backroundColor="#68a0cf"
-	  title="Create Bucket"
-	  onPress={createBucket}
-	/>
-	<Button
-	  backroundColor="#68a0cf"
-	  title="Delete Bucket"
-	  onPress={deleteBucket}
-	/>
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
-export default App;
+	import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+	
+	import {
+	  S3Client,
+	  CreateBucketCommand,
+	  DeleteBucketCommand,
+	} from "@aws-sdk/client-s3";
+	import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
+	import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
+	
+	const App = () => {
+	  const [bucketName, setBucketName] = useState("");
+	  const [successMsg, setSuccessMsg] = useState("");
+	  const [errorMsg, setErrorMsg] = useState("");
+	
+	  // Replace REGION with the appropriate AWS Region, such as 'us-east-1'.
+	  const region = "REGION";
+	  const client = new S3Client({
+	    region,
+	    credentials: fromCognitoIdentityPool({
+	      client: new CognitoIdentityClient({ region }),
+	      // Replace IDENTITY_POOL_ID with an appropriate Amazon Cognito Identity Pool ID for, such as 'us-east-1:xxxxxx-xxx-4103-9936-b52exxxxfd6'.
+	      identityPoolId: "IDENTITY_POOL_ID",
+	    }),
+	  });
+	
+	  const createBucket = async () => {
+	    setSuccessMsg("");
+	    setErrorMsg("");
+	
+	    try {
+	      await client.send(new CreateBucketCommand({ Bucket: bucketName }));
+	      setSuccessMsg(`Bucket "${bucketName}" created.`);
+	    } catch (e) {
+	      setErrorMsg(e);
+	    }
+	  };
+	
+	  const deleteBucket = async () => {
+	    setSuccessMsg("");
+	    setErrorMsg("");
+	
+	    try {
+	      await client.send(new DeleteBucketCommand({ Bucket: bucketName }));
+	      setSuccessMsg(`Bucket "${bucketName}" deleted.`);
+	    } catch (e) {
+	      setErrorMsg(e);
+	    }
+	  };
+	
+	  return (
+	    <View style={styles.container}>
+	      <Text style={{ color: "green" }}>
+	        {successMsg ? `Success: ${successMsg}` : ``}
+	      </Text>
+	      <Text style={{ color: "red" }}>
+	        {errorMsg ? `Error: ${errorMsg}` : ``}
+	      </Text>
+	      <View>
+	        <TextInput
+	          style={styles.textInput}
+	          onChangeText={(text) => setBucketName(text)}
+	          autoCapitalize={"none"}
+	          value={bucketName}
+	          placeholder={"Enter Bucket Name"}
+	        />
+	        <Button
+	          backroundColor="#68a0cf"
+	          title="Create Bucket"
+	          onPress={createBucket}
+	        />
+	        <Button
+	          backroundColor="#68a0cf"
+	          title="Delete Bucket"
+	          onPress={deleteBucket}
+	        />
+	      </View>
+	    </View>
+	  );
+	};
+	
+	const styles = StyleSheet.create({
+	  container: {
+	    flex: 1,
+	    alignItems: "center",
+	    justifyContent: "center",
+	  },
+	});
+	
+	export default App;
 ```
 
 The code first imports required React, React Native, and AWS SDK dependencies\.
 
 Inside the function App:
-+ The S3Client object is created, specifying the credentials using Cognito Identity Pool created earlier\.
++ The S3Client object is created, specifying the credentials using Amazon Cognito Identity Pool created earlier\.
 + The methods `createBucket` and `deleteBucket` create and delete the specified bucket, respectively\.
 + The React Native View displays a text input field for the user to specify an Amazon S3 bucket name, and buttons to create and delete the specified Amazon S3 bucket\.
 
@@ -339,7 +339,7 @@ Starting: Intent { cmp=com.reactnativeapp/.MainActivity }
 
 Enter the bucket name you want to create or delete and click on either **Create Bucket** or **Delete Bucket**\. The respective command will be sent to Amazon S3, and success or error message will be displayed\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/react-app-running.png)
+
 
 ## Possible Enhancements<a name="getting-started-react-native-variations"></a>
 

@@ -12,6 +12,11 @@ Rather than using promises, you should consider using async/await\. Async functi
 
 The following example uses async/await to list all of your Amazon DynamoDB tables in `us-west-2`\.
 
+**Note**  
+For this example to run:  
+Install the AWS SDK for JavaScript DynamoDB client by entering `npm install @aws-sdk/client-dynamodb` in the command line of your project\.
+Ensure you have configured your AWS credentials correctly\. For more information, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\. 
+
 ```
 (async function () {
   const DDB = require("@aws-sdk/client-dynamodb");

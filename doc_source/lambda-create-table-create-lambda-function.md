@@ -10,16 +10,16 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](lambda-create-table-example.md)\.
 
-In the root of your project, create an `mylambdafunction.ts` file, and copy and paste the content below into it\. Replace *"REGION"* with the AWS region\.
+In the root of your project, create an `mylambdafunction.js` file, and copy and paste the content below into it\. Replace *REGION* with the AWS region\.
 
 Run the following command to bundle the Lambda function and the required Amazon Web Services modules\.
 
 ```
-webpack mylambdafunction.ts --mode development --target web --devtool false -o index.js
+webpack mylamdbafunction.js --mode development --target node --devtool false --output-library-target umd -o index.js
 ```
 
 **Important**  
-Notice the output is named `index.js`\. This is because Lambda functions must have an `index.js` handler to work\.
+Notice the output is named `index.js`\. This is because Lambda functions must have an `indeltjieblllkbvt x.js` handler to work\.
 
 Compress the bundled output file, `index.js`, into a ZIP file named `my-lambda-function.zip`\.
 
@@ -28,10 +28,8 @@ Upload `my-lambda-function.zip` to the Amazon S3 bucket you created in the [Crea
 ```
 "use strict";
 // Load the required clients and packages.
-const { DynamoDBClient, CreateTableCommand } = require("@aws-sdk/client-dynamodb");
-
-//Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const { CreateTableCommand } = require ( "@aws-sdk/client-dynamodb" );
+const { dynamoClient } = require (  "./libs/dynamoClient" );
 
 // Set the parameters.
 const params = {
@@ -65,12 +63,9 @@ const params = {
     },
 };
 
-// Instantiate an Amazon DynamoDB client object.
-const ddb = new DynamoDBClient({ region: REGION });
-
 exports.handler = async(event, context, callback) => {
     try {
-        const data = await ddb.send(new CreateTableCommand(params));
+        const data = await dynamoClient.send(new CreateTableCommand(params));
         console.log("Table Created", data);
     } catch (err) {
         console.log("Error", err);
@@ -78,4 +73,4 @@ exports.handler = async(event, context, callback) => {
 };
 ```
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/lambda/lambda_create_function/src/mylamdbafunction.ts)\.
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/lambda/lambda_create_function/src/mylamdbafunction.js)\.

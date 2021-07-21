@@ -8,23 +8,22 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Deploy the Lambda function<a name="scheduled-events-invoking-lambda-deploy-function"></a>
 
-This topic is part of a tutorial that demonstrates how to invoke a Lambda function through Amazon CloudWatch scheduled events using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating scheduled events to execute Lambda functions](scheduled-events-invoking-lambda-example.md)\.
+This topic is part of a tutorial that demonstrates how to invoke a Lambda function through Amazon CloudWatch scheduled events using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating scheduled events to execute AWS Lambda functions](scheduled-events-invoking-lambda-example.md)\.
 
-In the root of your project, create a `lambda-function-setup.ts` file, and paste the content below into it\.
+In the root of your project, create a `lambda-function-setup.js` file, and paste the content below into it\.
 
-Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket you uploaded the ZIP version of your Lambda function to\. Replace *ZIP\_FILE\_NAME* with the name of name the ZIP version of your Lambda function\. Replace *ROLE* with the Amazon Resource Number \(ARN\) of the IAM role you created in the [Create the AWS resources ](scheduled-events-invoking-lambda-provision-resources.md) topic of this tutorial\. Replace *LAMBDA\_FUNCTION\_NAME* with a name for the Lambda function\.
+Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket you uploaded the ZIP version of your Lambda function to\. Replace *ZIP\_FILE\_NAME* with the name of name the ZIP version of your Lambda function\. Replace *IAM\_ROLE\_ARN* with the Amazon Resource Number \(ARN\) of the IAM role you created in the [Create the AWS resources ](scheduled-events-invoking-lambda-provision-resources.md) topic of this tutorial\. Replace *LAMBDA\_FUNCTION\_NAME* with a name for the Lambda function\.
 
 ```
-// Load the required AWS Lambda client and commands.
+// Load the required Lambda client and commands.
 const {
-  LambdaClient,
-  CreateFunctionCommand,
+   CreateFunctionCommand,
 } = require("@aws-sdk/client-lambda");
+const {
+   lambdaClient
+} = require("..libs/lambdaClient.js");
 
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-
-// Instantiate an AWS Lambda client service object.
+// Instantiate an Lambda client service object.
 const lambda = new LambdaClient({ region: REGION });
 
 // Set the parameters.
@@ -56,7 +55,7 @@ run();
 Enter the following at the command line to deploy the Lambda function\.
 
 ```
-ts-node lambda-function-setup.ts
+node lambda-function-setup.js
 ```
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-scheduled-events/src/helper-functions/lambda-function-setup.ts)\.
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-scheduled-events/src/helper-functions/lambda-function-setup.js)\.

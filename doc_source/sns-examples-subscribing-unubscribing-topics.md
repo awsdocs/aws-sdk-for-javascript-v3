@@ -27,41 +27,52 @@ In this example, you use a series of Node\.js modules to publish notification me
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Listing Subscriptions to a Topic<a name="sns-examples-list-subscriptions-email"></a>
 
-In this example, use a Node\.js module to list all subscriptions to an Amazon SNS topic\. Create a Node\.js module with the file name `sns_listsubscriptions.ts`\. Configure the SDK as previously shown\.
+In this example, use a Node\.js module to list all subscriptions to an Amazon SNS topic\. 
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+ Create a Node\.js module with the file name `sns_listsubscriptions.js`\. Configure the SDK as previously shown\.
 
 Create an object containing the `TopicArn` parameter for the topic whose subscriptions you want to list\. Pass the parameters to the `ListSubscriptionsByTopicCommand` method of the `SNS` client class\. To call the `ListSubscriptionsByTopicCommand` method, create an asynchronous function invoking an Amazon SNS client service object, and passing the parameters object\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic whose subscriptions you want to list \.
+Replace *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic whose subscriptions you want to list \.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, ListSubscriptionsByTopicCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {ListSubscriptionsByTopicCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = { TopicArn: "TOPIC_ARN" }; //TOPIC_ARN
 
-//Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new ListSubscriptionsByTopicCommand(params));
-    console.log("Success. Subscriptions:", data.Subscriptions);
+    const data = await snsClient.send(new ListSubscriptionsByTopicCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -70,31 +81,41 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_listsubscriptions.ts // If you prefer JavaScript, enter 'node sns_listsubscriptions.ts'
+node sns_listsubscriptions.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_listsubscriptions.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_listsubscriptions.js)\.
 
 ## Subscribing an Email Address to a Topic<a name="sns-examples-subscribing-email"></a>
 
-In this example, use a Node\.ts module to subscribe an email address so that it receives SMTP email messages from an Amazon SNS topic\. Create a Node\.ts module with the file name `sns_subscribeemail.ts`\. Configure the SDK as previously shown\.
+In this example, use a Node\.js module to subscribe an email address so that it receives SMTP email messages from an Amazon SNS topic\. 
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_subscribeemail.js`\. Configure the SDK as previously shown\.
 
 Create an object containing the `Protocol` parameter to specify the `email` protocol, the `TopicArn` for the topic to subscribe to, and an email address as the message `Endpoint`\. Pass the parameters to the `SubscribeCommand` method of the `SNS` client class\. You can use the `subscribe` method to subscribe several different endpoints to an Amazon SNS topic, depending on the values used for parameters passed, as other examples in this topic will show\.
 
 To call the `SubscribeCommand` method, create an asynchronous function invoking an Amazon SNS client service object, and passing the parameters object\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, and *EMAIL\_ADDRESS* with the email address to subcribe to\.
+Replace *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, and *EMAIL\_ADDRESS* with the email address to subcribe to\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, SubscribeCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {SubscribeCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = {
@@ -103,15 +124,13 @@ const params = {
   Endpoint: "EMAIL_ADDRESS", //EMAIL_ADDRESS
 };
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new SubscribeCommand(params));
-    console.log("Subscription ARN is " + data.SubscriptionArn);
+    const data = await snsClient.send(new SubscribeCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -120,36 +139,45 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_subscribeemail.ts // If you prefer JavaScript, enter 'node sns_subscribeemail.js'
+node sns_subscribeemail.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_subscribeemail.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_subscribeemail.js)\.
 
 ### Confirming Subscriptions<a name="sns-confirm-subscription-email"></a>
 
-In this example, use a Node\.js module to verify an endpoint owner's intent to receive emails by validating the token sent to the endpoint by a previous subscribe action\. Create a Node\.js module with the file name `sns_confirmsubscription.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to verify an endpoint owner's intent to receive emails by validating the token sent to the endpoint by a previous subscribe action\.
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_confirmsubscription.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Define the parameters, including the `TOPIC_ARN` and `TOKEN`, and define a value of `TRUE` or `FALSE` for `AutheticateOnUnsubscribe`\. If set to `TRUE` the `Confirm Subscription` action requires an AWS signature\. 
 
 The token is a short\-lived token sent to the owner of an endpoint during a previous `SUBSCRIBE` action\. For example, for an email endpoint the `TOKEN` is in the URL of the Confirm Subscription email sent to the email owner\. For example, `abc123` is the token in the following URL\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/token.png)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 To call the `ConfirmSubscriptionCommand` method, create an asynchronous function invoking an Amazon SNS client service object, passing the parameters object\. 
 
 **Note**  
-Replace *REGION* with your AWS Region, *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, *TOKEN* with the token value from the URL sent to the endpoint owner in a previous `Subscribe` action, and define *AuthenticateOnUnsubscribe*\. with a value of `TRUE` or `FALSE`\.  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+Replace *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, *TOKEN* with the token value from the URL sent to the endpoint owner in a previous `Subscribe` action, and define *AuthenticateOnUnsubscribe*\. with a value of `TRUE` or `FALSE`\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  SNSClient,
-  ConfirmSubscriptionCommand
-} = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {ConfirmSubscriptionCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = {
@@ -158,15 +186,13 @@ const params = {
   AuthenticateOnUnsubscribe: "true", // 'true' or 'false'
 };
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new ConfirmSubscriptionCommand(params));
-    console.log("Success", data.SubscriptionArn);
+    const data = await snsClient.send(new ConfirmSubscriptionCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -175,31 +201,41 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_confirmsubscription.ts // If you prefer JavaScript, enter 'node sns_confirmsubscription.js'
+node sns_confirmsubscription.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_confirmsubscription.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_confirmsubscription.js)\.
 
 ## Subscribing an Application Endpoint to a Topic<a name="sns-examples-subscribing-apps"></a>
 
-In this example, use a Node\.js module to subscribe a mobile application endpoint so it receives notifications from an Amazon SNS topic\. Create a Node\.js module with the file name `sns_confirmsubscription.ts`\. Configure the SDK as previously shown, including installing the required modules and packages\.
+In this example, use a Node\.js module to subscribe a mobile application endpoint so it receives notifications from an Amazon SNS topic\. 
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_confirmsubscription.js`\. Configure the SDK as previously shown, including installing the required modules and packages\.
 
 Create an object containing the `Protocol` parameter to specify the `application` protocol, the `TopicArn` for the topic to subscribe to, and the Amazon Resource Name \(ARN\) of a mobile application endpoint for the `Endpoint` parameter\. Pass the parameters to the `SubscribeCommand` method of the `SNS` client class\.
 
 To call the `SubscribeCommand` method, create an asynchronous function invoking an Amazon SNS service object, passing the parameters object\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, and *MOBILE\_ENDPOINT\_ARN* with the endpoint you are subscribing to the topic\.
+Replace *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, and *MOBILE\_ENDPOINT\_ARN* with the endpoint you are subscribing to the topic\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, SubscribeCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {SubscribeCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = {
@@ -208,15 +244,13 @@ const params = {
   Endpoint: "MOBILE_ENDPOINT_ARN", // MOBILE_ENDPOINT_ARN
 };
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new SubscribeCommand(params));
-    console.log("Subscription ARN is " + data.SubscriptionArn);
+    const data = await snsClient.send(new SubscribeCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -225,31 +259,41 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_subscribeapp.ts // If you prefer JavaScript, enter 'node sns_subscribeapp.js'
+node sns_subscribeapp.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/src/sns_subscribeapp.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/src/sns_subscribeapp.js)\.
 
 ## Subscribing a Lambda Function to a Topic<a name="sns-examples-subscribing-lambda"></a>
 
-In this example, use a Node\.js module to subscribe an AWS Lambda function so it receives notifications from an Amazon SNS topic\. Create a Node\.js module with the file name `sns_subscribelambda.ts`\. Configure the SDK as previously shown\.
+In this example, use a Node\.js module to subscribe an AWS Lambda function so it receives notifications from an Amazon SNS topic\. 
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_subscribelambda.js`\. Configure the SDK as previously shown\.
 
 Create an object containing the `Protocol` parameter, specifying the `lambda` protocol, the `TopicArn` for the topic to subscribe to, and the Amazon Resource Name \(ARN\) of an AWS Lambda function as the `Endpoint` parameter\. Pass the parameters to the `SubscribeCommand` method of the `SNS` client class\.
 
 To call the `SubscribeCommand` method, create an asynchronous function invoking an Amazon SNS client service object, passing the parameters object\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, and *LAMBDA\_FUNCTION\_ARN* with the Amazon Resource Name \(ARN\) of the Lambda function\.
+Replace *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, and *LAMBDA\_FUNCTION\_ARN* with the Amazon Resource Name \(ARN\) of the Lambda function\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, SubscribeCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {SubscribeCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = {
@@ -258,15 +302,13 @@ const params = {
   Endpoint: "LAMBDA_FUNCTION_ARN", //LAMBDA_FUNCTION_ARN
 };
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new SubscribeCommand(params));
-    console.log("Subscription ARN is " + data.SubscriptionArn);
+    const data = await snsClient.send(new SubscribeCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -275,44 +317,52 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_subscribelambda.ts // If you prefer JavaScript, enter 'node sns_subscribelambda.js'
+node sns_subscribelambda.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_subscribelambda.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_subscribelambda.js)\.
 
 ## Unsubscribing from a Topic<a name="sns-examples-unsubscribing"></a>
 
-In this example, use a Node\.js module to unsubscribe an Amazon SNS topic subscription\. Create a Node\.js module with the file name `sns_unsubscribe.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to unsubscribe an Amazon SNS topic subscription\.
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_unsubscribe.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object containing the `SubscriptionArn` parameter, specifying the Amazon Resource Name \(ARN\) of the subscription to unsubscribe\. Pass the parameters to the `UnsubscribeCommand` method of the `SNS` client class\.
 
 To call the `UnsubscribeCommand` method, create an asynchronous function invoking an Amazon SNS client service object, passing the parameters object\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, and *TOPIC\_SUBSCRIPTION\_ARN* with the Amazon Resource Name \(ARN\) of the subscription to unsubscribe\.
+Replace *TOPIC\_SUBSCRIPTION\_ARN* with the Amazon Resource Name \(ARN\) of the subscription to unsubscribe\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SNSClient, UnsubscribeCommand } = require("@aws-sdk/client-sns");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {UnsubscribeCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
 const params = { SubscriptionArn: "TOPIC_SUBSCRIPTION_ARN" }; //TOPIC_SUBSCRIPTION_ARN
 
-// Create SNS service object
-const sns = new SNSClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await sns.send(new UnsubscribeCommand(params));
-    console.log("Subscription is unsubscribed");
+    const data = await snsClient.send(new UnsubscribeCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -321,7 +371,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node sns_unsubscribe.ts // If you prefer JavaScript, enter 'node sns_unsubscribe.js'
+node sns_unsubscribe.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_unsubscribe.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_unsubscribe.js)\.

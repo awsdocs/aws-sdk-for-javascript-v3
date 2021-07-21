@@ -21,7 +21,7 @@ This behavior was a frequent source of confusion, and made it difficult to add c
 
 Each service that you use in the SDK for JavaScript is accessed through a service object that is part of the API for that service\. For example, to access the Amazon S3 service you create the Amazon S3 service object\. You can specify configuration settings that are specific to a service as part of the constructor for that service object\. 
 
-For example, if you need to access Amazon EC2 objects in multiple Regions, create an EC2 service object for each Region and then set the Region configuration of each service object accordingly\.
+For example, if you need to access Amazon EC2 objects in multiple Regions, create an Amazon EC2 service object for each Region and then set the Region configuration of each service object accordingly\.
 
 ```
 var ec2_regionA = new EC2({region: 'ap-southeast-2', maxRetries: 15, apiVersion: '2014-10-01'});

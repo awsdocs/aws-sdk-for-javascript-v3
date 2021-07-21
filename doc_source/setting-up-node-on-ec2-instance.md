@@ -14,7 +14,7 @@ A common scenario for using Node\.js with the SDK for JavaScript is to set up an
 
 This tutorial assumes that you have already launched a Linux instance with a public DNS name that is reachable from the internet and to which you are able to connect using SSH\. For more information, see [Step 1: Launch an instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance_linux) in the *Amazon EC2 User Guide for Linux Instances*\.
 
-You must also have configured your security group to allow `SSH` \(port 22\), `HTTP` \(port 80\), and `HTTPS` \(port 443\) connections\. For more information about these prerequisites, see [ Setting up with amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html) in the *Amazon EC2 User Guide for Linux Instances*\.
+You must also have configured your security group to allow `SSH` \(port 22\), `HTTP` \(port 80\), and `HTTPS` \(port 443\) connections\. For more information about these prerequisites, see [ Setting up with Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/get-set-up-for-amazon-ec2.html) in the *Amazon EC2 User Guide for Linux Instances*\.
 
 ## Procedure<a name="setting-up-node-on-ec2-instance-procedure"></a>
 
@@ -29,7 +29,7 @@ The following procedure helps you install Node\.js on an Amazon Linux instance\.
 AWS does not control the following code\. Before you run it, be sure to verify its authenticity and integrity\. More information about this code can be found in the [nvm](https://github.com/nvm-sh/nvm/blob/master/README.md) GitHub repository\.
 
    ```
-   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
    ```
 
    We will use `nvm` to install Node\.js because `nvm` can install multiple versions of Node\.js and allow you to switch between them\.
@@ -59,7 +59,7 @@ AWS does not control the following code\. Before you run it, be sure to verify i
    `Running Node.js VERSION`
 
 **Note**  
-The node installation only applies to the current EC2 session\. Once the EC2 instance goes away, you have to re\-install Node again\. The alternative is to make an Amazon Machine Image \(AMI\) of the EC2 instance once you have the configuration that you want to keep, as described in the following topic\.
+The node installation only applies to the current Amazon EC2 session\. Once the Amazon EC2 instance goes away, you have to re\-install Node again\. The alternative is to make an Amazon Machine Image \(AMI\) of the Amazon EC2 instance once you have the configuration that you want to keep, as described in the following topic\.
 
 ## Creating an Amazon Machine Image \(AMI\)<a name="setting-up-node-on-ec2-instance-create-image"></a>
 

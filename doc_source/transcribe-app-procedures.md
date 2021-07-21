@@ -6,6 +6,18 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Run the app<a name="cross-service-submitdata-run-app"></a>
+# Steps<a name="transcribe-app-procedures"></a>
 
-To run the app, open `index.html` on your browser\.
+**To build the app:**
+
+1. [Prerequisites ](transcribe-app-prerequisites.md)
+
+1. [Create the AWS resources ](transcribe-app-provision-resources.md)
+
+1. [Create the HTML ](transcribe-app-create-html.md)
+
+1. [Prepare the browser script ](transcribe-app-browser-script.md)
+
+1. [Run the app](transcribe-app-run.md)
+
+1. [Delete the resources](transcribe-app-destroy.md)

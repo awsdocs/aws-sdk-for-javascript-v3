@@ -31,36 +31,39 @@ For more information about the lifecycle of Amazon EC2 instances, see [Instance 
 ## Prerequisite tasks<a name="ec2-example-managing-instances-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ec2/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create an Amazon EC2 instance\. For more information about creating Amazon EC2 instances, see [Amazon EC2 instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Instances.html) in the *Amazon EC2 User Guide for Linux Instances* or [Amazon EC2 instances](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/Instances.html) in the *Amazon EC2 User Guide for Windows Instances*\.
 
+**Important**  
+These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
+However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+
 ## Describing your instances<a name="ec2-example-managing-instances-describing"></a>
 
-Create a Node\.js module with the file name `ec2_describeinstances.ts`\. Be sure to configure the SDK as previously shown\. To access Amazon EC2, create an `EC2` client service object\. Call the `DescribeInstancesCommand` method of the Amazon EC2 service object to retrieve a detailed description of your instances\. 
+Create a `libs` directory, and create a Node\.js module with the file name `ec2Client.js`\. Copy and paste the code below into it, which creates the Amazon EC2 client object\. Replace *REGION* with your AWS Region\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+```
+const  { EC2Client } = require( "@aws-sdk/client-ec2");
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create anAmazon EC2 service client object.
+const ec2Client = new EC2Client({ region: REGION });
+module.exports = { ec2Client };
+```
 
-**Note**  
-Replace *REGION* with your AWS Region\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/libs/ec2Client.js)\.
+
+Create a Node\.js module with the file name `ec2_describeinstances.js`\. Be sure to configure the SDK as previously shown\. Call the `DescribeInstancesCommand` method of the Amazon EC2 service object to retrieve a detailed description of your instances\. 
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { EC2Client, DescribeInstancesCommand } = require("@aws-sdk/client-ec2");
-
-// Set the AWS region
-const REGION = "REGION"; //e.g. "us-east-1"
-
-// Create EC2 service object
-const ec2client = new EC2Client({ region: REGION });
-
+import { DescribeInstancesCommand } from "@aws-sdk/client-ec2";
+import { ec2Client } from "./libs/ec2Client";
 const run = async () => {
   try {
-    const data = await ec2client.send(new DescribeInstancesCommand({}));
+    const data = await ec2Client.send(new DescribeInstancesCommand({}));
     console.log("Success", JSON.stringify(data));
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -71,53 +74,59 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node ec2_describeinstances.ts // If you prefer JavaScript, enter 'node ec2_describeinstances.js'
+node ec2_describeinstances.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_describeinstances.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_describeinstances.js)\.
 
 ## Managing instance monitoring<a name="ec2-example-managing-instances-monitoring"></a>
 
-Create a Node\.js module with the file name `ec2_monitorinstances.ts`\. Be sure to configure the SDK as previously shown\. To access Amazon EC2, create an `EC2` client service object\. Add the instance IDs of the instances for which you want to control monitoring\.
+Create a `libs` directory, and create a Node\.js module with the file name `ec2Client.js`\. Copy and paste the code below into it, which creates the Amazon EC2 client object\. Replace *REGION* with your AWS Region\.
+
+```
+const  { EC2Client } = require( "@aws-sdk/client-ec2");
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create anAmazon EC2 service client object.
+const ec2Client = new EC2Client({ region: REGION });
+module.exports = { ec2Client };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/libs/ec2Client.js)\.
+
+Create a Node\.js module with the file name `ec2_monitorinstances.js`\. Be sure to configure the SDK as previously shown\. Add the instance IDs of the instances for which you want to control monitoring\.
 
 Based on the value of a command\-line argument \(`ON` or `OFF`\), call either the `MonitorInstancesCommand` method of the Amazon EC2 service object to begin detailed monitoring of the specified instances or call the `UnmonitorInstancesCommand` method\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, the *INSTANCE\_ID* with the IDs of the instances for which you want to control monitoring, and *STATE* with either `ON` or `OFF`\.
+Replace *INSTANCE\_ID* with the IDs of the instances for which you want to control monitoring, and *STATE* with either `ON` or `OFF`\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  EC2Client,
+import {
   MonitorInstancesCommand,
   UnmonitorInstancesCommand,
-} = require("@aws-sdk/client-ec2");
-
-// Set the AWS region
-const REGION = "region"; //e.g. "us-east-1"
-
-// Create EC2 service object
-const ec2client = new EC2Client({ region: REGION });
+} from "@aws-sdk/client-ec2";
+import { ec2Client } from "./libs/ec2Client";
 
 // Set the parameters
-const params = { InstanceIds: "INSTANCE_ID" }; // INSTANCE_ID
+const params = { InstanceIds: ["INSTANCE_ID"] }; // Array of INSTANCE_IDs
 const state = "STATE"; // STATE; i.e., 'ON' or 'OFF'
 
 const run = async () => {
   if (process.argv[4].toUpperCase() === "ON") {
     try {
-      const data = await ec2client.send(new MonitorInstancesCommand(params));
+      const data = await ec2Client.send(new MonitorInstancesCommand(params));
       console.log("Success", data.InstanceMonitorings);
+      return data;
     } catch (err) {
       console.log("Error", err);
     }
   } else if (process.argv[4].toUpperCase() === "OFF") {
     try {
-      const data = await ec2client.send(new UnmonitorInstancesCommand(params));
+      const data = await ec2Client.send(new UnmonitorInstancesCommand(params));
       console.log("Success", data.InstanceMonitorings);
+      return data;
     } catch (err) {
       console.log("Error", err);
     }
@@ -129,56 +138,59 @@ run();
 To run the example, enter the following at the command prompt, specifying `ON` to begin detailed monitoring or `OFF` to discontinue monitoring\.
 
 ```
-ts-node ec2_monitorinstances.ts ON
+node ec2_monitorinstances.js ON
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_monitorinstances.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_monitorinstances.js)\.
 
 ## Starting and stopping instances<a name="ec2-example-managing-instances-starting-stopping"></a>
 
-Create a Node\.js module with the file name `ec2_startstopinstances.ts`\. Be sure to configure the SDK as previously shown\. To access Amazon EC2, create an `EC2` client service object\. Add the instance IDs of the instances you want to start or stop\.
+Create a `libs` directory, and create a Node\.js module with the file name `ec2Client.js`\. Copy and paste the code below into it, which creates the Amazon EC2 client object\. Replace *REGION* with your AWS Region\.
+
+```
+const  { EC2Client } = require( "@aws-sdk/client-ec2");
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create anAmazon EC2 service client object.
+const ec2Client = new EC2Client({ region: REGION });
+module.exports = { ec2Client };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/libs/ec2Client.js)\.
+
+Create a Node\.js module with the file name `ec2_startstopinstances.js`\. Be sure to configure the SDK as previously shown\. Add the instance IDs of the instances you want to start or stop\.
 
 Based on the value of a command\-line argument \(`START` or `STOP`\), call either the `StartInstancesCommand` method of the Amazon EC2 service object to start the specified instances, or the `StopInstancesCommand` method to stop them\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, *INSTANCE\_ID* with the instance IDs of the instances you want to start or stop, and *STATE* with `START` or `STOP`\.
+Replace *INSTANCE\_ID* with the instance IDs of the instances you want to start or stop, and *STATE* with `START` or `STOP`\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-const {
-  EC2Client,
+// Import required AWS SDK clients and commands for Node.js.
+import {
   StartInstancesCommand,
-  StopInstancesCommand
-} = require("@aws-sdk/client-ec2");
-
-// Set the AWS region
-const REGION = "REGION"; //e.g. "us-east-1"
-
-// Create EC2 service object
-const ec2client = new EC2Client({ region: REGION });
+  StopInstancesCommand,
+} from "@aws-sdk/client-ec2";
+import { ec2Client } from "./libs/ec2Client";
 
 // Set the parameters
-const params = { InstanceIds: "INSTANCE_ID" }; //INSTANCE_ID
+const params = { InstanceIds: ["INSTANCE_ID"] }; // Array of INSTANCE_IDs
 const command = "STATE"; // STATE i.e. "START" or "STOP"
 
 const run = async () => {
   if (command.toUpperCase() === "START") {
     try {
-      const data = await ec2client.send(new StartInstancesCommand(params));
+      const data = await ec2Client.send(new StartInstancesCommand(params));
       console.log("Success", data.StartingInstances);
+      return data;
     } catch (err) {
       console.log("Error2", err);
     }
   } else if (process.argv[2].toUpperCase() === "STOP") {
     try {
-      const data = await ec2client.send(new StopInstancesCommand(params));
+      const data = await ec2Client.send(new StopInstancesCommand(params));
       console.log("Success", data.StoppingInstances);
+      return data;
     } catch (err) {
       console.log("Error", err);
     }
@@ -190,51 +202,55 @@ run();
 To run the example, enter the following at the command prompt specifying `START` to start the instances or `STOP` to stop them\.
 
 ```
-ts-node ec2_startstopinstances.ts
+node ec2_startstopinstances.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_startstopinstances.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_startstopinstances.js)\.
 
 ## Rebooting instances<a name="ec2-example-managing-instances-rebooting"></a>
 
-Create a Node\.js module with the file name `ec2_rebootinstances.ts`\. Be sure to configure the SDK as previously shown\. To access Amazon EC2, create an Amazon EC2 service object\. Add the instance IDs of the instances you want to reboot\. Call the `RebootInstancesCommand` method of the `EC2` client service object to reboot the specified instances\. 
+Create a `libs` directory, and create a Node\.js module with the file name `ec2Client.js`\. Copy and paste the code below into it, which creates the Amazon EC2 client object\. Replace *REGION* with your AWS Region\.
+
+```
+const  { EC2Client } = require( "@aws-sdk/client-ec2");
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create anAmazon EC2 service client object.
+const ec2Client = new EC2Client({ region: REGION });
+module.exports = { ec2Client };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/libs/ec2Client.js)\.
+
+Create a Node\.js module with the file name `ec2_rebootinstances.js`\. Be sure to configure the SDK as previously shown\. Add the instance IDs of the instances you want to reboot\. Call the `RebootInstancesCommand` method of the `EC2` client service object to reboot the specified instances\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, and *INSTANCE\_ID* with the IDs of the instance you want to reboot\.
+Replace *INSTANCE\_ID* with the IDs of the instance you want to reboot\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  EC2Client,
-  RebootInstancesCommandInput,
-} = require("@aws-sdk/client-ec2");
-
-// Set the AWS region
-const REGION = "region"; //e.g. "us-east-1"
-
-// Create EC2 service object
-const ec2client = new EC2Client({ region: REGION });
+import { RebootInstancesCommand } from "@aws-sdk/client-ec2";
+import { ec2Client } from "./libs/ec2Client.js";
 
 // Set the parameters
-const params = { InstanceIds: "INSTANCE_ID" }; //INSTANCE_ID
+const params = { InstanceIds: ["INSTANCE_ID"] }; // Array of INSTANCE_IDs
 
 const run = async () => {
   try {
-    const data = await ec2client.send(new RebootInstancesCommandInput(params));
+    const data = await ec2Client.send(new RebootInstancesCommand(params));
     console.log("Success", data.InstanceMonitorings);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
 };
+run();
 ```
 
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node ec2_rebootinstances.ts // If you prefer JavaScript, enter 'node ec2_rebootinstances.js'
+node ec2_rebootinstances.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_rebootinstances.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ec2/src/ec2_rebootinstances.js)\.

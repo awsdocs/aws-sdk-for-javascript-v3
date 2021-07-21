@@ -32,46 +32,56 @@ In this example, you use a series of Node\.js modules to verify and manage Amazo
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/ses/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Listing your identities<a name="ses-examples-listing-identities"></a>
 
-In this example, use a Node\.js module to list email addresses and domains to use with Amazon SES\. Create a Node\.js module with the file name `ses_listidentities.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to list email addresses and domains to use with Amazon SES\.
+
+Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SESClient }  from  "@aws-sdk/client-ses";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SES service object.
+const sesClient = new SESClient({ region: REGION });
+export  { sesClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
+
+Create a Node\.js module with the file name `ses_listidentities.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object to pass the `IdentityType` and other parameters for the `ListIdentitiesCommand` method of the `SES` client class\. To call the `ListIdentitiesCommand` method, invoke an Amazon SES service object, passing the parameters object\. 
 
  The `data` returned contains an array of domain identities as specified by the `IdentityType` parameter\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, and *IDENTITY\_TYPE* with the identity type, which can be "EmailAddress" or "Domain"\.
+Replace *IDENTITY\_TYPE* with the identity type, which can be "EmailAddress" or "Domain"\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SESClient, ListIdentitiesCommand } = require("@aws-sdk/client-ses");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
-
+import { ListIdentitiesCommand }  from "@aws-sdk/client-ses";
+import { sesClient } from "./libs/sesClient.js";
 // Set the parameters
 var params = {
-  IdentityType: "IDENTITY_TYPE", // IDENTITY_TYPE: "EmailAddress' or 'Domain'
+  IdentityType: "EmailAddress", // IDENTITY_TYPE: "EmailAddress' or 'Domain'
   MaxItems: 10,
 };
 
-// Create SES service object
-const ses = new SESClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await ses.send(new ListIdentitiesCommand(params));
+    const data = await sesClient.send(new ListIdentitiesCommand(params));
     console.log("Success.", data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -80,45 +90,53 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node ses_listidentities.ts // If you prefer JavaScript, enter 'node ses_listidentities.js'
+node ses_listidentities.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_listidentities.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_listidentities.js)\.
 
 ## Verifying an email address identity<a name="ses-examples-verifying-email"></a>
 
-In this example, use a Node\.js module to verify email senders to use with Amazon SES\. Create a Node\.js module with the file name `ses_verifyemailidentity.ts`\. Configure the SDK as previously shown, including downloading the required clients and packages\. To access Amazon SES, create an `SES` client service object\.
+In this example, use a Node\.js module to verify email senders to use with Amazon SES\.
+
+Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SESClient }  from  "@aws-sdk/client-ses";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SES service object.
+const sesClient = new SESClient({ region: REGION });
+export  { sesClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
+
+Create a Node\.js module with the file name `ses_verifyemailidentity.js`\. Configure the SDK as previously shown, including downloading the required clients and packages\. 
 
 Create an object to pass the `EmailAddress` parameter for the `VerifyEmailIdentityCommand` method of the `SES` client class\. To call the `VerifyEmailIdentityCommand` method, invoke an Amazon SES client service object, passing the parameters\. 
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, and *ADDRESS@DOMAIN\.EXT* with the email address, such as name@example\.com\.
+Replace *ADDRESS@DOMAIN\.EXT* with the email address, such as name@example\.com\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  SESClient,
-  VerifyEmailIdentityCommand
-} = require("@aws-sdk/client-ses");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import {
+    VerifyEmailIdentityCommand
+}  from "@aws-sdk/client-ses";
+import { sesClient } from "./libs/sesClient.js";
 
 // Set the parameters
 const params = { EmailAddress: "ADDRESS@DOMAIN.EXT" }; //ADDRESS@DOMAIN.EXT; e.g., name@example.com
 
-// Create SES service object
-const ses = new SESClient({ region: REGION });
 
 const run = async () => {
   try {
-    const data = await ses.send(new VerifyEmailIdentityCommand(params));
-    console.log("Email verification initiated");
+    const data = await sesClient.send(new VerifyEmailIdentityCommand(params));
+    console.log("Success.", data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -127,14 +145,29 @@ run();
 To run the example, enter the following at the command prompt\. The domain is added to Amazon SES to be verified\.
 
 ```
-ts-node ses_verifyemailidentity.ts // If you prefer JavaScript, enter 'node ses_verifyemailidentity.js'
+node ses_verifyemailidentity.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_verifyemailidentity.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_verifyemailidentity.js)\.
 
 ## Verifying a Domain identity<a name="ses-examples-verifying-domains"></a>
 
-In this example, use a Node\.js module to verify email domains to use with Amazon SES\. Create a Node\.js module with the file name `ses_verifydomainidentity.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to verify email domains to use with Amazon SES\.
+
+Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SESClient }  from  "@aws-sdk/client-ses";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SES service object.
+const sesClient = new SESClient({ region: REGION });
+export  { sesClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
+
+Create a Node\.js module with the file name `ses_verifydomainidentity.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object to pass the `Domain` parameter for the `VerifyDomainIdentityCommand` method of the `SES` client class\. To call the `VerifyDomainIdentityCommand` method, invoke an Amazon SES client service object, passing the parameters object\. 
 
@@ -142,30 +175,25 @@ Create an object to pass the `Domain` parameter for the `VerifyDomainIdentityCom
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 **Note**  
-Replace *REGION* with your AWS Region, *AMI\_ID* with the ID of the Amazon Machine Image \(AMI\) to run, and *KEY\_PAIR\_NAME* of the key pair to assign to the AMI ID\.
+Replace *AMI\_ID* with the ID of the Amazon Machine Image \(AMI\) to run, and *KEY\_PAIR\_NAME* of the key pair to assign to the AMI ID\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  SESClient,
+import {
   VerifyDomainIdentityCommand,
-} = require("@aws-sdk/client-ses");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+}  from "@aws-sdk/client-ses";
+import { sesClient } from "./libs/sesClient.js";
 
 // Set the parameters
 const params = { Domain: "DOMAIN_NAME" }; //DOMAIN_NAME
 
-// Create SES service object
-const ses = new SESClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await ses.send(new VerifyDomainIdentityCommand(params));
-    console.log("Verification Token: " + data.VerificationToken);
+    const data = await sesClient.send(new VerifyDomainIdentityCommand(params));
+    console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -174,14 +202,29 @@ run();
 To run the example, enter the following at the command prompt\. The domain is added to Amazon SES to be verified\.
 
 ```
-ts-node ses_verifydomainidentity.ts  // If you prefer JavaScript, enter 'node ses_verifydomainidentity.js'
+node ses_verifydomainidentity.js  
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_verifydomainidentity.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_verifydomainidentity.js)\.
 
 ## Deleting identities<a name="ses-examples-deleting-identities"></a>
 
-In this example, use a Node\.js module to delete email addresses or domains used with Amazon SES\. Create a Node\.js module with the file name `ses_deleteidentity.ts`\. Configure the SDK as previously shown, including installing the required clients and packages\.
+In this example, use a Node\.js module to delete email addresses or domains used with Amazon SES\.
+
+Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SESClient }  from  "@aws-sdk/client-ses";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SES service object.
+const sesClient = new SESClient({ region: REGION });
+export  { sesClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
+
+Create a Node\.js module with the file name `ses_deleteidentity.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
 Create an object to pass the `Identity` parameter for the `DeleteIdentityCommand` method of the `SES` client class\. To call the `DeleteIdentityCommand` method, create a `request` for invoking an Amazon SES client service object, passing the parameters\. 
 
@@ -189,30 +232,25 @@ Create an object to pass the `Identity` parameter for the `DeleteIdentityCommand
 This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
 
 **Note**  
-Replace *REGION* with your AWS Region, *IDENTITY\_TYPE* with the identity type to be deleted, and *IDENTITY\_NAME* with the name of the identity to be deleted\.
+Replace *IDENTITY\_TYPE* with the identity type to be deleted, and *IDENTITY\_NAME* with the name of the identity to be deleted\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { SESClient, DeleteIdentityCommand } = require("@aws-sdk/client-ses");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
-
+import { DeleteIdentityCommand }  from "@aws-sdk/client-ses";
+import { sesClient } from "./libs/sesClient.js";
 // Set the parameters
 const params = {
   IdentityType: "IDENTITY_TYPE", // IDENTITY_TYPE - i.e., 'EmailAddress' or 'Domain'
   Identity: "IDENTITY_NAME",
 }; // IDENTITY_NAME
 
-// Create SES service object
-const ses = new SESClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await ses.send(new DeleteIdentityCommand(params));
-    console.log("Identity Deleted");
+    const data = await sesClient.send(new DeleteIdentityCommand(params));
+    console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
-    console.error(err, err.stack);
+    console.log("Error", err.stack);
   }
 };
 run();
@@ -221,7 +259,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node ses_deleteidentity.ts // If you prefer JavaScript, enter 'node ses_deleteidentity.js'
+node ses_deleteidentity.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_deleteidentity.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/ses_deleteidentity.js)\.

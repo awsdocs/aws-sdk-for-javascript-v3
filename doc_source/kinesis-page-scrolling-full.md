@@ -18,7 +18,7 @@ For information about*webpack*, see [Bundling applications with webpack](webpack
 Run the the following in the command line to bundle the JavaScript for this example into a file called `<main.js>` :
 
 ```
-webpack kinesis-example.ts --mode development --target web --devtool false -o main.js
+webpack kinesis-example.js --mode development --target web --devtool false -o main.js
 ```
 
 Here is the complete browser script code for the Kinesis capturing webpage scroll progress example\.

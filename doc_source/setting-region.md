@@ -8,9 +8,9 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Setting the AWS Region<a name="setting-region"></a>
 
-An AWS Region is a named set of AWS resources in the same geographical area\. An example of a Region is `us-east-1`, which is the US West \(Oregon\) Region\. You specify a Region when creating a service client in the SDK for JavaScript so that the SDK accesses the service in that Region\. Some services are available only in specific Regions\.
+An AWS Region is a named set of AWS resources in the same geographical area\. An example of a Region is `us-east-1`, which is the US East \(N\. Virginia\) Region\. You specify a Region when creating a service client in the SDK for JavaScript so that the SDK accesses the service in that Region\. Some services are available only in specific Regions\.
 
-The SDK for JavaScript doesn't select a Region by default\. However, you can set the Region using an environment variable, a shared configuration `config` file, or the global configuration object\.
+The SDK for JavaScript doesn't select a Region by default\. However, you can set the AWS Region using an environment variable, or a shared configuration `config` file\.
 
 ## In a client class constructor<a name="setting-region-constructor"></a>
 
@@ -46,6 +46,4 @@ The following is the order of precedence for Region setting:
 
 1. If a Region is passed to a client class constructor, that Region is used\.
 
-1. Otherwise, if the `AWS_REGION` environment variable is a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value, that Region is used\.
-
-1. Otherwise, if the `AMAZON_REGION` environment variable is a truthy value, that Region is used\.
+1. Otherwise, the Region defined in the shared config file is used\.

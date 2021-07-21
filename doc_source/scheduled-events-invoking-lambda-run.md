@@ -28,4 +28,4 @@ To configure CloudWatch to invoke the Lambda functions:
 
 1. Choose **Add**\.
 **Note**  
-For more information, see Using AWS Lambda with Amazon CloudWatch Events\.
+For more information, see [Using Lambda with CloudWatch Events](https://docs.aws.amazon.com/lambda/latest/dg/services-cloudwatchevents.html)\.

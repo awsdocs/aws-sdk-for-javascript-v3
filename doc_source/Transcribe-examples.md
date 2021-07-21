@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 Amazon Transcribe makes it easy for developers to add speech to text capabilities to their applications\. 
 
-![\[Relationship between JavaScript environments, the SDK, and Amazon Transcribe\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-transcribe.png)
+
 
 The JavaScript API for Amazon Transcribe is exposed through the [TranscribeService](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/transcribe.html) client class\.
 

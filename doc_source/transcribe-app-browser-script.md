@@ -10,55 +10,49 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 This topic is part of a tutorial about building an app that transcribes and displays voice messages for authenticated users\. To start at the beginning of the tutorial, see [Build a transcription app with authenticated users](transcribe-app.md)\. 
 
-There are three files, `index.html`, `recorder.js`, and `helper.js`, which you are required to bundle into a single `main.js` using Webpack\. This topic describes in detail only the functions in `index.js` that use the SDK for JavaScript, which is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/transcription-app/src/index.ts)\.
+There are three files, `index.html`, `recorder.js`, and `helper.js`, which you are required to bundle into a single `main.js` using Webpack\. This topic describes in detail only the functions in `index.js` that use the SDK for JavaScript, which is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/transcription-app/src/index.js)\.
 
 **Note**  
-`recorder.js` and `helper.js` are required but, because they do not contain Node\.js code, are explained in the inline comments [here](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/transcription-app/src/recorder.ts) and [here](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/transcription-app/src/helper.ts) respectively GitHub\.
+`recorder.js` and `helper.js` are required but, because they do not contain Node\.js code, are explained in the inline comments [here](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/transcription-app/src/recorder.js) and [here](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/transcription-app/src/helper.js) respectively GitHub\.
 
-First, define the parameters\. `COGNITO_ID` is the endpoint for the Amazon Cognito User Pool you created in the [Create the AWS resources ](transcribe-app-provision-resources.md) topic of this tutorial\. It is formatted`cognito-idp.AWS_REGION.amazonaws.com/USER_POOL_ID`\. The user pool id is *ID\_TOKEN* in the AWS credentials token, which is stripped from the app URL by the `getToken` function in the 'helper\.ts' file\. This token is passed to the `loginData` variable, which provides the Amazon Transcribe and Amazon S3 client objects with logins\. Replace *"REGION"* with the AWS Region, and *"BUCKET"* with the Replace *"IDENTITY\_POOL\_ID"* with the `IdentityPoolId` from the **Sample page** of the Amazon Cognito identity pool you created for this example\. This is also passed to each client object\.
+First, define the parameters\. `COGNITO_ID` is the endpoint for the Amazon Cognito User Pool you created in the [Create the AWS resources ](transcribe-app-provision-resources.md) topic of this tutorial\. It is formatted`cognito-idp.AWS_REGION.amazonaws.com/USER_POOL_ID`\. The user pool id is *ID\_TOKEN* in the AWS credentials token, which is stripped from the app URL by the `getToken` function in the 'helper\.js' file\. This token is passed to the `loginData` variable, which provides the Amazon Transcribe and Amazon S3 client objects with logins\. Replace *"REGION"* with the AWS Region, and *"BUCKET"* with the Replace *"IDENTITY\_POOL\_ID"* with the `IdentityPoolId` from the **Sample page** of the Amazon Cognito identity pool you created for this example\. This is also passed to each client object\.
 
 **Note**  
 
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/identity-pool-id.png)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 ```
 // Import the required AWS SDK clients and commands for Node.js
-require("./helper.ts");
-require("./recorder.ts");
-const { IAMClient } = require("@aws-sdk/client-iam");
-const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
-const {
+import "./helper.js";
+import "./recorder.js";
+import { CognitoIdentityClient } from"@aws-sdk/client-cognito-identity";
+import {
   fromCognitoIdentityPool,
-} = require("@aws-sdk/credential-provider-cognito-identity");
-const {
+} from"@aws-sdk/credential-provider-cognito-identity";
+import {
   CognitoIdentityProviderClient,
   GetUserCommand,
-} = require("@aws-sdk/client-cognito-identity-provider");
-const { S3RequestPresigner } = require("@aws-sdk/s3-request-presigner");
-const { createRequest } = require("@aws-sdk/util-create-request");
-const { formatUrl } = require("@aws-sdk/util-format-url");
-const {
+} from"@aws-sdk/client-cognito-identity-provider";
+import { S3RequestPresigner } from"@aws-sdk/s3-request-presigner";
+import { createRequest } from"@aws-sdk/util-create-request";
+import { formatUrl } from"@aws-sdk/util-format-url";
+import {
   TranscribeClient,
   StartTranscriptionJobCommand,
-  GetTranscriptionJobCommand,
-} = require("@aws-sdk/client-transcribe");
-const {
-  S3,
+} from"@aws-sdk/client-transcribe";
+import {
   S3Client,
   PutObjectCommand,
   GetObjectCommand,
-  CreateBucketCommand,
-  HeadBucketCommand,
   ListObjectsCommand,
   DeleteObjectCommand,
-} = require("@aws-sdk/client-s3");
-const { path } = require("path");
-const fetch = require("node-fetch");
+} from"@aws-sdk/client-s3";
+import  fetch from "node-fetch";
 
 // Set the parameters.
 // 'COGINTO_ID' has the format 'cognito-idp.eu-west-1.amazonaws.com/COGNITO_ID'.
 let COGNITO_ID = "COGNITO_ID";
-// Get the Amazon Cognito ID token for the user. 'getToken()' is in 'helper.ts'.
+// Get the Amazon Cognito ID token for the user. 'getToken()' is in 'helper.js'.
 let idToken = getToken();
 let loginData = {
   [COGNITO_ID]: idToken,
@@ -94,10 +88,11 @@ const s3Client = new S3Client({
 When the HTML page loads, the `updateUserInterface` creates a folder with the user's name in the Amazon S3 bucket if its the first time they've signed in to the app\. If not, it updates the user interface with any transcripts from the user's previous sessions\.
 
 ```
+let updateUserInterface;
 window.onload = updateUserInterface = async () => {
   // Set the parameters.
   const userParams = {
-    // Get the access token. 'GetAccessToken()' is in 'helper.ts'.
+    // Get the access token. 'GetAccessToken()' is in 'helper.js'.
     AccessToken: getAccessToken(),
   };
   // Create a CognitoIdentityProviderClient client object.
@@ -105,8 +100,7 @@ window.onload = updateUserInterface = async () => {
   try {
     const data = await client.send(new GetUserCommand(userParams));
     const username = data.Username;
-    var username = data.Username;
-    // Export username for use in 'recorder.ts'.
+    // Export username for use in 'recorder.js'.
     exports.username = username;
     try {
       // If this is user's first sign-in, create a folder with user's name in Amazon S3 bucket.
@@ -156,7 +150,7 @@ window.onload = updateUserInterface = async () => {
             i++;
             //
             // Display the details for the transcription on the UI.
-            // 'displayTranscriptionDetails()' is in 'helper.ts'.
+            // 'displayTranscriptionDetails()' is in 'helper.js'.
             displayTranscriptionDetails(
               i,
               outputJSONTime,
@@ -191,7 +185,7 @@ async function* yieldUint8Chunks(data) {
 }
 ```
 
-When the user records a voice message for transcriptions, the `upload` uploads the recordings to the Amazon S3 bucket\. This function is called from the `recorder.ts` file\.
+When the user records a voice message for transcriptions, the `upload` uploads the recordings to the Amazon S3 bucket\. This function is called from the `recorder.js` file\.
 
 ```
 // Upload recordings to Amazon S3 bucket
@@ -211,6 +205,7 @@ window.upload = async function (blob, userName) {
     // Define the duration until expiration of the presigned URL.
     const expiration = new Date(Date.now() + 60 * 60 * 1000);
     // Create and format the presigned URL.
+    let signedUrl;
     signedUrl = formatUrl(await signer.presign(request, expiration));
     console.log(`\nPutting "${Key}"`);
   } catch (err) {
@@ -298,7 +293,7 @@ window.deleteRow = function (rowid) {
 Finally, run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`:
 
 ```
-webpack index.ts --mode development --target web --devtool false -o main.js
+webpack index.js --mode development --target web --devtool false -o main.js
 ```
 
 **Note**  

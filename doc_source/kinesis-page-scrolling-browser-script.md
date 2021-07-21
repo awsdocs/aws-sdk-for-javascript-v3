@@ -10,28 +10,29 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 ## Configuring the SDK<a name="kinesis-page-scrolling-configure-sdk"></a>
 
-First import the required AWS SDK for JavaScript \(v3\) modules, `CognitoIdentityClient`, `fromCognitoIdentityPool` , and `Kinesis`, and the Amazon Kinesis `PutRecordsCommand` command\. Then create an Amazon Kinesis service client object that includes the required credentials\. Replace *REGION* with theAWS Region, and *IDENTITY\_POOL\_ID* with the ID of the Amazon Cognito identity pool you created in the [Create the AWS resources ](kinesis-page-scrolling-provision-resources.md) section of this example\.
-
-The following code snippet shows this step\. \(See [Bundling the browser script](kinesis-page-scrolling-full.md) for the full example\.\)
+Create a `libs` directory, and create a Node\.js module with the file name `kinesisClient.js`\. Copy and paste the code below into it, which creates the Kinesis client object\. Replace *REGION* with your AWS Region\. Replace *IDENTITY\_POOL\_ID* with the Amazon Cognito identity pool id you created in [Create the AWS resources ](kinesis-page-scrolling-provision-resources.md)\.
 
 ```
 // Import the required AWS SDK clients and commands for Node.js.
-const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
+const {CognitoIdentityClient} = require("@aws-sdk/client-cognito-identity");
 const {
   fromCognitoIdentityPool,
 } = require("@aws-sdk/credential-provider-cognito-identity");
-const { Kinesis, PutRecordsCommand } = require("@aws-sdk/client-kinesis");
+const { KinesisClient, PutRecordsCommand } = require("@aws-sdk/client-kinesis");
 
 // Configure Credentials to use Cognito
 const REGION = "REGION";
-const client = new Kinesis({
+const kinesisClient = new KinesisClient({
   region: REGION,
   credentials: fromCognitoIdentityPool({
     client: new CognitoIdentityClient({region: REGION}),
     identityPoolId: "IDENTITY_POOL_ID" // IDENTITY_POOL_ID
   })
 });
+export {kinesisClient}
 ```
+
+You can find this code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/kinesis/src/libs/kinesisClient.js)\.
 
 ## Creating Scroll Records<a name="kinesis-page-scrolling-create-records"></a>
 
@@ -40,6 +41,8 @@ Scroll progress is calculated using the `scrollHeight` and `scrollTop` propertie
 The following code snippet shows this step\. \(See [Bundling the browser script](kinesis-page-scrolling-full.md) for the full example\.\)
 
 ```
+import { PutRecordsCommand } from "@aws-sdk/client-kinesis";
+import { kinesisClient } from "./libs/kinesisClient.js";
 // Get the ID of the web page element.
 var blogContent = document.getElementById('BlogContent');
 

@@ -12,7 +12,7 @@ The use of code modules by web applications in browser scripts or Node\.js creat
 
 The `webpack` module bundler parses your application code, searching for `import` or `require` statements, to create bundles that contain all the assets your application needs\. This is so that the assets can be easily served through a webpage\. The SDK for JavaScript can be included in `webpack` as one of the dependencies to include in the output bundle\.
 
-![\[Process by which webpack bundles application module dependencies into a static asset\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/webpack.png)
+
 
 For more information about `webpack`, see the [webpack module bundler](https://webpack.github.io/) on GitHub\.
 
@@ -49,8 +49,8 @@ module.exports = {
     filename: 'bundle.js'
   },
    // Enable WebPack to use the 'path' package.
-  resolve:{
-    fallback: { path: require.resolve("path-browserify")}
+   resolve:{
+  fallback: { path: require.resolve("path-browserify")}
   }
   /**
   * In Webpack version v2.0.0 and earlier, you must tell 
@@ -115,7 +115,7 @@ To use the bundle in a browser script, you can incorporate the bundle using a `<
 <!DOCTYPE html>
 <html>
     <head>
-        <title>AWS SDK with webpack</title>
+        <title>Amazon SDK with webpack</title>
     </head> 
     <body>
         <div id="list"></div>
@@ -148,17 +148,15 @@ module.exports = {
   // Let webpack know to generate a Node.js bundle.
   target: "node",
    // Enable WebPack to use the 'path' package.
-  resolve:{
-    fallback: { path: require.resolve("path-browserify")}
-
-  }
-  /**
-  * In Webpack version v2.0.0 and earlier, you must tell 
-  * webpack how to use "json-loader" to load 'json' files.
-  * To do this Enter 'npm --save-dev install json-loader' at the 
-  * command line to install the "json-loader' package, and include the 
-  * following entry in your webpack.config.js:
-  module: {
+   resolve:{
+  fallback: { path: require.resolve("path-browserify")}
+   /**
+   * In Webpack version v2.0.0 and earlier, you must tell 
+   * webpack how to use "json-loader" to load 'json' files.
+   * To do this Enter 'npm --save-dev install json-loader' at the 
+   * command line to install the "json-loader' package, and include the 
+   * following entry in your webpack.config.js.
+   module: {
     rules: [{test: /\.json$/, use: use: "json-loader"}]
   }
   **/

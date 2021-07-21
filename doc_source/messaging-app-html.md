@@ -98,4 +98,4 @@ This topic is part of a tutorial that create an AWS application that sends and r
 </html>
 ```
 
-This code is also available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/message-app/setup.yaml)\.
+This code is also available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/message-app/index.html)\.

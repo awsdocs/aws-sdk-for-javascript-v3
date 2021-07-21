@@ -35,16 +35,13 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 
 The browser script code for the example:
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ```
 // Load the required clients and packages
 const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
 const {
   fromCognitoIdentityPool,
 } = require("@aws-sdk/credential-provider-cognito-identity");
-const { S3Client, PutObjectCommand, ListObjectsCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand, ListObjectsCommand, DeleteObjectCommand, DeleteObjectsCommand } = require("@aws-sdk/client-s3");
 
 // Set the AWS Region
 const REGION = "REGION"; //REGION
@@ -295,7 +292,7 @@ const deleteAlbum = async (albumName) => {
         Delete: { Objects: objects },
         Quiet: true,
       };
-      const data = await s3.send(new DeleteObjectCommand(params));
+      const data = await s3.send(new DeleteObjectsCommand(params));
       listAlbums();
       return alert("Successfully deleted album.");
     } catch (err) {

@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Using Amazon Cognito Identity to authenticate users<a name="loading-browser-credentials-cognito"></a>
 
-The recommended way to obtain AWS credentials for your browser scripts is to use the Amazon Cognito Identity credentials client `CognitoIdentityClientconst`\. Amazon Cognito enables authentication of users through third\-party identity providers\.
+The recommended way to obtain AWS credentials for your browser scripts is to use the Amazon Cognito Identity credentials client `CognitoIdentityClient`\. Amazon Cognito enables authentication of users through third\-party identity providers\.
 
 To use Amazon Cognito Identity, you must first create an identity pool in the Amazon Cognito console\. An identity pool represents the group of identities that your application provides to your users\. The identities given to users uniquely identify each user account\. Amazon Cognito identities are not credentials\. They are exchanged for credentials using web identity federation support in AWS Security Token Service \(AWS STS\)\.
 
@@ -20,51 +20,55 @@ If you have not yet created one, create an identity pool to use with your browse
 
 Unauthenticated users don't have their identity verified, making this role appropriate for guest users of your app or in cases when it doesn't matter if users have their identities verified\. Authenticated users log in to your application through a third\-party identity provider that verifies their identities\. Make sure you scope the permissions of resources appropriately so you don't grant access to them from unauthenticated users\.
 
-After you configure an identity pool, use the Amazon Cognito `CognitoIdentityCredentials` method from the `@aws-sdk/aws-sdk-client-cognito-identity`" of the AWS SDK for JavaScript client module to create the credentials to authenticate users\. Use the `fromCognitoIdentityPool` method from the `@aws-sdk/credential-provider-cognito-identity` to retrieve the cendentials from the identity pool This is shown in the following example of creating an Amazon S3 client in the `us-west-2` AWS Region for users in the *IDENTITY\_POOL\_ID* identity pool\.
+After you configure an identity pool, use the Amazon Cognito `CognitoIdentityCredentials` client from the `@aws-sdk/aws-sdk-client-cognito-identity`" and the `fromCognitoIdentityPool` method from the `@aws-sdk/credential-provider-cognito-identity` to retrieve the cendentials from the identity pool\. This is shown in the following example of creating an Amazon S3 client in the `us-west-2` AWS Region for users in the *IDENTITY\_POOL\_ID* identity pool\.
 
 ```
-                // Import required AWS SDK clients and command for Node.js
-                const {S3Client} = require("@aws-sdk/client-s3");
-                const {CognitoIdentityClient} = require("@aws-sdk/client-cognito-identity");
-                const {fromCognitoIdentityPool} = require("@aws-sdk/credential-provider-cognito-identity");
-                
-const cognitoIdentityClient = new CognitoIdentityClient({
-  region: "us-west-2"
-});
+// Import required AWS SDK clients and command for Node.js
+const {S3Client} = require("@aws-sdk/client-s3");
+const {CognitoIdentityClient} = require("@aws-sdk/client-cognito-identity");
+const {fromCognitoIdentityPool} = require("@aws-sdk/credential-provider-cognito-identity");
+
+const REGION = AWS_REGION               
 
 const s3Client = new S3Client({
-  region: "us-west-2",
+  region: REGION,
   credentials: fromCognitoIdentityPool({
-    client: cognitoIdentityClient,
-    identityPoolId: 'IDENTITY_POOL_ID'
+    client: new CognitoIdentityClient({region:REGION}),
+    identityPoolId: 'IDENTITY_POOL_ID',
+    logins: {
+            // Optional tokens, used for authenticated login.
+        },
   })
 });
 ```
 
-The optional `Logins` property is a map of identity provider names to the identity tokens for those providers\. How you get the token from your identity provider depends on the provider you use\. For example, if Facebook is one of your identity providers, you might use the `FB.login` function from the [Facebook SDK](https://developers.facebook.com/docs/facebook-login/web) to get an identity provider token\.
+The optional `logins` property is a map of identity provider names to the identity tokens for those providers\. How you get the token from your identity provider depends on the provider you use\. For example, if you are using an Amazon Cognito user pool as your authentication provider, you could use a method similar to the one below\.
 
 ```
-FB.login(function (response) {
-  if (response.authResponse) { 
-    // logged in
-    const cognitoIdentityClient = new CognitoIdentityClient({
-      region: "us-west-2"
-    });
-    const s3Client = new S3Client({
-      region: "us-west-2",
-      credentials: fromCognitoIdentityPool({
-        client: cognitoIdentityClient,
-        identityPoolId: 'IDENTITY_POOL_ID',
-        logins: {
-           "graph.facebook.com': 'response.authResponse.accessToken"
+// Get the Amazon Cognito ID token for the user. 'getToken()' below.
+let idToken = getToken();
+let COGNITO_ID = "COGNITO_ID"; // 'COGNITO_ID' has the format 'cognito-idp.REGION.amazonaws.com/COGNITO_USER_POOL_ID'
+let loginData = {
+  [COGNITO_ID]: idToken,
+};
+const s3Client = new S3Client({
+    region: REGION,
+    credentials: new CognitoIdentityClient({region:REGION}),
+    identityPoolId: 'IDENTITY_POOL_ID',
+    logins: {
+            loginData
         },
       }),
     });
-    console.log('You are now logged in.');
-  } else {
-    console.log('There was a problem logging you in.');
-  }
-});
+
+// Strips the token ID from the URL after authentication.
+window.getToken = function () {
+  var idtoken = window.location.href;
+  var idtoken1 = idtoken.split("=")[1];
+  var idtoken2 = idtoken1.split("&")[0];
+  var idtoken3 = idtoken2.split("&")[0];
+  return idtoken3;
+};
 ```
 
 ## Switching Unauthenticated Users to Authenticated Users<a name="browser-switching-unauthenticated-users"></a>
@@ -73,31 +77,30 @@ Amazon Cognito supports both authenticated and unauthenticated users\. Unauthent
 
 ### Initially Unauthenticated User<a name="browser-initially-unauthenticated-user"></a>
 
-Users typically start with the unauthenticated role, for which you set the credentials property of your configuration object without a `Logins` property\. In this case, your default credentials might look like the following:
+Users typically start with the unauthenticated role, for which you set the credentials property of your configuration object without a `logins` property\. In this case, your default credentials might look like the following:
 
 ```
-// set the default credentials
-const creds = new CognitoIdentityCredentials({
- IdentityPoolId: 'us-east-1:1699ebc0-7900-4099-b910-2df94f52a030'
+// Import the required AWS SDK for JavaScript v3 modules.                   
+const {fromCognitoIdentityPool} = require("@aws-sdk/credential-provider-cognito-identity");
+const {CognitoIdentityProviderClient} = require("@aws-sdk/client-cognito-identity-provider");
+// Set the default credentials.
+const creds = new fromCognitoIdentityPool({
+client: new CognitoIdentityClient({region: "REGION",
+ IdentityPoolId: "IDENTITY_POOL_ID"
 });
-AWS.config.credentials = creds;
 ```
 
 ### Switch to Authenticated User<a name="switch-to-authenticated"></a>
 
-When an unauthenticated user logs in to an identity provider and you have a token, you can switch the user from unauthenticated to authenticated by calling a custom function that updates the credentials object and adds the `Logins` token\.
+When an unauthenticated user logs in to an identity provider and you have a token, you can switch the user from unauthenticated to authenticated by calling a custom function that updates the credentials object and adds the `logins` token\.
 
 ```
 // Called when an identity provider has a token for a logged in user
 function userLoggedIn(providerName, token) {
-  creds.params.Logins = creds.params.Logins || {};
+  creds.params.Logins = creds.params.logins || {};
   creds.params.Logins[providerName] = token;
                     
   // Expire credentials to refresh them on the next request
   creds.expired = true;
 }
 ```
-
-You can also create an `CognitoIdentityCredentials` object\. If you do, you must reset the credentials properties of existing service objects you created\. Service objects read from the global configuration only when the object is initialized\. 
-
-For more information about the `CognitoIdentityCredentials` object, see [CognitoIdentityCredentials](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cognito-identity/classes/cognitoidentityclient.html) in the *AWS SDK for JavaScript API Reference\.* 

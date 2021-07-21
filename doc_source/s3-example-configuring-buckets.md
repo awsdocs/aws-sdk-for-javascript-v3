@@ -24,39 +24,46 @@ For more information about using CORS configuration with an Amazon S3 bucket, se
 ## Prerequisite tasks<a name="s3-example-configuring-buckets-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up a project environment to run Node TypeScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
++ Set up a project environment to run Node JavaScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Retrieving a bucket CORS configuration<a name="s3-example-configuring-buckets-get-cors"></a>
 
-Create a Node\.js module with the file name `s3_getcors.ts`\. The module will take a single command\-line argument to specify the bucket whose CORS configuration you want\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. 
+Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+
+```
+import { S3Client} from "@aws-sdk/client-s3";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon S3 service client object.
+const s3Client = new S3Client({ region: REGION });
+export { s3Client };
+```
+
+Create a Node\.js module with the file name `s3_getcors.js`\. The module will take a single command\-line argument to specify the bucket whose CORS configuration you want\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. 
 
 The only parameter you need to pass is the name of the selected bucket when calling the `GetBucketCorsCommand` method\. If the bucket currently has a CORS configuration, that configuration is returned by Amazon S3 as the `CORSRules` property of the `data` parameter passed to the callback function\.
 
 If the selected bucket has no CORS configuration, that information is returned to the callback function in the `error` parameter\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ```
 // Import required AWS SDK clients and commands for Node.js
-const { S3Client, GetBucketCorsCommand } = require("@aws-sdk/client-s3");
-
-// Set the AWS region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { GetBucketCorsCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
 
 // Create the parameters for calling
-const bucketParams = { Bucket: "BUCKET_NAME" };
+export const bucketParams = { Bucket: "BUCKET_NAME" };
 
-// Create S3 service object
-const s3 = new S3Client({ region: REGION });
-
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await s3.send(new GetBucketCorsCommand(bucketParams));
+    const data = await s3Client.send(new GetBucketCorsCommand(bucketParams));
     console.log("Success", JSON.stringify(data.CORSRules));
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -67,29 +74,36 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node s3_getcors.ts // If you prefer JavaScript, enter 'node s3_getcors.js'
+node s3_getcors.js 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_getcors.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_getcors.js)\.
 
 ## Setting a bucket CORS configuration<a name="s3-example-configuring-buckets-put-cors"></a>
 
-Create a Node\.js module with the file name `s3_setcors.ts`\. The module takes multiple command\-line arguments, the first of which specifies the bucket whose CORS configuration you want to set\. Additional arguments enumerate the HTTP methods \(POST, GET, PUT, PATCH, DELETE, POST\) you want to allow for the bucket\. Configure the SDK as previously shown, including installing the required clients and packages\.
+Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
- Create an `S3` client service object\. Next create a JSON object to hold the values for the CORS configuration as required by the `PutBucketCorsCommand` method of the `S3` service object\. Specify `"Authorization"` for the `AllowedHeaders` value and `"*"` for the `AllowedOrigins` value\. Set the value of `AllowedMethods` as empty array initially\.
+```
+import { S3Client} from "@aws-sdk/client-s3";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon S3 service client object.
+const s3Client = new S3Client({ region: REGION });
+export { s3Client };
+```
+
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/libs/s3Client.js)\.
+
+Create a Node\.js module with the file name `s3_setcors.js`\. The module takes multiple command\-line arguments, the first of which specifies the bucket whose CORS configuration you want to set\. Additional arguments enumerate the HTTP methods \(POST, GET, PUT, PATCH, DELETE, POST\) you want to allow for the bucket\. Configure the SDK as previously shown, including installing the required clients and packages\.
+
+ Next create a JSON object to hold the values for the CORS configuration as required by the `PutBucketCorsCommand` method of the `S3` service object\. Specify `"Authorization"` for the `AllowedHeaders` value and `"*"` for the `AllowedOrigins` value\. Set the value of `AllowedMethods` as empty array initially\.
 
 Specify the allowed methods as command line parameters to the Node\.js module, adding each of the methods that match one of the parameters\. Add the resulting CORS configuration to the array of configurations contained in the `CORSRules` parameter\. Specify the bucket you want to configure for CORS in the `Bucket` parameter\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ```
-async function run() {
   // Import required AWS-SDK clients and commands for Node.js
-  const { S3Client, PutBucketCorsCommand } = require("@aws-sdk/client-s3");
-
-  // Set the AWS region
-  const REGION = "REGION";
+ import { PutBucketCorsCommand } from "@aws-sdk/client-s3";
+ import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
 
   // Set params
   // Create initial parameters JSON for putBucketCors
@@ -131,17 +145,15 @@ async function run() {
   const corsRules = new Array(thisConfig);
 
   // Create CORS params
-  const corsParams = {
+export  const corsParams = {
     Bucket: "BUCKET_NAME",
     CORSConfiguration: { CORSRules: corsRules },
   };
-
-  // Create S3 service object
-  const s3 = new S3Client({ region: REGION });
-
+export async function run() {
   try {
-    const data = await s3.send(new PutBucketCorsCommand(corsParams));
+    const data = await s3Client.send(new PutBucketCorsCommand(corsParams));
     console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -155,4 +167,4 @@ To run the example, enter the following at the command prompt including one or m
 node s3_setcors.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_setcors.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_setcors.js)\.

@@ -32,8 +32,6 @@ If no credential provider is supplied to a client, the default precedence of sel
 
 1. Credentials loaded from AWS Identity and Access Management using the credentials provider of the Amazon EC2 instance \(if configured in the instance metadata\)
 
-For more information, see [Class: Credentials](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Credentials.html) and [Class: CredentialProviderChain](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/CredentialProviderChain.html) in the API Reference\.
-
 **Warning**  
 We don't recommend hard\-coding your AWS credentials in your application\. Hard\-coding credentials poses a risk of exposing your access key ID and secret access key\.
 

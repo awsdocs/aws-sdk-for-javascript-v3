@@ -1,7 +1,7 @@
 # AWS SDK for JavaScript Developer Guide for SDK Version 3
 
 -----
-*****Copyright &copy;  Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
+*****Copyright &copy; Amazon Web Services, Inc. and/or its affiliates. All rights reserved.*****
 
 -----
 Amazon's trademarks and trade dress may not be used in 
@@ -60,6 +60,7 @@ Amazon's trademarks and trade dress may not be used in
    + [Working with JSON](working-with-json.md)
 + [Using AWS Cloud9 with the AWS SDK for JavaScript](cloud9-javascript.md)
 + [SDK for JavaScript code examples](sdk-code-samples.md)
+   + [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
    + [Amazon CloudWatch examples](cloudwatch-examples.md)
       + [Creating alarms in Amazon CloudWatch](cloudwatch-examples-creating-alarms.md)
       + [Using alarm actions in Amazon CloudWatch](cloudwatch-examples-using-alarm-actions.md)
@@ -71,7 +72,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Reading and writing a single item in DynamoDB](dynamodb-example-table-read-write.md)
       + [Reading and writing items in batch in DynamoDB](dynamodb-example-table-read-write-batch.md)
       + [Querying and scanning a DynamoDB table](dynamodb-example-query-scan.md)
-      + [Using the DynamoDB Utilities](dynamodb-example-dynamodb-utilities.md)
+      + [Using the DynamoDB Document Client](dynamodb-example-dynamodb-utilities.md)
    + [Amazon EC2 examples](ec2-examples.md)
       + [Creating an Amazon EC2 instance](ec2-example-creating-an-instance.md)
       + [Managing Amazon EC2 instances](ec2-example-managing-instances.md)
@@ -141,14 +142,14 @@ Amazon's trademarks and trade dress may not be used in
 + [Cross-service examples for the AWS SDK for JavaScript](tutorials.md)
    + [Setting up Node.js on an Amazon EC2 instance](setting-up-node-on-ec2-instance.md)
    + [Build an app to submit data to DynamoDB](cross-service-example-submitting-data.md)
-      + [Create an Amazon Cognito identity pool with an unauthenticated identity](s3-crossservices-adddata-create-idpool.md)
-      + [Create an Amazon S3 bucket](s3-crossservices-adddata-create-bucket.md)
-      + [Create a DynamoDB table](s3-crossservices-adddata-create-table.md)
-      + [Create a front-end page for the app](cross-service-submitdata-front-end.md)
+      + [Prerequisites](s3-crossservices-adddata-prereqs.md)
+      + [Create the AWS resources](s3-crossservices-adddata-provision-resources.md)
+      + [Create a front-end page for the app](s3-crossservices-adddata-front-end.md)
       + [Create the browser script](cross-service-submitdata-browser-script.md)
-      + [Hosting the app on Amazon S3](cross-service-submitdata-create-website.md)
-      + [Run the app](cross-service-submitdata-run-app.md)
+      + [Delete the resources](s3-crossservices-adddata-destroy.md)
    + [Build a transcription app with authenticated users](transcribe-app.md)
+      + [Steps](transcribe-app-procedures.md)
+      + [Prerequisites](transcribe-app-prerequisites.md)
       + [Create the AWS resources](transcribe-app-provision-resources.md)
       + [Create the HTML](transcribe-app-create-html.md)
       + [Prepare the browser script](transcribe-app-browser-script.md)
@@ -171,7 +172,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Create the Lambda functions](serverless-step-functions-example-create-lambda-functions.md)
          + [Add the Lambda functions to workflows](serverless-step-functions-example-add-lambda.md)
          + [Execute your workflow by using the Step Functions console](serverless-step-functions-example-execute-workflow.md)
-   + [Creating scheduled events to execute Lambda functions](scheduled-events-invoking-lambda-example.md)
+   + [Creating scheduled events to execute AWS Lambda functions](scheduled-events-invoking-lambda-example.md)
       + [Prerequisite tasks](scheduled-events-invoking-lambda-prerequisites.md)
       + [Create the AWS resources](scheduled-events-invoking-lambda-provision-resources.md)
       + [Creating the AWS Lambda function](scheduled-events-invoking-lambda-browser-script.md)
@@ -184,7 +185,6 @@ Amazon's trademarks and trade dress may not be used in
       + [Prepare the browser script](lambda-create-table-browser-script.md)
       + [Create the Lambda function](lambda-create-table-create-lambda-function.md)
       + [Deploy the Lambda function](lambda-create-table-deploy-function.md)
-      + [Run the app](lambda-create-table-run.md)
       + [Delete the resources](lambda-create-table-destroy.md)
    + [Building an Amazon Lex chatbot](lex-bot-example.md)
       + [Prerequisites](lex-bot-example-prerequisites.md)

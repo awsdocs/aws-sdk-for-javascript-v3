@@ -17,36 +17,47 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/glacier/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
+This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
+If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Create the vault<a name="glacier-example-createvault-code"></a>
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+Create a `libs` directory, and create a Node\.js module with the file name `glacierClient.js`\. Copy and paste the code below into it, which creates the S3 Glacier client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { GlacierClient }  from  "@aws-sdk/client-glacier";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create Glacier service object.
+const glacierClient = new GlacierClient({ region: REGION });
+export { glacierClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/glacierClient.js)\.
+
+Create a Node\.js module with the file name `createVault.js`\. Copy and paste the code below into it\.
 
 **Note**  
-Replace *REGION* with your AWS Region, and *VAULT\_NAME* with the name of the Glacier vault\.
+Replace *VAULT\_NAME* with the name of the S3 Glacier vault\.
 
 ```
 // Load the SDK for JavaScript
-const { GlacierClient, CreateVaultCommand } = require("@aws-sdk/client-glacier");
-
-// Set the AWS Region
-const REGION = "REGION"; // e.g. 'us-east-1'
+import { CreateVaultCommand } from "@aws-sdk/client-glacier";
+import { glacierClient } from "./libs/glacierClient.js";
 
 // Set the parameters
 const vaultname = "VAULT_NAME"; // VAULT_NAME
 const params = { vaultName: vaultname };
 
-// Instantiate an S3 Glacier client
-const glacier = new GlacierClient({ region: REGION });
-
 const run = async () => {
   try {
-    const data = await glacier.send(new CreateVaultCommand(params));
+    const data = await glacierClient.send(new CreateVaultCommand(params));
     console.log("Success, vault created!");
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error");
   }
@@ -57,7 +68,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node createVault.ts // If you prefer JavaScript, enter 'node createVault.js'
+node createVault.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/glacier/src/createVault.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/glacier/src/createVault.js)\.

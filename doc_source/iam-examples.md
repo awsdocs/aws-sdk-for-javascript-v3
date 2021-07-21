@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 AWS Identity and Access Management \(IAM\) is a web service that enables Amazon Web Services \(AWS\) customers to manage users and user permissions in AWS\. The service is targeted at organizations with multiple users or systems in the cloud that use AWS products\. With IAM, you can centrally manage users, security credentials such as access keys, and permissions that control which AWS resources users can access\.
 
-![\[Relationship between JavaScript environments, the SDK, and IAM\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/code-samples-iam.png)
+
 
 The JavaScript API for IAM is exposed through the `IAM` client class\. For more information about using the IAM client class, see [Class: IAM](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-iam/classes/iam.html) in the API Reference\.
 

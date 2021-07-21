@@ -28,4 +28,4 @@ First, create a `LambdaApp` folder\. In this folder, create an `index.html` file
 </html>
 ```
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/lambda/lambda_create_function/src/LambdaApp/index.ts)\.
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/lambda/lambda_create_function/src/LambdaApp/index.js)\.

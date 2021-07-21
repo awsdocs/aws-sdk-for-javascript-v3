@@ -21,11 +21,9 @@ In this example, a series of Node\.js modules are used to automatically upload a
 ## Prerequisite tasks<a name="polly-example-synthesize-to-s3-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up a project environment to run Node TypeScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so with minor adjustments these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
++ Set up a project environment to run Node JavaScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
-+ Create resources for the example using the template [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/polly/general-examples/src/setup.yaml) to create a AWS CDK stack using either the [AWS Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) or the [AWS Command Line](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\. For instructions on how to modify the stack, or to delete the stack and its associated resources when you have finished the tutorial, see [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/resources/cdk/javascript_example_code_polly_aws_service)\.
++ Create resources for the example using the template [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/polly/general-examples/src/setup.yaml) to create a AWS CDK stack using either the [AWS Web Services Management Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) or the [AWS CLI](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\. For instructions on how to modify the stack, or to delete the stack and its associated resources when you have finished the tutorial, see [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/resources/cdk/javascript_example_code_polly_aws_service)\.
 **Note**  
 The stack name must be unique within an AWS Region and AWS account\. You can specify up to 128 characters, and numbers and hyphens are allowed\.
 
@@ -35,11 +33,11 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
 
 ## Upload audio recorded using Amazon Polly to Amazon S3<a name="polly-example-synthesize-to-s3-example"></a>
 
-Create a Node\.js module with the file name `polly_synthesize_to_s3.ts`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. In the code, enter the *REGION*, and the *BUCKET\_NAME*\. To access Amazon Polly, create an `Polly` client service object\. Replace *"IDENTITY\_POOL\_ID"* with the `IdentityPoolId` from the **Sample page** of the Amazon Cognito identity pool you created for this example\. This is also passed to each client object\.
+Create a Node\.js module with the file name `polly_synthesize_to_s3.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. In the code, enter the *REGION*, and the *BUCKET\_NAME*\. To access Amazon Polly, create an `Polly` client service object\. Replace *"IDENTITY\_POOL\_ID"* with the `IdentityPoolId` from the **Sample page** of the Amazon Cognito identity pool you created for this example\. This is also passed to each client object\.
 
 **Note**  
 
-![\[Identity pool ID\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/identity-pool-id.png)![\[Identity pool ID\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Identity pool ID\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Identity pool ID\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Identity pool ID\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Identity pool ID\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 Call the `StartSpeechSynthesisCommand` method of the Amazon Polly client service object synthesize the voice message and upload it to the Amazon S3 bucket\. 
 
@@ -87,4 +85,4 @@ const run = async () => {
 run();
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/polly/general-examples/src/polly_synthesize_to_s3.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/polly/general-examples/src/polly_synthesize_to_s3.js)\.

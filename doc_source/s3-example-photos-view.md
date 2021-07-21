@@ -13,14 +13,11 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 **This browser script code example shows:**
 + How to create a photo album in an Amazon Simple Storage Service \(Amazon S3\) bucket and allow unauthenticated users to view the photos\.
 
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript is a super\-set of JavaScript so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
-
 ## The scenario<a name="s3-example-photos-view-scenario"></a>
 
 In this example, a simple HTML page provides a browser\-based application for viewing the photos in a photo album\. The photo album is in an Amazon S3 bucket into which photos are uploaded\.
 
-![\[JavaScript in a browser script using Amazon S3 buckets for photo albums.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/s3-photo-album-example.png)
+
 
 The browser script uses the SDK for JavaScript to interact with an Amazon S3 bucket\. The script uses the [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property) method of the Amazon S3 client class to enable you to view the photo albums\.
 
@@ -35,9 +32,6 @@ In this example, you must use the same AWS Region for both the Amazon S3 bucket 
 
 Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/README.md)\.
 
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
-
 ### Create the bucket<a name="s3-example-photos-view-prereq-bucket"></a>
 
 In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon S3 bucket where you can store albums and photos\. For more information about using the console to create an S3 bucket, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
@@ -45,7 +39,7 @@ In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon
 As you create the Amazon S3 bucket, be sure to do the following:
 + Make note of the bucket name so you can use it in a subsequent prerequisite task, [Configure role permissions](#s3-example-photos-view-prereq-perms)\.
 + Choose an AWS Region to create the bucket in\. This must be the same Region that you'll use to create an Amazon Cognito identity pool in a subsequent prerequisite task, [Create an identity pool](#s3-example-photos-view-prereq-idpool)\.
-+ In the **Create Bucket** wizard, on the **Create Bucket** page, in the **Bucket settings for block public access** section, clear these boxes: **Block public access to buckets and objects granted through new access control lists \(ACLs\)** and **Block public access to buckets and objects granted through any acess control lists \(ACLs\)**\.
++ In the **Create Bucket** wizard, on the **Create Bucket** page, in the **Bucket settings for block public access** section, clear these boxes: **Block public access to buckets and objects granted through new access control lists \(ACLs\)** and **Block public access to buckets and objects granted through any access control lists \(ACLs\)**\.
 
   For information about how to check and configure bucket permissions, see [Setting permissions for website access](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html) in the *Amazon Simple Storage Service Console User Guide*\.
 
@@ -392,7 +386,7 @@ This file is available on [GitHub](https://github.com/awsdocs/aws-doc-sdk-exampl
 **Note**  
 The *IDENTITY\_POOL\_ID* is displayed in red on the console as shown\.  
 
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/identity-pool-id.png)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Run the following at the command prompt to bundle the JavaScript for this example into a file called `main.js`\.
 

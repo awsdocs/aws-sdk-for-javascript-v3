@@ -25,87 +25,91 @@ In this example, a series of Node\.js modules are used to create alarms in Cloud
 
 For more information about CloudWatch alarms, see [Creating Amazon CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html) in the *Amazon CloudWatch User Guide*\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
 ## Prerequisite tasks<a name="cloudwatch-examples-creating-alarms-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cloudwatch/README.md)\.
-**Note**  
-The AWS SDK for JavaScript \(V3\) is written in TypeScript, so for consistency these examples are presented in TypeScript\. TypeScript extends JavaScript, so these examples can also be run in JavaScript\. For more information, see [this article](https://aws.amazon.com/blogs/developer/first-class-typescript-support-in-modular-aws-sdk-for-javascript/) in the AWS Developer Blog\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
+
+**Important**  
+These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
+However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
 
 ## Describing alarms<a name="cloudwatch-examples-creating-alarms-describing"></a>
 
-Create a Node\.js module with the file name `cw_describealarms.ts`\. Be sure to configure the SDK as previously shown, including downloading the `CloudWatch` client\. To access CloudWatch, create a `CloudWatch` client service object\. Create a JSON object to hold the parameters for retrieving alarm descriptions, limiting the alarms returned to those with a state of `INSUFFICIENT_DATA`\. Then call the `DescribeAlarmsCommand` method of the `CloudWatch` client service object\.
+Create a `libs` directory, and create a Node\.js module with the file name `cloudWatchClient.js`\. Copy and paste the code below into it, which creates the CloudWatch client object\. Replace *REGION* with your AWS region\.
 
-**Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
+```
+import { CloudWatchClient } from "@aws-sdk/client-cloudwatch";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon CloudWatch service client object.
+export const cwClient = new CloudWatchClient({ region: REGION });
+```
 
-**Note**  
-Replace *REGION* with your AWS Region\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchClient.js)\.
+
+Create a Node\.js module with the file name `describeAlarms.js`\. Be sure to configure the SDK as previously shown, including downloading the `CloudWatch` client\. Create a JSON object to hold the parameters for retrieving alarm descriptions, limiting the alarms returned to those with a state of `INSUFFICIENT_DATA`\. Then call the `DescribeAlarmsCommand` method of the `CloudWatch` client service object\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  CloudWatchClient,
-  DescribeAlarmsCommand
-} = require("@aws-sdk/client-cloudwatch");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { DescribeAlarmsCommand } from "@aws-sdk/client-cloudwatch";
+import { cwClient } from "./libs/cloudWatchClient.js";
 
 // Set the parameters
-const params = { StateValue: "INSUFFICIENT_DATA" };
+export const params = { StateValue: "INSUFFICIENT_DATA" };
 
-// Create CloudWatch service object
-const cw = new CloudWatchClient({ region: REGION });
-
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await cw.send(new DescribeAlarmsCommand(params));
+    const data = await cwClient.send(new DescribeAlarmsCommand(params));
     console.log("Success", data);
+    return data;
     data.MetricAlarms.forEach(function (item, index, array) {
       console.log(item.AlarmName);
+      return data;
     });
   } catch (err) {
     console.log("Error", err);
   }
 };
-run();
+// Uncomment this line to run execution within this file.
+// run();
 ```
 
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node cw_describealarms.ts //If you prefer JavaScript, enter 'node cw-describealarms.js'
+node describeAlarms.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/cw_describealarms.ts)\. 
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/describeAlarms.js)\. 
 
 ## Creating an alarm for a CloudWatch metric<a name="cloudwatch-examples-creating-alarms-putmetricalarm"></a>
 
-Create a Node\.js module with the file name `cw_putmetricalarm.ts`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. To access CloudWatch, create a `CloudWatch` service object\. Create a JSON object for the parameters needed to create an alarm based on a metric, in this case the CPU utilization of an Amazon EC2 instance\. The remaining parameters are set so the alarm triggers when the metric exceeds a threshold of 70 percent\. Then call the `DescribeAlarmsCommand` method of the `CloudWatch` client service object\.
+Create a `libs` directory, and create a Node\.js module with the file name `cloudWatchClient.js`\. Copy and paste the code below into it, which creates the CloudWatch client object\. Replace *REGION* with your AWS region\.
+
+```
+import { CloudWatchClient } from "@aws-sdk/client-cloudwatch";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon CloudWatch service client object.
+export const cwClient = new CloudWatchClient({ region: REGION });
+```
+
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchClient.js)\.
+
+Create a Node\.js module with the file name `putMetricAlarm.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. Create a JSON object for the parameters needed to create an alarm based on a metric, in this case the CPU utilization of an Amazon EC2 instance\. The remaining parameters are set so the alarm triggers when the metric exceeds a threshold of 70 percent\. Then call the `DescribeAlarmsCommand` method of the `CloudWatch` client service object\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, and *INSTANCE\_ID* with the ID of the Amazon EC2 instance\.
+Replace *INSTANCE\_ID* with the ID of the Amazon EC2 instance\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  CloudWatchClient,
-  PutMetricAlarmCommand,
-} = require("@aws-sdk/client-cloudwatch");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+import { PutMetricAlarmCommand } from "@aws-sdk/client-cloudwatch";
+import { cwClient } from "./libs/cloudWatchClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   AlarmName: "Web_Server_CPU_Utilization",
   ComparisonOperator: "GreaterThanThreshold",
   EvaluationPeriods: 1,
@@ -125,72 +129,72 @@ const params = {
   Unit: "Percent",
 };
 
-// Create CloudWatch service object
-const cw = new CloudWatchClient({ region: REGION });
-
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await cw.send(new PutMetricAlarmCommand(params));
-    console.log(
-      "Success",
-      data.$metadata.requestId
-    );
+    const data = await cwClient.send(new PutMetricAlarmCommand(params));
+    console.log("Success", data);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
 };
-run();
+// Uncomment this line to run execution within this file.
+// run();
 ```
 
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node cw_putmetricalarm.ts // If you prefer JavaScript, enter 'node cw_putmetricalarm.js'
+node putMetricAlarm.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/cw_putmetricalarm.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/putMetricAlarm.js)\.
 
 ## Deleting an alarm<a name="cloudwatch-examples-creating-alarms-deleting"></a>
 
-Create a Node\.js module with the file name `cw_deletealarms.ts`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. To access CloudWatch, create an `CloudWatch` client service object\. Create a JSON object to hold the names of the alarms to delete\. Then call the `DeleteAlarmsCommand` method of the `CloudWatch` client service object\.
+Create a `libs` directory, and create a Node\.js module with the file name `cloudWatchClient.js`\. Copy and paste the code below into it, which creates the CloudWatch client object\. Replace *REGION* with your AWS region\.
+
+```
+import { CloudWatchClient } from "@aws-sdk/client-cloudwatch";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon CloudWatch service client object.
+export const cwClient = new CloudWatchClient({ region: REGION });
+```
+
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchClient.js)\.
+
+Create a Node\.js module with the file name `deleteAlarms.js`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. Create a JSON object to hold the names of the alarms to delete\. Then call the `DeleteAlarmsCommand` method of the `CloudWatch` client service object\.
 
 **Note**  
-This example imports and uses the required AWS Service V3 package clients, V3 commands, and uses the `send` method in an async/await pattern\. You can create this example using V2 commands instead by making some minor changes\. For details, see [Using V3 commands](welcome.md#using_v3_commands)\.
-
-**Note**  
-Replace *REGION* with your AWS Region, and *ALARM\_NAMES* with the names of the alarms\.
+Replace *ALARM\_NAMES* with the names of the alarms\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
-const {
-  CloudWatchClient,
-  DeleteAlarmsCommand,
-} = require("@aws-sdk/client-cloudwatch");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g., "us-east-1"
+import { DeleteAlarmsCommand } from "@aws-sdk/client-cloudwatch";
+import { cwClient } from "./libs/cloudWatchClient.js";
 
 // Set the parameters
-const params = { AlarmNames: "ALARM_NAMES" }; // e.g., "Web_Server_CPU_Utilization"
+export const params = { AlarmNames: "ALARM_NAME" }; // e.g., "Web_Server_CPU_Utilization"
 
-// Create CloudWatch service object
-const cw = new CloudWatchClient({ region: REGION });
-
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await cw.send(new DeleteAlarmsCommand(params));
-    console.log("Success, alarm deleted; requestID:", data.$metadata.requestId);
+    const data = await cwClient.send(new DeleteAlarmsCommand(params));
+    console.log("Success, alarm deleted; requestID:", data);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
 };
-run();
+
+// Uncomment this line to run execution within this file.
+// run();
 ```
 
 To run the example, enter the following at the command prompt\.
 
 ```
-ts-node cw_deletealarms.ts // If you prefer to use JavaScript, enter 'node cw_deletealarms.js'
+node deleteAlarms.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/cw_deletealarms.ts)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/deleteAlarms.js)\.

@@ -15,18 +15,19 @@ This example requires the following resources\.
 + An Amazon Cognito identity pool with access enabled for unauthenticated identities\. 
 + An AWS Identity and Access Management role whose policy grants permission to submit data to an Amazon Kinesis stream\.
 
-You can create these resources manually, but we recommend provisioning these resources using the AWS Cloud Development Kit \(AWS CDK\) as described in this topic\.
+You can create these resources manually, but we recommend provisioning these resources using the AWS CloudFormation as described in this topic\.
 
-**Note**  
-The AWS CDK is a software development framework that enables you to define cloud application resources\. For more information, see the [AWS Cloud Development Kit \(AWS CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/home.html)\.
+## Create the AWS resources using the AWS CloudFormation<a name="kinesis-page-scrolling-resources-cli"></a>
 
-## Create the AWS resources using the AWS CLI<a name="kinesis-page-scrolling-resources-cli"></a>
+To create the resources using the AWS CloudFormation:
 
-To creat the resources using the AWS CLI:
+AWS CloudFormation enables you to create and provision AWS infrastructure deployments predictably and repeatedly\. For more information about AWS CloudFormation, see the [AWS CloudFormation developer guide\.](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)\.
 
-1. Install and configure the AWS CLI following the instructions in the [AWS CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)\.
+1. Install and configure the AWS CloudFormation following the instructions in the [AWS CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)\.
 
 1. Create a file named `setup.yaml` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/kinesis/src/setup.yaml) into it\.
+**Note**  
+The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/resources/cdk/kinesis-iam-unauthenticated-role)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
 
 1. Run the following command from the command line, replacing *STACK\_NAME* with a unique name for the stack\.
 **Important**  
@@ -38,7 +39,16 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
 
    For more information on the `create-stack` command parameters, see the [AWS CLI Command Reference guide](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack.html), and the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\.
 
-The resources are created, are the values you require as variables for this example are returned in the command window\. These include:
+**Note**  
+If you create anoher stack using this template, you must change the stream name in the `setup.yaml` or you encounter an error\.  
+
+
+
+To view the resources when they are created, to the the **Stacks** page on the AWS AWS CloudFormation console, select the stack, and open the **Resources** tab\. 
+
+
+
+You require the following for this example:
 + An Amazon Kinesis stream\. You need to include the name of the stream the browser script\.
 + An Amazon Cognito identity pool with access enabled for unauthenticated identities\. You need to include the identity pool ID in the code to obtain credentials for the browser script\. For more information about Amazon Cognito identity pools, see [Identity Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) in the *Amazon Cognito Developer Guide*\.
 + An IAM role with an attached IAM policy that grants permission to submit data to an Amazon Kinesis stream\. For more information about creating an IAM role, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
@@ -74,7 +84,7 @@ This is the role policy when is attached to the IAM role\. The CDK automatically
 **Note**  
 The CDK automatically poplulates the *STREAM\_RESOURCE\_ARN*\. 
 
-## Create the AWS resources using the AWS Management Console;<a name="kinesis-page-scrolling-resources-console"></a>
+## Create the AWS resources using the Amazon Web Services Management Console;<a name="kinesis-page-scrolling-resources-console"></a>
 
 To create resources for the app in the console, follow the instructions in the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)\. Use the template provided create a file named `setup.yaml`, and copy the content [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/kinesis/src/setup.yaml)\.
 

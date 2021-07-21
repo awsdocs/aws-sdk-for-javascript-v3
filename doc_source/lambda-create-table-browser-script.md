@@ -10,24 +10,60 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 This topic is part of a tutorial that demonstrates how to create, deploy, and run a Lambda function using the AWS SDK for JavaScript\. To start at the beginning of the tutorial, see [Creating and using Lambda functions](lambda-create-table-example.md)\.
 
-In the `LambdaApp` folder, create a file name `index.ts`, and paste the content below into it\.
+First, create the required service client objects\. Create a `libs` folder, and in it create two files, `dynamoClient.js` and `lambdaClient.js`\. Paste the code below into `dynamoClient.js`\.
 
- First, replace *REGION* with the AWS region\. Create an Lambda client service object as show\. Replace *IDENTITY\_POOL\_ID* with the `IdentityPoolId` of the Amazon Cognito identity pool you created in the [Create the AWS resources ](lambda-create-table-provision-resources.md) topic of this tutorial\. In the parameters, replace *LAMBDA\_FUNCTION* with a name unique in your AWS account, for example `createTable`\.
+```
+const { CognitoIdentityClient } = require ( "@aws-sdk/client-cognito-identity" );
+const { fromCognitoIdentityPool } = require ( "@aws-sdk/credential-provider-cognito-identity" );
+const { DynamoDBClient } = require ( "@aws-sdk/client-dynamodb" );
 
-**Note**  
+const REGION = "REGION";
+const IDENTITY_POOL_ID = "IDENTITY_POOL_ID"; // An Amazon Cognito Identity Pool ID.
 
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/identity-pool-id.png)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+// Create an Amazon DynamoDB service client object.
+const dynamoClient = new DynamoDBClient({
+  region: REGION,
+  credentials: fromCognitoIdentityPool({
+    client: new CognitoIdentityClient({ region: REGION }),
+    identityPoolId: IDENTITY_POOL_ID,
+  }),
+});
+
+module.exports = { dynamoClient };
+```
+
+Paste the code below into `lambdaClient.js`\.
+
+```
+const { lambdaClient } = require ("@aws-sdk/client-lambda" );
+const {
+  fromCognitoIdentityPool,
+} = require ( "@aws-sdk/credential-provider-cognito-identity" );
+const { CognitoIdentityClient }  = require ("@aws-sdk/client-cognito-identity" );
+
+// Set the AWS Region.
+const REGION = "eu-west-1"; // e.g., 'us-east-2'
+const IDENTITY_POOL_ID = "eu-west-1:dc7d706a-1f07-4fa5-baa7-edfabc05f293";
+
+// Create an AWS Lambda client service object that initializes the Amazon Cognito credentials provider.
+const lambdaClient = new LambdaClient({
+  region: REGION,
+  credentials: fromCognitoIdentityPool({
+    client: new CognitoIdentityClient({ region: REGION }),
+    identityPoolId: IDENTITY_POOL_ID
+  }),
+});
+module.exports = {lambdaClient}
+```
+
+In both, replace *REGION* with the AWS region\. Create an Lambda client service object as show\. Replace *IDENTITY\_POOL\_ID* with the `IdentityPoolId` of the Amazon Cognito identity pool you created in the [Create the AWS resources ](lambda-create-table-provision-resources.md) topic of this tutorial\.
+
+In the `LambdaApp` folder, create a file name `index.js`, and paste the content below into it\.
 
 ```
 // Load the required clients and packages.
-const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
-const {
-  fromCognitoIdentityPool,
-} = require("@aws-sdk/credential-provider-cognito-identity");
-const { LambdaClient, InvokeCommand } = require("@aws-sdk/client-lambda");
-
-// Set the AWS Region.
-const REGION = "REGION"; // e.g., 'us-east-2'
+const { InvokeCommand } = require ("@aws-sdk/client-lambda" );
+const { lambdaClient } = require ( "../libs/lambdaClient" );
 
 // Set the parmaeters.
 const params={
@@ -37,19 +73,10 @@ const params={
   LogType: "None"
 }
 
-// Create an AWS Lambda client service object that initializes the Amazon Cognito credentials provider.
-const lambda = new LambdaClient({
-  region: REGION,
-  credentials: fromCognitoIdentityPool({
-    client: new CognitoIdentityClient({ region: REGION }),
-    identityPoolId: "IDENTITY_POOL_ID", // IDENTITY_POOL_ID e.g., eu-west-1:xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx
-  }),
-});
-
 // Call the Lambda function.
 window.createTable = async () => {
   try {
-    const data = await lambda.send(new InvokeCommand(params));
+    const data = await lambdaClient.send(new InvokeCommand(params));
     console.log("Table Created", data);
     document.getElementById('message').innerHTML = "Success, table created"
   } catch (err) {
@@ -58,12 +85,14 @@ window.createTable = async () => {
 };
 ```
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/lambda/lambda_create_function/src/LambdaApp/index.ts)\.
+In the parameters, replace *LAMBDA\_FUNCTION* with a name unique in your AWS account, for example `createTable`\.
+
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/lambda/lambda_create_function/src/LambdaApp/index.js)\.
 
 Finally, run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`\.
 
 ```
-webpack index.ts --mode development --target web --devtool false -o main.js
+webpack LambdaApp/index.js --mode development --target web --devtool false -o LambdaApp/main.js
 ```
 
 **Note**  
