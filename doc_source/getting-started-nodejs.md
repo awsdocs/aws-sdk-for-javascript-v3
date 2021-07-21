@@ -124,14 +124,14 @@ const run = async () => {
 run();
 ```
 
-The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/src/sample.ts)\.
+The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/src/sample.js)\.
 
 ## Step 3: Run the example<a name="getting-started-nodejs-run-sample"></a>
 
 Enter the following command to run the example\.
 
 ```
-node sample.ts
+node sample.js
 ```
 
 If the upload is successful, you'll see a confirmation message at the command prompt\. You can also find the bucket and the uploaded text object in the [Amazon S3 console](https://console.aws.amazon.com/s3/)\.
