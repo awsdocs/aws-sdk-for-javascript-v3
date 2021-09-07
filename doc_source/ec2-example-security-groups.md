@@ -104,8 +104,6 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 Create a Node\.js module with the file name `ec2_createsecuritygroup.js`\. Be sure to configure the SDK as previously shown\. Create a JSON object for the parameters that specify the name of the security group, a description, and the ID for the VPC\. Pass the parameters to the `CreateSecurityGroupCommand` method\.
 
-`curityGroupCommand` method\.
-
 After you successfully create the security group, you can define rules for allowing inbound traffic\. Create a JSON object for parameters that specify the IP protocol and inbound ports on which the Amazon EC2 instance will receive traffic\. Pass the parameters to the `AuthorizeSecurityGroupIngressCommand` method\.
 
 **Note**  
