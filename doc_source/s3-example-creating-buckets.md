@@ -74,54 +74,6 @@ node s3_listbuckets.js
 
 This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_listbuckets.js)\.
 
-## Creating an Amazon S3 bucket<a name="s3-example-creating-buckets-new-bucket-2"></a>
-
-Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
-
-```
-import { S3Client} from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
-
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/libs/s3Client.js)\.
-
-Create a Node\.js module with the file name `s3_createbucket.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create an `S3` client service object\. The module will take a single command\-line argument to specify a name for the new bucket\.
-
-Add a variable to hold the parameters used to call the `createBucket` method of the Amazon S3 client service object, including the name for the newly created bucket\. The callback function logs the new bucket's location to the console after Amazon S3 successfully creates it\.
-
-```
-// Get service clients module and commands using ES6 syntax.
- import { CreateBucketCommand } from "@aws-sdk/client-s3";
- import { s3 } from "./libs/s3Client.js";
-
-// Set the bucket parameters
-const bucketParams = { Bucket: "BUCKET_NAME" };
-
-// Create the Amazon S3 bucket.
-const run = async () => {
-  try {
-    const data = await s3.send(new CreateBucketCommand(bucketParams));
-    console.log("Success", data.Location);
-    return data;
-  } catch (err) {
-    console.log("Error", err);
-  }
-};
-run();
-```
-
-To run the example, enter the following at the command prompt\.
-
-```
-node s3_createbucket.js
-```
-
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_createbucket.js)\.
-
 ## Creating an Amazon S3 bucket<a name="s3-example-creating-buckets-new-bucket"></a>
 
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
