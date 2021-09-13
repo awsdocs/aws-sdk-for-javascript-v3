@@ -62,7 +62,7 @@ For details about using `package.json` in a Node\.js project, see [What is the f
 
    The packages and dependencies are installed\. 
 **Note**  
-You can add dependencies to the `package.json` and install them by running `npm install`\. You can also add dependancies directly through the command line\. For example, to install the AWS SDK for JavaScript v3 client module for Amazon S3, enter the command below in the command line\.  
+You can add dependencies to the `package.json` and install them by running `npm install`\. You can also add dependencies directly through the command line\. For example, to install the AWS SDK for JavaScript v3 client module for Amazon S3, enter the command below in the command line\.  
 
    ```
    npm install @aws-sdk/client-s3
