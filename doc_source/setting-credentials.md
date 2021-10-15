@@ -28,6 +28,5 @@ While it is possible to do so, we recommend you not hard code credentials inside
 For more information about how to manage your access keys, see [ Best practices for managing AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html) in the AWS General Reference\.
 
 **Topics**
-+ [Best practices for credentials](#credentials-best-practices)
 + [Setting credentials in Node\.js](setting-credentials-node.md)
 + [Setting credentials in a web browser](setting-credentials-browser.md)

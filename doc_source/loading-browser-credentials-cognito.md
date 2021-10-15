@@ -20,24 +20,23 @@ If you have not yet created one, create an identity pool to use with your browse
 
 Unauthenticated users don't have their identity verified, making this role appropriate for guest users of your app or in cases when it doesn't matter if users have their identities verified\. Authenticated users log in to your application through a third\-party identity provider that verifies their identities\. Make sure you scope the permissions of resources appropriately so you don't grant access to them from unauthenticated users\.
 
-After you configure an identity pool, use the Amazon Cognito `CognitoIdentityCredentials` client from the `@aws-sdk/aws-sdk-client-cognito-identity`" and the `fromCognitoIdentityPool` method from the `@aws-sdk/credential-provider-cognito-identity` to retrieve the cendentials from the identity pool\. This is shown in the following example of creating an Amazon S3 client in the `us-west-2` AWS Region for users in the *IDENTITY\_POOL\_ID* identity pool\.
+After you configure an identity pool, use the `fromCognitoIdentityPool` method from the `@aws-sdk/credential-providers` to retrieve the cendentials from the identity pool\. This is shown in the following example of creating an Amazon S3 client in the `us-west-2` AWS Region for users in the *IDENTITY\_POOL\_ID* identity pool\.
 
 ```
 // Import required AWS SDK clients and command for Node.js
 const {S3Client} = require("@aws-sdk/client-s3");
-const {CognitoIdentityClient} = require("@aws-sdk/client-cognito-identity");
-const {fromCognitoIdentityPool} = require("@aws-sdk/credential-provider-cognito-identity");
+const {fromCognitoIdentityPool} = require("@aws-sdk/credential-providers");
 
 const REGION = AWS_REGION               
 
 const s3Client = new S3Client({
   region: REGION,
   credentials: fromCognitoIdentityPool({
-    client: new CognitoIdentityClient({region:REGION}),
+    clientConfig: { region: REGION }, // Configure the underlying CognitoIdentityClient.
     identityPoolId: 'IDENTITY_POOL_ID',
     logins: {
-            // Optional tokens, used for authenticated login.
-        },
+        // Optional tokens, used for authenticated login.
+    },
   })
 });
 ```
@@ -51,15 +50,17 @@ let COGNITO_ID = "COGNITO_ID"; // 'COGNITO_ID' has the format 'cognito-idp.REGIO
 let loginData = {
   [COGNITO_ID]: idToken,
 };
+
 const s3Client = new S3Client({
-    region: REGION,
-    credentials: new CognitoIdentityClient({region:REGION}),
+  region: REGION,
+  credentials: fromCognitoIdentityPool({
+    clientConfig: { region: REGION }, // Configure the underlying CognitoIdentityClient.
     identityPoolId: 'IDENTITY_POOL_ID',
     logins: {
-            loginData
-        },
-      }),
-    });
+      loginData
+    }
+  })
+});
 
 // Strips the token ID from the URL after authentication.
 window.getToken = function () {
@@ -81,26 +82,10 @@ Users typically start with the unauthenticated role, for which you set the crede
 
 ```
 // Import the required AWS SDK for JavaScript v3 modules.                   
-const {fromCognitoIdentityPool} = require("@aws-sdk/credential-provider-cognito-identity");
-const {CognitoIdentityProviderClient} = require("@aws-sdk/client-cognito-identity-provider");
+const {fromCognitoIdentityPool} = require("@aws-sdk/credential-providers");
 // Set the default credentials.
 const creds = new fromCognitoIdentityPool({
-client: new CognitoIdentityClient({region: "REGION",
- IdentityPoolId: "IDENTITY_POOL_ID"
+  IdentityPoolId: "IDENTITY_POOL_ID",
+  clientConfig({ region: REGION }) // Configure the underlying CognitoIdentityClient.
 });
-```
-
-### Switch to Authenticated User<a name="switch-to-authenticated"></a>
-
-When an unauthenticated user logs in to an identity provider and you have a token, you can switch the user from unauthenticated to authenticated by calling a custom function that updates the credentials object and adds the `logins` token\.
-
-```
-// Called when an identity provider has a token for a logged in user
-function userLoggedIn(providerName, token) {
-  creds.params.Logins = creds.params.logins || {};
-  creds.params.Logins[providerName] = token;
-                    
-  // Expire credentials to refresh them on the next request
-  creds.expired = true;
-}
 ```
