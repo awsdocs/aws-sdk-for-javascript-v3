@@ -60,7 +60,7 @@ const params = {
   MediaFormat: "SOURCE_FILE_FORMAT", // For example, 'wav'
   Media: {
     MediaFileUri: "SOURCE_LOCATION",
-    // For example, "https://transcribe-demo.s3-REGION.amazonaws.com/hello_world.wav"
+    // For example, "https://transcribe-demo.s3.REGION.amazonaws.com/hello_world.wav"
   },
 };
 
