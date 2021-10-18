@@ -49,15 +49,6 @@ const sqsClient = new SQSClient({ region: REGION });
 export  { sqsClient };
 ```
 
-```
-import  { SQSClient } from "@aws-sdk/client-sqs";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create SNS service object.
-const sqsClient = new SQSClient({ region: REGION });
-export { sqsClient };
-```
-
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/libs/sqsClient.js)\.
 
 Create a Node\.js module with the file name `sqs_sendmessage.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed for your message, including the URL of the queue to which you want to send this message\. In this example, the message provides details about a book on a list of fiction best sellers including the title, author, and number of weeks on the list\.

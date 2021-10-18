@@ -19,7 +19,7 @@ In this example, a Node\.js module is used to display the bucket access control 
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getbucketcorscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getbucketcorscommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putbucketaclcommand.htm](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putbucketaclcommand.htm)
 
-For more information about access control lists for Amazon S3 buckets, see [ Managing access with ACLs](https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html) in the *Amazon Simple Storage Service Developer Guide*\.
+For more information about access control lists for Amazon S3 buckets, see [ Managing access with ACLs](https://docs.aws.amazon.com/AmazonS3/latest/dev/S3_ACLs_UsingACLs.html) in the *Amazon Simple Storage Service User Guide*\.
 
 ## Prerequisite tasks<a name="s3-manage-bucket-access-prereqs"></a>
 

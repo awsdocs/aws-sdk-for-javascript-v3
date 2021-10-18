@@ -41,7 +41,7 @@ However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/Co
 
 ## Getting an Item from a Table<a name="dynamodb-example-document-client-get"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
@@ -73,7 +73,7 @@ export { ddbDocClient };
 
 This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
 
-In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -135,7 +135,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 ## Putting an Item in a Table<a name="dynamodb-example-document-client-put"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
@@ -167,7 +167,7 @@ export { ddbDocClient };
 
 This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
 
-In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -230,7 +230,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 ## Updating an Item in a Table<a name="dynamodb-example-document-client-update"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
@@ -260,7 +260,7 @@ const ddbDocClient = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 export { ddbDocClient };
 ```
 
-In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -329,7 +329,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 ## Querying a Table<a name="dynamodb-example-document-client-query"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
@@ -361,7 +361,7 @@ export { ddbDocClient };
 
 This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
 
-In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -429,7 +429,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 ## Deleting an Item from a Table<a name="dynamodb-example-document-client-delete"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
@@ -461,7 +461,7 @@ export { ddbDocClient };
 
 This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
 
-In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";

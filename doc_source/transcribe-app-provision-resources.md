@@ -27,4 +27,4 @@ The resulting stack automatically provisions the following resources\.
 + An Amazon S3 bucket to host the application files\.
 + An Amazon S3 bucket to to store the transcriptions\.
 **Important**  
-This Amazon S3 bucket allows READ \(LIST\) public access, which enables anyone to list the objects within the bucket and potentially misuse the information\. If you do not delete this Amazon S3 bucket immediately after completing the tutorial, we highly recommend you comply with the [Security Best Practices in Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/compM.html) in the *Amazon Simple Storage Service Developer Guide*\. 
+This Amazon S3 bucket allows READ \(LIST\) public access, which enables anyone to list the objects within the bucket and potentially misuse the information\. If you do not delete this Amazon S3 bucket immediately after completing the tutorial, we highly recommend you comply with the [Security Best Practices in Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/compM.html) in the *Amazon Simple Storage Service User Guide*\. 

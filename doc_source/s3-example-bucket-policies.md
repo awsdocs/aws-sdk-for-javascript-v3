@@ -22,7 +22,7 @@ In this example, a series of Node\.js modules are used to retrieve, set, or dele
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/petbucketpolicycommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/petbucketpolicycommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deletebucketpolicycommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deletebucketpolicycommand.html)
 
-For more information about bucket policies for Amazon S3 buckets, see [ Using bucket policies and user policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon Simple Storage Service Developer Guide*\.
+For more information about bucket policies for Amazon S3 buckets, see [ Using bucket policies and user policies](https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html) in the *Amazon Simple Storage Service User Guide*\.
 
 ## Prerequisite tasks<a name="s3-bucket-policy-examples-prereqs"></a>
 

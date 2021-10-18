@@ -14,6 +14,6 @@ This topic is part of a tutorial that demonstrates how to invoke a Lambda functi
 
 1. [Create the rest API](api-gateway-invoking-lambda-run-create.md)
 
-1. [Create the rest API](api-gateway-invoking-lambda-run-test.md)
+1. [Test the API Gateway method](api-gateway-invoking-lambda-run-test.md)
 
 1. [Deploy the API Gateway method](api-gateway-invoking-lambda-run-deploy.md)

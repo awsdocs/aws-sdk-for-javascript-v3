@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 This topic is part of a tutorial that demonstrates to to invoke Lambda functions using AWS Step Functions\. To start at the beginning of the tutorial, see [Creating AWS serverless workflows using AWS SDK for JavaScript](serverless-step-functions-example.md)\.
 
-Use the Lambda runtime API to create the Lamdba functions\. In this example, there are three workflow steps that each correspond to each Lambda function\. 
+Use the Lambda runtime API to create the Lambda functions\. In this example, there are three workflow steps that each correspond to each Lambda function\. 
 
 Create these Lambda function, as described in the following sections:
 + [getId Lambda function](#serverless-step-functions-example-getid) \- Used as the first step in the workflow that processes the ticket ID value\.

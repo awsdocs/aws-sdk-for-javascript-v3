@@ -37,35 +37,28 @@ Create a `libs` directory, and create a Node\.js module with the file name `emcC
 import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
 // Set the AWS Region.
 const REGION = "REGION";
-//Set the account end point.
-const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
 //Set the MediaConvert Service Object
-const emcClient = new MediaConvertClient(ENDPOINT);
-export { emcClient };
+const emcClientGet = new MediaConvertClient({region: REGION});
+export { emcClientGet };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/libs/emcClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/mediaconvert/src/libs/emcClientGet.js)\.
 
 Create a Node\.js module with the file name `emc_getendpoint.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\.
 
-Create an object to pass the empty request parameters for the `DescribeEndpointsCommand` method of the MediaConvert client class\. To call the `DescribeEndpointsCommand` method, create a promise for invoking an MediaConvert client service object, passing the parameters\. 
-
-**Note**  
-Replace *AMI\_ID* with the ID of the AMI to run, and *KEY\_PAIR\_NAME* of the key pair to assign to the AMI ID\.
+Create an object to pass the empty request parameters for the `DescribeEndpointsCommand` method of the MediaConvert client class\. Then call the `DescribeEndpointsCommand` method\. 
 
 ```
 // Import required AWS-SDK clients and commands for Node.js
 import { DescribeEndpointsCommand } from  "@aws-sdk/client-mediaconvert";
 import { emcClientGet } from  "./libs/emcClientGet.js";
 
-//set the parameters
+//set the parameters.
 const params = { MaxResults: 0 };
 
 const run = async () => {
   try {
-    // Load the required SDK for JavaScript modules
     // Create a new service object and set MediaConvert to customer endpoint
-    const params = { MaxResults: 0 };
     const data = await emcClientGet.send(new DescribeEndpointsCommand(params));
     console.log("Your MediaConvert endpoint is ", data.Endpoints);
     return data;

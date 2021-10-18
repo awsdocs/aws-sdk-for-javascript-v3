@@ -28,7 +28,7 @@ The browser script uses the SDK for JavaScript to interact with an Amazon S3 buc
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/README.md)\.
-+ In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon S3 bucket that you will use to store the photos in the album\. For more information about creating a bucket in the console, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\. Make sure you have both **Read** and **Write** permissions on **Objects**\. For more information about setting bucket permissions, see [Setting permissions for website access](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html)\.
++ In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon S3 bucket that you will use to store the photos in the album\. For more information about creating a bucket in the console, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service User Guide*\. Make sure you have both **Read** and **Write** permissions on **Objects**\. For more information about setting bucket permissions, see [Setting permissions for website access](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html)\.
 + In the [Amazon Cognito console](https://console.aws.amazon.com/cognito/), create an Amazon Cognito identity pool using Federated Identities with access enabled for unauthenticated users in the same Region as the Amazon S3 bucket\. You need to include the identity pool ID in the code to obtain credentials for the browser script\. For more information about Amazon Cognito Federated Identities, see [Amazon Cognito identity pools \(federated identites\)](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html) in the *Amazon Cognito Developer Guide*\.
 + In the [IAM console](https://console.aws.amazon.com/iam/), find the IAM role created by Amazon Cognito for unauthenticated users\. Add the following policy to grant read and write permissions to an Amazon S3 bucket\. For more information about creating an IAM role, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
@@ -504,7 +504,7 @@ window.deleteAlbum = deleteAlbum;
 
 **To run the code for this example**
 
-1. Save all the code as `s3_PhotoExample.ts`\.
+1. Save all the code as `s3_PhotoExample.js`\.
 **Note**  
 This file is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/src/s3_PhotoExample.ts)\.
 

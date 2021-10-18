@@ -34,16 +34,16 @@ The AWS CloudFormation template was generated using the AWS CDK available [here 
 The stack name must be unique within an AWS Region and AWS account\. You can specify up to 128 characters, and numbers and hyphens are allowed\.
 
    ```
-   webpack mylamdbafunction.js --mode development --target node --devtool false --output-library-target umd -o index.js
+   aws cloudformation create-stack --stack-name STACK_NAME --template-body file://setup.yaml --capabilities CAPABILITY_IAM
    ```
 
    For more information on the `create-stack` command parameters, see the [AWS CLI Command Reference guide](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack.html), and the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\.
 
    View a list of the resources in the console by opening the stack on the AWS CloudFormation dashboard, and choosing the **Resources** tab\. You require these for the tutorial\. 
 
-1. When the stack is create, use the AWS SDK for JavaScript to populate the DynamoDB table, as described in [](#scheduled-events-invoking-lambda-resources-create-table)\.
+1. When the stack is created, use the AWS SDK for JavaScript to populate the DynamoDB table, as described in [Populate the DynamoDB table](#scheduled-events-invoking-lambda-resources-create-table)\.
 
-## <a name="scheduled-events-invoking-lambda-resources-create-table"></a>
+## Populate the DynamoDB table<a name="scheduled-events-invoking-lambda-resources-create-table"></a>
 
 To populate the table, first create a diretory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. 
 

@@ -36,7 +36,7 @@ However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/Co
 
 This example queries a table that contains episode information about a video series, returning the episode titles and subtitles of second season episodes past episode 9 that contain a specified phrase in their subtitle\.
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -99,7 +99,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 ## Scanning a table<a name="dynamodb-example-table-query-scan-scanning"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";

@@ -85,7 +85,7 @@ git clone https://github.com/awsdocs/aws-doc-sdk-examples.git
 
 To find code examples for the SDK for JavaScript, use the **Environment** window to open the `ENVIRONMENT_NAME\aws-doc-sdk-examples\javascriptv3\example_code/src`, where *ENVIRONMENT\_NAME* is the name of your AWS Cloud9 development environment\.
 
-To learn how to work with these and other code examples, see [SDK for JavaScript code examples](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sdk-code-samples.html)\.
+To learn how to work with these and other code examples, see [SDK for JavaScript code examples](https://docs.aws.amazon.com/sdk-for-javascript/latest/developer-guide/sdk-code-samples.html)\.
 
 ## Step 5: Run and debug example code<a name="cloud9-javascript-run"></a>
 

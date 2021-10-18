@@ -36,7 +36,7 @@ However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/Co
 
 ## Creating a table<a name="dynamodb-examples-using-tables-creating-a-table"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -118,7 +118,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 ## Listing your tables<a name="dynamodb-examples-using-tables-listing-tables"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -160,7 +160,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 ## Describing a table<a name="dynamodb-examples-using-tables-describing-a-table"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
@@ -208,7 +208,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 ## Deleting a table<a name="dynamodb-examples-using-tables-deleting-a-table"></a>
 
-Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
+Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";

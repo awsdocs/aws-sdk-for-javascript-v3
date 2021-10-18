@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Creating scheduled events to execute AWS Lambda functions<a name="scheduled-events-invoking-lambda-example"></a>
 
-You can create a scheduled event that invokes an Lambda function by using an Amazon CloudWatch Event\. You can configure a CloudWatch Event to use a cron expression to schedule when a Lambda function is invoked\. For example, you can schedule a CloudWatch Event to invoke an Lambda function every weekday\. Lambda is a compute service that enables you to run code without provisioning or managing servers\.
+You can create a scheduled event that invokes an AWS Lambda function by using an Amazon CloudWatch Event\. You can configure a CloudWatch Event to use a cron expression to schedule when a Lambda function is invoked\. For example, you can schedule a CloudWatch Event to invoke an Lambda function every weekday\.
 
 AWS Lambda is a compute service that enables you to run code without provisioning or managing servers\. You can create Lambda functions in various programming languages\. For more information about AWS Lambda, see [What is AWS Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)\.
 

@@ -19,7 +19,7 @@ In this example, a series of Node\.js modules are used to list your Amazon S3 bu
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getbucketcorscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getbucketcorscommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putbucketcorscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putbucketcorscommand.html)
 
-For more information about using CORS configuration with an Amazon S3 bucket, see [Cross\-origin resource sharing \(CORS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon Simple Storage Service Developer Guide*\.
+For more information about using CORS configuration with an Amazon S3 bucket, see [Cross\-origin resource sharing \(CORS\)](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon Simple Storage Service User Guide*\.
 
 ## Prerequisite tasks<a name="s3-example-configuring-buckets-prerequisites"></a>
 
