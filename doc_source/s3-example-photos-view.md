@@ -34,14 +34,14 @@ Set up the project environment to run these Node TypeScript examples, and instal
 
 ### Create the bucket<a name="s3-example-photos-view-prereq-bucket"></a>
 
-In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon S3 bucket where you can store albums and photos\. For more information about using the console to create an S3 bucket, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service Console User Guide*\.
+In the [Amazon S3 console](https://console.aws.amazon.com/s3/), create an Amazon S3 bucket where you can store albums and photos\. For more information about using the console to create an S3 bucket, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) in the *Amazon Simple Storage Service User Guide*\.
 
 As you create the Amazon S3 bucket, be sure to do the following:
 + Make note of the bucket name so you can use it in a subsequent prerequisite task, [Configure role permissions](#s3-example-photos-view-prereq-perms)\.
 + Choose an AWS Region to create the bucket in\. This must be the same Region that you'll use to create an Amazon Cognito identity pool in a subsequent prerequisite task, [Create an identity pool](#s3-example-photos-view-prereq-idpool)\.
 + In the **Create Bucket** wizard, on the **Create Bucket** page, in the **Bucket settings for block public access** section, clear these boxes: **Block public access to buckets and objects granted through new access control lists \(ACLs\)** and **Block public access to buckets and objects granted through any access control lists \(ACLs\)**\.
 
-  For information about how to check and configure bucket permissions, see [Setting permissions for website access](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html) in the *Amazon Simple Storage Service Console User Guide*\.
+  For information about how to check and configure bucket permissions, see [Setting permissions for website access](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html) in the *Amazon Simple Storage Service User Guide*\.
 
 ### Create an identity pool<a name="s3-example-photos-view-prereq-idpool"></a>
 
@@ -84,7 +84,7 @@ To allow viewing of albums and photos, you have to add permissions to an IAM rol
 
    Be sure to make note of the name so that you can find it and attach it to the IAM role later\.
 
-After the policy is created, navigate back to the [IAM console](https://console.aws.amazon.com/iam/)\. Find the IAM role for the **unauthenticated** identity that Amazon Cognito created in the previous prerequisite task, [Create an identity pool](#s3-example-photos-view-prereq-idpool)\. You use the policy you just created to add permissions to this identity\.
+After the policy is created, navigate back to the [IAM console](https://console.aws.amazon.com/iam/)\. Find the IAM role for the **unauthenticated** identity that Amazon Cognito created in the previous prerequisite task\. You use the policy you just created to add permissions to this identity\.
 
 For additional information about creating an IAM role, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 
@@ -374,7 +374,7 @@ window.viewAlbum = viewAlbum;
 
 **To run the code for this example**
 
-1. Save all the code as `s3_PhotoViewer.ts`\.
+1. Save all the code as `s3_PhotoViewer.js`\.
 **Note**  
 This file is available on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/src/s3_PhotoViewer.ts)\.
 
@@ -391,7 +391,7 @@ The *IDENTITY\_POOL\_ID* is displayed in red on the console as shown\.
 1. Run the following at the command prompt to bundle the JavaScript for this example into a file called `main.js`\.
 
    ```
-   webpack s3_PhotoViewer.ts --mode development --target web --devtool false -o main.js
+   webpack s3_PhotoViewer.js --mode development --target web --devtool false -o main.js
    ```
 **Note**  
 For information about installing `webpack`, see [Bundling applications with webpack](webpack.md)\.
@@ -399,5 +399,5 @@ For information about installing `webpack`, see [Bundling applications with webp
 1. Run the following in the command line:
 
    ```
-   node s3_PhotoViewer.ts
+   node s3_PhotoViewer.js
    ```

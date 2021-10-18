@@ -17,7 +17,7 @@ To disable reusing TCP connections, set the `AWS_NODEJS_CONNECTION_REUSE_ENABLED
 You can also disable keeping these connections alive on a per\-service client basis, as shown in the following example for a DynamoDB client\.
 
 ```
-const { NodeHttpHandler} = require("@aws-sdk/node-http-handler");
+const { NodeHttpHandler } = require("@aws-sdk/node-http-handler");
 const { Agent } = require("http");
 const dynamodbClient = new DynamoDBClient({
   requestHandler: new NodeHttpHandler({

@@ -49,7 +49,7 @@ In this exercise, we will only work with the unauthenticated user role to keep t
 
 **To create an Amazon Cognito Identity pool**
 
-1. Sign in to the AWSManagement Console and open the Amazon Cognito console at [Amazon Web Services Console\.](https://console.aws.amazon.com/cognito/)
+1. Sign in to the AWS Management Console and open the Amazon Cognito console at [Amazon Web Services Console\.](https://console.aws.amazon.com/cognito/)
 
 1. Choose **Manage Identity Pools** on the console opening page\.
 
@@ -77,7 +77,7 @@ To enable browser script access to Amazon Polly for speech synthesis, use the un
 
 **To add an Amazon Polly policy to the IAM role associated with unauthenticated users**
 
-1. Sign in to the AWSManagement Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
+1. Sign in to the AWS Management Console and open the IAM console at [https://console\.aws\.amazon\.com/iam/](https://console.aws.amazon.com/iam/)\.
 
 1. In the navigation panel on the left of the page, choose **Roles**\.
 

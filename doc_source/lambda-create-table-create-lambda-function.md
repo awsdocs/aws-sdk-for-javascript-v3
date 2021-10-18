@@ -19,7 +19,7 @@ webpack mylamdbafunction.js --mode development --target node --devtool false --o
 ```
 
 **Important**  
-Notice the output is named `index.js`\. This is because Lambda functions must have an `indeltjieblllkbvt x.js` handler to work\.
+Notice the output is named `index.js`\. This is because Lambda functions must have an `index.js` handler to work\.
 
 Compress the bundled output file, `index.js`, into a ZIP file named `my-lambda-function.zip`\.
 

@@ -50,7 +50,7 @@ A CORS configuration is an XML file that contains a series of rules within a `<C
 + `<AllowedMethod>` – Specifies a type of request you allow \(GET, PUT, POST, DELETE, HEAD\) in cross\-domain requests\.
 + `<AllowedHeader>` – Specifies the headers allowed in a preflight request\.
 
-For example configurations, see [How do I configure CORS on my bucket?](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html#how-do-i-enable-cors) in the *Amazon Simple Storage Service Developer Guide*\.
+For example configurations, see [How do I configure CORS on my bucket?](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html#how-do-i-enable-cors) in the *Amazon Simple Storage Service User Guide*\.
 
 ## CORS configuration example<a name="cors-configuration-example"></a>
 

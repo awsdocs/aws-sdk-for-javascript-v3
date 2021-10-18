@@ -56,9 +56,9 @@ Create a `libs` directory, and create a Node\.js module with the file name `emcC
 import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
 // Set the AWS Region.
 const REGION = "REGION";
-//Set the account end point.
+// Set the account end point.
 const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
-//Set the MediaConvert Service Object
+// Set the MediaConvert Service Object
 const emcClient = new MediaConvertClient(ENDPOINT);
 export { emcClient };
 ```
@@ -237,9 +237,9 @@ Create a `libs` directory, and create a Node\.js module with the file name `emcC
 import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
 // Set the AWS Region.
 const REGION = "REGION";
-//Set the account end point.
+// Set the account end point.
 const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
-//Set the MediaConvert Service Object
+// Set the MediaConvert Service Object
 const emcClient = new MediaConvertClient(ENDPOINT);
 export { emcClient };
 ```
@@ -287,9 +287,9 @@ Create a `libs` directory, and create a Node\.js module with the file name `emcC
 import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
 // Set the AWS Region.
 const REGION = "REGION";
-//Set the account end point.
+// Set the account end point.
 const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
-//Set the MediaConvert Service Object
+// Set the MediaConvert Service Object
 const emcClient = new MediaConvertClient(ENDPOINT);
 export { emcClient };
 ```

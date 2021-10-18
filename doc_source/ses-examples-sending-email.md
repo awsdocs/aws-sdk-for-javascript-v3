@@ -72,7 +72,6 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *RECEIVER\_ADDRESS* with the address to send the email to, and *SENDER\_ADDRESS* with the email address to the send the email from\.
 
 ```
-*/
 // Create the promise and SES service object
 
 // Import required AWS SDK clients and commands for Node.js

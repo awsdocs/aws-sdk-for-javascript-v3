@@ -22,7 +22,7 @@ To use a proxy in your application, use the `httpAgent` and `httpsAgent` propert
 
 ```
 const { NodeHttpHandler } = require("@aws-sdk/node-http-handler");
->const proxyAgent = new ProxyAgent("http://internal.proxy.com");
+                const proxyAgent = new ProxyAgent("http://internal.proxy.com");
 const dynamodbClient = new DynamoDBClient({
   requestHandler: new NodeHttpHandler({
     httpAgent: proxyAgent,

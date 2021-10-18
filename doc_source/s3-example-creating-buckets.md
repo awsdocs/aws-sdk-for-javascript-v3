@@ -45,6 +45,15 @@ If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-e
 
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
+```
+import { S3Client} from "@aws-sdk/client-s3";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon S3 service client object.
+const s3Client = new S3Client({ region: REGION });
+export { s3Client };
+```
+
 This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/libs/s3Client.js)\.
 
 Create a Node\.js module with the file name `s3_listbuckets.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. To access Amazon Simple Storage Service, create an `S3` client service object\. Call the `listBuckets` method of the Amazon S3 client service object to retrieve a list of your buckets\. The `data` parameter of the callback function has a `Buckets` property containing an array of maps to represent the buckets\. Display the bucket list by logging it to the console\.
@@ -74,7 +83,7 @@ node s3_listbuckets.js
 
 This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_listbuckets.js)\.
 
-## Creating an Amazon S3 bucket<a name="s3-example-creating-buckets-new-bucket"></a>
+## Creating an Amazon S3 bucket<a name="s3-example-creating-buckets-new-bucket-2"></a>
 
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
@@ -95,19 +104,18 @@ Add a variable to hold the parameters used to call the `createBucket` method of 
 
 ```
 // Get service clients module and commands using ES6 syntax.
-import { CreateBucketCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js";
+ import { CreateBucketCommand } from "@aws-sdk/client-s3";
+ import { s3 } from "./libs/s3Client.js";
 
-// Set the bucket parameters.
-
-export const bucketParams = { Bucket: "brmurbucket" };
+// Set the bucket parameters
+const bucketParams = { Bucket: "BUCKET_NAME" };
 
 // Create the Amazon S3 bucket.
-export const run = async () => {
+const run = async () => {
   try {
-    const data = await s3Client.send(new CreateBucketCommand(bucketParams));
-    console.log("Success", data);
-    return data; // For unit tests.
+    const data = await s3.send(new CreateBucketCommand(bucketParams));
+    console.log("Success", data.Location);
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
@@ -118,7 +126,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-node s3_createbucket.js 
+node s3_createbucket.js
 ```
 
 This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/s3/src/s3_createbucket.js)\.
@@ -546,7 +554,7 @@ export const run = async () => {
       expiresIn: 3600,
     });
     console.log(
-      `\nPutting "${params.Key}" using signedUrl with body "${bucketParams.Body}" in v3`
+      `\nPutting "${bucketParams.Key}" using signedUrl with body "${bucketParams.Body}" in v3`
     );
     console.log(signedUrl);
     const response = await fetch(signedUrl);
@@ -561,7 +569,7 @@ export const run = async () => {
     // Delete the object.
     console.log(`\nDeleting object "${bucketParams.Key}"} from bucket`);
     await s3Client.send(
-      new DeleteObjectCommand({ Bucket: bucketParams.Bucket, Key: params.Key })
+      new DeleteObjectCommand({ Bucket: bucketParams.Bucket, Key: bucketParams.Key })
     );
   } catch (err) {
     console.log("Error deleting object", err);

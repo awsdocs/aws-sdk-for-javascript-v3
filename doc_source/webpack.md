@@ -90,8 +90,8 @@ The following is an example `package.json` file that demonstrates adding `webpac
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-iam": "^3.0.0",
-    "@aws-sdk/client-s3": "^3.3.0"
+    "@aws-sdk/client-iam": "^3.32.0",
+    "@aws-sdk/client-s3": "^3.32.0"
   },
   "devDependencies": {
     "webpack": "^5.0.0"

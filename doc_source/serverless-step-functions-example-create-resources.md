@@ -12,7 +12,7 @@ This topic is part of a tutorial that demonstrates to to invoke Lambda functions
 
 This tutorial requires the following resources\.
 + An Amazon DynamoDB table named **Case** with a key named **Id**\.
-+  An IAM role named `lambda-support` used to invoke Lamdba functions\. This role has policies that enable it to invoke the Amazon DynamoDB and Amazon Simple Email Service services from a Lambda function\. 
++  An IAM role named `lambda-support` used to invoke Lambda functions\. This role has policies that enable it to invoke the Amazon DynamoDB and Amazon Simple Email Service services from a Lambda function\. 
 +  An IAM role named `workflow-support` used to invoke the workflow\.
 + An Amazon S3 bucket to host the Lambda functions\.
 

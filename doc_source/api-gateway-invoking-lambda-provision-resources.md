@@ -54,7 +54,7 @@ const dynamoClient = new DynamoDBClient({region:REGION});
 module.exports = { dynamoClient };
 ```
 
- This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/src/libs/dynamoClient.js)\.
+ This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-api-gateway/src/libs/dynamoClient.js)\.
 
 Next, create a file named `populate-table.js` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-api-gateway/src/helper-functions/populate-table.js) into it\. For one of the items, replace the value for the `phone` property with a valid mobile phone number in the E\.164 format, and the value for the `startDate` with today's date\.
 
