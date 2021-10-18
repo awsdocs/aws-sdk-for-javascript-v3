@@ -22,7 +22,9 @@ You can supply your credentials in order of recommendation:
 
 1. Other credential\-provider classes provided by the JavaScript SDK
 
-If no credential provider is supplied to a client, the default precedence of selection is as follows:
+V3 provides a default credential provider in Node.js. So you are not required to supply a credential provider explicitly. The default credential provider attempts to resolve the credentials from a variety of different sources in a given precedence, until a credential is returned from the one of the sources. If the resolved credential is from a dynamic source, which means the credential can expire, the SDK will only use the specific source to refresh the credential. 
+
+Here's the order of the sources where the default credential provider resolve credentials from:
 
 1. Environment variables
 
