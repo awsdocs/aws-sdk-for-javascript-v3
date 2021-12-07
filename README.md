@@ -35,8 +35,6 @@ To contribute your own documentation fixes or updates, please use standard GitHu
 
 All content in this repository, unless otherwise stated, is Copyright Amazon.com, Inc. or its affiliates. All rights reserved.
 
-Except where otherwise noted, this work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/) (the "License"). Use the preceding link for a human-readable summary of the license terms. The full license text is available at: http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode and in the LICENSE file accompanying this repository.
-
 ## License summary
 
 The documentation is made available under the Creative Commons Attribution-ShareAlike 4.0 International License. See the LICENSE file.
