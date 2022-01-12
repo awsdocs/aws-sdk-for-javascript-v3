@@ -61,7 +61,7 @@ import {PublishCommand } from "@aws-sdk/client-sns";
 import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
-var params = {
+const params = {
   Message: "MESSAGE_TEXT", // MESSAGE_TEXT
   TopicArn: "TOPIC_ARN", //TOPIC_ARN
 };
