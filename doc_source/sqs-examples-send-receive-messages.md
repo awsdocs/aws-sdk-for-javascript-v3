@@ -152,7 +152,7 @@ const run = async () => {
   try {
     const data = await sqsClient.send(new ReceiveMessageCommand(params));
     if (data.Messages) {
-      var deleteParams = {
+      const deleteParams = {
         QueueUrl: queueURL,
         ReceiptHandle: data.Messages[0].ReceiptHandle,
       };
