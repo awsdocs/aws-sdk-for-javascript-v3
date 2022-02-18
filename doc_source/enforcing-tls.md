@@ -6,9 +6,9 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Enforcing TLS 1\.2<a name="enforcing-tls"></a>
+# Enforcing TLS 1\.3<a name="enforcing-tls"></a>
 
-To add increased security when communicating with AWS services, configure the AWS SDK for JavaScript to use TLS 1\.2 or later\. 
+To add increased security when communicating with AWS services, configure the AWS SDK for JavaScript to use TLS 1\.3 or later\. 
 
 Transport Layer Security \(TLS\) is a protocol used by web browsers and other applications to ensure the privacy and integrity of data exchanged over a network\.
 
@@ -16,7 +16,7 @@ Transport Layer Security \(TLS\) is a protocol used by web browsers and other ap
 
 When you use the AWS SDK for JavaScript with Node\.js, the underlying Node\.js security layer is used to set the TLS version\.
 
-Node\.js 8\.0\.0 and later use a minimum version of OpenSSL 1\.0\.2, which supports TLS 1\.2\. The SDK for JavaScript defaults to use TLS 1\.2 when available\.
+Node\.js 12\.0\.0 and later use a minimum version of OpenSSL 1\.1\.1b, which supports TLS 1\.3\. The SDK for JavaScript defaults to use TLS 1\.3 when available\.
 
 ### Verify the version of OpenSSL and TLS<a name="verify-tls-version"></a>
 
@@ -29,7 +29,7 @@ node -p process.versions
 The version of OpenSSL in the list is the version used by Node\.js, as shown in the following example\.
 
 ```
-openssl: '1.1.1d'
+openssl: '1.1.1b'
 ```
 
 To get the version of TLS used by Node\.js on your computer, start the Node shell and run the following commands, in order\.
@@ -59,10 +59,10 @@ nvm install 11
 nvm use 11
 ```
 
-To enforce that TLS 1\.2 is the minimum allowable version, specify the `--tls-min-v1.2` argument when running your script, as shown in the following example\.
+To enforce that TLS 1\.3 is the minimum allowable version, specify the `--tls-min-v1.3` argument when running your script, as shown in the following example\.
 
 ```
-node --tls-min-v1.2 yourScript.js
+node --tls-min-v1.3 yourScript.js
 ```
 
 To specify the minimum allowable TLS version for a specific request in your JavaScript code, use the `httpOptions` parameter to specify the protocol, as shown in the following example\.
@@ -77,7 +77,7 @@ const client = new DynamoDBClient({
     requestHandler: new NodeHttpHandler({
         httpsAgent: new https.Agent(
             {
-                secureProtocol: 'TLSv1_2_method'
+                secureProtocol: 'TLSv1_3_method'
             }
         )
     })
