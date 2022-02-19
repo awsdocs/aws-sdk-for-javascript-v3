@@ -176,7 +176,7 @@ npm install --save-dev webpack
 ```
 
 **Important**  
-To view a sample of the `package.json`for this example, see the [AWS SDK for JavaScript code samples on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/package.json)\.
+To view a sample of the `package.json` for this example, see the [AWS SDK for JavaScript code samples on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/package.json)\.
 
 **Note**  
 For information on installing Webpack, see [Bundling applications with webpack](webpack.md)\.
