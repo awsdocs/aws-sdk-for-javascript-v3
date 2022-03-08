@@ -276,7 +276,7 @@ To use V3 of the SDK for JavaScript in your HTML pages, you must bundle the requ
 **Note**  
 For more information about Webpack, see [Bundling applications with webpack](webpack.md)\.
 
-To use V2 of the SDK for JavaScript you instead add a script tag that points to the latest version of the V2 SDK\. For more information, see [https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-browser.html#getting-started-browser-run-sample](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-browser.html#getting-started-browser-run-sample)the SDK for JavaScript v2 Developer Guide\.
+To use V2 of the SDK for JavaScript you instead add a script tag that points to the latest version of the V2 SDK\. For more information, see [the SDK for JavaScript v2 Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-browser.html#getting-started-browser-run-sample)\.
 
 ### Common use cases<a name="welcome_use_cases"></a>
 
