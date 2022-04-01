@@ -6,9 +6,12 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Enforcing TLS 1\.3<a name="enforcing-tls"></a>
+# Enforcing a minimum TLS version<a name="enforcing-tls"></a>
 
-To add increased security when communicating with AWS services, configure the AWS SDK for JavaScript to use TLS 1\.3 or later\. 
+To add increased security when communicating with AWS services, configure the AWS SDK for JavaScript to use TLS 1\.2 or later\. 
+
+**Important**  
+The AWS SDK for JavaScript v3 automatically negotiates the highest level TLS version supported by a given AWS Service endpoint\. You can optionally enforce a minimum TLS version required by your application, such as TLS 1\.2 or 1\.3, but please note that TLS 1\.3 is not supported by some AWS Service endpoints, so some calls may fail if you enforce TLS 1\.3\.
 
 Transport Layer Security \(TLS\) is a protocol used by web browsers and other applications to ensure the privacy and integrity of data exchanged over a network\.
 
@@ -16,7 +19,7 @@ Transport Layer Security \(TLS\) is a protocol used by web browsers and other ap
 
 When you use the AWS SDK for JavaScript with Node\.js, the underlying Node\.js security layer is used to set the TLS version\.
 
-Node\.js 12\.0\.0 and later use a minimum version of OpenSSL 1\.1\.1b, which supports TLS 1\.3\. The SDK for JavaScript defaults to use TLS 1\.3 when available\.
+Node\.js 12\.0\.0 and later use a minimum version of OpenSSL 1\.1\.1b, which supports TLS 1\.3\. The AWS SDK for JavaScript v3 defaults to use TLS 1\.3 when available, but defaults to a lower version if required\.
 
 ### Verify the version of OpenSSL and TLS<a name="verify-tls-version"></a>
 
@@ -59,6 +62,37 @@ nvm install 11
 nvm use 11
 ```
 
+------
+#### [ Enforcing TLS 1\.2 ]
+
+To enforce that TLS 1\.2 is the minimum allowable version, specify the `--tls-min-v1.2` argument when running your script, as shown in the following example\.
+
+```
+node --tls-min-v1.2 yourScript.js
+```
+
+To specify the minimum allowable TLS version for a specific request in your JavaScript code, use the `httpOptions` parameter to specify the protocol, as shown in the following example\.
+
+```
+const https = require("https");
+const {NodeHttpHandler} = require("@aws-sdk/node-http-handler");
+const {DynamoDBClient} = require("@aws-sdk/client-dynamodb");
+
+const client = new DynamoDBClient({
+    region: "us-west-2",
+    requestHandler: new NodeHttpHandler({
+        httpsAgent: new https.Agent(
+            {
+                secureProtocol: 'TLSv1_2_method'
+            }
+        )
+    })
+});
+```
+
+------
+#### [ Enforcing TLS 1\.3 ]
+
 To enforce that TLS 1\.3 is the minimum allowable version, specify the `--tls-min-v1.3` argument when running your script, as shown in the following example\.
 
 ```
@@ -84,6 +118,75 @@ const client = new DynamoDBClient({
 });
 ```
 
+------
+
 ## Verify and enforce TLS in a browser script<a name="browser-verify-enforce-tls"></a>
 
 When you use the SDK for JavaScript in a browser script, browser settings control the version of TLS that is used\. The version of TLS used by the browser cannot be discovered or set by script and must be configured by the user\. To verify and enforce the version of TLS used in a browser script, refer to the instructions for your specific browser\.
+
+------
+#### [ Microsoft Internet Explorer ]
+
+1. Open **Internet Explorer**\.
+
+1. From the menu bar, choose **Tools** \- **Internet Options** \- **Advanced** tab\.
+
+1. Scroll down to **Security** category, manually check the option box for **Use TLS 1\.2**\.
+
+1. Click **OK**\.
+
+1. Close your browser and restart Internet Explorer\.
+
+------
+#### [ Microsoft Edge ]
+
+1. In the Windows menu search box, type *Internet options*\.
+
+1. Under **Best match**, click **Internet Options**\.
+
+1. In the **Internet Properties** window, on the **Advanced** tab, scroll down to the **Security** section\.
+
+1. Check the **User TLS 1\.2** checkbox\.
+
+1. Click **OK**\.
+
+------
+#### [ Google Chrome ]
+
+1. Open **Google Chrome**\.
+
+1. Click **Alt F** and select **Settings**\.
+
+1. Scroll down and select **Show advanced settings\.\.\.**\.
+
+1. Scroll down to the **System** section and click on **Open proxy settings\.\.\.**\.
+
+1. Select the **Advanced** tab\.
+
+1. Scroll down to **Security** category, manually check the option box for **Use TLS 1\.2**\.
+
+1. Click **OK**\.
+
+1. Close your browser and restart Google Chrome\.
+
+------
+#### [ Mozilla Firefox ]
+
+1. Open **Firefox**\.
+
+1. In the address bar, type **about:config** and press Enter\.
+
+1. In the **Search** field, enter **tls**\. Find and double\-click the entry for **security\.tls\.version\.min**\.
+
+1. Set the integer value to 3 to force protocol of TLS 1\.2 to be the default\.
+
+1. Click **OK**\.
+
+1. Close your browser and restart Mozilla Firefox\.
+
+------
+#### [ Apple Safari ]
+
+There are no options for enabling SSL protocols\. If you are using Safari version 7 or greater, TLS 1\.2 is automatically enabled\.
+
+------

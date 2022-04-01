@@ -8,8 +8,8 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Loading the SDK for JavaScript<a name="loading-the-jssdk"></a>
 
-After you install the SDK, you can load a client package in your node application using `require`\. For example, to load the Amazon S3 client, use the following\.
+After you install the SDK, you can load a client package in your node application using `import`\. For example, to load the Amazon S3 client, use the following\.
 
 ```
-const {S3} = require('@aws-sdk/client-s3');
+import {S3} from "@aws-sdk/client-s3";
 ```

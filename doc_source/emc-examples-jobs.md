@@ -11,7 +11,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 
 **This Node\.js code example shows:**
-+ How to specify the account\-specific endpoint to use with MediaConvert\.
++ How to specify the region\-specific endpoint to use with MediaConvert\.
 + How to create transcoding jobs in MediaConvert\.
 + How to cancel a transcoding job\.
 + How to retrieve the JSON for a completed transcoding job\.
@@ -40,7 +40,7 @@ However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/Co
 
 ## Configuring the SDK<a name="emc-examples-jobs-configure-sdk"></a>
 
-Configure the SDK as previously shown, including downloading the required clients and packages\. Because MediaConvert uses custom endpoints for each account, you must also configure the `MediaConvert` client class to use your account\-specific endpoint\. To do this, set the `endpoint` parameter on `mediaconvert(endpoint)`\.
+Configure the SDK as previously shown, including downloading the required clients and packages\. Because MediaConvert uses custom endpoints for each account, you must also configure the `MediaConvert` client class to use your region\-specific endpoint\. To do this, set the `endpoint` parameter on `mediaconvert(endpoint)`\.
 
 ```
 // Import required AWS-SDK clients and commands for Node.js

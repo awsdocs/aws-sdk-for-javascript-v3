@@ -27,8 +27,8 @@ In this example, a series of Node\.js modules are used to obtain a list of exist
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deletebucketcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deletebucketcommand.html)
 
 There is also an example that uses the following method of *node\-fetch* to generate a presigned URL:
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#s3-create-presigendurl](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#s3-create-presigendurl)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#s3-create-presigendurl](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#s3-create-presigendurl)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_s3_request_presigner.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_s3_request_presigner.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_s3_request_presigner.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/modules/_aws_sdk_s3_request_presigner.html)
 
 ## Prerequisite tasks<a name="s3-example-creating-buckets-prerequisites"></a>
 
@@ -46,7 +46,8 @@ If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-e
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -59,9 +60,9 @@ This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 Create a Node\.js module with the file name `s3_listbuckets.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. To access Amazon Simple Storage Service, create an `S3` client service object\. Call the `listBuckets` method of the Amazon S3 client service object to retrieve a list of your buckets\. The `data` parameter of the callback function has a `Buckets` property containing an array of maps to represent the buckets\. Display the bucket list by logging it to the console\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { ListBucketsCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
 export const run = async () => {
   try {
@@ -88,7 +89,8 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -104,18 +106,19 @@ Add a variable to hold the parameters used to call the `createBucket` method of 
 
 ```
 // Get service clients module and commands using ES6 syntax.
- import { CreateBucketCommand } from "@aws-sdk/client-s3";
- import { s3 } from "./libs/s3Client.js";
+import { CreateBucketCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js";
 
-// Set the bucket parameters
-const bucketParams = { Bucket: "BUCKET_NAME" };
+// Set the bucket parameters.
+
+export const bucketParams = { Bucket: "BUCKET_NAME" };
 
 // Create the Amazon S3 bucket.
-const run = async () => {
+export const run = async () => {
   try {
-    const data = await s3.send(new CreateBucketCommand(bucketParams));
-    console.log("Success", data.Location);
-    return data;
+    const data = await s3Client.send(new CreateBucketCommand(bucketParams));
+    console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -142,7 +145,8 @@ This section describes how to:
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -160,9 +164,9 @@ Create a variable with the parameters needed to call the `PutObjectCommand` meth
 To create a directory for the object, use the format `directoryY_NAME/OBJECT_NAME`\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
 // Set the parameters.
 export const bucketParams = {
@@ -174,7 +178,7 @@ export const bucketParams = {
   Body: "BODY",
 };
 
-// Create and upload the object to the specified Amazon S3 bucket.
+// Create and upload the object to the S3 bucket.
 export const run = async () => {
   try {
     const data = await s3Client.send(new PutObjectCommand(bucketParams));
@@ -205,7 +209,8 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -222,7 +227,7 @@ Create a variable with the parameters needed to call the `PutObjectCommand` meth
 ```
 // Import required AWS SDK clients and commands for Node.js.
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 import {path} from "path";
 import {fs} from "fs";
 
@@ -265,7 +270,8 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -282,7 +288,7 @@ Create a variable with the parameters needed to call the `GetObjectCommand` meth
 ```
 // Import required AWS SDK clients and commands for Node.js.
 import { GetObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
 export const bucketParams = {
   Bucket: "BUCKET_NAME",
@@ -332,7 +338,8 @@ To list more than 1000 objects, see [Listing more than 1000 objects in an Amazon
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -347,9 +354,9 @@ Create a Node\.js module with the file name `s3_listobjects.js`\. Make sure to c
 Add a variable to hold the parameters used to call the `ListObjectsCommnad` method of the Amazon S3 service object, including the name of the bucket to read\. The callback function logs a list of objects \(files\) or a failure message\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { ListObjectsCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
 // Create the parameters for the bucket
 export const bucketParams = { Bucket: "BUCKET_NAME" };
@@ -381,7 +388,8 @@ This example lists more than 1000 objects in an Amazon S3 Bucket\.
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -396,19 +404,19 @@ Create a Node\.js module with the file name `s3_list1000plusobjects.js`\. Make s
 Use a while loop to list each 1000 items until all items have been listed\. Then declare `truncated` as a flag with a value of `true`, and a while loop that prints 1,000 items at at time, until the the flag is `false`\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { ListObjectsCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
 // Create the parameters for the bucket
 export const bucketParams = { Bucket: "BUCKET_NAME" };
 
 export async function run() {
-  // Declare truncated as a flag that we will base our while loop on
+  // Declare truncated as a flag that the while loop is based on.
   let truncated = true;
-  // Declare a variable that we will assign the key of the last element in the response to
+  // Declare a variable to which the key of the last element is assigned to in the response.
   let pageMarker;
-  // While loop that runs until response.truncated is false
+  // while loop that runs until 'response.truncated' is false.
   while (truncated) {
     try {
       const response = await s3Client.send(new ListObjectsCommand(bucketParams));
@@ -416,15 +424,15 @@ export async function run() {
       response.Contents.forEach((item) => {
         console.log(item.Key);
       });
-      // Log the Key of every item in the response to standard output
+      // Log the key of every item in the response to standard output.
       truncated = response.IsTruncated;
-      // If 'truncated' is true, assign the key of the final element in the response to our variable 'pageMarker'
+      // If truncated is true, assign the key of the last element in the response to the pageMarker variable.
       if (truncated) {
         pageMarker = response.Contents.slice(-1)[0].Key;
-        // Assign value of pageMarker to bucketParams so that the next iteration will start} from the new pageMarker.
+        // Assign the pageMarker value to bucketParams so that the next iteration starts from the new pageMarker.
         bucketParams.Marker = pageMarker;
       }
-      // At end of the list, response.truncated is false and our function exits the while loop.
+      // At end of the list, response.truncated is false, and the function exits the while loop.
     } catch (err) {
       console.log("Error", err);
       truncated = false;
@@ -447,7 +455,8 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -462,9 +471,9 @@ Create a Node\.js module with the file name `s3_deletebucket.js`\. Make sure to 
 Add a variable to hold the parameters used to call the `deleteBucket` method of the Amazon S3 service object, including the name of the bucket to delete\. The bucket must be empty to delete it\. The callback function logs a success or failure message\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { DeleteBucketCommand } from "@aws-sdk/client-s3/";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+// Import required AWS SDK clients and commands for Node.js.
+import { DeleteBucketCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
 // Set the bucket parameters
 export const bucketParams = { Bucket: "BUCKET_NAME" };
@@ -499,7 +508,8 @@ This section demonstrated how to create presigned URLs to get and put objects in
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -525,12 +535,12 @@ import {
   PutObjectCommand,
   DeleteBucketCommand }
 from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import fetch from "node-fetch";
 
 // Set parameters
-// Create a random names for the Amazon Simple Storage Service (Amazon S3) bucket and key
+// Create a random name for the Amazon Simple Storage Service (Amazon S3) bucket and key
 export const bucketParams = {
   Bucket: `test-bucket-${Math.ceil(Math.random() * 10 ** 10)}`,
   Key: `test-object-${Math.ceil(Math.random() * 10 ** 10)}`,
@@ -538,7 +548,7 @@ export const bucketParams = {
 };
 export const run = async () => {
   try {
-    // Create an Amazon S3 bucket.
+    // Create an S3 bucket.
     console.log(`Creating bucket ${bucketParams.Bucket}`);
     await s3Client.send(new CreateBucketCommand({ Bucket: bucketParams.Bucket }));
     console.log(`Waiting for "${bucketParams.Bucket}" bucket creation...`);
@@ -546,9 +556,8 @@ export const run = async () => {
     console.log("Error creating bucket", err);
   }
   try {
-    // Create the command.
+    // Create a command to put the object in the S3 bucket.
     const command = new PutObjectCommand(bucketParams);
-
     // Create the presigned URL.
     const signedUrl = await getSignedUrl(s3Client, command, {
       expiresIn: 3600,
@@ -557,11 +566,10 @@ export const run = async () => {
       `\nPutting "${bucketParams.Key}" using signedUrl with body "${bucketParams.Body}" in v3`
     );
     console.log(signedUrl);
-    const response = await fetch(signedUrl);
+    const response = await fetch(signedUrl, {method: 'PUT', body: bucketParams.Body});
     console.log(
       `\nResponse returned by signed URL: ${await response.text()}\n`
     );
-    return response;
   } catch (err) {
     console.log("Error creating presigned URL", err);
   }
@@ -575,9 +583,9 @@ export const run = async () => {
     console.log("Error deleting object", err);
   }
   try {
-    // Delete the Amazon S3 bucket.
+    // Delete the S3 bucket.
     console.log(`\nDeleting bucket ${bucketParams.Bucket}`);
-    await s3Client.send(new DeleteBucketCommand({ Bucket: bucketParams.Bucket }));
+    await s3.send(new DeleteBucketCommand({ Bucket: bucketParams.Bucket }));
   } catch (err) {
     console.log("Error deleting bucket", err);
   }
@@ -598,7 +606,8 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -625,12 +634,12 @@ import {
   DeleteObjectCommand,
   DeleteBucketCommand }
 from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 const fetch = require("node-fetch");
 
 // Set parameters
-// Create random names for the Amazon Simple Storage Service (Amazon S3) bucket and key.
+// Create a random names for the S3 bucket and key.
 export const bucketParams = {
   Bucket: `test-bucket-${Math.ceil(Math.random() * 10 ** 10)}`,
   Key: `test-object-${Math.ceil(Math.random() * 10 ** 10)}`,
@@ -638,7 +647,7 @@ export const bucketParams = {
 };
 
 export const run = async () => {
-  // Create an Amazon S3 bucket.
+  // Create an S3 bucket.
   try {
     console.log(`Creating bucket ${bucketParams.Bucket}`);
     const data = await s3Client.send(
@@ -649,7 +658,7 @@ export const run = async () => {
   } catch (err) {
     console.log("Error creating bucket", err);
   }
-  // Put the object in the Amazon S3 bucket.
+  // Put the object in the S3 bucket.
   try {
     console.log(`Putting object "${bucketParams.Key}" in bucket`);
     const data = await s3Client.send(
@@ -693,7 +702,7 @@ export const run = async () => {
   } catch (err) {
     console.log("Error deleting object", err);
   }
-  // Delete the bucket.
+  // Delete the S3 bucket.
   try {
     console.log(`\nDeleting bucket ${bucketParams.Bucket}`);
     const data = await s3Client.send(

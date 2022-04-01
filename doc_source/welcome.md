@@ -32,6 +32,9 @@ Users can now use a middleware stack to control the lifecycle of an operation ca
 
 In addition, the SDK is written in TypeScript, which has many advantages, such as static typing\.
 
+**Important**  
+The code examples for V3 in this guide are written in ECMAScript 6 \(ES6\)\. ES6 brings new syntax and new features to make your code more modern and readable, and do more\. ES6 requires you use Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads](https://nodejs.org/en/download/)\. For more information, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
+
 ### Modularized packages<a name="welcome_whats_new_v3_modularized_packages"></a>
 
 Version 2 of the SDK for JavaScript \(V2\) required you to use the entire AWS SDK, as follows\.
@@ -45,28 +48,28 @@ Loading the entire SDK isn’t an issue if your application is using many AWS se
 In V3, you can load and use only the individual AWS Services you need\. This is shown in the following example, which gives you access to Amazon DynamoDB \(DynamoDB\)\.
 
 ```
-const {DynamoDB} = require("@aws-sdk/client-dynamodb");
+import {DynamoDB} from "@aws-sdk/client-dynamodb";
 ```
 
 Not only can you load and use individual AWS services, but you can also load and use only the service commands you need\. This is shown in the following examples, which gives you access to DynamoDB client and the `ListTablesCommand` command\.
 
 ```
-const {
+import {
   DynamoDBClient,
   ListTablesCommand
-} = require('@aws-sdk/client-dynamodb')
+} from @aws-sdk/client-dynamodb"
 ```
 
 **Important**  
 You should not import submodules into modules\. For example, the following code might result in errors\.  
 
 ```
-const {CognitoIdentity} = require("@aws-sdk/client-cognito-identity/CognitoIdentity")
+import {CognitoIdentity} from "@aws-sdk/client-cognito-identity/CognitoIdentity";
 ```
 The following is the correct code\.  
 
 ```
-const {CognitoIdentity} = require("@aws-sdk/client-cognito-identity")
+import {CognitoIdentity} from "@aws-sdk/client-cognito-identity";
 ```
 
 #### Comparing code size<a name="welcome_whats_new_v3_modularized_packages_code_size"></a>
@@ -93,10 +96,10 @@ ddb.listTables({Limit:10}, function(err, data) {
 V3 looks like the following\.
 
 ```
-(async function () {
-   const { DynamoDBClient, 
+import { DynamoDBClient, 
            ListTablesCommand 
-   }= require('@aws-sdk/client-dynamodb');
+   } from "@aws-sdk/client-dynamodb";
+(async function () {
    const dbclient = new DynamoDBClient({ region: 'us-west-2'});
  
   try {
@@ -110,14 +113,14 @@ V3 looks like the following\.
 })();
 ```
 
-The `aws-sdk` package adds about 40 MB to your application\. Replacing `varAWS = require("aws-sdk")` with `const {DynamoDB} = require("@aws-sdk/client-dynamodb")` reduces that overhead to about 3 MB\. Restricting the import to just the DynamoDB client and `ListTablesCommand` command reduces the overhead to less than 100 KB\.
+The `aws-sdk` package adds about 40 MB to your application\. Replacing `var AWS = require("aws-sdk")` with `import {DynamoDB} from "@aws-sdk/client-dynamodb"` reduces that overhead to about 3 MB\. Restricting the import to just the DynamoDB client and `ListTablesCommand` command reduces the overhead to less than 100 KB\.
 
 ```
 // Load the DynamoDB client and ListTablesCommand command for Node.js
-const { 
+import { 
   DynamoDBClient, 
   ListTablesCommand 
-} = require('@aws-sdk/client-dynamodb');
+} from "@aws-sdk/client-dynamodb";
 const dbclient = new DynamoDBClient({});
 ```
 
@@ -134,24 +137,24 @@ V3 provides a set of commands for each AWS Service package to enable you to perf
 You must import the commands you want to use\. For example, the following code loads the DynamoDB service, and the `CreateTableCommand` command\. 
 
 ```
-const {DynamoDB, CreateTableCommand} = require('@aws-sdk/client-dynamodb');
+import {DynamoDB, CreateTableCommand} from "@aws-sdk/client-dynamodb";
 ```
 
 To call these commands in the recommend async/await pattern, use the following syntax\. 
 
 ```
-  CLIENT.send(newXXXCommand)
+  CLIENT.send(new XXXCommand)
 ```
 
 For example, the following example creates a DynamoDB table using the recommended async/await pattern\.
 
 ```
-const {DynamoDB, CreateTableCommand} = require('@aws-sdk/client-dynamodb');
+import {DynamoDB, CreateTableCommand} from "@aws-sdk/client-dynamodb";
 const dynamodb = new DynamoDB({region: 'us-west-2'});
 var tableParams = {
     Table : TABLE_NAME
 };
-async function run() => {
+(async function () => {
       try{
            const data = await dynamodb.send(new CreateTableCommand(tableParams));
            console.log("Success", data);
@@ -159,8 +162,7 @@ async function run() => {
       catch (err) {
            console.log("Error", err);
       }
-};
-run();
+})();
 ```
 
 ##### Using V2 commands<a name="using_v2_commands"></a>
@@ -276,7 +278,7 @@ To use V3 of the SDK for JavaScript in your HTML pages, you must bundle the requ
 **Note**  
 For more information about Webpack, see [Bundling applications with webpack](webpack.md)\.
 
-To use V2 of the SDK for JavaScript you instead add a script tag that points to the latest version of the V2 SDK\. For more information, see [the SDK for JavaScript v2 Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-browser.html#getting-started-browser-run-sample)\.
+To use V2 of the SDK for JavaScript you instead add a script tag that points to the latest version of the V2 SDK\. For more information, see [https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-browser.html#getting-started-browser-run-sample](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-browser.html#getting-started-browser-run-sample)the SDK for JavaScript v2 Developer Guide\.
 
 ### Common use cases<a name="welcome_use_cases"></a>
 
@@ -297,7 +299,7 @@ In addition to this guide, the following online resources are available for SDK 
 + [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html)
 + [JavaScript Developer Blog](https://aws.amazon.com/blogs/developer/category/programing-language/javascript/)
 + [AWS JavaScript Forum](https://forums.aws.amazon.com/forum.jspa?forumID=148)
-+ [JavaScript examples in the AWS Code Catalog](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-javascript.html)
++ [JavaScript examples in the AWS Code Catalog](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-javascriptv3.html)
 + [AWS Code Example Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code)
 + [Gitter channel](https://gitter.im/aws/aws-sdk-js)
 + [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=aws-sdk-js)

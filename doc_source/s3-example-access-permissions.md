@@ -37,7 +37,8 @@ If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-e
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -52,9 +53,9 @@ Create a Node\.js module with the file name `s3_getbucketacl.js`\. Make sure to 
 Create an `S3Client` client service object\. The only parameter you need to pass is the name of the selected bucket when calling the `GetBucketAclCommand` method\. The current access control list configuration is returned by Amazon S3 in the `data` parameter passed to the callback function\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { GetBucketAclCommand } from "@aws-sdk/client-s3/";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+// Import required AWS SDK clients and commands for Node.js.
+import { GetBucketAclCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
 // Create the parameters.
 export const bucketParams = { Bucket: "BUCKET_NAME" };
@@ -84,7 +85,8 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -99,32 +101,31 @@ Create a Node\.js module with the file name `s3_putbucketacl.js`\. Make sure to 
 Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket\. Replace *GRANTEE\_1* and *GRANTEE\_2* with users you want to grant respective access contol permission\. 
 
 ```
-/ Import required AWS SDK; clients and commands for Node.js.
-const { S3Client, PutBucketAclCommand } = require("@aws-sdk/client-s3");
+// Import required AWS SDK clients and commands for Node.js.
+import { PutBucketAclCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
-// Set the parameters. 
-const bucketParams = {
-    Bucket: "BUCKET_NAME",
-    // 'GrantFullControl' allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
-    // For example, an AWS account Canonical User ID in the format:
-    // id=002160194XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXa7a49125274
-    GrantFullControl:
-        "GRANTEE_1",
-    // 'GrantWrite' allows grantee to create, overwrite, and delete any object in the bucket..
-    // For example, 'uri=http://acs.amazonaws.com/groups/s3/LogDelivery'
-    GrantWrite: "GRANTEE_2"
+// Set the parameters. For more information,
+// see https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putBucketAcl-property.
+export const bucketParams = {
+  Bucket: "BUCKET_NAME",
+  // 'GrantFullControl' allows grantee the read, write, read ACP, and write ACL permissions on the bucket.
+  // Use a canonical user ID for an AWS account, formatted as follows:
+  // id=002160194XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXa7a49125274
+  GrantFullControl: "GRANTEE_1",
+  // 'GrantWrite' allows grantee to create, overwrite, and delete any object in the bucket.
+  // For example, 'uri=http://acs.amazonaws.com/groups/s3/LogDelivery'
+  GrantWrite: "GRANTEE_2",
 };
 
-// Create an Amazon S3 client service object.
-const s3 = new S3Client({});
-
-const run = async () => {
-    try {
-        const data = await s3.send(new PutBucketAclCommand(bucketParams));
-        console.log("Success, permissions added to bucket", data);
-    } catch (err) {
-        console.log("Error", err);
-    }
+export const run = async () => {
+  try {
+    const data = await s3Client.send(new PutBucketAclCommand(bucketParams));
+    console.log("Success, permissions added to bucket", data);
+    return data; // For unit tests.
+  } catch (err) {
+    console.log("Error", err);
+  }
 };
 run();
 ```

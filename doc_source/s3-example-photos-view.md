@@ -19,7 +19,7 @@ In this example, a simple HTML page provides a browser\-based application for vi
 
 
 
-The browser script uses the SDK for JavaScript to interact with an Amazon S3 bucket\. The script uses the [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#listObjects-property) method of the Amazon S3 client class to enable you to view the photo albums\.
+The browser script uses the SDK for JavaScript to interact with an Amazon S3 bucket\. The script uses the [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/listobjectscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/listobjectscommand.html) method of the Amazon S3 client class to enable you to view the photo albums\.
 
 ## Prerequisite tasks<a name="s3-example-photos-view-scenario-prerequisites"></a>
 
@@ -376,22 +376,18 @@ window.viewAlbum = viewAlbum;
 
 1. Save all the code as `s3_PhotoViewer.js`\.
 **Note**  
-This file is available on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/src/s3_PhotoViewer.ts)\.
+This file is available on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoViewer/src/s3_PhotoViewer.js)\.
 
 1. Replace *"REGION"* with your AWS Region, such as `us-west-2`\.
 
 1. Replace *"BUCKET\_NAME"* with your Amazon S3 bucket\.
 
 1. Replace *"IDENTITY\_POOL\_ID"* with the `IdentityPoolId` from the **Sample page** of the Amazon Cognito identity pool you created for this example\.
-**Note**  
-The *IDENTITY\_POOL\_ID* is displayed in red on the console as shown\.  
-
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 1. Run the following at the command prompt to bundle the JavaScript for this example into a file called `main.js`\.
 
    ```
-   webpack s3_PhotoViewer.js --mode development --target web --devtool false -o main.js
+   npx webpack ./src/s3_PhotoViewer.js --mode development --target web --no-devtool -o main.js
    ```
 **Note**  
 For information about installing `webpack`, see [Bundling applications with webpack](webpack.md)\.

@@ -39,6 +39,7 @@ This example queries a table that contains episode information about a video ser
 Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -63,7 +64,7 @@ import { QueryCommand } from "@aws-sdk/client-dynamodb";
 import { ddbClient } from "./libs/ddbClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   KeyConditionExpression: "Season = :s and Episode > :e",
   FilterExpression: "contains (Subtitle, :topic)",
   ExpressionAttributeValues: {
@@ -75,12 +76,12 @@ const params = {
   TableName: "EPISODES_TABLE",
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbClient.send(new QueryCommand(params));
+    return data;
     data.Items.forEach(function (element, index, array) {
       console.log(element.Title.S + " (" + element.Subtitle.S + ")");
-      return data;
     });
   } catch (err) {
     console.error(err);
@@ -102,6 +103,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -120,7 +122,7 @@ import { ScanCommand } from "@aws-sdk/client-dynamodb";
 import { ddbClient } from "./libs/ddbClient.js";
 
 // Set the parameters.
-const params = {
+export const params = {
   // Specify which items in the results are returned.
   FilterExpression: "Subtitle = :topic AND Season = :s AND Episode = :e",
   // Define the expression attribute value, which are substitutes for the values you want to compare.
@@ -134,15 +136,13 @@ const params = {
   TableName: "EPISODES_TABLE",
 };
 
-// Create an AWS DynamoDB service object.
-const dbclient = new DynamoDBClient({ region: REGION });
 
-async function run() {
+export const run = async () => {
   try {
     const data = await ddbClient.send(new ScanCommand(params));
+    return data;
     data.Items.forEach(function (element, index, array) {
       console.log(element.Title.S + " (" + element.Subtitle.S + ")");
-      return data;
     });
   } catch (err) {
     console.log("Error", err);

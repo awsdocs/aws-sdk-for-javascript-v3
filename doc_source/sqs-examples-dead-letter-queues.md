@@ -43,7 +43,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `sqsC
 import  { SQSClient } from "@aws-sdk/client-sqs";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
-// Create SNS service object.
+// Create SQS service object.
 const sqsClient = new SQSClient({ region: REGION });
 export  { sqsClient };
 ```

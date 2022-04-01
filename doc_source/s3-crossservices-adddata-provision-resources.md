@@ -28,12 +28,12 @@ To create the AWS CloudFormation stack using the AWS CLI:
 **Note**  
 The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/resources/cdk/submit-data-app-unauthenticated-role)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
 
-1. Run the following command from the command line, replacing *STACK\_NAME* with a unique name for the stack\.
+1. Run the following command from the command line, replacing *STACK\_NAME* with a unique name for the stack, and *REGION* in your AWS region\.
 **Important**  
 The stack name must be unique within an AWS Region and AWS account\. You can specify up to 128 characters, and numbers and hyphens are allowed\.
 
    ```
-   aws cloudformation create-stack --stack-name STACK_NAME --template-body file://setup.yaml --capabilities CAPABILITY_IAM
+   aws cloudformation create-stack --stack-name STACK_NAME --template-body file://setup.yaml --capabilities CAPABILITY_IAM --region REGION
    ```
 
    For more information on the `create-stack` command parameters, see the [AWS CLI Command Reference guide](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack.html), and the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\.
@@ -47,11 +47,22 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
 To populate the table, first create a diretory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. Replace *REGION* with your AWS Region\. This creates the DynamoDB client object\.
 
 ```
+import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
+import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-// Set the AWS Region.
-const REGION = "REGION"; // e.g. "us-east-1"
-// Create an Amazon DynamoDB service client object.
-const dynamoClient = new DynamoDBClient({region:REGION});
+
+const REGION = "REGION";
+const IDENTITY_POOL_ID = "IDENTITY_POOL_ID"; // An Amazon Cognito Identity Pool ID.
+
+// Create an Amazon DynaomDB service client object.
+const dynamoClient = new DynamoDBClient({
+  region: REGION,
+  credentials: fromCognitoIdentityPool({
+    client: new CognitoIdentityClient({ region: REGION }),
+    identityPoolId: IDENTITY_POOL_ID,
+  }),
+});
+
 export { dynamoClient };
 ```
 
@@ -64,20 +75,20 @@ Next, create a `dynamoAppHelperFiles` folder in your project folder, create a fi
 import { PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { dynamoClient } from "../libs/dynamoClient.js";
 
-// Set the parameters.
+// Set the parameters
 export const params = {
   TableName: "Items",
-  item: {
-    Id: { N: "1" },
-    Title: { S: "aTitle" },
-    Name: { S: "aName" },
-    Body: { S: "aBody" },
+  Item: {
+    id: { N: "1" },
+    title: { S: "aTitle" },
+    name: { S: "aName" },
+    body: { S: "aBody" },
   },
 };
 
 export const run = async () => {
   try {
-    const data = await dbclient.send(new PutItemCommand(params));
+    const data = await dynamoClient.send(new PutItemCommand(params));
     console.log("success");
     console.log(data);
   } catch (err) {

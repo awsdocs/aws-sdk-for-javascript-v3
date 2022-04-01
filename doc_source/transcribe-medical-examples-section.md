@@ -28,7 +28,7 @@ If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-e
 
 ## Starting an Amazon Transcribe medical transcription job<a name="transcribe-start-medical-transcription"></a>
 
-This example demonstrates how to start a Amazon Transcribe medical transcription job using the AWS SDK for JavaScript\. For more information, see [startMedicalTranscriptionJob](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#startMedicalTranscriptionJob-property)\.
+This example demonstrates how to start a Amazon Transcribe medical transcription job using the AWS SDK for JavaScript\. For more information, see [startMedicalTranscriptionJob](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/startmedicaltranscriptionjobcommand.html)\.
 
 Create a `libs` directory, and create a Node\.js module with the file name `transcribeClient.js`\. Copy and paste the code below into it, which creates the Amazon Transcribe client object\. Replace *REGION* with your AWS Region\.
 
@@ -54,7 +54,7 @@ import { StartMedicalTranscriptionJobCommand } from "@aws-sdk/client-transcribe"
 import { transcribeClient } from "./libs/transcribeClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   MedicalTranscriptionJobName: "MEDICAL_JOB_NAME", // Required
   OutputBucketName: "OUTPUT_BUCKET_NAME", // Required
   Specialty: "PRIMARYCARE", // Required. Possible values are 'PRIMARYCARE'
@@ -69,7 +69,7 @@ const params = {
   },
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await transcribeClient.send(
       new StartMedicalTranscriptionJobCommand(params)
@@ -93,15 +93,15 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 
 ## Listing Amazon Transcribe medical jobs<a name="transcribe-list-medical-jobs"></a>
 
-This example shows how to list the Amazon Transcribe transcription jobs using the AWS SDK for JavaScript\. For more information, see [ListTranscriptionMedicalJobsCommand](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#listTranscriptionMedicalJobs-property)\.
+This example shows how to list the Amazon Transcribe transcription jobs using the AWS SDK for JavaScript\. For more information, see [ListTranscriptionMedicalJobsCommand](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/listmedicaltranscriptionjobscommand.html)\.
 
 Create a `libs` directory, and create a Node\.js module with the file name `transcribeClient.js`\. Copy and paste the code below into it, which creates the Amazon Transcribe client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { TranscribeClient }  from  "@aws-sdk/client-transcribe";
+const { TranscribeClient } = require("@aws-sdk/client-transcribe");
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
-// Create Transcribe service object.
+// Create anAmazon EC2 service client object.
 const transcribeClient = new TranscribeClient({ region: REGION });
 export { transcribeClient };
 ```
@@ -120,11 +120,11 @@ import { ListMedicalTranscriptionJobsCommand } from "@aws-sdk/client-transcribe"
 import { transcribeClient } from "./libs/transcribeClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   JobNameContains: "KEYWORD", // Returns only transcription job names containing this string
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await transcribeClient.send(
       new ListMedicalTranscriptionJobsCommand(params)
@@ -148,7 +148,7 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 
 ## Deleting an Amazon Transcribe medical job<a name="transcribe-delete-medical-job"></a>
 
-This example shows how to delete an Amazon Transcribe transcription job using the AWS SDK for JavaScript\. For more information about optional, see [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#deleteTranscriptionMedicalJob-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#deleteTranscriptionMedicalJob-property)\.
+This example shows how to delete an Amazon Transcribe transcription job using the AWS SDK for JavaScript\. For more information about optional, see [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/deletemedicaltranscriptionjobcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/deletemedicaltranscriptionjobcommand.html)\.
 
 Create a `libs` directory, and create a Node\.js module with the file name `transcribeClient.js`\. Copy and paste the code below into it, which creates the Amazon Transcribe client object\. Replace *REGION* with your AWS Region\.
 
@@ -174,11 +174,11 @@ import { DeleteMedicalTranscriptionJobCommand } from "@aws-sdk/client-transcribe
 import { transcribeClient } from "./libs/transcribeClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   MedicalTranscriptionJobName: "MEDICAL_JOB_NAME", // For example, 'medical_transciption_demo'
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await transcribeClient.send(
       new DeleteMedicalTranscriptionJobCommand(params)

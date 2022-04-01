@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Creating AWS serverless workflows using AWS SDK for JavaScript<a name="serverless-step-functions-example"></a>
 
-You can create an AWS serverless workflow by using AWS Step Functions the AWS SDK for Java and AWS Step Functions\. Each workflow step is implemented using an AWS Lambda function\. Lambda is a compute service that enables you to run code without provisioning or managing servers\. Step Functions is a serverless orchestration service that lets you combine Lambda functions and other AWS services to build business\-critical applications\. 
+You can create an AWS serverless workflow by using Step Functions the AWS SDK for Java and AWS Step Functions\. Each workflow step is implemented using an AWS Lambda function\. Lambda is a compute service that enables you to run code without provisioning or managing servers\. Step Functions is a serverless orchestration service that lets you combine Lambda functions and other AWS services to build business\-critical applications\. 
 
 **Note**  
  You can create Lambda functions in various programming languages\. For this tutorial, Lambda functions implemented by using the Lambda Java API\. For more information about Lambda, see [What is Lambda](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)\.

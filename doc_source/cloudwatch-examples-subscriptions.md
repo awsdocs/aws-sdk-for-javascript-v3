@@ -27,7 +27,7 @@ For more information about CloudWatch Logs subscriptions, see [Real\-time proces
 ## Prerequisite tasks<a name="cloudwatch-examples-subscriptions-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cloudwatch/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cloudwatch-logs/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create an AWS Lambda function as the destination for log events\. You will need to use the Amazon Resource Name \(ARN\) of this function\. For more information about setting up a Lambda function, see [Subscription filters with Lambda](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#LambdaFunctionExample) in the *Amazon CloudWatch Logs User Guide*\.
 + Create an IAM role whose policy grants permission to invoke the Lambda function you created and grants full access to CloudWatch Logs or apply the following policy to the execution role you create for the Lambda function\. For more information about creating an IAM role, see [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
@@ -77,7 +77,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 export const cwlClient = new CloudWatchLogsClient({ region: REGION });
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchLogsClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch-logs/src/libs/cloudWatchLogsClient.js)\.
 
 Create a Node\.js module with the file name `describeSubscriptionFilters.js`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. Create a JSON object containing the parameters needed to describe your existing filters, including the name of the log group and the maximum number of filters to describe\. Call the `DescribeSubscriptionFiltersCommand` method\.
 
@@ -116,7 +116,7 @@ To run the example, enter the following at the command prompt\.
 node describeSubscriptionFilters.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/describeSubscriptionFilters.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch-logs/src/describeSubscriptionFilters.js)\.
 
 ## Creating a subscription filter<a name="cloudwatch-examples-subscriptions-creating"></a>
 
@@ -130,7 +130,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 export const cwlClient = new CloudWatchLogsClient({ region: REGION });
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchLogsClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch-logs/src/libs/cloudWatchLogsClient.js)\.
 
 Create a Node\.js module with the file name `describeSubscriptionFilters.js`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. Create a JSON object containing the parameters needed to create a filter, including the ARN of the destination Lambda function, the name of the filter, the string pattern for filtering, and the name of the log group\. Call the `PutSubscriptionFiltersCommand` method\.
 
@@ -171,7 +171,7 @@ To run the example, enter the following at the command prompt\.
 node describeSubscriptionFilters.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/describeSubscriptionFilters.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch-logs/src/describeSubscriptionFilters.js)\.
 
 ## Deleting a subscription filter<a name="cloudwatch-examples-subscriptions-deleting"></a>
 
@@ -185,7 +185,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 export const cwlClient = new CloudWatchLogsClient({ region: REGION });
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchLogsClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch-logs/src/libs/cloudWatchLogsClient.js)\.
 
 Create a Node\.js module with the file name `deletesubScriptionFilters.js`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. Create a JSON object containing the parameters needed to delete a filter, including the names of the filter and the log group\. Call the `DeleteSubscriptionFiltersCommand` method\.
 
@@ -229,4 +229,4 @@ To run the example, enter the following at the command prompt\.
 node deletesubScriptionFilters.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/deletesubScriptionFilters.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch-logs/src/deletesubScriptionFilters.js)\.

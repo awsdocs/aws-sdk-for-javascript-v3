@@ -35,6 +35,7 @@ However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/Co
 Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -59,7 +60,7 @@ import { BatchGetItemCommand } from "@aws-sdk/client-dynamodb";
 import { ddbClient } from "./libs/ddbClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   RequestItems: {
     TABLE_NAME: {
       Keys: [
@@ -74,7 +75,7 @@ const params = {
   },
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbClient.send(new BatchGetItemCommand(params));
     console.log("Success, items retrieved", data);
@@ -99,6 +100,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -122,7 +124,7 @@ import { BatchWriteItemCommand } from "@aws-sdk/client-dynamodb";
 import { ddbClient } from "./libs/ddbClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   RequestItems: {
     TABLE_NAME: [
       {
@@ -147,7 +149,7 @@ const params = {
   },
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbClient.send(new BatchWriteItemCommand(params));
     console.log("Success, items inserted", data);

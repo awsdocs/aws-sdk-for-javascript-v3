@@ -11,9 +11,9 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 Use the service client's AWS SDK for JavaScript v3 method \( `ListTablesCommand` \)to make the service call and manage asynchronous flow instead of using callbacks\. The following example shows how to get the names of your Amazon DynamoDB tables in `us-west-2`\.
 
 ```
-const { DynamoDBClient, 
+import { DynamoDBClient, 
         ListTablesCommand 
-} = require('@aws-sdk/client-dynamodb');
+} from "@aws-sdk/client-dynamodb";
 const dbClient = new DynamoDBClient({ region: 'us-west-2' });
 
 dbClient

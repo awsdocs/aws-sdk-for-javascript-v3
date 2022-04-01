@@ -14,25 +14,30 @@ First, create the service client objects required for the example\. Create a `li
 Use the ID of the Amazon Cognito identity pool you created in [Create the AWS resources ](s3-crossservices-adddata-provision-resources.md)\.
 
 ```
-const { SNSClient } = require("@aws-sdk/client-sns");
-const REGION = "REGION"; //e.g. "us-east-1"
-const IdentityPoolId = "IDENTITY_POOL_ID";
+import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
+import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
+import { SNSClient } from "@aws-sdk/client-sns";
 
+const REGION = "REGION";
+const IDENTITY_POOL_ID = "IDENTITY_POOL_ID"; // An Amazon Cognito Identity Pool ID.
+
+// Create an Amazon Comprehend service client object.
 const snsClient = new SNSClient({
   region: REGION,
   credentials: fromCognitoIdentityPool({
     client: new CognitoIdentityClient({ region: REGION }),
-    identityPoolId: IdentityPoolId
+    identityPoolId: IDENTITY_POOL_ID,
   }),
 });
+
 export { snsClient };
 ```
 
-This code is available [here on GitHub\.](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/submit-data-app/srclibs/snsClient.js)\.
+This code is available [here on GitHub\.](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/submit-data-app/src/libs/snsClient.js)\.
 
-To create the browser script for this example, in a folder named `DynamoDBApp`, create a Node\.js module with the file name `add_dat.js` and paste the code below into it\. The `submitData` function submits data to a DynamoDB table, and sends an SMS text to the app administrator using Amazon SNS\. 
+To create the browser script for this example, in a folder named `DynamoDBApp`, create a Node\.js module with the file name `add_data.js` and paste the code below into it\. The `submitData` function submits data to a DynamoDB table, and sends an SMS text to the app administrator using Amazon SNS\. 
 
-In the `submitData` function, declare variables for the target phone number, the values entered on the app interface, and for the name of the Amazon S3 bucket\. Replace *BUCKET\_NAME* with the name of the `S3` bucket you created\. Next, create a parameters object for adding an item to the table\. If none of the values is empty, `submitData` adds the item to the table, and sends the message\. Remember to make the function available to the browser, with `window.submitData = submitData`
+In the `submitData` function, declare variables for the target phone number, the values entered on the app interface, and for the name of the Amazon S3 bucket\. Replace *BUCKET\_NAME* with the name of the `S3` bucket you created\. Next, create a parameters object for adding an item to the table\. If none of the values is empty, `submitData` adds the item to the table, and sends the message\. Remember to make the function available to the browser, with `window.submitData = submitData`\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js

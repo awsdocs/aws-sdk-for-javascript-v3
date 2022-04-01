@@ -17,15 +17,9 @@ Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket you uploaded the ZI
 ```
 // Load the Lambda client.
 const {
-    LambdaClient,
-    CreateFunctionCommand
+        CreateFunctionCommand
 } = require("@aws-sdk/client-lambda");
-
-//Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-
-// Instantiate an AWS Lambda client service object.
-const lambda = new LambdaClient({ region: REGION });
+const {lambdaClient} = require("./libs/lambaClient")
 
 // Set the parameters.
 const params = {
@@ -42,7 +36,7 @@ const params = {
 
 const run = async () => {
     try {
-        const data = await lambda.send(new CreateFunctionCommand(params));
+        const data = await lambdaClient.send(new CreateFunctionCommand(params));
         console.log("Success", data); // successful response
     } catch (err) {
         console.log("Error", err); // an error occurred

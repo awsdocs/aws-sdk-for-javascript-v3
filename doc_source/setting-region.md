@@ -46,4 +46,6 @@ The following is the order of precedence for Region setting:
 
 1. If a Region is passed to a client class constructor, that Region is used\.
 
+1. If a Region is set in the environment variable, that Region is used\.
+
 1. Otherwise, the Region defined in the shared config file is used\.

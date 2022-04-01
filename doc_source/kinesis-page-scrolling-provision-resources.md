@@ -46,8 +46,6 @@ If you create anoher stack using this template, you must change the stream name 
 
 To view the resources when they are created, to the the **Stacks** page on the AWS AWS CloudFormation console, select the stack, and open the **Resources** tab\. 
 
-
-
 You require the following for this example:
 + An Amazon Kinesis stream\. You need to include the name of the stream the browser script\.
 + An Amazon Cognito identity pool with access enabled for unauthenticated identities\. You need to include the identity pool ID in the code to obtain credentials for the browser script\. For more information about Amazon Cognito identity pools, see [Identity Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) in the *Amazon Cognito Developer Guide*\.

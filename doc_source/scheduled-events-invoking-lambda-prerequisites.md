@@ -13,6 +13,3 @@ This topic is part of a tutorial that demonstrates how to invoke a Lambda functi
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/lex-bot/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
-
-**Important**  
-This example uses CommonJS sytax, as Lambda does not currently support ECMAScript 6 \(ES6\) syntax\. For more information, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)

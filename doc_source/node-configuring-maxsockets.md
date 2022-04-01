@@ -15,9 +15,9 @@ This lets you set an upper bound on the number of concurrent requests to a given
 The following example shows how to set `maxSockets` for a DynamoDB client\.
 
 ```
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { NodeHttpHandler } = require("@aws-sdk/node-http-handler");
-var https = require("https");    
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { NodeHttpHandler } from "@aws-sdk/node-http-handler";
+import  https from "https";    
 var agent = new https.Agent({
   maxSockets: 25
 });

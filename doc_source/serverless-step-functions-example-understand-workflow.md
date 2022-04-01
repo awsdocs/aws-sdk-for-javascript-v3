@@ -30,8 +30,6 @@ The following is what happens at each step in the workflow:
 
 You can create a workflow that processes support tickets\. To define a workflow by using Step Functions, you create an Amazon States Language \(JSON\-based\) document to define your state machine\. An Amazon States Language document describes each step\. After you define the document, Step functions provides a visual representation of the workflow\. The following figure shows the Amazon States Language document and the visual representation of the workflow\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
-
 Workflows can pass data between steps\. For example, the **Open Case** step processes a case ID value \(passed to the workflow\) and passes that value to the **Assign Case** step\. Later in this tutorial, you’ll create application logic in the Lambda function to read and process the data values\.
 
 ### To create a workflow<a name="serverless-step-functions-example-workflow"></a>

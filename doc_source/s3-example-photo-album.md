@@ -119,7 +119,7 @@ Install the following SDK modules:
 **Note**  
 For information on installing SDK modules, see [Installing the SDK for JavaScript](installing-jssdk.md)\.
 + client\-s3
-+ client\-cognito\-identity
++ credential\-providers
 + credential\-provider\-cognito\-identity
 
 ### Install webpack<a name="s3-example-photo-album-install-webpack"></a>
@@ -506,7 +506,7 @@ window.deleteAlbum = deleteAlbum;
 
 1. Save all the code as `s3_PhotoExample.js`\.
 **Note**  
-This file is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/src/s3_PhotoExample.ts)\.
+This file is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/src/s3_PhotoExample.js)\.
 
 1. Replace *"REGION"* with your AWS Region, such as 'us\-east\-1'\.
 
@@ -514,14 +514,12 @@ This file is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 
 1. Replace *"IDENTITY\_POOL\_ID"* with the IdentityPoolId from the **Sample page** of the Amazon Cognito Identity Pool you created for this example\.
 **Note**  
-The *IDENTITY\_POOL\_ID* is displayed in red in the console, as below:  
-
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+The *IDENTITY\_POOL\_ID* is displayed in red in the console\.
 
 1. Run the following in the command line to bundle the JavaScript for this example in to a file called `<main.js>`:
 
    ```
-   webpack s3_PhotoExample.ts --mode development --target web --devtool false -o main.js
+   npx webpack ./src/s3_PhotoExample.js --mode development --target web --no-devtool -o main.js
    ```
 **Note**  
 For information on installing WebPack, see [Bundling applications with webpack](webpack.md)\.
@@ -529,5 +527,5 @@ For information on installing WebPack, see [Bundling applications with webpack](
 Run the following in the command line:
 
 ```
-node s3_PhotoUploader.ts
+node s3_PhotoExample.js
 ```

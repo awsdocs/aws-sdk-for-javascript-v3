@@ -12,12 +12,10 @@ This topic is part of a tutorial that create an Amazon Lex chatbot within a web 
 
 Create a file named `index.js`\. Copy and paste the code below into `index.js`\. Import the required AWS SDK for JavaScript modules and commands\. Create clients for Amazon Lex, Amazon Comprehend, and Amazon Translate\. Replace *REGION* with AWS Region, and *IDENTITY\_POOL\_ID* with the ID of the identity pool you created in the [Create the AWS resources ](lex-bot-provision-resources.md)\. To retrieve this identity pool ID, open the identity pool in the Amazon Cognito console, choose **Edit identity pool**, and choose **Sample code** in the side menu\. The identity pool ID is shown in red text in the console\.
 
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
-
 First, create a `libs` directory create the required service client objects by creating three files, `comprehendClient.js`, `lexClient.js`, and `transcribeClient.js`\. Paste the approriate code below into each, and replace *REGION* and *IDENTITY\_POOL\_ID* in each\. 
 
 **Note**  
-Use the ID of the Amazon Cognito identity pool you created in [Create the AWS resources using AWS CloudFormation ](lex-bot-provision-resources.md#lex-bot-example-resources-cli)\.
+Use the ID of the Amazon Cognito identity pool you created in [Create the AWS resources using AWS CloudFormation](lex-bot-provision-resources.md#lex-bot-example-resources-cli)\.
 
 ```
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";

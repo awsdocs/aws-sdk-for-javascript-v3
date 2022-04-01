@@ -18,17 +18,18 @@ Install the AWS SDK for JavaScript DynamoDB client by entering `npm install @aws
 Ensure you have configured your AWS credentials correctly\. For more information, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\. 
 
 ```
+import { DynamoDBClient, 
+ListTablesCommand } from "@aws-sdk/client-dynamodb";
 (async function () {
-  const DDB = require("@aws-sdk/client-dynamodb");
-  const dbClient = new DDB.DynamoDBClient({ region: "us-west-2" });
-  const command = new DDB.ListTablesCommand({});
+    const dbClient = new DynamoDBClient({ region: "us-west-2" });
+    const command = new ListTablesCommand({});
 
-  try {
-    const results = await dbClient.send(command);
-    console.log(results.TableNames.join('\n'));
-  } catch (err) {
-    console.error(err)
-  }
+    try {
+        const results = await dbClient.send(command);
+        console.log(results.TableNames.join('\n'));
+    } catch (err) {
+        console.error(err)
+    }
 })();
 ```
 

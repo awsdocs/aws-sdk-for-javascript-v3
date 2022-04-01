@@ -44,10 +44,9 @@ However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/Co
 Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
-import {ddbClient} from "./ddbClient.js";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+import {ddbClient} from "./ddbClient";
 
 const marshallOptions = {
     // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -76,6 +75,7 @@ This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -90,10 +90,10 @@ Create a Node\.js module with the file name `ddbdoc_get_item.js`\. Be sure to co
 
 ```
 import { GetCommand } from "@aws-sdk/lib-dynamodb";
-import { ddbDocClient } from "./libs/ddbDocClient.js";
+import { ddbDocClient } from "./libs/ddbDocClient";
 
 // Set the parameters.
-const params = {
+export const params = {
   TableName: "TABLE_NAME",
   /*
   Convert the key JavaScript object you are retrieving to the
@@ -113,10 +113,11 @@ const params = {
   },
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbDocClient.send(new GetCommand(params));
-    console.log("Success :", data.Item);
+    console.log("Success :", data);
+    // console.log("Success :", data.Item);
     return data;
   } catch (err) {
     console.log("Error", err);
@@ -138,10 +139,9 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
-import {ddbClient} from "./ddbClient.js";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+import {ddbClient} from "./ddbClient";
 
 const marshallOptions = {
     // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -170,6 +170,7 @@ This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -184,10 +185,10 @@ Create a Node\.js module with the file name `ddbdoc_put_item.js`\. Be sure to co
 
 ```
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
-import { ddbDocClient } from "./libs/ddbDocClient.js";
+import { ddbDocClient } from "./libs/ddbDocClient";
 
 // Set the parameters.
-const params = {
+export const params = {
   TableName: "TABLE_NAME",
   /*
     Convert the key JavaScript object you are adding to the
@@ -208,7 +209,7 @@ const params = {
   },
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbDocClient.send(new PutCommand(params));
     console.log("Success - item added or updated", data);
@@ -233,10 +234,9 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
-import {ddbClient} from "./ddbClient.js";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+import {ddbClient} from "./ddbClient";
 
 const marshallOptions = {
     // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -260,9 +260,12 @@ const ddbDocClient = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 export { ddbDocClient };
 ```
 
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
+
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -273,16 +276,14 @@ export { ddbClient };
 
 This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
-
 Create a Node\.js module with the file name `ddbdoc_update_item.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/lib-dynamodb`, a library package that provides document client functionality to `@aws-sdk/client-dynamodb`\. Next, set the configuration as shown below for marshalling and unmarshalling \- as an optional second parameter \- during creation of document client\. Next, create the clients\. Create a JSON object containing the parameters needed to write an item to the table, which in this example includes the name of the table, the key of the item to update, a set of `UpdateExpressions` that define the attributes of the item to update with tokens you assign values to in the `ExpressionAttributeValues` parameters\.Call the `UpdateCommand` method of the DynamoDB Document client\.
 
 ```
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
-import { ddbDocClient } from "./libs/ddbDocClient.js";
+import { ddbDocClient } from "./libs/ddbDocClient";
 
 // Set the parameters
-const params = {
+export const params = {
   TableName: "TABLE_NAME",
   /*
   Convert the attribute JavaScript object you are updating to the required
@@ -305,9 +306,10 @@ const params = {
     ":t": "NEW_ATTRIBUTE_VALUE_1", // For example ':t' : 'NEW_TITLE'
     ":s": "NEW_ATTRIBUTE_VALUE_2", // For example ':s' : 'NEW_SUBTITLE'
   },
+  ReturnValues: "ALL_NEW"
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbDocClient.send(new UpdateCommand(params));
     console.log("Success - item added or updated", data);
@@ -332,10 +334,9 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
-import {ddbClient} from "./ddbClient.js";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+import {ddbClient} from "./ddbClient";
 
 const marshallOptions = {
     // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -364,6 +365,7 @@ This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -380,10 +382,10 @@ Create a Node\.js module with the file name `ddbdoc_query_item.js`\. Be sure to 
 
 ```
 import { QueryCommand } from "@aws-sdk/lib-dynamodb";
-import { ddbDocClient } from "./libs/ddbDocClient.js";
+import { ddbDocClient } from "./libs/ddbDocClient";
 
 // Set the parameters
-const params = {
+export const params = {
   TableName: "TABLE_NAME",
   /*
   Convert the JavaScript object defining the objects to the required
@@ -407,10 +409,11 @@ const params = {
   FilterExpression: "contains (Subtitle, :topic)",
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbDocClient.send(new QueryCommand(params));
-    console.log("Success. Item details: ", data.Items);
+    console.log("Success. Item details: ", data);
+    // console.log("Success. Item details: ", data.Items);
     return data;
   } catch (err) {
     console.log("Error", err);
@@ -432,10 +435,9 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a `libs` directory, and create a Node\.js module with the file name `ddbDocClient.js`\. Copy and paste the code below into it, which creates the DynamoDB document client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBDocumentClient} from "@aws-sdk/lib-dynamodb";
-import {ddbClient} from "./ddbClient.js";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+import {ddbClient} from "./ddbClient";
 
 const marshallOptions = {
     // Whether to automatically convert empty strings, blobs, and sets to `null`.
@@ -464,6 +466,7 @@ This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -478,10 +481,10 @@ Create a Node\.js module with the file name `ddbdoc_delete_item.js`\. Be sure to
 
 ```
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
-import { ddbDocClient } from "./libs/ddbDocClient.js";
+import { ddbDocClient } from "./libs/ddbDocClient";
 
 // Set the parameters
-const params = {
+export const params = {
   TableName: "TABLE_NAME",
   /*
   Convert the key JavaScript object you are deleting to the
@@ -501,7 +504,7 @@ const params = {
   },
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbDocClient.send(new DeleteCommand(params));
     console.log("Success - item deleted");

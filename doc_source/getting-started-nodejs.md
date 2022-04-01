@@ -40,8 +40,7 @@ For details about using `package.json` in a Node\.js project, see [What is the f
      "version": "1.0.0",
      "main": "index.js",
      "dependencies": {
-      "@aws-sdk/client-s3": "^3.32.0",
-       "@aws-sdk/node-http-handler": "^3.32.0"
+      "@aws-sdk/client-s3": "^3.32.0"
      },
      "type": "module"
    }
@@ -71,7 +70,7 @@ This example demonstrate how to import/export client service objects and command
 This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
 If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
-Create a file named `sample.js` to contain the client for creating the Amazon S3 service client object\. Copy and paste the code below into it\. Replace *REGION* with your AWS Region\.
+Create a folder named `libs` in the root of your project, and ceate a file named `sampleClient.js` to contain the client for creating the Amazon S3 service client object\. Copy and paste the code below into it\. Replace *REGION* with your AWS Region\.
 
 ```
 import { S3Client } from "@aws-sdk/client-s3";
@@ -83,6 +82,8 @@ export { s3Client };
 ```
 
 The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/src/libs/s3Client.js)\.
+
+Next, in the root of your project, create a file named `sample.js`\.
 
 First, define the parameters by replacing *BUCKET\_NAME* with the name of the bucket, *KEY* with the name of the new object, *BODY* with some content for the new object\.
 
