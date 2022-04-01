@@ -12,11 +12,7 @@ This topic is part of a tutorial that create an AWS application that sends and r
 
 To send a message to a SQS queue, enter the message into the application and choose Send\.
 
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
-
-After the message is sent, the application displays the message, as shown in this figure\.
-
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+After the message is sent, the application displays the message\.
 
 You can choose **Purge** to purge the messages from the Amazon SQS queue\. This results in an empty queue, and no messages are displayed in the application\.
 

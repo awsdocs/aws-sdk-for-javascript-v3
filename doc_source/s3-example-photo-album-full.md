@@ -306,4 +306,4 @@ const deleteAlbum = async (albumName) => {
 window.deleteAlbum = deleteAlbum;
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/src/s3_PhotoExample.ts)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/photoExample/src/s3_PhotoExample.js)\.

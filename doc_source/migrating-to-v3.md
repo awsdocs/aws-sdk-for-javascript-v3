@@ -50,7 +50,7 @@ npm install @aws-sdk/client-s3
 The following code loads the Amazon S3 service\.
 
 ```
-const {S3} = require('@aws-sdk/client-s3');
+import {S3} from '@aws-sdk/client-s3';
 ```
 
 **Note**  
@@ -69,7 +69,7 @@ client.command(parameters)
 ```
 
 ```
-const {S3} = require('@aws-sdk/client-s3');
+import {S3} from '@aws-sdk/client-s3';
 const client = new S3({region: 'us-west-2'});
 const bucketParams = {
     Bucket : BUCKET_NAME
@@ -97,7 +97,7 @@ const data =  await v2client.command(params).promise()
 Here is the V3 version\.
 
 ```
-const data = await v2client.command(params)
+const data = await v3client.command(params)
 ```
 
 ## Path 3 examples<a name="path3-examples"></a>
@@ -111,7 +111,7 @@ npm install @aws-sdk/client-s3;
 The following code loads only the Amazon S3 client, reducing the overhead\.
 
 ```
-const {S3Client, CreateBucketCommand} = require('@aws-sdk/client-s3');
+import {S3Client, CreateBucketCommand} from '@aws-sdk/client-s3';
 ```
 
  If you install only the client of a package, you must also import the V3 commands you want to use\. In this case, the code imports the `CreateBucketCommand`, which enables you to create an Amazon S3 bucket\. You can browse the available commands in your project's `node-modules/@aws-sdk/client-PACKAGE_NAME/commands` folder\. 
@@ -131,21 +131,20 @@ To call imported commands using the recommended async/await pattern, you must im
 The following example creates an Amazon S3 bucket using the async/await pattern, using only the client of the Amazon S3 service package to reduce overhead\.
 
 ```
-const {S3Client, CreateBucketCommand} = require('@aws-sdk/client-s3');
+import {S3Client, CreateBucketCommand} from '@aws-sdk/client-s3';
 const client = new S3Client({region: 'us-west-2'});
 const bucketParams = {
     Bucket : BUCKET_NAME
 };
 
-const run = async () => {
+(async function () {
       try{
         const data = await client.send(new CreateBucketCommand(bucketParams));
         console.log("Success", data);
       } catch (err) {
         console.log("Error", err);
       }
-};
-await run();
+})();
 ```
 
 For more examples, see [SDK for JavaScript code examples](sdk-code-samples.md)\.

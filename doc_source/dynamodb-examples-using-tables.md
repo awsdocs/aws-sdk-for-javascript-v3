@@ -39,6 +39,7 @@ However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/Co
 Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -65,7 +66,7 @@ import { CreateTableCommand } from "@aws-sdk/client-dynamodb";
 import { ddbClient } from "./libs/ddbClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   AttributeDefinitions: [
     {
       AttributeName: "Season", //ATTRIBUTE_NAME_1
@@ -96,7 +97,7 @@ const params = {
   },
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbClient.send(new CreateTableCommand(params));
     console.log("Table Created", data);
@@ -121,6 +122,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -138,10 +140,11 @@ Create a Node\.js module with the file name `ddb_listtables.js`\. Be sure to con
 import { ListTablesCommand } from "@aws-sdk/client-dynamodb";
 import { ddbClient } from "./libs/ddbClient.js";
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbClient.send(new ListTablesCommand({}));
-    console.log(data.TableNames.join("\n"));
+    console.log(data);
+    // console.log(data.TableNames.join("\n"));
     return data;
   } catch (err) {
     console.error(err);
@@ -163,6 +166,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -184,12 +188,13 @@ import { DescribeTableCommand } from "@aws-sdk/client-dynamodb";
 import { ddbClient } from "./libs/ddbClient.js";
 
 // Set the parameters
-const params = { TableName: "TABLE_NAME" }; //TABLE_NAME
+export const params = { TableName: "TABLE_NAME" }; //TABLE_NAME
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbClient.send(new DescribeTableCommand(params));
-    console.log("Success", data.Table.KeySchema);
+    console.log("Success", data);
+    // console.log("Success", data.Table.KeySchema);
     return data;
   } catch (err) {
     console.log("Error", err);
@@ -211,6 +216,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a `libs` directory, and create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
 ```
+// Create service client module using ES6 syntax.
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
@@ -229,22 +235,18 @@ import { DeleteTableCommand } from "@aws-sdk/client-dynamodb";
 import { ddbClient } from "./libs/ddbClient.js";
 
 // Set the parameters
-const params = {
-  TableName: "TABLE_NAME",
+export const params = {
+  TableName: "CUSTOMER_LIST_NEW",
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await ddbClient.send(new DeleteTableCommand(params));
     console.log("Success, table deleted", data);
     return data;
   } catch (err) {
-    if (err && err.code === "ResourceNotFoundException") {
-      console.log("Error: Table not found");
-    } else if (err && err.code === "ResourceInUseException") {
-      console.log("Error: Table in use");
+      console.log("Error", err);
     }
-  }
 };
 run();
 ```

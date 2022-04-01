@@ -23,64 +23,89 @@ In this example, a series of Node\.js modules are used to automatically upload a
 To set up and run this example, you must first complete these tasks:
 + Set up a project environment to run Node JavaScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
-+ Create resources for the example using the template [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/polly/general-examples/src/setup.yaml) to create a AWS CDK stack using either the [AWS Web Services Management Console](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html) or the [AWS CLI](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\. For instructions on how to modify the stack, or to delete the stack and its associated resources when you have finished the tutorial, see [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/resources/cdk/javascript_example_code_polly_aws_service)\.
++ Create an AWS Identity and Access Management \(IAM\) Unaunthenticated Amazon Cognito user role polly:SynthesizeSpeech permissions, and an Amazon Cognito identity pool with the IAM role attached to it\. The [Create the AWS resources using the AWS CloudFormation](#polly-example-synthesize-to-s3-create-resources)section below describes how to create these resources\.
+
 **Note**  
+This example uses Amazon Cognito, but if you are not using Amazon Cognito then your AWS user must have following IAM permissions policy  
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "mobileanalytics:PutEvents",
+        "cognito-sync:*"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    },
+    {
+      "Action": "polly:SynthesizeSpeech",
+      "Resource": "*",
+      "Effect": "Allow"
+    }
+  ]
+}
+```
+
+## Create the AWS resources using the AWS CloudFormation<a name="polly-example-synthesize-to-s3-create-resources"></a>
+
+AWS CloudFormation enables you to create and provision AWS infrastructure deployments predictably and repeatedly\. For more information about AWS CloudFormation, see the [AWS CloudFormation developer guide\.](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)\.
+
+To create the AWS CloudFormation stack:
+
+1. Install and configure the AWS CLI following the instructions in the [AWS CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)\.
+
+1. Create a file named `setup.yaml` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/polly/general-examples/src/setup.yaml) into it\. 
+**Note**  
+The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/resources/cdk/javascript_example_code_polly_aws_service/)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
+
+1. Run the following command from the command line, replacing *STACK\_NAME* with a unique name for the stack\.
+**Important**  
 The stack name must be unique within an AWS Region and AWS account\. You can specify up to 128 characters, and numbers and hyphens are allowed\.
 
-  This resulting AWS CloudFormation stack creates the following resources:
-  + An AWS Identity and Access Management role with full access permissions to Amazon Polly\.
-  + An Amazon Cognito identity pool with the IAM role attached to it\.
+   ```
+   aws cloudformation create-stack --stack-name STACK_NAME --template-body file://setup.yaml --capabilities CAPABILITY_IAM
+   ```
+
+   For more information on the `create-stack` command parameters, see the [AWS CLI Command Reference guide](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack.html), and the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\.
+
+1. Navigate to the AWS CloudFormation management console, choose **Stacks**, choose the stack name, and choose the **Resources** tab to view a list of the created resources\.  
+![\[AWS CloudFormation resources\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[AWS CloudFormation resources\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[AWS CloudFormation resources\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
 
 ## Upload audio recorded using Amazon Polly to Amazon S3<a name="polly-example-synthesize-to-s3-example"></a>
 
 Create a Node\.js module with the file name `polly_synthesize_to_s3.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. In the code, enter the *REGION*, and the *BUCKET\_NAME*\. To access Amazon Polly, create an `Polly` client service object\. Replace *"IDENTITY\_POOL\_ID"* with the `IdentityPoolId` from the **Sample page** of the Amazon Cognito identity pool you created for this example\. This is also passed to each client object\.
 
-**Note**  
-
-![\[Identity pool ID\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Identity pool ID\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Identity pool ID\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
-
 Call the `StartSpeechSynthesisCommand` method of the Amazon Polly client service object synthesize the voice message and upload it to the Amazon S3 bucket\. 
 
 ```
-const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
 const {
- fromCognitoIdentityPool,
-} = require("@aws-sdk/credential-provider-cognito-identity");
-const {
- Polly,
- StartSpeechSynthesisTaskCommand,
+  Polly,
+  StartSpeechSynthesisTaskCommand,
 } = require("@aws-sdk/client-polly");
-
-// Set the AWS Region
-const REGION = "REGION"; //e.g. "us-east-1"
+const { pollyClient } = require("./libs/pollyClient.js");
 
 // Create the parameters
-var s3Params = {
- OutputFormat: "mp3",
- OutputS3BucketName: "BUCKET_NAME",
- Text: "Hello David, How are you?",
- TextType: "text",
- VoiceId: "Joanna",
- SampleRate: "22050",
+var params = {
+  OutputFormat: "mp3",
+  OutputS3BucketName: "videoanalyzerbucket",
+  Text: "Hello David, How are you?",
+  TextType: "text",
+  VoiceId: "Joanna",
+  SampleRate: "22050",
 };
-// Create the Polly service client, assigning your credentials
-const polly = new Polly({
- region: REGION,
- credentials: fromCognitoIdentityPool({
- client: new CognitoIdentityClient({ region: REGION }),
- identityPoolId: "IDENTITY_POOL_ID", // IDENTITY_POOL_ID
- }),
-});
 
 const run = async () => {
- try {
- const data = await polly.send(
- new StartSpeechSynthesisTaskCommand(s3Params)
- );
- console.log("Audio file added to " + s3Params.OutputS3BucketName);
- } catch (err) {
- console.log("Error putting object", err);
- }
+  try {
+    const data = await pollyClient.send(
+      new StartSpeechSynthesisTaskCommand(params)
+    );
+    console.log("Success, audio file added to " + params.OutputS3BucketName);
+  } catch (err) {
+    console.log("Error putting object", err);
+  }
 };
 run();
 ```

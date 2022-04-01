@@ -13,9 +13,9 @@ The default trust stores for Node\.js include the certificates needed to access 
 In this example, a specific certificate on disk is used to create an `https.Agent` that rejects connections unless the designated certificate is provided\. The newly created `https.Agent` is then used by the DynamoDB client\.
 
 ```
-const fs = require("fs"); 
-const https = require("https");
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+import fs from "fs"; 
+import https from "https";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 
 const certs = [
   fs.readFileSync("/path/to/cert.pem")

@@ -44,7 +44,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -60,18 +60,18 @@ Call the `GetUserCommand` method of the `IAM` client service object to see if th
 Replace *USER\_NAME* with the user name to create\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { GetUserCommand, CreateUserCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = { UserName: "USER_NAME" }; //USER_NAME
+// Set the parameters.
+export const params = { UserName: "USER_NAME" }; //USER_NAME
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new GetUserCommand(params));
     console.log(
-      "User " + process.argv[3] + " already exists",
+      "User " + "USER_NAME" + " already exists",
       data.User.UserId
     );
     return data;
@@ -103,7 +103,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -114,14 +114,14 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a Node\.js module with the file name `iam_listusers.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to list your users, limiting the number returned by setting the `MaxItems` parameter to 10\. Call the `ListUsersCommand` method of the `IAM` client service object\. Write the first user's name and creation date to the console\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { ListUsersCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = { MaxItems: 10 };
+// Set the parameters.
+export const params = { MaxItems: 10 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new ListUsersCommand(params));
     return data;
@@ -151,7 +151,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -165,17 +165,17 @@ Create a Node\.js module with the file name `iam_updateuser.js`\. Be sure to con
 Replace *ORIGNAL\_USER\_NAME* with the user name to update, and *NEW\_USER\_NAME* with the new user name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { UpdateUserCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = {
+// Set the parameters.
+export const params = {
   UserName: "ORIGINAL_USER_NAME", //ORIGINAL_USER_NAME
   NewUserName: "NEW_USER_NAME", //NEW_USER_NAME
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new UpdateUserCommand(params));
     console.log("Success, username updated");
@@ -202,7 +202,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -218,14 +218,14 @@ Call the `GetUserCommand` method of the `IAM` client service object to see if th
 Replace *USER\_NAME* with the name of the user to delete\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { DeleteUserCommand, GetUserCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = { UserName: "USER_NAME" }; //USER_NAME
+// Set the parameters.
+export const params = { UserName: "USER_NAME" }; //USER_NAME
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new GetUserCommand(params));
     return data;
@@ -237,7 +237,7 @@ const run = async () => {
       console.log("Error", err);
     }
   } catch (err) {
-    console.log("User " + process.argv[2] + " does not exist.");
+    console.log("User " + "USER_NAME" + " does not exist.");
   }
 };
 run();

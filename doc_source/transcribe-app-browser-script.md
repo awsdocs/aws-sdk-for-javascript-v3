@@ -17,10 +17,6 @@ There are three files, `index.html`, `recorder.js`, and `helper.js`, which you a
 
 First, define the parameters\. `COGNITO_ID` is the endpoint for the Amazon Cognito User Pool you created in the [Create the AWS resources ](transcribe-app-provision-resources.md) topic of this tutorial\. It is formatted`cognito-idp.AWS_REGION.amazonaws.com/USER_POOL_ID`\. The user pool id is *ID\_TOKEN* in the AWS credentials token, which is stripped from the app URL by the `getToken` function in the 'helper\.js' file\. This token is passed to the `loginData` variable, which provides the Amazon Transcribe and Amazon S3 client objects with logins\. Replace *"REGION"* with the AWS Region, and *"BUCKET"* with the Replace *"IDENTITY\_POOL\_ID"* with the `IdentityPoolId` from the **Sample page** of the Amazon Cognito identity pool you created for this example\. This is also passed to each client object\.
 
-**Note**  
-
-![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Preparing an Amazon Cognito identity pool for the browser script\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
-
 ```
 // Import the required AWS SDK clients and commands for Node.js
 import "./helper.js";

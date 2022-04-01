@@ -40,7 +40,8 @@ If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-e
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -57,9 +58,9 @@ Create an `S3` service object\. The only parameter you need to pass is the name 
 If the selected bucket has no policy, that information is returned to the callback function in the `error` parameter\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { GetBucketPolicyCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
 // Create the parameters for calling
 export const bucketParams = { Bucket: "BUCKET_NAME" };
@@ -89,7 +90,8 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -106,16 +108,15 @@ Bucket policies are specified in JSON\. First, create a JSON object that contain
 Format the `Resource` string required by the policy, incorporating the name of the selected bucket\. Insert that string into the JSON object\. Prepare the parameters for the `PutBucketPolicyCommand` method, including the name of the bucket and the JSON policy converted to a string value\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { PutBucketPolicyCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+// Import required AWS SDK clients and commands for Node.js.
+import { CreateBucketCommand, PutBucketPolicyCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
-// Create params JSON for S3.createBucket
 const BUCKET_NAME = "BUCKET_NAME";
 export const bucketParams = {
   Bucket: BUCKET_NAME,
 };
-// Create the policy
+// Create the policy in JSON for the S3 bucket.
 const readOnlyAnonUserPolicy = {
   Version: "2012-10-17",
   Statement: [
@@ -129,11 +130,11 @@ const readOnlyAnonUserPolicy = {
   ],
 };
 
-// create selected bucket resource string for bucket policy
+// Create selected bucket resource string for bucket policy.
 const bucketResource = "arn:aws:s3:::" + BUCKET_NAME + "/*"; //BUCKET_NAME
 readOnlyAnonUserPolicy.Statement[0].Resource[0] = bucketResource;
 
-// // convert policy JSON into string and assign into params
+// Convert policy JSON into string and assign into parameters.
 const bucketPolicyParams = {
   Bucket: BUCKET_NAME,
   Policy: JSON.stringify(readOnlyAnonUserPolicy),
@@ -141,14 +142,21 @@ const bucketPolicyParams = {
 
 export const run = async () => {
   try {
-    // const response = await s3.putBucketPolicy(bucketPolicyParams);
-    const response = await s3Client.send(
-      new PutBucketPolicyCommand(bucketPolicyParams)
+    const data = await s3Client.send(
+        new CreateBucketCommand(bucketParams)
     );
-    return response;
-    console.log("Success, permissions added to bucket", response);
+    console.log('Success, bucket created.', data)
+    try {
+      const response = await s3Client.send(
+          new PutBucketPolicyCommand(bucketPolicyParams)
+      );
+      console.log("Success, permissions added to bucket", response);
+    }
+    catch (err) {
+        console.log("Error adding policy to S3 bucket.", err);
+      }
   } catch (err) {
-    console.log("Error", err);
+    console.log("Error creating S3 bucket.", err);
   }
 };
 run();
@@ -167,7 +175,8 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 Create a `libs` directory, and create a Node\.js module with the file name `s3Client.js`\. Copy and paste the code below into it, which creates the Amazon S3 client object\. Replace *REGION* with your AWS region\.
 
 ```
-import { S3Client} from "@aws-sdk/client-s3";
+// Create service client module using ES6 syntax.
+import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon S3 service client object.
@@ -182,9 +191,9 @@ Create a Node\.js module with the file name `s3_deletebucketpolicy.js`\. The mod
  The only parameter you need to pass when calling the `DeleteBucketPolicy` method is the name of the selected bucket\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { DeleteBucketPolicyCommand } from "@aws-sdk/client-s3/";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates Amazon S3 service client module.
+// Import required AWS SDK clients and commands for Node.js.
+import { DeleteBucketPolicyCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
 
 // Set the bucket parameters
 export const bucketParams = { Bucket: "BUCKET_NAME" };

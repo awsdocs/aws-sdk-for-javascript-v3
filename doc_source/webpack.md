@@ -12,8 +12,6 @@ The use of code modules by web applications in browser scripts or Node\.js creat
 
 The `webpack` module bundler parses your application code, searching for `import` or `require` statements, to create bundles that contain all the assets your application needs\. This is so that the assets can be easily served through a webpage\. The SDK for JavaScript can be included in `webpack` as one of the dependencies to include in the output bundle\.
 
-
-
 For more information about `webpack`, see the [webpack module bundler](https://webpack.github.io/) on GitHub\.
 
 ## Installing webpack<a name="webpack-installing"></a>

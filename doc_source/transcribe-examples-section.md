@@ -28,15 +28,15 @@ If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-e
 
 ## Starting an Amazon Transcribe job<a name="transcribe-start-transcription"></a>
 
-This example demonstrates how to start a Amazon Transcribe transcription job using the AWS SDK for JavaScript\. For more information, see [StartTranscriptionJobCommand](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#startTranscriptionJob-property)\.
+This example demonstrates how to start a Amazon Transcribe transcription job using the AWS SDK for JavaScript\. For more information, see [StartTranscriptionJobCommand](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/starttranscriptionjobcommand.html)\.
 
 Create a `libs` directory, and create a Node\.js module with the file name `transcribeClient.js`\. Copy and paste the code below into it, which creates the Amazon Transcribe client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { TranscribeClient }  from  "@aws-sdk/client-transcribe";
+const { TranscribeClient } = require("@aws-sdk/client-transcribe");
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
-// Create Transcribe service object.
+// Create anAmazon EC2 service client object.
 const transcribeClient = new TranscribeClient({ region: REGION });
 export { transcribeClient };
 ```
@@ -54,17 +54,17 @@ import { StartTranscriptionJobCommand } from "@aws-sdk/client-transcribe";
 import { transcribeClient } from "./libs/transcribeClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   TranscriptionJobName: "JOB_NAME",
   LanguageCode: "LANGUAGE_CODE", // For example, 'en-US'
   MediaFormat: "SOURCE_FILE_FORMAT", // For example, 'wav'
   Media: {
     MediaFileUri: "SOURCE_LOCATION",
-    // For example, "https://transcribe-demo.s3.REGION.amazonaws.com/hello_world.wav"
+    // For example, "https://transcribe-demo.s3-REGION.amazonaws.com/hello_world.wav"
   },
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await transcribeClient.send(
       new StartTranscriptionJobCommand(params)
@@ -88,15 +88,15 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 
 ## List Amazon Transcribe jobs<a name="transcribe-list-jobs"></a>
 
-This example shows how list the Amazon Transcribe transcription jobs using the AWS SDK for JavaScript\. For more information about what other setting you can modify, see [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#listTranscriptionJobs-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#listTranscriptionJobs-property)\.
+This example shows how list the Amazon Transcribe transcription jobs using the AWS SDK for JavaScript\. For more information about what other setting you can modify, see [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/listtranscriptionjobscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/listtranscriptionjobscommand.html)\.
 
 Create a `libs` directory, and create a Node\.js module with the file name `transcribeClient.js`\. Copy and paste the code below into it, which creates the Amazon Transcribe client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { TranscribeClient }  from  "@aws-sdk/client-transcribe";
+const { TranscribeClient } = require("@aws-sdk/client-transcribe");
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
-// Create Transcribe service object.
+// Create anAmazon EC2 service client object.
 const transcribeClient = new TranscribeClient({ region: REGION });
 export { transcribeClient };
 ```
@@ -115,12 +115,12 @@ import { ListTranscriptionJobsCommand } from "@aws-sdk/client-transcribe";
 import { transcribeClient } from "./libs/transcribeClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   JobNameContains: "KEYWORD", // Not required. Returns only transcription
   // job names containing this string
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await transcribeClient.send(
       new ListTranscriptionJobsCommand(params)
@@ -144,7 +144,7 @@ This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-do
 
 ## Deleting a Amazon Transcribe job<a name="transcribe-delete-job"></a>
 
-This example shows how to delete an Amazon Transcribe transcription job using the AWS SDK for JavaScript\. For more information about optional, see [https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#deleteTranscriptionJob-property](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/TranscribeService.html#deleteTranscriptionJob-property)\.
+This example shows how to delete an Amazon Transcribe transcription job using the AWS SDK for JavaScript\. For more information about optional, see [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/deletetranscriptionjobcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-transcribe/classes/deletetranscriptionjobcommand.html)\.
 
 Create a `libs` directory, and create a Node\.js module with the file name `transcribeClient.js`\. Copy and paste the code below into it, which creates the Amazon Transcribe client object\. Replace *REGION* with your AWS Region\.
 
@@ -170,11 +170,11 @@ import { DeleteTranscriptionJobCommand } from "@aws-sdk/client-transcribe";
 import { transcribeClient } from "./libs/transcribeClient.js";
 
 // Set the parameters
-const params = {
+export const params = {
   TranscriptionJobName: "JOB_NAME", // Required. For example, 'transciption_demo'
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await transcribeClient.send(
       new DeleteTranscriptionJobCommand(params)

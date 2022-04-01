@@ -46,7 +46,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -60,11 +60,11 @@ Create a Node\.js module with the file name `iam_createpolicy.js`\. Be sure to c
 Replace *RESOURCE\_ARN* with the Amazon Resource Name \(ARN\) of the resource you want to grant the permissions to, and *DYNAMODB\_POLICY\_NAME* with the name of the DynamoDB policy name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { CreatePolicyCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
+// Set the parameters.
 const myManagedPolicy = {
   Version: "2012-10-17",
   Statement: [
@@ -82,16 +82,16 @@ const myManagedPolicy = {
         "dynamodb:Scan",
         "dynamodb:UpdateItem",
       ],
-      Resource: "DYNAMODB_POLICY_NAME", // DYNAMODB_POLICY_NAME; e.g., "myDynamoDBName"
+      Resource: "DYNAMODB_POLICY_NAME", // DYNAMODB_POLICY_NAME; For example, "myDynamoDBName".
     },
   ],
 };
-const params = {
+export const params = {
   PolicyDocument: JSON.stringify(myManagedPolicy),
-  PolicyName: process.argv[4],
+  PolicyName: "IAM_POLICY_NAME",
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new CreatePolicyCommand(params));
     console.log("Success", data);
@@ -118,7 +118,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -129,20 +129,19 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a Node\.js module with the file name `iam_getpolicy.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed retrieve a policy, which is the ARN of the policy to get\. Call the `GetPolicyCommand` method of the `IAM` client service object\. Write the policy description to the console\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { GetPolicyCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
+// Set the parameters.
 const params = {
-  PolicyArn: "arn:aws:iam::aws:policy/AWSLambdaExecute",
+  PolicyArn: "POLICY_ARN" /* required */,
 };
 
 const run = async () => {
   try {
     const data = await iamClient.send(new GetPolicyCommand(params));
-    console.log("Success", data);
-    return data;
+    console.log("Success", data.Policy);
   } catch (err) {
     console.log("Error", err);
   }
@@ -165,7 +164,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -181,21 +180,21 @@ Check the array members to see if the policy to attach to the role is already at
 Replace *ROLE\_NAME* with the name of the role to attach\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import {
   ListAttachedRolePoliciesCommand,
   AttachRolePolicyCommand,
 } from "@aws-sdk/client-iam";
 
-// Set the parameters
+// Set the parameters.
 const ROLENAME = "ROLE_NAME";
 const paramsRoleList = { RoleName: ROLENAME }; //ROLE_NAME
-const params = {
+export const params = {
   PolicyArn: "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
   RoleName: ROLENAME,
 };
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(
       new ListAttachedRolePoliciesCommand(paramsRoleList)
@@ -239,7 +238,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -255,17 +254,17 @@ Check the array members to see if the policy to detach from the role is attached
 Replace *ROLE\_NAME* with the name of the role to detach\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import {
   ListAttachedRolePoliciesCommand,
   DetachRolePolicyCommand,
 } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = { RoleName: "ROLE_NAME" }; //ROLE_NAME
+// Set the parameters.
+export const params = { RoleName: "ROLE_NAME" }; //ROLE_NAME
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(
       new ListAttachedRolePoliciesCommand(params)
@@ -274,7 +273,7 @@ const run = async () => {
     const myRolePolicies = data.AttachedPolicies;
     myRolePolicies.forEach(function (val, index, array) {
       if (myRolePolicies[index].PolicyName === "AmazonDynamoDBFullAccess") {
-        const params = {
+         const params = {
           PolicyArn: "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess",
           paramsRoleList,
         };
@@ -291,7 +290,7 @@ const run = async () => {
       }
     });
   } catch (err) {
-    console.log("User " + process.argv[2] + " does not exist.");
+    console.log("User " + "USER_NAME" + " does not exist.");
   }
 };
 run();

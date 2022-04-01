@@ -20,5 +20,3 @@ Amazon Cognito makes it easy to run the app by providing a link in the AWS Web S
 
 **Important**  
 The Hosted UI defaults to a response type of 'code'\. However, this tutorial is designed for the 'token' response type, so you have to change it\.
-
-![\[Launch your hosted UI.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Launch your hosted UI.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Launch your hosted UI.\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)

@@ -43,7 +43,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -54,11 +54,11 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a Node\.js module with the file name `iam_listservercerts.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Call the `ListServerCertificatesCommand` method of the `IAM` client service object\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { ListServerCertificatesCommand } from "@aws-sdk/client-iam";
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new ListServerCertificatesCommand({}));
     console.log("Success", data);
@@ -85,7 +85,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -96,14 +96,14 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a Node\.js module with the file name `iam_getservercert.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed get a certificate, which consists of the name of the server certificate\. Call the `GetServerCertificatesCommand` method of the `IAM` client service object\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { GetServerCertificateCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = { ServerCertificateName: "CERTIFICATE_NAME" }; //CERTIFICATE_NAME
+// Set the parameters.
+export const params = { ServerCertificateName: "CERTIFICATE_NAME" }; //CERTIFICATE_NAME
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new GetServerCertificateCommand(params));
     console.log("Success", data);
@@ -129,7 +129,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -143,17 +143,17 @@ Create a Node\.js module with the file name `iam_updateservercert.js`\. Be sure 
 Replace *CERTIFICATE\_NAME* with the service certicate name to update, and *NEW\_CERTIFICATE\_NAME* with the new certificate name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { UpdateServerCertificateCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = {
+// Set the parameters.
+export const params = {
   ServerCertificateName: "CERTIFICATE_NAME", //CERTIFICATE_NAME
   NewServerCertificateName: "NEW_CERTIFICATE_NAME", //NEW_CERTIFICATE_NAME
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(
       new UpdateServerCertificateCommand(params)
@@ -182,7 +182,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -196,14 +196,14 @@ Create a Node\.js module with the file name `iam_deleteservercert.js`\. Be sure 
 Replace *CERTIFICATE\_NAME* with the name of the server certificate to delete\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { DeleteServerCertificateCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = { ServerCertificateName: "CERTIFICATE_NAME" }; // CERTIFICATE_NAME
+// Set the parameters.
+export const params = { ServerCertificateName: "CERTIFICATE_NAME" }; // CERTIFICATE_NAME
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(
       new DeleteServerCertificateCommand(params)

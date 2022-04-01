@@ -29,7 +29,7 @@ For more information about CloudWatch Events, see [Adding events with PutEvents]
 ## Prerequisite tasks<a name="cloudwatch-examples-sending-events-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cloudwatch/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cloudwatch-events/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create an AWS Lambda function using the **hello\-world** blueprint to serve as the target for events\. To learn how, see [ Step 1: Create an Lambda function](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/LogEC2InstanceState.html) in the *Amazon CloudWatch Events User Guide*\.
 + Create an IAM role whose policy grants permission to CloudWatch Events and that includes `events.amazonaws.com` as a trusted entity\. For more information about creating an IAM role, see [ Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
@@ -90,7 +90,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 export const cweClient = new CloudWatchEventsClient({ region: REGION });
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchEventsClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cloudwatch-events/src/libs/cloudWatchEventsClient.js)\.
 
 Create a Node\.js module with the file name `putRule.js`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. To access CloudWatch Events, create an `CloudWatchEvents` client service object\. Create a JSON object containing the parameters needed to specify the new scheduled rule, which include the following: 
 + A name for the rule
@@ -131,7 +131,7 @@ To run the example, enter the following at the command prompt\.
 node putRule.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch-events/src/putRule.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cloudwatch-events/src/putRule.js)\.
 
 ## Adding a Lambda function target<a name="cloudwatch-examples-sending-events-targets"></a>
 
@@ -145,7 +145,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 export const cweClient = new CloudWatchEventsClient({ region: REGION });
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchEventsClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch-events/src/libs/cloudWatchEventsClient.js)\.
 
 Create a Node\.js module with the file name `putTargets.js`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. To access CloudWatch Events, create an `CloudWatchEvents` service object\. Create a JSON object containing the parameters needed to specify the rule to which to attach the target, including the ARN of the Lambda function you created\. Call the `PutTargetsCommand` method of the `CloudWatchEvents` service object\.
 
@@ -201,7 +201,7 @@ const REGION = "REGION"; //e.g. "us-east-1"
 export const cweClient = new CloudWatchEventsClient({ region: REGION });
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch/src/libs/cloudWatchEventsClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cloudwatch-events/src/libs/cloudWatchEventsClient.js)\.
 
 Create a Node\.js module with the file name `putEvents.js`\. Be sure to configure the SDK as previously shown, including downloading the CloudWatch client\. To access CloudWatch Events, create an `CloudWatchEvents` client service object\. Create a JSON object containing the parameters needed to send events\. For each event, include the source of the event, the ARNs of any resources affected by the event, and details for the event\. Call the `PutEventsCommands` method of the `CloudWatchEvents` client service object\.
 

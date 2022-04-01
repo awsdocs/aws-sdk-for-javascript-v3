@@ -12,15 +12,13 @@ You can keep your AWS credentials data in a shared file used by SDKs and the com
 + The shared credentials file on Linux, Unix, and macOS: `~/.aws/credentials`
 + The shared credentials file on Windows: `C:\Users\USER_NAME\.aws\credentials`
 
-If you do not already have a shared credentials file, see [Getting your credentials](getting-your-credentials.md)\. Once you follow those instructions, you should see text similar to the following in the credentials file, where *<YOUR\_ACCESS\_KEY\_ID>* is your access key ID and *<YOUR\_SECRET\_ACCESS\_KEY>* is your secret access key:
+If you do not already have a shared credentials file, see [Getting your credentials](getting-your-credentials.md)\. Once you follow those instructions, you should see text similar to the following in the credentials file, where *<YOUR\_ACCESS\_KEY\_ID>* is your access key ID and *<YOUR\_SECRET\_ACCESS\_KEY>* is your secret access key\. Create a shared credentials file like below in the directory\.
 
 ```
 [default]
 aws_access_key_id = <YOUR_ACCESS_KEY_ID>
 aws_secret_access_key = <YOUR_SECRET_ACCESS_KEY>
 ```
-
-For an example showing this file being used, see [Getting started in Node\.js](getting-started-nodejs.md)\.
 
 The `[default]` section heading specifies a default profile and associated values for credentials\. You can create additional profiles in the same shared configuration file, each with its own credential information\. The following example shows a configuration file with the default profile and two additional profiles:
 
@@ -43,7 +41,7 @@ By default, the SDK checks the `AWS_PROFILE` environment variable to determine w
 **Note**  
 When setting environment variables, be sure to take appropriate actions afterward \(according to the needs of your operating system\) to make the variables available in the shell or command environment\.
 
-After setting the environment variable \(if needed\), you can run a file named `script.js` that uses the SDK as follows\.
+After setting the environment variable \(if needed\), you can run a JavaScript file that uses the SDK, such as for example, a file named `script.js`\.
 
 ```
 $ node script.js

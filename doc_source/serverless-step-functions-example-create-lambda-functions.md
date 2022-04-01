@@ -153,7 +153,7 @@ exports.handler = async (event) => {
 
 // The character encoding for the email.
     const charset = "UTF-8";
-    var params = {
+    const params = {
         Source: sender,
         Destination: {
             ToAddresses: [
@@ -211,8 +211,7 @@ To deploy the `getid` Lambda function:
 
 1. In the **Runtime**, choose **Node\.js 14x**\.
 
-1. Choose **Use an existing role**, and then choose **lambda\-support** \(the IAM role that you created in the \)\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)![\[Image NOT FOUND\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/)
+1. Choose **Use an existing role**, and then choose **lambda\-support** \(the IAM role that you created in the \)\.
 
 1. Choose **Create function**\.
 

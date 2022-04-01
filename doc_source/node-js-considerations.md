@@ -15,14 +15,14 @@ Although Node\.js code is JavaScript, using the AWS SDK for JavaScript in Node\.
 Node\.js provides a collection of built\-in modules you can use without installing them\. To use these modules, create an object with the `require` method to specify the module name\. For example, to include the built\-in HTTP module, use the following\.
 
 ```
-var http = require('http');
+import http from 'http';
 ```
 
 Invoke methods of the module as if they are methods of that object\. For example, here is code that reads an HTML file\.
 
 ```
 // include File System module
-var fs = require('fs'); 
+import fs from "fs"; 
 // Invoke readFile method 
 fs.readFile('index.html', function(err, data) {
   if (err) {

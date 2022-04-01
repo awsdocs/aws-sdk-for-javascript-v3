@@ -6,16 +6,16 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Getting your account\-specific endpoint for MediaConvert<a name="emc-examples-getendpoint"></a>
+# Getting your region\-specific endpoint for MediaConvert<a name="emc-examples-getendpoint"></a>
 
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 
 **This Node\.js code example shows:**
-+ How to retrieve your account\-specific endpoint from MediaConvert\.
++ How to retrieve your region\-specific endpoint from MediaConvert\.
 
 ## The scenario<a name="emc-example-getendpoint-scenario"></a>
 
-In this example, you use a Node\.js module to call MediaConvert and retrieve your account\-specific endpoint\. You can retrieve your endpoint URL from the service default endpoint and so do not yet need your account\-specific endpoint\. The code uses the SDK for JavaScript to retrieve this endpoint by using this method of the MediaConvert client class:
+In this example, you use a Node\.js module to call MediaConvert and retrieve your region\-specific endpoint\. You can retrieve your endpoint URL from the service default endpoint and so do not yet need your region\-specific endpoint\. The code uses the SDK for JavaScript to retrieve this endpoint by using this method of the MediaConvert client class:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-mediaconvert/classes/describeendpointscommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-mediaconvert/classes/describeendpointscommand.html)
 
 ## Prerequisite tasks<a name="emc-example-getendpoint-prerequisites"></a>

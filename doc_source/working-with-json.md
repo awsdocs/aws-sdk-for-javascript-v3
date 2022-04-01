@@ -47,8 +47,9 @@ The `params` object is defined by three name\-value pairs, separated by commas w
 When passing parameters to a service object method call, provide the JSON object to the method call, as shown in the following example of invoking a Lambda function\.
 
 ```
-(async function() {
-  const { LambdaClient, InvokeCommand } = require("@aws-sdk/client-lambda");
+  import { LambdaClient, 
+   InvokeCommand } from "@aws-sdk/client-lambda";
+  (async function() {
   const lambdaClient = new LambdaClient({ region: "us-west-2" });
   // create JSON object for service call parameters
   const params = {

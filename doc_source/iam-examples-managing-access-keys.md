@@ -44,7 +44,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -58,14 +58,14 @@ Create a Node\.js module with the file name `iam_createaccesskeys.js`\. Be sure 
 Replace *IAM\_USER\_NAME* with the IAM user name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { CreateAccessKeyCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = {UserName: "IAM_USER_NAME"}; //IAM_USER_NAME
+// Set the parameters.
+export const params = {UserName: "IAM_USER_NAME"}; //IAM_USER_NAME
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new CreateAccessKeyCommand(params));
     console.log("Success", data);
@@ -92,7 +92,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -106,17 +106,17 @@ Create a Node\.js module with the file name `iam_listaccesskeys.js`\. Be sure to
 Replace *IAM\_USER\_NAME* with the IAM user name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { ListAccessKeysCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = {
+// Set the parameters.
+export const params = {
   MaxItems: 5,
   UserName: "IAM_USER_NAME", //IAM_USER_NAME
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new ListAccessKeysCommand(params));
     console.log("Success", data);
@@ -143,7 +143,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -157,14 +157,14 @@ Create a Node\.js module with the file name `iam_accesskeylastused.js`\. Be sure
 Replace *ACCESS\_KEY\_ID* with the access key ID for which the the last use information\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { GetAccessKeyLastUsedCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = { AccessKeyId: "ACCESS_KEY_ID" }; //ACCESS_KEY_ID
+// Set the parameters.
+export const params = { AccessKeyId: "ACCESS_KEY_ID" }; //ACCESS_KEY_ID
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new GetAccessKeyLastUsedCommand(params));
     console.log("Success", data);
@@ -191,7 +191,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -205,18 +205,18 @@ Create a Node\.js module with the file name `iam_updateaccesskey.js`\. Be sure t
 Replace *ACCESS\_KEY\_ID* the access key ID and the updated status, and *USER\_NAME* with the name of the user\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { UpdateAccessKeyCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = {
+// Set the parameters.
+export const params = {
   AccessKeyId: "ACCESS_KEY_ID", //ACCESS_KEY_ID
   Status: "Active",
   UserName: "USER_NAME", //USER_NAME
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new UpdateAccessKeyCommand(params));
     console.log("Success", data);
@@ -243,7 +243,7 @@ Create a `libs` directory, and create a Node\.js module with the file name `iamC
 ```
 import { IAMClient } from "@aws-sdk/client-iam";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "REGION"; // For example, "us-east-1".
 // Create an IAM service client object.
 const iamClient = new IAMClient({ region: REGION });
 export { iamClient };
@@ -257,17 +257,17 @@ Create a Node\.js module with the file name `iam_deleteaccesskey.js`\. Be sure t
 Replace *ACCESS\_KEY\_ID* with your access key ID, and *USER\_NAME* with the user name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
+// Import required AWS SDK clients and commands for Node.js.
 import { iamClient } from "./libs/iamClient.js";
 import { DeleteAccessKeyCommand } from "@aws-sdk/client-iam";
 
-// Set the parameters
-const params = {
+// Set the parameters.
+export const params = {
   AccessKeyId: "ACCESS_KEY_ID", // ACCESS_KEY_ID
   UserName: "USER_NAME", // USER_NAME
 };
 
-const run = async () => {
+export const run = async () => {
   try {
     const data = await iamClient.send(new DeleteAccessKeyCommand(params));
     console.log("Success", data);

@@ -26,11 +26,12 @@ You can also perform operations using version 2 \(V2\) commands when using the V
 For example, to list your Amazon DynamoDB tables in `us-west-2`, you can do it with async/await\.
 
 ```
-(async function() {
-  const { 
-    DynamoDBClient, 
-    ListTablesCommand 
-  } = require('@aws-sdk/client-dynamodb');
+  import { 
+  DynamoDBClient, 
+  ListTablesCommand 
+  } from "@aws-sdk/client-dynamodb";
+  
+  (async function() {
   const dbClient = new DynamoDBClient({ region: 'us-west-2' });
   const command = new ListTablesCommand({});
 
