@@ -21,11 +21,11 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 You can use Amazon SNS to send text messages, or SMS messages, to SMS\-enabled devices\. You can send a message directly to a phone number, or you can send a message to multiple phone numbers at once by subscribing those phone numbers to a topic and sending your message to the topic\.
 
 In this example, you use a series of Node\.js modules to publish SMS text messages from Amazon SNS to SMS\-enabled devices\. The Node\.js modules use the SDK for JavaScript to publish SMS messages using these methods of the `SNS` client class:
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/publishcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/publishcommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/getsmsattributescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/getsmsattributescommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/setsmsattributescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/setsmsattributescommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/checkifphonenumberisoptedoutcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/checkifphonenumberisoptedoutcommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/listphonenumbersoptedoutcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/listphonenumbersoptedoutcommand.html)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/publishcommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/publishcommand.html)
 
 ## Prerequisite Tasks<a name="sns-examples-sending-sms-prerequisites"></a>
 
@@ -37,6 +37,63 @@ To set up and run this example, you must first complete these tasks:
 These examples demonstrate how to import/export client service objects and command using ECMAScript6 \(ES6\)\.  
 This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
 If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
+
+## Publishing an SMS Message<a name="sending-sms-publishsms"></a>
+
+In this example, use a Node\.js module to send an SMS message to a phone number\.
+
+Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
+
+```
+import  { SNSClient } from "@aws-sdk/client-sns";
+// Set the AWS Region.
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create SNS service object.
+const snsClient = new SNSClient({ region: REGION });
+export  { snsClient };
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+
+Create a Node\.js module with the file name `sns_publishsms.js`\. Configure the SDK as previously shown, including installing the required clients and packages\. Create an object containing the `Message` and `PhoneNumber` parameters\.
+
+When you send an SMS message, specify the phone number using the E\.164 format\. E\.164 is a standard for the phone number structure used for international telecommunication\. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character \(\+\) and the country code\. For example, a US phone number in E\.164 format would appear as \+1001XXX5550100\. 
+
+This example sets the `PhoneNumber` parameter to specify the phone number to send the message\. Pass the object to the `PublishCommand` method of the `SNS` client class\. To call the `PublishCommand` method, create an asynchronous function invoking an Amazon SNS service object, passing the parameters object\. 
+
+**Note**  
+Replace *TEXT\_MESSAGE* with the text message, and *PHONE\_NUMBER* with the phone number\.
+
+```
+// Import required AWS SDK clients and commands for Node.js
+import {PublishCommand } from "@aws-sdk/client-sns";
+import {snsClient } from "./libs/snsClient.js";
+
+// Set the parameters
+const params = {
+  Message: "MESSAGE_TEXT" /* required */,
+  PhoneNumber: "PHONE_NUMBER", //PHONE_NUMBER, in the E.164 phone number structure
+};
+
+const run = async () => {
+  try {
+    const data = await snsClient.send(new PublishCommand(params));
+    console.log("Success.",  data);
+    return data; // For unit tests.
+  } catch (err) {
+    console.log("Error", err.stack);
+  }
+};
+run();
+```
+
+To run the example, enter the following at the command prompt\.
+
+```
+node sns_publishsms.js
+```
+
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_publishsms.js)\.
 
 ## Getting SMS Attributes<a name="sending-sms-getattributes"></a>
 
@@ -72,7 +129,7 @@ import {GetSMSAttributesCommand } from "@aws-sdk/client-sns";
 import {snsClient } from "./libs/snsClient.js";
 
 // Set the parameters
-var params = {
+const params = {
   attributes: [
     "DefaultSMSType",
     "ATTRIBUTE_NAME",
@@ -255,60 +312,3 @@ node sns_listnumbersoptedout.js
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_listnumbersoptedout.js)\.
-
-## Publishing an SMS Message<a name="sending-sms-publishsms"></a>
-
-In this example, use a Node\.js module to send an SMS message to a phone number\.
-
-Create a `libs` directory, and create a Node\.js module with the file name `snsClient.js`\. Copy and paste the code below into it, which creates the Amazon SNS client object\. Replace *REGION* with your AWS Region\.
-
-```
-import  { SNSClient } from "@aws-sdk/client-sns";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create SNS service object.
-const snsClient = new SNSClient({ region: REGION });
-export  { snsClient };
-```
-
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
-
-Create a Node\.js module with the file name `sns_publishsms.js`\. Configure the SDK as previously shown, including installing the required clients and packages\. Create an object containing the `Message` and `PhoneNumber` parameters\.
-
-When you send an SMS message, specify the phone number using the E\.164 format\. E\.164 is a standard for the phone number structure used for international telecommunication\. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character \(\+\) and the country code\. For example, a US phone number in E\.164 format would appear as \+1001XXX5550100\. 
-
-This example sets the `PhoneNumber` parameter to specify the phone number to send the message\. Pass the object to the `PublishCommand` method of the `SNS` client class\. To call the `PublishCommand` method, create an asynchronous function invoking an Amazon SNS service object, passing the parameters object\. 
-
-**Note**  
-Replace *TEXT\_MESSAGE* with the text message, and *PHONE\_NUMBER* with the phone number\.
-
-```
-// Import required AWS SDK clients and commands for Node.js
-import {PublishCommand } from "@aws-sdk/client-sns";
-import {snsClient } from "./libs/snsClient.js";
-
-// Set the parameters
-const params = {
-  Message: "MESSAGE_TEXT" /* required */,
-  PhoneNumber: "PHONE_NUMBER", //PHONE_NUMBER, in the E.164 phone number structure
-};
-
-const run = async () => {
-  try {
-    const data = await snsClient.send(new PublishCommand(params));
-    console.log("Success.",  data);
-    return data; // For unit tests.
-  } catch (err) {
-    console.log("Error", err.stack);
-  }
-};
-run();
-```
-
-To run the example, enter the following at the command prompt\.
-
-```
-node sns_publishsms.js
-```
-
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_publishsms.js)\.
