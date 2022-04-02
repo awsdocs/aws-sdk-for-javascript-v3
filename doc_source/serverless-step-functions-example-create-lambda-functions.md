@@ -153,7 +153,7 @@ exports.handler = async (event) => {
 
 // The character encoding for the email.
     const charset = "UTF-8";
-    const params = {
+    var params = {
         Source: sender,
         Destination: {
             ToAddresses: [

@@ -23,4 +23,4 @@ Sample applications that work across multiple AWS services\.
 
 **Topics**
 + [Single\-service actions and scenarios](javascript_code_examples_categorized.md)
-+ [Cross\-service examples](javascript_service_code_examples_cross_service.md)
++ [Cross\-service examples](javascript_code_examples_cross_service.md)

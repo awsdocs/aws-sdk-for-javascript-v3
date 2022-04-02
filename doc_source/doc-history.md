@@ -9,12 +9,13 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 # Document history for AWS SDK for JavaScript version 3<a name="doc-history"></a>
 
 ## Document History<a name="doc-history-recent"></a>
-+ **Latest documentation update:**November 09, 2020
++ **Latest documentation update:** March 31, 2022
 
 The following table describes the important changes in the V3 release of the *AWS SDK for JavaScript* from October 20, 2020, onward\. For notification about updates to this documentation, you can subscribe to an [RSS feed](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/amazon-sdk-javascript-guide-doc-history.rss)\.
 
 | Change | Description | Date | 
 | --- |--- |--- |
+| [Enforcing a minimum TLS version](enforcing-tls.md) | Added information about TLS 1\.3\. | March 31, 2022 | 
 | [Updated AWS Lambda tutorial](cross-service-example-submitting-data.md) | Added tutorial demonstrating how to build a browser\-based application for submitting data to a Amazon DynamoDB table\.  | October 20, 2020 | 
 | [Setting credentials in Node\.js topic updated](configuring-the-jssdk.md) | Update topic about setting credentials in Node\.js for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Migrating to V3](migrating-to-v3.md) | Added topic to describe how to migrate to AWS SDK for JavaScript V3\. | October 20, 2020 | 

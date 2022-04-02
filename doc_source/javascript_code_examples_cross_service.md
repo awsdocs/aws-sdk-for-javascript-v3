@@ -6,7 +6,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Cross\-service examples using SDK for JavaScript V3<a name="javascript_service_code_examples_cross_service"></a>
+# Cross\-service examples using SDK for JavaScript V3<a name="javascript_code_examples_cross_service"></a>
 
 The following sample applications use the AWS SDK for JavaScript V3 to work across multiple AWS services\.
 

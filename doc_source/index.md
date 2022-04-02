@@ -214,7 +214,7 @@ Amazon's trademarks and trade dress may not be used in
       + [Amazon SQS examples using SDK for JavaScript V3](javascript_sqs_code_examples.md)
       + [AWS STS examples using SDK for JavaScript V3](javascript_sts_code_examples.md)
       + [Amazon Transcribe examples using SDK for JavaScript V3](javascript_transcribe_code_examples.md)
-   + [Cross-service examples using SDK for JavaScript V3](javascript_service_code_examples_cross_service.md)
+   + [Cross-service examples using SDK for JavaScript V3](javascript_code_examples_cross_service.md)
       + [Build an Amazon Transcribe app](cross_TranscriptionApp_javascript_topic.md)
       + [Build an Amazon Transcribe streaming app](cross_TranscriptionStreamingApp_javascript_topic.md)
       + [Build an application to submit data to a DynamoDB table](cross_SubmitDataApp_javascript_topic.md)

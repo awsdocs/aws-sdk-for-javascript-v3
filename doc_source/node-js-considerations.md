@@ -33,7 +33,7 @@ fs.readFile('index.html', function(err, data) {
 });
 ```
 
-For a complete list of all built\-in modules that Node\.js provides, see [Node\.js documentation](https://nodejs.org/api/modules.html) on the Node\.js website\.
+For a complete list of all built\-in modules that Node\.js provides, see [Node\.js v6\.11\.1 documentation](https://nodejs.org/api/modules.html) on the Node\.js website\.
 
 ## Using npm packages<a name="node-npm-packages"></a>
 
