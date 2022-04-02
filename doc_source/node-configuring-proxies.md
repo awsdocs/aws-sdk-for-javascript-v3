@@ -20,19 +20,21 @@ npm install PROXY --save
 
 To use a proxy in your application, use the `httpAgent` and `httpsAgent` property, as shown in the following example for a DynamoDB client\. 
 
-```
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { NodeHttpHandler } from "@aws-sdk/node-http-handler";
-import ProxyAgent from "proxy-agent";
+```js
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { NodeHttpHandler } from '@aws-sdk/node-http-handler';
+import { HttpsProxyAgent } from 'hpagent';
 
-const proxyAgent = new ProxyAgent("http://internal.proxy.com");
+const agent = new HttpsProxyAgent({ proxy: 'http://internal.proxy.com' });
 const dynamodbClient = new DynamoDBClient({
     requestHandler: new NodeHttpHandler({
-        httpAgent: proxyAgent,
-        httpsAgent: proxyAgent
+        httpAgent: agent,
+        httpsAgent: agent
     }),
 });
 ```
+
+The above example makes use of [hpagent](https://www.npmjs.com/package/hpagent). This package supports a number of agent options, including setting trusted certificates through the `ca` property.
 
 **Note**  
 `httpAgent` is not the same as `httpsAgent`, and since most calls from the client will be to `https`, both should be set\.
