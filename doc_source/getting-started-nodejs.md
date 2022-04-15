@@ -70,7 +70,7 @@ This example demonstrate how to import/export client service objects and command
 This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.
 If you prefer to use CommonJS syntax, see [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
-Create a folder named `libs` in the root of your project, and ceate a file named `sampleClient.js` to contain the client for creating the Amazon S3 service client object\. Copy and paste the code below into it\. Replace *REGION* with your AWS Region\.
+Create a folder named `libs` in the root of your project, and create a file named `sampleClient.js` to contain the client for creating the Amazon S3 service client object\. Copy and paste the code below into it\. Replace *REGION* with your AWS Region\.
 
 ```
 import { S3Client } from "@aws-sdk/client-s3";
