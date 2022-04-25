@@ -50,7 +50,7 @@ $ node script.js
 You can also explicitly select the profile used by a client, as shown in the following example\.
 
 ```
-const {fromIni} = require("@aws-sdk/credential-provider-ini");
+const {fromIni} = require("@aws-sdk/credential-providers");
 const s3Client = new S3.S3Client({
   credentials: fromIni({profile: 'work-account'})
 });
