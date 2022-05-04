@@ -161,10 +161,10 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-node ddb_putitem.js 
+node ddb_updateitem.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_putitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_updateitem.js)\.
 
 ## Getting an item<a name="dynamodb-example-table-read-write-getting-an-item"></a>
 
