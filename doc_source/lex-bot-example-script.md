@@ -64,7 +64,7 @@ const translateClient = new TranslateClient({
 
 This code is available [here on GitHub\.](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/lex-bot/src/libs)\.
 
-Next, create an `index.html` file, and paste the code below into it\.
+Next, paste the code below into the `index.js` file we created earlier\.
 
  Replace *BOT\_ALIAS* and *BOT\_NAME* with the alias and name of your Amazon Lex bot respectively, and *USER\_ID* with a user id\. The `createResponse` asynchronous function does the following:
 + Takes the text inputted by the user into the browser and uses Amazon Comprehend to determine its language code\.
