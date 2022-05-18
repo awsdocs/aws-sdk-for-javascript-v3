@@ -230,12 +230,6 @@ const addPhoto = async (albumName) => {
   const files = document.getElementById("photoupload").files;
   try {
     const albumPhotosKey = encodeURIComponent(albumName) + "/";
-    const data = await s3.send(
-        new ListObjectsCommand({
-          Prefix: albumPhotosKey,
-          Bucket: albumBucketName
-        })
-    );
     const file = files[0];
     const fileName = file.name;
     const photoKey = albumPhotosKey + fileName;
