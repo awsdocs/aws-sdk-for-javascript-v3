@@ -259,7 +259,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 Create a Node\.js module with the file name `sns_settopicattributes.js`\. Configure the SDK as previously shown\.
 
-Create an object containing the parameters for the attribute update, including the `TopicArn` of the topic whose attributes you want to set, the name of the attribute to set, and the new value for that attribute\. You can set only the `Policy`, `DisplayName`, and `DeliveryPolicy` attributes\. Pass the parameters to the `SetTopicAttributesCommand` method of the `SNS` client class\. To call the `SetTopicAttributesCommand` method, create an asynchronous function invoking an Amazon SNS cleint service object, passing the parameters object\. 
+Create an object containing the parameters for the attribute update, including the `TopicArn` of the topic whose attributes you want to set, the name of the attribute to set, and the new value for that attribute\. You can set only the `Policy`, `DisplayName`, and `DeliveryPolicy` attributes\. Pass the parameters to the `SetTopicAttributesCommand` method of the `SNS` client class\. To call the `SetTopicAttributesCommand` method, create an asynchronous function invoking an Amazon SNS client service object, passing the parameters object\. 
 
 **Note**  
 Replace *ATTRIBUTE\_NAME* with the name of the attribute you are setting, *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) of the topic whose attributes you want to set, and *NEW\_ATTRIBUTE\_VALUE* with the new value for that attribute\.

@@ -6,7 +6,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Managing Subscriptions in Amazon SNS<a name="sns-examples-subscribing-unubscribing-topics"></a>
+# Managing Subscriptions in Amazon SNS<a name="sns-examples-subscribing-unsubscribing-topics"></a>
 
 ![\[JavaScript code example that applies to Node.js execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/nodeicon.png)
 
@@ -15,7 +15,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 + How to subscribe an email address, an application endpoint, or an AWS Lambda function to an Amazon SNS topic\.
 + How to unsubscribe from Amazon SNS topics\.
 
-## The Scenario<a name="sns-examples-subscribing-unubscribing-yopics-scenario"></a>
+## The Scenario<a name="sns-examples-subscribing-unsubscribing-yopics-scenario"></a>
 
 In this example, you use a series of Node\.js modules to publish notification messages to Amazon SNS topics\. The Node\.js modules use the SDK for JavaScript to manage topics using these methods of the `SNS` client class:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/listsubscriptionsbytopiccommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/listsubscriptionsbytopiccommand.html)
@@ -23,7 +23,7 @@ In this example, you use a series of Node\.js modules to publish notification me
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/confirmsubscriptioncommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/confirmsubscriptioncommand.html)
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/unsubscribecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/unsubscribecommand.html)
 
-## Prerequisite Tasks<a name="sns-examples-subscribing-unubscribing-topics-prerequisites"></a>
+## Prerequisite Tasks<a name="sns-examples-subscribing-unsubscribing-topics-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
 + Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/README.md)\.
@@ -110,7 +110,7 @@ Create an object containing the `Protocol` parameter to specify the `email` prot
 To call the `SubscribeCommand` method, create an asynchronous function invoking an Amazon SNS client service object, and passing the parameters object\. 
 
 **Note**  
-Replace *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, and *EMAIL\_ADDRESS* with the email address to subcribe to\.
+Replace *TOPIC\_ARN* with the Amazon Resource Name \(ARN\) for the topic, and *EMAIL\_ADDRESS* with the email address to subscribe to\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -163,7 +163,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 
 Create a Node\.js module with the file name `sns_confirmsubscription.js`\. Configure the SDK as previously shown, including installing the required clients and packages\.
 
-Define the parameters, including the `TOPIC_ARN` and `TOKEN`, and define a value of `TRUE` or `FALSE` for `AutheticateOnUnsubscribe`\. If set to `TRUE` the `Confirm Subscription` action requires an AWS signature\. 
+Define the parameters, including the `TOPIC_ARN` and `TOKEN`, and define a value of `TRUE` or `FALSE` for `AuthenticateOnUnsubscribe`\. If set to `TRUE` the `Confirm Subscription` action requires an AWS signature\. 
 
 The token is a short\-lived token sent to the owner of an endpoint during a previous `SUBSCRIBE` action\. For example, for an email endpoint the `TOKEN` is in the URL of the Confirm Subscription email sent to the email owner\. For example, `abc123` is the token in the following URL\.
 

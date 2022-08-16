@@ -138,7 +138,7 @@ exports.handler = async (event) => {
 
     // AWS Step Functions passes the  employee's email to the event.
     // This address must be verified.
-    const recepient = event.S;
+    const recipient = event.S;
 
     // The subject line for the email.
     const subject = "New case";
@@ -157,7 +157,7 @@ exports.handler = async (event) => {
         Source: sender,
         Destination: {
             ToAddresses: [
-                recepient
+                recipient
             ],
         },
         Message: {

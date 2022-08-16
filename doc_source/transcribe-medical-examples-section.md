@@ -108,7 +108,7 @@ export { transcribeClient };
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/transcribe/src/libs/transcribeClient.js)\.
 
-Create a Node\.js module with the file name `transcribe-list-medical-jobs.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create a paramters object with the required parameters, and list the medical jobs using the `ListMedicalTranscriptionJobsCommand` command\.
+Create a Node\.js module with the file name `transcribe-list-medical-jobs.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create a parameters object with the required parameters, and list the medical jobs using the `ListMedicalTranscriptionJobsCommand` command\.
 
 **Note**  
 Replace *KEYWORD* with a keyword that the returned jobs name must contain\.
@@ -175,7 +175,7 @@ import { transcribeClient } from "./libs/transcribeClient.js";
 
 // Set the parameters
 export const params = {
-  MedicalTranscriptionJobName: "MEDICAL_JOB_NAME", // For example, 'medical_transciption_demo'
+  MedicalTranscriptionJobName: "MEDICAL_JOB_NAME", // For example, 'medical_transcription_demo'
 };
 
 export const run = async () => {

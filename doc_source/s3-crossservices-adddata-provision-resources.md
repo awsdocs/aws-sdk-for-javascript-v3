@@ -9,7 +9,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 # Create the AWS resources<a name="s3-crossservices-adddata-provision-resources"></a>
 
 This app requires the following resources:
-+ AWS Identity and Access Management \(IAM\) Unaunthenticated Amazon Cognito user role with the following permissions:
++ AWS Identity and Access Management \(IAM\) Unauthenticated Amazon Cognito user role with the following permissions:
   + sns:Publish
   + dynamodb:PutItem
 + A DynamoDB table\.
@@ -44,7 +44,7 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
 
 ## Populating the table<a name="s3-crossservices-adddata-resources-create-table"></a>
 
-To populate the table, first create a diretory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. Replace *REGION* with your AWS Region\. This creates the DynamoDB client object\.
+To populate the table, first create a directory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. Replace *REGION* with your AWS Region\. This creates the DynamoDB client object\.
 
 ```
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
@@ -54,7 +54,7 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 const REGION = "REGION";
 const IDENTITY_POOL_ID = "IDENTITY_POOL_ID"; // An Amazon Cognito Identity Pool ID.
 
-// Create an Amazon DynaomDB service client object.
+// Create an Amazon DynamoDB service client object.
 const dynamoClient = new DynamoDBClient({
   region: REGION,
   credentials: fromCognitoIdentityPool({

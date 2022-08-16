@@ -65,7 +65,7 @@ In the `LambdaApp` folder, create a file name `index.js`, and paste the content 
 const { InvokeCommand } = require ("@aws-sdk/client-lambda" );
 const { lambdaClient } = require ( "../libs/lambdaClient" );
 
-// Set the parmaeters.
+// Set the parameters.
 const params={
   // The name of the AWS Lambda function.
   FunctionName: "LAMBDA_FUNCTION",

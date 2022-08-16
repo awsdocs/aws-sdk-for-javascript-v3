@@ -235,12 +235,12 @@ import React, { useState } from "javascriptv3/example_code/reactnative/App";
 	          placeholder={"Enter Bucket Name"}
 	        />
 	        <Button
-	          backroundColor="#68a0cf"
+	          backgroundColor="#68a0cf"
 	          title="Create Bucket"
 	          onPress={createBucket}
 	        />
 	        <Button
-	          backroundColor="#68a0cf"
+	          backgroundColor="#68a0cf"
 	          title="Delete Bucket"
 	          onPress={deleteBucket}
 	        />
@@ -316,7 +316,7 @@ Compatible side by side NDK version was not found.
 Installing APK 'app-debug.apk' on 'Pixel_3a_API_30_x86(AVD) - 11' for app:debug
 02:18:38 D/app-debug.apk: Uploading app-debug.apk onto device 'emulator-5554'
 02:18:38 D/Device: Uploading file onto device 'emulator-5554'
-02:18:38 D/ddms: Reading file permision of /Users/trivikr/workspace/ReactNativeApp/android/app/build/outputs/apk/debug/app-debug.apk as: rw-r--r--
+02:18:38 D/ddms: Reading file permission of /Users/trivikr/workspace/ReactNativeApp/android/app/build/outputs/apk/debug/app-debug.apk as: rw-r--r--
 02:18:40 V/ddms: execute: running pm install -r -t "/data/local/tmp/app-debug.apk"
 02:18:41 V/ddms: execute 'pm install -r -t "/data/local/tmp/app-debug.apk"' on 'emulator-5554' : EOF hit. Read: -1
 02:18:41 V/ddms: execute: returning

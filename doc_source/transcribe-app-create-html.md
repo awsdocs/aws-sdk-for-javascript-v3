@@ -42,7 +42,7 @@ Create an `index.html` file, and copy and paste the content below into it\. The 
 <table id="myTable" style ="width:678px;">
         <tr>
     <td style = "font-weight:bold">Time created</td>
-    <td style = "font-weight:bold">Transciption</td>
+    <td style = "font-weight:bold">Transcription</td>
     <td style = "font-weight:bold">Download</td>
     <td style = "font-weight:bold">Delete</td>
        </tr>

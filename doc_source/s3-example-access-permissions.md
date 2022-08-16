@@ -98,7 +98,7 @@ This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 
 Create a Node\.js module with the file name `s3_putbucketacl.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. 
 
-Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket\. Replace *GRANTEE\_1* and *GRANTEE\_2* with users you want to grant respective access contol permission\. 
+Replace *BUCKET\_NAME* with the name of the Amazon S3 bucket\. Replace *GRANTEE\_1* and *GRANTEE\_2* with users you want to grant respective access control permission\. 
 
 ```
 // Import required AWS SDK clients and commands for Node.js.

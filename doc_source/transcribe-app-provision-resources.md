@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 This topic is part of a tutorial about building an app that transcribes and displays voice messages for authenticated users\. To start at the beginning of the tutorial, see [Build a transcription app with authenticated users](transcribe-app.md)\. 
 
-This topic desribes how to provison AWS resources for this app using the AWS Cloud Development Kit \(CDK\)\.
+This topic describes how to provision AWS resources for this app using the AWS Cloud Development Kit \(CDK\)\.
 
 **Note**  
 The AWS CDK is a software development framework that enables you to define cloud application resources\. For more information, see the [AWS Cloud Development Kit \(CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/home.html)\.

@@ -23,7 +23,7 @@ In this example, a series of Node\.js modules are used to automatically upload a
 To set up and run this example, you must first complete these tasks:
 + Set up a project environment to run Node JavaScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
-+ Create an AWS Identity and Access Management \(IAM\) Unaunthenticated Amazon Cognito user role polly:SynthesizeSpeech permissions, and an Amazon Cognito identity pool with the IAM role attached to it\. The [Create the AWS resources using the AWS CloudFormation](#polly-example-synthesize-to-s3-create-resources)section below describes how to create these resources\.
++ Create an AWS Identity and Access Management \(IAM\) Unauthenticated Amazon Cognito user role polly:SynthesizeSpeech permissions, and an Amazon Cognito identity pool with the IAM role attached to it\. The [Create the AWS resources using the AWS CloudFormation](#polly-example-synthesize-to-s3-create-resources)section below describes how to create these resources\.
 
 **Note**  
 This example uses Amazon Cognito, but if you are not using Amazon Cognito then your AWS user must have following IAM permissions policy  

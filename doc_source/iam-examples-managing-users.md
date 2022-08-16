@@ -162,7 +162,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a Node\.js module with the file name `iam_updateuser.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to list your users, specifying both the current and new user names as command\-line parameters\. Call the `UpdateUserCommand` method of the `IAM` client service object\.
 
 **Note**  
-Replace *ORIGNAL\_USER\_NAME* with the user name to update, and *NEW\_USER\_NAME* with the new user name\.
+Replace *ORIGINAL\_USER\_NAME* with the user name to update, and *NEW\_USER\_NAME* with the new user name\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js.

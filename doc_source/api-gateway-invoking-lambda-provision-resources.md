@@ -39,11 +39,11 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
 
    For more information on the `create-stack` command parameters, see the [AWS CLI Command Reference guide](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack.html), and the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\.
 
-1. Next, populate the table by folllowing the procdure [Populating the table](#api-gateway-invoking-lambda-resources-create-table)\.
+1. Next, populate the table by following the procedure [Populating the table](#api-gateway-invoking-lambda-resources-create-table)\.
 
 ## Populating the table<a name="api-gateway-invoking-lambda-resources-create-table"></a>
 
-To populate the table, first create a diretory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. 
+To populate the table, first create a directory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. 
 
 ```
 const { DynamoDBClient } = require ( "@aws-sdk/client-dynamodb" );

@@ -32,7 +32,7 @@ To set up and run this example, first complete these tasks:
 
 **Important**  
 These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
 
 ## Writing an item<a name="dynamodb-example-table-read-write-writing-an-item"></a>
 
@@ -56,7 +56,7 @@ Create a Node\.js module with the file name `ddb_putitem.js`\. Be sure to config
 Replace *TABLE\_NAME* with the name of the table\.
 
 **Note**  
-The following code example writes to a table with a primary key composed of only a partion key \- `CUSTOMER_ID` \- and a sort key \- `CUSTOMER_NAME`\. If the table's primary key is composed of only a partition key, you only specify the partition key\. 
+The following code example writes to a table with a primary key composed of only a partition key \- `CUSTOMER_ID` \- and a sort key \- `CUSTOMER_NAME`\. If the table's primary key is composed of only a partition key, you only specify the partition key\. 
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -108,13 +108,13 @@ export { ddbClient };
 
 This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
-Create a Node\.js module with the file name `ddb_updateitem.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to add an item, which in this example includes the name of the table, the key to update, andu date expression that maps the new attribute names, and values for each new attribute\. Call the `UpdateItemCommand` method of the DynamoDB client service object\.
+Create a Node\.js module with the file name `ddb_updateitem.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to add an item, which in this example includes the name of the table, the key to update, and the date expression that maps the new attribute names, and values for each new attribute\. Call the `UpdateItemCommand` method of the DynamoDB client service object\.
 
 **Note**  
 Replace *TABLE\_NAME* with the name of the table\.
 
 **Note**  
-The following code example writes to a table with a primary key composed of only a partion key\. If the table's primary key is composed of only a partition key, you only specify the partition key\. 
+The following code example writes to a table with a primary key composed of only a partition key\. If the table's primary key is composed of only a partition key, you only specify the partition key\. 
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -189,7 +189,7 @@ Create a JSON object containing the parameters needed to get an item, which in t
 **Note**  
 Replace *TABLE\_NAME* with the name of the table, *KEY\_NAME* with the primary key of the table, *KEY\_NAME\_VALUE* with the value of the primary key row containing the attribute value, and *ATTRIBUTE\_NAME* the name of the attribute column containing the attribute value\.
 
-The following code example retrieves an item from a table with a primary key composed of only a partion key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute\.
+The following code example retrieves an item from a table with a primary key composed of only a partition key \- `KEY_NAME` \- and not of both a partition and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -243,7 +243,7 @@ Create a Node\.js module with the file name `ddb_deleteitem.js`\. Be sure to con
 Replace *TABLE\_NAME* with the name of the table\.
 
 **Note**  
-The following code example below deletes a item with a primary key composed of only a partion key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute\.
+The following code example below deletes a item with a primary key composed of only a partition key \- `KEY_NAME` \- and not of both a partition and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js

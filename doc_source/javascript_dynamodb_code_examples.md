@@ -1425,7 +1425,7 @@ import {
 
 if (process.argv.length < 6) {
   console.log(
-    "Usage: node dynamodb_basics.js <tableNaame> <newMovieName> <newMovieYear> <existingMovieName> <existingMovieYear> <newMovieRank> <newMoviePlot>\n" +
+    "Usage: node dynamodb_basics.js <tableName> <newMovieName> <newMovieYear> <existingMovieName> <existingMovieYear> <newMovieRank> <newMoviePlot>\n" +
       "Example: node dynamodb_basics.js newmoviesbrmur newmoviename 2025 200 'MOVIE PLOT DETAILS'"
   );
 }

@@ -69,7 +69,7 @@ const params = {
 
 ## Scanning the DynamoDB table<a name="api-gateway-invoking-lambda-scan-table"></a>
 
-First create an async/await function called `sendText` to publish a text message using the Amazon SNS `PublishCommand`\. Then, add a `try` block pattern that scans the DynamoDB table for employees with their work anniversry today, and then calls the `sendText` function to send these employees a text message\. If an error occurs the `catch` block is called\.
+First create an async/await function called `sendText` to publish a text message using the Amazon SNS `PublishCommand`\. Then, add a `try` block pattern that scans the DynamoDB table for employees with their work anniversary today, and then calls the `sendText` function to send these employees a text message\. If an error occurs the `catch` block is called\.
 
 The following code snippet shows this step\. \(See [Bundling the Lambda function](#api-gateway-invoking-lambda-full) for the full example\.\)
 

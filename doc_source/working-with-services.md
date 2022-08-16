@@ -16,7 +16,7 @@ Invoking an AWS service includes the full request and response lifecycle of an o
 
 **Topics**
 + [Creating and calling service objects](creating-and-calling-service-objects.md)
-+ [Calling services asychronously](calling-services-asynchronously.md)
++ [Calling services asynchronously](calling-services-asynchronously.md)
 + [Creating service client requests](the-request-object.md)
 + [Handling service client responses](the-response-object.md)
 + [Working with JSON](working-with-json.md)

@@ -22,13 +22,13 @@ In this example, you use a series of Node\.js modules to put a batch of items in
 ## Prerequisite tasks<a name="dynamodb-example-table-read-write-batch-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node JypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create a DynamoDB table whose items you can access\. For more information about creating a DynamoDB table, see [Creating and using tables in DynamoDB](dynamodb-examples-using-tables.md)\.
 
 **Important**  
 These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
 
 ## Reading items in Batch<a name="dynamodb-example-table-read-write-batch-reading"></a>
 
@@ -52,7 +52,7 @@ Create a Node\.js module with the file name `ddb_batchgetitem.js`\. Be sure to c
 Replace *TABLE\_NAME* with the name of the table, *KEY\_NAME* with the primary key of the table, *KEY\_VALUE* with the value of the primary key row containing the attribute value, and *ATTRIBUTE\_NAME* the name of the attribute column containing the attribute value\.
 
 **Note**  
-This the following code below batch retrieves items from a table with a primary key composed of only a partion key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute for each item\.
+This the following code below batch retrieves items from a table with a primary key composed of only a partition key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute for each item\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -116,7 +116,7 @@ Create a Node\.js module with the file name `ddb_batchwriteitem.js`\. Be sure to
 **Note**  
 Replace *TABLE\_NAME* with the name of the table, *KEYS* with the primary key of the item, *KEY\_VALUE* with the value of the primary key row containing the attribute value, and *ATTRIBUTE\_NAME* the name of the attribute column containing the attribute value\.
 
-The following code example batch writes items to a table with a primary key composed of only a partion key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute for each item\.
+The following code example batch writes items to a table with a primary key composed of only a partition key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute for each item\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js

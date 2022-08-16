@@ -46,7 +46,7 @@ import {
 import  fetch from "node-fetch";
 
 // Set the parameters.
-// 'COGINTO_ID' has the format 'cognito-idp.eu-west-1.amazonaws.com/COGNITO_ID'.
+// 'COGNITO_ID' has the format 'cognito-idp.eu-west-1.amazonaws.com/COGNITO_ID'.
 let COGNITO_ID = "COGNITO_ID";
 // Get the Amazon Cognito ID token for the user. 'getToken()' is in 'helper.js'.
 let idToken = getToken();
@@ -130,7 +130,7 @@ window.onload = updateUserInterface = async () => {
           const result = data.Body;
           // Create a variable for the string version of the readable stream.
           let stringResult = "";
-          // Use 'yeidlUnit8Chunks' to convert the readable streams into JSON.
+          // Use 'yieldUnit8Chunks' to convert the readable streams into JSON.
           for await (let chunk of yieldUint8Chunks(result)) {
             stringResult += String.fromCharCode.apply(null, chunk);
           }

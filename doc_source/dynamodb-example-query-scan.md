@@ -30,7 +30,7 @@ To set up and run this example, first complete these tasks:
 
 **Important**  
 These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
 
 ## Querying a table<a name="dynamodb-example-table-query-scan-querying"></a>
 
@@ -50,7 +50,7 @@ export { ddbClient };
 
 This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
-Create a Node\.js module with the file name `ddb_query.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client servicec object\. Create a JSON object containing the parameters needed to query the table, which in this example includes the table name, the `ExpressionAttributeValues` needed by the query, a `KeyConditionExpression` that uses those values to define which items the query returns, and the names of attribute values to return for each item\. Call the `QueryCommand` method of the DynamoDB service object\.
+Create a Node\.js module with the file name `ddb_query.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to query the table, which in this example includes the table name, the `ExpressionAttributeValues` needed by the query, a `KeyConditionExpression` that uses those values to define which items the query returns, and the names of attribute values to return for each item\. Call the `QueryCommand` method of the DynamoDB service object\.
 
 The primary key for the table is composed of the following attributes:
 + `Season`

@@ -6,7 +6,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 --------
 
-# Calling services asychronously<a name="calling-services-asynchronously"></a>
+# Calling services asynchronously<a name="calling-services-asynchronously"></a>
 
 All requests made through the SDK are asynchronous\. This is important to keep in mind when writing browser scripts\. JavaScript running in a web browser typically has just a single execution thread\. After making an asynchronous call to an AWS service, the browser script continues running and in the process can try to execute code that depends on that asynchronous result before it returns\.
 
@@ -24,7 +24,7 @@ callback
 Avoid using callbacks except in very simple cases\. However, you might find it useful for migration scenarios\.
 
 **Topics**
-+ [Managing asychronous calls](making-asynchronous-calls.md)
++ [Managing asynchronous calls](making-asynchronous-calls.md)
 + [Using async/await](using-async-await.md)
 + [Using JavaScript promises](using-promises.md)
 + [Using an anonymous callback function](using-a-callback-function.md)

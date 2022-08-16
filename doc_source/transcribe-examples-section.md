@@ -171,7 +171,7 @@ import { transcribeClient } from "./libs/transcribeClient.js";
 
 // Set the parameters
 export const params = {
-  TranscriptionJobName: "JOB_NAME", // Required. For example, 'transciption_demo'
+  TranscriptionJobName: "JOB_NAME", // Required. For example, 'transcription_demo'
 };
 
 export const run = async () => {

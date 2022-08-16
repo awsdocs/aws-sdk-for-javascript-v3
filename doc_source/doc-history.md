@@ -20,7 +20,7 @@ The following table describes the important changes in the V3 release of the *AW
 | [Setting credentials in Node\.js topic updated](configuring-the-jssdk.md) | Update topic about setting credentials in Node\.js for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Migrating to V3](migrating-to-v3.md) | Added topic to describe how to migrate to AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Getting Started ](getting-started.md) | Updated topics for getting started in the browser and getting started with Node\.js for AWS SDK for JavaScript V3\. | October 20, 2020 | 
-| [Browser builder](#doc-history) | Information about AWS Broswer Builder was removed because it is not required for AWS SDK for JavaScript V3\. | October 20, 2020 | 
+| [Browser builder](#doc-history) | Information about AWS Browser Builder was removed because it is not required for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon Transcribe service examples updated](Transcribe-examples.md) | Updated Amazon Transcribe service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon Simple Storage Service service examples updated](s3-examples.md) | Updated Amazon Simple Storage Service service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 
 | [Amazon Simple Queue Service service examples updated](sqs-examples.md) | Updated Amazon Simple Queue Service service examples for AWS SDK for JavaScript V3\. | October 20, 2020 | 

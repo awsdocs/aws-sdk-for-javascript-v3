@@ -35,7 +35,7 @@ To set up and run this example, first complete these tasks:
 
 **Important**  
 These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
 
 ## Describing elastic IP addresses<a name="ec2-example-elastic-ip-addresses-describing"></a>
 
@@ -132,7 +132,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a Node\.js module with the file name `ec2_releaseaddress.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. To access Amazon EC2, create an `EC2` client service object\. Create a JSON object for the parameters used to release an Elastic IP address, which in this case specifies the `AllocationId` for the Elastic IP address\. Releasing an Elastic IP address also disassociates it from any Amazon EC2 instance\. Call the `ReleaseAddressCommand` method of the Amazon EC2 service object\.
 
 **Note**  
-Replace *ALLOCATION\_ID* with the alloaction ID for the Elastic IP address\.
+Replace *ALLOCATION\_ID* with the allocation ID for the Elastic IP address\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js

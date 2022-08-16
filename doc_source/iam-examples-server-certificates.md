@@ -140,7 +140,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a Node\.js module with the file name `iam_updateservercert.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to update a certificate, which consists of the name of the existing server certificate as well as the name of the new certificate\. Call the `UpdateServerCertificateCommand` method of the `IAM` client service object\.
 
 **Note**  
-Replace *CERTIFICATE\_NAME* with the service certicate name to update, and *NEW\_CERTIFICATE\_NAME* with the new certificate name\.
+Replace *CERTIFICATE\_NAME* with the service certificate name to update, and *NEW\_CERTIFICATE\_NAME* with the new certificate name\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js.

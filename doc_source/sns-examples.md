@@ -21,5 +21,5 @@ The JavaScript API for Amazon SNS is exposed through the [Class: SNS](https://do
 **Topics**
 + [Managing Topics in Amazon SNS](sns-examples-managing-topics.md)
 + [Publishing Messages in Amazon SNS](sns-examples-publishing-messages.md)
-+ [Managing Subscriptions in Amazon SNS](sns-examples-subscribing-unubscribing-topics.md)
++ [Managing Subscriptions in Amazon SNS](sns-examples-subscribing-unsubscribing-topics.md)
 + [Sending SMS Messages with Amazon SNS](sns-examples-sending-sms.md)

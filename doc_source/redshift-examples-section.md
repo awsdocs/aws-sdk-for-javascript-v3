@@ -91,7 +91,7 @@ node redshift-create-cluster.js
 
 This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/redshift-create-cluster.js)\.
 
-## Modifing a Amazon Redshift cluster<a name="redshift-modify-cluster"></a>
+## Modifying a Amazon Redshift cluster<a name="redshift-modify-cluster"></a>
 
 This example shows how to modify the master user password of an Amazon Redshift cluster using the AWS SDK for JavaScript\. For more information about what other setting you can modify, see [ModifyCluster](https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyCluster.html)\.
 
@@ -161,7 +161,7 @@ export { redshiftClient };
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/libs/redshiftClient.js)\.
 
-Create a Node\.js module with the file name `redshift-descibe-clusters.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Specify the AWS Region, the name of the cluster you want to modify, and new master user password\.
+Create a Node\.js module with the file name `redshift-describe-clusters.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Specify the AWS Region, the name of the cluster you want to modify, and new master user password\.
 
 **Note**  
 Replace *CLUSTER\_NAME* with the name of the cluster\. 

@@ -36,7 +36,7 @@ You can find this code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 
 ## Creating Scroll Records<a name="kinesis-page-scrolling-create-records"></a>
 
-Scroll progress is calculated using the `scrollHeight` and `scrollTop` properties of the `<div>` containing the content of the blog post\. Each scroll record is created in an event listener function for the `scroll` event and then added to an array of records for periodic submission to Kinesis\. Replace *PARTITION\_KEY* with a paritition key, which must be a string\. For more information about partition strings, see [PutRecord](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecord.html) in the *Amazon Kinesis Data Analytics developer guide*\.
+Scroll progress is calculated using the `scrollHeight` and `scrollTop` properties of the `<div>` containing the content of the blog post\. Each scroll record is created in an event listener function for the `scroll` event and then added to an array of records for periodic submission to Kinesis\. Replace *PARTITION\_KEY* with a partition key, which must be a string\. For more information about partition strings, see [PutRecord](https://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecord.html) in the *Amazon Kinesis Data Analytics developer guide*\.
 
 The following code snippet shows this step\. \(See [Bundling the browser script](kinesis-page-scrolling-full.md) for the full example\.\)
 

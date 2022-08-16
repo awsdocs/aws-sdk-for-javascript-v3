@@ -40,7 +40,7 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
    For more information on the `create-stack` command parameters, see the [AWS CLI Command Reference guide](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack.html), and the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\.
 
 **Note**  
-If you create anoher stack using this template, you must change the stream name in the `setup.yaml` or you encounter an error\.  
+If you create another stack using this template, you must change the stream name in the `setup.yaml` or you encounter an error\.  
 
 
 
@@ -51,7 +51,7 @@ You require the following for this example:
 + An Amazon Cognito identity pool with access enabled for unauthenticated identities\. You need to include the identity pool ID in the code to obtain credentials for the browser script\. For more information about Amazon Cognito identity pools, see [Identity Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) in the *Amazon Cognito Developer Guide*\.
 + An IAM role with an attached IAM policy that grants permission to submit data to an Amazon Kinesis stream\. For more information about creating an IAM role, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 **Note**  
-This is the role policy when is attached to the IAM role\. The CDK automatically poplulates the *STREAM\_RESOURCE\_ARN*\.  
+This is the role policy when is attached to the IAM role\. The CDK automatically populates the *STREAM\_RESOURCE\_ARN*\.  
 
   ```
   {
@@ -80,7 +80,7 @@ This is the role policy when is attached to the IAM role\. The CDK automatically
   }
   ```
 **Note**  
-The CDK automatically poplulates the *STREAM\_RESOURCE\_ARN*\. 
+The CDK automatically populates the *STREAM\_RESOURCE\_ARN*\. 
 
 ## Create the AWS resources using the Amazon Web Services Management Console;<a name="kinesis-page-scrolling-resources-console"></a>
 

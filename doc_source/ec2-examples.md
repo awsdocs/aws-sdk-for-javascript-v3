@@ -8,7 +8,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Amazon EC2 examples<a name="ec2-examples"></a>
 
-Amazon Elastic Compute Cloud \(Amazon EC2\) is a web service that provides virtual server hosting in the cloud\. It is designed to make web\-scale cloud computing easier for developers by providing resizeable compute capacity\.
+Amazon Elastic Compute Cloud \(Amazon EC2\) is a web service that provides virtual server hosting in the cloud\. It is designed to make web\-scale cloud computing easier for developers by providing resizable compute capacity\.
 
 
 

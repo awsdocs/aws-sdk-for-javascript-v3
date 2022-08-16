@@ -122,7 +122,7 @@ Create a file named `polly.js`, and paste the code below into it\. The full Java
 
 Next, it creates a function named `speakText()` that is be invoked as an event handler by the button\. Amazon Polly returns synthesized speech as an audio stream\. The easiest way to play that audio in a browser is to have Amazon Polly make the audio available at a presigned URL you can then set as the `src` attribute of the `<audio>` element in the webpage\.
 
-Next it create thes `Presigner` object you'll use to create the presigned URL from which the synthesized speech audio can be retrieved\. You must pass the speech parameters that you defined as well as the `Polly` service object that you created to the `Polly.Presigner` constructor\.
+Next it creates the `Presigner` object you'll use to create the presigned URL from which the synthesized speech audio can be retrieved\. You must pass the speech parameters that you defined as well as the `Polly` service object that you created to the `Polly.Presigner` constructor\.
 
 After it creates the presigner object, it calls the `getSynthesizeSpeechUrl` method of that object, passing the speech parameters\. If successful, this method returns the URL of the synthesized speech, which the code then assign to the `<audio>` element for playback\.
 

@@ -45,13 +45,13 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
 
 ## Populate the DynamoDB table<a name="scheduled-events-invoking-lambda-resources-create-table"></a>
 
-To populate the table, first create a diretory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. 
+To populate the table, first create a directory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. 
 
 ```
 const { DynamoDBClient } = require( "@aws-sdk/client-dynamodb" );
 // Set the AWS Region.
 const REGION = "REGION"; // e.g. "us-east-1"
-// Create an Amazon DynamodDB service client object.
+// Create an Amazon DynamoDB service client object.
 const dynamoClient = new DynamoDBClient({region:REGION});
 module.exports = { dynamoClient };
 ```

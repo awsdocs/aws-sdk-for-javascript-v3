@@ -350,7 +350,7 @@ This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-e
 
 Create a Node\.js module with the file name `s3_listobjects.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. 
 
-Add a variable to hold the parameters used to call the `ListObjectsCommnad` method of the Amazon S3 service object, including the name of the bucket to read\. The callback function logs a list of objects \(files\) or a failure message\.
+Add a variable to hold the parameters used to call the `ListObjectsCommand` method of the Amazon S3 service object, including the name of the bucket to read\. The callback function logs a list of objects \(files\) or a failure message\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js.

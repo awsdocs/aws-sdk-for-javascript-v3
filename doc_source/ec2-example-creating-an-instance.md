@@ -28,7 +28,7 @@ To set up and run this example, first complete these tasks\.
 
 **Important**  
 These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
 
 ## Creating and tagging an instance<a name="ec2-example-creating-an-instance-and-tags"></a>
 

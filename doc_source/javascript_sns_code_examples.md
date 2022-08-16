@@ -338,7 +338,7 @@ const run = async () => {
 run();
 ```
 +  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sns#code-examples)\. 
-+  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sns-examples-subscribing-unubscribing-topics.html#sns-confirm-subscription-email)\. 
++  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sns-examples-subscribing-unsubscribing-topics.html#sns-confirm-subscription-email)\. 
 +  For API details, see [GetSMSAttributes](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/getsmsattributescommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### List the subscribers of a topic<a name="sns_ListSubscriptions_javascript_topic"></a>
@@ -592,7 +592,7 @@ const run = async () => {
 run();
 ```
 +  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sns#code-examples)\. 
-+  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sns-examples-subscribing-unubscribing-topics.html#sns-examples-subscribing-lambda)\. 
++  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sns-examples-subscribing-unsubscribing-topics.html#sns-examples-subscribing-lambda)\. 
 +  For API details, see [Subscribe](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sns/classes/subscribecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Subscribe a mobile application to a topic<a name="sns_Subscribe_App_javascript_topic"></a>
