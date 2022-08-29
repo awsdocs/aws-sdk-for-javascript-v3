@@ -340,8 +340,8 @@ export const bucketParams = { Bucket: "BUCKET_NAME" };
 export const run = async () => {
   try {
     const data = await s3Client.send(new DeleteBucketCommand(bucketParams));
-    return data; // For unit tests.
     console.log("Success - bucket deleted");
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -430,8 +430,8 @@ export const bucketParams = {
 export const run = async () => {
   try {
     const data = await s3Client.send(new DeleteObjectsCommand(bucketParams));
-    return data; // For unit tests.
     console.log("Success. Object deleted.");
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -500,8 +500,8 @@ export const bucketParams = { Bucket: "BUCKET_NAME" };
 export const run = async () => {
   try {
     const data = await s3Client.send(new DeleteBucketWebsiteCommand(bucketParams));
-    return data; // For unit tests.
     console.log("Success", data);
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error", err);
   }
@@ -1160,8 +1160,8 @@ export const run = async () => {
     const data = await s3Client.send(
       new CreateBucketCommand({ Bucket: bucketParams.Bucket })
     );
-    return data; // For unit tests.
     console.log(`Waiting for "${bucketParams.Bucket}" bucket creation...\n`);
+    return data; // For unit tests.
   } catch (err) {
     console.log("Error creating bucket", err);
   }
