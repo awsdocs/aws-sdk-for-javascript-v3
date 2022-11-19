@@ -8,8 +8,9 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 # Supported web browsers<a name="browsers-supported"></a>
 
-The SDK for JavaScript supports all modern web browsers, including these minimum versions\.
+The SDK for JavaScript supports all modern web browsers\.
 
+In versions <=v3.182.0, the SDK published ES5 artifacts which supported following minimum versions.
 
 ****  
 
@@ -24,6 +25,19 @@ The SDK for JavaScript supports all modern web browsers, including these minimum
 | Android Browser | 76\.0\+ | 
 | UC Browser | 12\.12\+ | 
 | Samsung Internet | 5\.0\+ | 
+
+In >3.183.0, the SDK switched to ES2020 artifacts which supports following minimum versions
+
+***
+
+| Browser | Version | 
+| --- | --- | 
+| Google Chrome | 80\.0\+ | 
+| Mozilla Firefox | 80\.0\+ | 
+| Opera | 63\.0\+ | 
+| Microsoft Edge | 80\.0\+ | 
+| Apple Safari | 14\.1\+ | 
+| Samsung Internet | 12\.0\+ | 
 
 **Note**  
 Frameworks such as AWS Amplify might not offer the same browser support as the SDK for JavaScript\. See the [AWS Amplify Documentation](https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html) for details\.
