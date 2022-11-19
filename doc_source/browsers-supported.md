@@ -28,7 +28,7 @@ In versions <=v3.182.0, the SDK published ES5 artifacts which supported followin
 
 In >3.183.0, the SDK switched to ES2020 artifacts which supports following minimum versions
 
-***
+****
 
 | Browser | Version | 
 | --- | --- | 
