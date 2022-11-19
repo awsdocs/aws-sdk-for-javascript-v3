@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 The SDK for JavaScript supports all modern web browsers\.
 
-In versions <=v3.182.0, the SDK published ES5 artifacts which supported following minimum versions.
+In versions <=v3.182.0, the SDK published ES5 artifacts which supported following minimum versions\.
 
 ****  
 
