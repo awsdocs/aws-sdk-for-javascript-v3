@@ -19,7 +19,7 @@ ES6 requires you use Node\.js version 13\.x or higher\. To download and install 
   import { s3 } from "./libs/s3Client.js";
   ```
 
-  To its CommonJS equivelent:
+  To its CommonJS equivalent:
 
   ```
   const { CreateBucketCommand } = require("@aws-sdk/client-s3");
@@ -28,13 +28,13 @@ ES6 requires you use Node\.js version 13\.x or higher\. To download and install 
 + Convert all ES6 `export` statements to CommonJS `module.exports` statements\. For example, convert:
 
   ```
-  export {s3}
+  export { s3 }
   ```
 
-  To its CommonJS equivelent:
+  To its CommonJS equivalent:
 
   ```
-  module.exports = {s3}
+  module.exports = { s3 }
   ```
 
 The following example demonstrates the code example for creating an Amazon S3 bucket in both ES6 and CommonJS\.
