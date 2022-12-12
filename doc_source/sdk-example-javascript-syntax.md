@@ -10,7 +10,7 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 The AWS SDK for JavaScript code examples are written in ECMAScript 6 \(ES6\)\. ES6 brings new syntax and new features to make your code more modern and readable, and do more\. 
 
-ES6 requires you use Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download) However, if you prefer, you can convert any of our examples to CommonJS sytax using the following guidelines:
+ES6 requires you use Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download) However, if you prefer, you can convert any of our examples to CommonJS syntax using the following guidelines:
 + Remove `"type" : "module"` from the `package.json` in your project environment\.
 + Convert all ES6 `import` statements to CommonJS `require` statements\. For example, convert:
 
@@ -52,19 +52,15 @@ const REGION = "eu-west-1"; //e.g. "us-east-1"
 // Create Amazon S3 service object.
 const s3 = new S3Client({ region: REGION });
 // Export 's3' constant.
-export {s3};
+export { s3 };
 ```
 
 s3\_createbucket\.js
 
 ```
 // Get service clients module and commands using ES6 syntax.
- import { CreateBucketCommand } from "@aws-sdk/client-s3";
- import { s3 } from "./libs/s3Client.js";
-
-// Get service clients module and commands using CommonJS syntax.
-// const { CreateBucketCommand } = require("@aws-sdk/client-s3");
-// const { s3 } = require("./libs/s3Client.js");
+import { CreateBucketCommand } from "@aws-sdk/client-s3";
+import { s3 } from "./libs/s3Client.js";
 
 // Set the bucket parameters
 const bucketParams = { Bucket: "BUCKET_NAME" };
@@ -79,6 +75,7 @@ const run = async () => {
     console.log("Error", err);
   }
 };
+
 run();
 ```
 
@@ -89,13 +86,13 @@ libs/s3Client\.js
 
 ```
 // Create service client module using CommonJS syntax.
- const { S3Client } = require("@aws-sdk/client-s3");
+const { S3Client } = require("@aws-sdk/client-s3");
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
- // Create Amazon S3 service object.
+const REGION = "eu-west-1"; //e.g. "us-east-1"
+// Create Amazon S3 service object.
 const s3 = new S3Client({ region: REGION });
 // Export 's3' constant.
- module.exports ={s3};
+module.exports = { s3 };
 ```
 
 s3\_createbucket\.js
@@ -118,6 +115,7 @@ const run = async () => {
     console.log("Error", err);
   }
 };
+
 run();
 ```
 
