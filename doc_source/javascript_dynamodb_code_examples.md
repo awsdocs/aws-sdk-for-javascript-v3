@@ -1266,27 +1266,28 @@ export const writeData = async () => {
     // Loop batch write operation 10 times to upload 250 items.
     for (let i = 0; i < 10; i++) {
       const segment = dataSegments[i];
+      const items = [];
       for (let j = 0; j < 25; j++) {
-        const params = {
-          RequestItems: {
-            [TABLE_NAME]: [
-              {
-                // Destination Amazon DynamoDB table name.
-                PutRequest: {
-                  Item: {
-                    year: segment[j].year,
-                    title: segment[j].title,
-                    info: segment[j].info,
-                  },
-                },
+        items.push(
+          {
+            // Destination Amazon DynamoDB table name.
+            PutRequest: {
+              Item: {
+                year: segment[j].year,
+                title: segment[j].title,
+                info: segment[j].info,
               },
-            ],
-          },
-        };
-        const data = ddbDocClient.send(new BatchWriteCommand(params));
+            },
+          });
       }
-      console.log("Success, table updated.");
+      const params = {
+        RequestItems: {
+          [TABLE_NAME]: items,
+        },
+      };
+      ddbDocClient.send(new BatchWriteCommand(params));
     }
+    console.log("Success, table updated.");
   } catch (error) {
     console.log("Error", error);
   }
