@@ -1,14 +1,12 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
 # Detect PPE in images with Amazon Rekognition using an AWS SDK<a name="cross_RekognitionPhotoAnalyzerPPE_javascript_topic"></a>
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
  Shows how to use Amazon Rekognition with the AWS SDK for JavaScript to create an application to detect personal protective equipment \(PPE\) in images located in an Amazon Simple Storage Service \(Amazon S3\) bucket\. The app saves the results to an Amazon DynamoDB table, and sends the admin an email notification with the results using Amazon Simple Email Service \(Amazon SES\)\.   
 Learn how to:  
 + Create an unauthenticated user using Amazon Cognito\.

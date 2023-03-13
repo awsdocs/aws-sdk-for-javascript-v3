@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -33,11 +31,11 @@ const snsClient = new SNSClient({
 export { snsClient };
 ```
 
-This code is available [here on GitHub\.](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/cross-services/submit-data-app/src/libs/snsClient.js)\.
+This code is available [here on GitHub\.](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/submit-data-app/src/libs/snsClient.js)\.
 
 To create the browser script for this example, in a folder named `DynamoDBApp`, create a Node\.js module with the file name `add_data.js` and paste the code below into it\. The `submitData` function submits data to a DynamoDB table, and sends an SMS text to the app administrator using Amazon SNS\. 
 
-In the `submitData` function, declare variables for the target phone number, the values entered on the app interface, and for the name of the Amazon S3 bucket\. Replace *BUCKET\_NAME* with the name of the `S3` bucket you created\. Next, create a parameters object for adding an item to the table\. If none of the values is empty, `submitData` adds the item to the table, and sends the message\. Remember to make the function available to the browser, with `window.submitData = submitData`\.
+In the `submitData` function, declare variables for the target phone number, the values entered on the app interface, and for the name of the Amazon S3 bucket\. Next, create a parameters object for adding an item to the table\. If none of the values is empty, `submitData` adds the item to the table, and sends the message\. Remember to make the function available to the browser, with `window.submitData = submitData`\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -72,13 +70,13 @@ export const submitData = async () => {
   if (id != "" && title != "" && name != "" && body != "") {
     try {
       //Upload the item to the table
-      const data = await dynamoClient.send(new PutItemCommand(params));
+      await dynamoClient.send(new PutItemCommand(params));
       alert("Data added to table.");
       try {
         // Create the message parameters object.
         const messageParams = {
           Message: "A new item with ID value was added to the DynamoDB",
-          PhoneNumber: "+353861230764", //PHONE_NUMBER, in the E.164 phone number structure.
+          PhoneNumber: "PHONE_NUMBER", //PHONE_NUMBER, in the E.164 phone number structure.
           // For example, ak standard local formatted number, such as (415) 555-2671, is +14155552671 in E.164
           // format, where '1' in the country code.
         };
@@ -107,7 +105,7 @@ export const submitData = async () => {
 window.submitData = submitData;
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoApp/add_data.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/submit-data-app/src/dynamoApp/add_data.js)\.
 
 Finally, run the following at the command prompt to bundle the JavaScript for this example in a file named `main.js`:
 

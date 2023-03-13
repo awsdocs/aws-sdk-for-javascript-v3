@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -51,12 +49,12 @@ In this example, use a Node\.js module to send email with Amazon SES\.
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -72,59 +70,59 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *RECEIVER\_ADDRESS* with the address to send the email to, and *SENDER\_ADDRESS* with the email address to the send the email from\.
 
 ```
-// Create the promise and SES service object
-
-// Import required AWS SDK clients and commands for Node.js
-import { SendEmailCommand }  from "@aws-sdk/client-ses";
+import { SendEmailCommand } from "@aws-sdk/client-ses";
 import { sesClient } from "./libs/sesClient.js";
 
-// Set the parameters
-const params = {
-  Destination: {
-    /* required */
-    CcAddresses: [
+const createSendEmailCommand = (toAddress, fromAddress) => {
+  return new SendEmailCommand({
+    Destination: {
+      /* required */
+      CcAddresses: [
+        /* more items */
+      ],
+      ToAddresses: [
+        toAddress,
+        /* more To-email addresses */
+      ],
+    },
+    Message: {
+      /* required */
+      Body: {
+        /* required */
+        Html: {
+          Charset: "UTF-8",
+          Data: "HTML_FORMAT_BODY",
+        },
+        Text: {
+          Charset: "UTF-8",
+          Data: "TEXT_FORMAT_BODY",
+        },
+      },
+      Subject: {
+        Charset: "UTF-8",
+        Data: "EMAIL_SUBJECT",
+      },
+    },
+    Source: fromAddress,
+    ReplyToAddresses: [
       /* more items */
     ],
-    ToAddresses: [
-      "RECEIVER_ADDRESS", //RECEIVER_ADDRESS
-      /* more To-email addresses */
-    ],
-  },
-  Message: {
-    /* required */
-    Body: {
-      /* required */
-      Html: {
-        Charset: "UTF-8",
-        Data: "HTML_FORMAT_BODY",
-      },
-      Text: {
-        Charset: "UTF-8",
-        Data: "TEXT_FORMAT_BODY",
-      },
-    },
-    Subject: {
-      Charset: "UTF-8",
-      Data: "EMAIL_SUBJECT",
-    },
-  },
-  Source: "SENDER_ADDRESS", // SENDER_ADDRESS
-  ReplyToAddresses: [
-    /* more items */
-  ],
+  });
 };
-
 
 const run = async () => {
+  const sendEmailCommand = createSendEmailCommand(
+    "recipient@example.com",
+    "sender@example.com"
+  );
+
   try {
-    const data = await sesClient.send(new SendEmailCommand(params));
-    console.log("Success", data);
-    return data; // For unit tests.
-  } catch (err) {
-    console.log("Error", err);
+    return await sesClient.send(sendEmailCommand);
+  } catch (e) {
+    console.error("Failed to send email.");
+    return e;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. The email is queued for sending by Amazon SES\.
@@ -148,38 +146,54 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *REGION* with your AWS Region, *RECEIVER\_ADDRESS* with the address to send the email to, *SENDER\_ADDRESS* with the email address to the send the email from, and *TEMPLATE\_NAME* with the name of the template\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { SendTemplatedEmailCommand }  from "@aws-sdk/client-ses";
+import { SendTemplatedEmailCommand } from "@aws-sdk/client-ses";
+import { getUniqueName, postfix } from "../../libs/utils/util-string.js";
 import { sesClient } from "./libs/sesClient.js";
 
-// Set the parameters
-const params = {
-  Destination: {
-    /* required */
-    CcAddresses: [
-      /* more CC email addresses */
-    ],
-    ToAddresses: [
-      "RECEIVER_ADDRESS", // RECEIVER_ADDRESS
-      /* more To-email addresses */
-    ],
-  },
-  Source: "SENDER_ADDRESS", //SENDER_ADDRESS
-  Template: "TEMPLATE_NAME", // TEMPLATE_NAME
-  TemplateData: '{ "REPLACEMENT_TAG_NAME":"REPLACEMENT_VALUE" }' /* required */,
-  ReplyToAddresses: [],
+/**
+ * Replace this with the name of an existing template.
+ */
+const TEMPLATE_NAME = getUniqueName("ReminderTemplate");
+
+/**
+ * Replace these with existing verified emails.
+ */
+const VERIFIED_EMAIL = postfix(getUniqueName("Bilbo"), "@example.com");
+
+const USER = { firstName: "Bilbo", emailAddress: VERIFIED_EMAIL };
+
+/**
+ *
+ * @param { { emailAddress: string, firstName: string } } user
+ * @param { string } templateName - The name of an existing template in Amazon SES.
+ * @returns { SendTemplatedEmailCommand }
+ */
+const createReminderEmailCommand = (user, templateName) => {
+  return new SendTemplatedEmailCommand({
+    /**
+     * Here's an example of how a template would be replaced with user data:
+     * Template: <h1>Hello {{contact.firstName}},</h1><p>Don't forget about the party gifts!</p>
+     * Destination: <h1>Hello Bilbo,</h1><p>Don't forget about the party gifts!</p>
+     */
+    Destination: { ToAddresses: [user.emailAddress] },
+    TemplateData: JSON.stringify({ contact: { firstName: user.firstName } }),
+    Source: VERIFIED_EMAIL,
+    Template: templateName,
+  });
 };
 
 const run = async () => {
+  const sendReminderEmailCommand = createReminderEmailCommand(
+    USER,
+    TEMPLATE_NAME
+  );
   try {
-    const data = await sesClient.send(new SendTemplatedEmailCommand(params));
-    console.log("Success.", data);
-    return data; // For unit tests.
+    return await sesClient.send(sendReminderEmailCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to send template email", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. The email is queued for sending by Amazon SES\.
@@ -197,12 +211,12 @@ In this example, use a Node\.js module to send email with Amazon SES\.
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -218,46 +232,65 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *RECEIVER\_ADDRESSES* with the address to send the email to, and *SENDER\_ADDRESS* with the email address to the send the email from\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import {
-  SendBulkTemplatedEmailCommand
-} from "@aws-sdk/client-ses";
+import { SendBulkTemplatedEmailCommand } from "@aws-sdk/client-ses";
+import { getUniqueName, postfix } from "../../libs/utils/util-string.js";
 import { sesClient } from "./libs/sesClient.js";
 
-// Set the parameters
-var params = {
-  Destinations: [
-    /* required */
-    {
-      Destination: {
-        /* required */
-        CcAddresses: [
-          "RECEIVER_ADDRESSES", //RECEIVER_ADDRESS
-          /* more items */
-        ],
-        ToAddresses: [
-          /* more items */
-        ],
-      },
-      ReplacementTemplateData: '{ "REPLACEMENT_TAG_NAME":"REPLACEMENT_VALUE" }',
-    },
-  ],
-  Source: "SENDER_ADDRESS", // SENDER_ADDRESS
-  Template: "TEMPLATE", //TEMPLATE
-  DefaultTemplateData: '{ "REPLACEMENT_TAG_NAME":"REPLACEMENT_VALUE" }',
-  ReplyToAddresses: [],
+/**
+ * Replace this with the name of an existing template.
+ */
+const TEMPLATE_NAME = getUniqueName("ReminderTemplate");
+
+/**
+ * Replace these with existing verified emails.
+ */
+const VERIFIED_EMAIL_1 = postfix(getUniqueName("Bilbo"), "@example.com");
+const VERIFIED_EMAIL_2 = postfix(getUniqueName("Frodo"), "@example.com");
+
+const USERS = [
+  { firstName: "Bilbo", emailAddress: VERIFIED_EMAIL_1 },
+  { firstName: "Frodo", emailAddress: VERIFIED_EMAIL_2 },
+];
+
+/**
+ *
+ * @param { { emailAddress: string, firstName: string }[] } users
+ * @param { string } templateName the name of an existing template in SES
+ * @returns { SendBulkTemplatedEmailCommand }
+ */
+const createBulkReminderEmailCommand = (users, templateName) => {
+  return new SendBulkTemplatedEmailCommand({
+    /**
+     * Each 'Destination' uses a corresponding set of replacement data. We can map each user
+     * to a 'Destination' and provide user specific replacement data to create personalized emails.
+     *
+     * Here's an example of how a template would be replaced with user data:
+     * Template: <h1>Hello {{name}},</h1><p>Don't forget about the party gifts!</p>
+     * Destination 1: <h1>Hello Bilbo,</h1><p>Don't forget about the party gifts!</p>
+     * Destination 2: <h1>Hello Frodo,</h1><p>Don't forget about the party gifts!</p>
+     */
+    Destinations: users.map((user) => ({
+      Destination: { ToAddresses: [user.emailAddress] },
+      ReplacementTemplateData: JSON.stringify({ name: user.firstName }),
+    })),
+    DefaultTemplateData: JSON.stringify({ name: "Shireling" }),
+    Source: VERIFIED_EMAIL_1,
+    Template: templateName,
+  });
 };
 
 const run = async () => {
+  const sendBulkTemplateEmailCommand = createBulkReminderEmailCommand(
+    USERS,
+    TEMPLATE_NAME
+  );
   try {
-    const data = await sesClient.send(new SendBulkTemplatedEmailCommand(params));
-    console.log("Success.", data);
-    return data; // For unit tests.
+    return await sesClient.send(sendBulkTemplateEmailCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to send bulk template email", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. The email is queued for sending by Amazon SES\.

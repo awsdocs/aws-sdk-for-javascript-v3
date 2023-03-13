@@ -1,31 +1,30 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
-# Amazon SQS examples using SDK for JavaScript V3<a name="javascript_sqs_code_examples"></a>
+# Amazon SQS examples using SDK for JavaScript \(v3\)<a name="javascript_sqs_code_examples"></a>
 
-The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript V3 with Amazon SQS\.
+The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript \(v3\) with Amazon SQS\.
 
-*Actions* are code excerpts that show you how to call individual Amazon SQS functions\.
+*Actions* are code excerpts that show you how to call individual service functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple Amazon SQS functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
 **Topics**
-+ [Actions](#w362aac23b9c31c13)
++ [Actions](#actions)
 
-## Actions<a name="w362aac23b9c31c13"></a>
+## Actions<a name="actions"></a>
 
 ### Change how long a queue waits for a message<a name="sqs_SetQueueAttributes_javascript_topic"></a>
 
 The following code example shows how to change how long an Amazon SQS queue waits for a message to arrive\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 Create the client\.  
 
 ```
@@ -62,11 +61,11 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sqs-examples-enable-long-polling.html#sqs-examples-enable-long-polling-existing-queue)\. 
 +  For API details, see [SetQueueAttributes](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/setqueueattributescommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 Change how long an Amazon SQS queue waits for a message to arrive\.  
 
 ```
@@ -93,7 +92,6 @@ sqs.setQueueAttributes(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sqs-examples-enable-long-polling.html#sqs-examples-enable-long-polling-existing-queue)\. 
 +  For API details, see [SetQueueAttributes](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/sqs-2012-11-05/SetQueueAttributes) in *AWS SDK for JavaScript API Reference*\. 
 
@@ -101,7 +99,8 @@ sqs.setQueueAttributes(params, function(err, data) {
 
 The following code example shows how to change an Amazon SQS message timeout visibility\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 Create the client\.  
 
 ```
@@ -137,13 +136,13 @@ const run = async () => {
     const data = await sqsClient.send(new ReceiveMessageCommand(params));
     if (data.Messages != null) {
       try {
-        var visibilityParams = {
+        const visibilityParams = {
           QueueUrl: queueURL,
           ReceiptHandle: data.Messages[0].ReceiptHandle,
           VisibilityTimeout: 20, // 20 second timeout
         };
         const results = await sqsClient.send(
-          new ChangeMessageVisibilityCommand(params)
+            new ChangeMessageVisibilityCommand(visibilityParams)
         );
         console.log("Timeout Changed", results);
       } catch (err) {
@@ -159,11 +158,11 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sqs-examples-managing-visibility-timeout.html#sqs-examples-managing-visibility-timeout-setting)\. 
 +  For API details, see [ChangeMessageVisibility](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/changemessagevisibilitycommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 Receive an Amazon SQS message and change its timeout visibility\.  
 
 ```
@@ -208,7 +207,6 @@ sqs.receiveMessage(params, function (err, data) {
   }
 })
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sqs-examples-managing-visibility-timeout.html#sqs-examples-managing-visibility-timeout-setting)\. 
 +  For API details, see [ChangeMessageVisibility](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/sqs-2012-11-05/ChangeMessageVisibility) in *AWS SDK for JavaScript API Reference*\. 
 
@@ -216,7 +214,8 @@ sqs.receiveMessage(params, function (err, data) {
 
 The following code example shows how to create an Amazon SQS queue\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 Create the client\.  
 
 ```
@@ -280,11 +279,11 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sqs-examples-using-queues.html#sqs-examples-using-queues-create-queue)\. 
 +  For API details, see [CreateQueue](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/createqueuecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 Create an Amazon SQS standard queue\.  
 
 ```
@@ -338,7 +337,6 @@ sqs.createQueue(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sqs-examples-using-queues.html#sqs-examples-using-queues-create-queue)\. 
 +  For API details, see [CreateQueue](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/sqs-2012-11-05/CreateQueue) in *AWS SDK for JavaScript API Reference*\. 
 
@@ -346,7 +344,8 @@ sqs.createQueue(params, function(err, data) {
 
 The following code example shows how to delete a message from an Amazon SQS queue\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 Create the client\.  
 
 ```
@@ -402,11 +401,11 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sqs-examples-send-receive-messages.html#sqs-examples-send-receive-messages-receiving)\. 
 +  For API details, see [DeleteMessage](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/deletemessagecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 Receive and delete Amazon SQS messages\.  
 
 ```
@@ -451,7 +450,6 @@ sqs.receiveMessage(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sqs-examples-send-receive-messages.html#sqs-examples-send-receive-messages-receiving)\. 
 +  For API details, see [DeleteMessage](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/sqs-2012-11-05/DeleteMessage) in *AWS SDK for JavaScript API Reference*\. 
 
@@ -459,7 +457,8 @@ sqs.receiveMessage(params, function(err, data) {
 
 The following code example shows how to delete an Amazon SQS queue\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 Create the client\.  
 
 ```
@@ -491,11 +490,11 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sqs-examples-using-queues.html#sqs-examples-using-queues-delete-queue)\. 
 +  For API details, see [DeleteQueue](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/deletequeuecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 Delete an Amazon SQS queue\.  
 
 ```
@@ -519,7 +518,6 @@ sqs.deleteQueue(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sqs-examples-using-queues.html#sqs-examples-using-queues-delete-queue)\. 
 +  For API details, see [DeleteQueue](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/sqs-2012-11-05/DeleteQueue) in *AWS SDK for JavaScript API Reference*\. 
 
@@ -527,7 +525,8 @@ sqs.deleteQueue(params, function(err, data) {
 
 The following code example shows how to get the URL of an Amazon SQS queue\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 Create the client\.  
 
 ```
@@ -559,11 +558,11 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sqs-examples-using-queues.html#sqs-examples-using-queues-get-queue-url)\. 
 +  For API details, see [GetQueueUrl](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/getqueueurlcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 Get the URL for an Amazon SQS queue\.  
 
 ```
@@ -587,7 +586,6 @@ sqs.getQueueUrl(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sqs-examples-using-queues.html#sqs-examples-using-queues-get-queue-url)\. 
 +  For API details, see [GetQueueUrl](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/sqs-2012-11-05/GetQueueUrl) in *AWS SDK for JavaScript API Reference*\. 
 
@@ -595,7 +593,8 @@ sqs.getQueueUrl(params, function(err, data) {
 
 The following code example shows how to list Amazon SQS queues\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 Create the client\.  
 
 ```
@@ -624,11 +623,11 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sqs-examples-using-queues.html#sqs-examples-using-queues-listing-queues)\. 
 +  For API details, see [ListQueues](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/listqueuescommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 List your Amazon SQS queues\.  
 
 ```
@@ -650,7 +649,6 @@ sqs.listQueues(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sqs-examples-using-queues.html#sqs-examples-using-queues-listing-queues)\. 
 +  For API details, see [ListQueues](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/sqs-2012-11-05/ListQueues) in *AWS SDK for JavaScript API Reference*\. 
 
@@ -658,7 +656,8 @@ sqs.listQueues(params, function(err, data) {
 
 The following code example shows how to receive messages from an Amazon SQS queue\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 Create the client\.  
 
 ```
@@ -697,11 +696,11 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sqs-examples-enable-long-polling.html#sqs-examples-enable-long-polling-on-receive-message)\. 
 +  For API details, see [ReceiveMessage](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/receivemessagecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 Receive a message from an Amazon SQS queue using long\-poll support\.  
 
 ```
@@ -735,7 +734,6 @@ sqs.receiveMessage(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sqs-examples-enable-long-polling.html#sqs-examples-enable-long-polling-on-receive-message)\. 
 +  For API details, see [ReceiveMessage](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/sqs-2012-11-05/ReceiveMessage) in *AWS SDK for JavaScript API Reference*\. 
 
@@ -743,7 +741,8 @@ sqs.receiveMessage(params, function(err, data) {
 
 The following code example shows how to send a message to an Amazon SQS queue\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 Create the client\.  
 
 ```
@@ -796,11 +795,11 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/sqs-examples-send-receive-messages.html#sqs-examples-send-receive-messages-sending)\. 
 +  For API details, see [SendMessage](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-sqs/classes/sendmessagecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 Send a message to an Amazon SQS queue\.  
 
 ```
@@ -843,6 +842,5 @@ sqs.sendMessage(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/sqs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sqs-examples-send-receive-messages.html#sqs-examples-send-receive-messages-sending)\. 
 +  For API details, see [SendMessage](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/sqs-2012-11-05/SendMessage) in *AWS SDK for JavaScript API Reference*\. 

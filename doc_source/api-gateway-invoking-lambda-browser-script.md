@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -10,41 +8,40 @@ Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by pro
 
 ## Configuring the SDK<a name="api-gateway-invoking-lambda-configure-sdk"></a>
 
-In the `libs` directory create a files named `snsClient.js` and `lambdaClient.js`, and paste the content below into them respectively\. 
+In the `libs` directory, create files named `snsClient.js` and `lambdaClient.js`, and paste the content below into these files, respectively\. 
 
 ```
-const { SNSClient } = require("@aws-sdk/client-sns");
+const  { SNSClient } = require ( "@aws-sdk/client-sns" );
 // Set the AWS Region.
-const REGION = "REGION"; // e.g. "us-east-1"
-// Create an Amazon Simple Notification Service client object.
-const snsClient = new SNSClient({region:REGION});
+const REGION = "REGION"; //e.g. "us-east-1"
+// Create an Amazon SNS service client object.
+const snsClient = new SNSClient({ region: REGION });
 module.exports = { snsClient };
 ```
 
- Replace *REGION* with the AWS Region\. This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-api-gateway/src/libs/snsClient.js)\.
+ Replace *REGION* with the AWS Region\. This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/lambda-api-gateway/src/libs/snsClient.js)\.
 
 ```
-const { LambadaClient } = require( "@aws-sdk/client-lambda" );
+const { LambdaClient } = require ( "@aws-sdk/client-lambda" );
 // Set the AWS Region.
-const REGION = "eu-west-1"; // e.g. "us-east-1"
+const REGION = "REGION"; //e.g. "us-east-1"
 // Create an Amazon Lambda service client object.
-const lambdaClient = new LambdaClient({region:REGION});
+const lambdaClient = new LambdaClient({ region: REGION });
 module.exports = { lambdaClient };
 ```
 
-Replace *REGION* with the AWS Region\. This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-api-gateway/src/libs/lambdaClient.js)\.
+Replace *REGION* with the AWS Region\. This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/lambda-api-gateway/src/libs/lambdaClient.js)\.
 
-First import the required AWS SDK for JavaScript \(v3\) modules and commands\. Then calculate today's date and assign it to a parameter\. Then create the parameters for the `ScanCommand`\.Replace *TABLE\_NAME* with the name of the table you created in the [Create the AWS resources ](api-gateway-invoking-lambda-provision-resources.md) section of this example\.
+First, import the required AWS SDK for JavaScript \(v3\) modules and commands\. Then calculate today's date and assign it to a parameter\. Third, create the parameters for the `ScanCommand`\.Replace *TABLE\_NAME* with the name of the table you created in the [Create the AWS resources ](api-gateway-invoking-lambda-provision-resources.md) section of this example\.
 
 The following code snippet shows this step\. \(See [Bundling the Lambda function](#api-gateway-invoking-lambda-full) for the full example\.\)
 
 ```
 "use strict";
-// Load the required clients and commands.
-const { ScanCommand }  = require ( "@aws-sdk/client-dynamodb" );
-const { PublishCommand } = require ( "@aws-sdk/client-sns" );
-const {lambdaClient}  = require ( "./libs/lambdaClient" );
+const { ScanCommand } = require("@aws-sdk/client-dynamodb");
+const { PublishCommand } = require("@aws-sdk/client-sns");
 const {snsClient} = require ( "./libs/snsClient" );
+const {dynamoClient} = require ( "./libs/dynamoClient" );
 
 // Get today's date.
 const today = new Date();
@@ -61,39 +58,40 @@ const params = {
   ExpressionAttributeValues: {
     ":topic": { S: date },
   },
-  // Set the projection expression, which the the attributes that you want.
+  // Set the projection expression, which are the attributes that you want.
   ProjectionExpression: "firstName, phone",
-  TableName: "TABLE_NAME",
+  TableName: "Employees",
 };
 ```
 
 ## Scanning the DynamoDB table<a name="api-gateway-invoking-lambda-scan-table"></a>
 
-First create an async/await function called `sendText` to publish a text message using the Amazon SNS `PublishCommand`\. Then, add a `try` block pattern that scans the DynamoDB table for employees with their work anniversry today, and then calls the `sendText` function to send these employees a text message\. If an error occurs the `catch` block is called\.
+First, create an async/await function called `sendText` to publish a text message using the Amazon SNS `PublishCommand`\. Then, add a `try` block pattern that scans the DynamoDB table for employees with their work anniversary today, and then calls the `sendText` function to send these employees a text message\. If an error occurs the `catch` block is called\.
 
 The following code snippet shows this step\. \(See [Bundling the Lambda function](#api-gateway-invoking-lambda-full) for the full example\.\)
 
 ```
-exports.handler = async (event, context, callback) => {
+// Helper function to send message using Amazon SNS.
+exports.handler = async () => {
   // Helper function to send message using Amazon SNS.
   async function sendText(textParams) {
     try {
-      const data = await snsClient.send(new PublishCommand(textParams));
+      await snsClient.send(new PublishCommand(textParams));
       console.log("Message sent");
     } catch (err) {
       console.log("Error, message not sent ", err);
     }
   }
   try {
-    // Scan the table to check identify employees with work anniversary today.
+    // Scan the table to identify employees with work anniversary today.
     const data = await dynamoClient.send(new ScanCommand(params));
-    data.Items.forEach(function (element, index, array) {
+    data.Items.forEach(function (element) {
       const textParams = {
         PhoneNumber: element.phone.N,
         Message:
-          "Hi " +
-          element.firstName.S +
-          "; congratulations on your work anniversary!",
+            "Hi " +
+            element.firstName.S +
+            "; congratulations on your work anniversary!",
       };
       // Send message using Amazon SNS.
       sendText(textParams);
@@ -110,7 +108,7 @@ This topic describes how to bundle the `mylambdafunction.ts` and the required AW
 
 1. If you haven't already, follow the [Prerequisite tasks](api-gateway-invoking-lambda-prerequisites.md) for this example to install webpack\. 
 **Note**  
-For information about*webpack*, see [Bundling applications with webpack](webpack.md)\.
+For information about *webpack*, see [Bundling applications with webpack](webpack.md)\.
 
 1. Run the the following in the command line to bundle the JavaScript for this example into a file called `<index.js>` :
 

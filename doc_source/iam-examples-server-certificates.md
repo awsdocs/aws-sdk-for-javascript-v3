@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -140,7 +138,7 @@ This example code can be found [here on GitHub](https://github.com/awsdocs/aws-d
 Create a Node\.js module with the file name `iam_updateservercert.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed to update a certificate, which consists of the name of the existing server certificate as well as the name of the new certificate\. Call the `UpdateServerCertificateCommand` method of the `IAM` client service object\.
 
 **Note**  
-Replace *CERTIFICATE\_NAME* with the service certicate name to update, and *NEW\_CERTIFICATE\_NAME* with the new certificate name\.
+Replace *CERTIFICATE\_NAME* with the service certificate name to update, and *NEW\_CERTIFICATE\_NAME* with the new certificate name\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js.

@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -22,13 +20,16 @@ In this example, you use a series of Node\.js modules to put a batch of items in
 ## Prerequisite tasks<a name="dynamodb-example-table-read-write-batch-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node JypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create a DynamoDB table whose items you can access\. For more information about creating a DynamoDB table, see [Creating and using tables in DynamoDB](dynamodb-examples-using-tables.md)\.
 
 **Important**  
 These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
+
+**Note**  
+For information about the data types used in these examples, see [Supported data types and naming rules in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)\.
 
 ## Reading items in Batch<a name="dynamodb-example-table-read-write-batch-reading"></a>
 
@@ -44,7 +45,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddb_batchgetitem.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to get a batch of items, which in this example includes the name of one or more tables from which to read, the values of keys to read in each table, and the projection expression that specifies the attributes to return\. Call the `BatchGetItemCommand` method of the DynamoDB service object\.
 
@@ -52,7 +53,7 @@ Create a Node\.js module with the file name `ddb_batchgetitem.js`\. Be sure to c
 Replace *TABLE\_NAME* with the name of the table, *KEY\_NAME* with the primary key of the table, *KEY\_VALUE* with the value of the primary key row containing the attribute value, and *ATTRIBUTE\_NAME* the name of the attribute column containing the attribute value\.
 
 **Note**  
-This the following code below batch retrieves items from a table with a primary key composed of only a partion key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute for each item\.
+This the following code below batch retrieves items from a table with a primary key composed of only a partition key \- `KEY_NAME` \- and not of both a partition and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute for each item\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -93,7 +94,7 @@ To run the example, enter the following at the command prompt\.
 node ddb_batchgetitem.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_batchgetitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddb_batchgetitem.js)\.
 
 ## Writing items in Batch<a name="dynamodb-example-table-read-write-batch-writing"></a>
 
@@ -109,14 +110,14 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddb_batchwriteitem.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to get a batch of items, which in this example includes the table into which you want to write items, the keys you want to write for each item, and the attributes along with their values\. Call the `BatchWriteItemCommand` method of the DynamoDB service object\.
 
 **Note**  
 Replace *TABLE\_NAME* with the name of the table, *KEYS* with the primary key of the item, *KEY\_VALUE* with the value of the primary key row containing the attribute value, and *ATTRIBUTE\_NAME* the name of the attribute column containing the attribute value\.
 
-The following code example batch writes items to a table with a primary key composed of only a partion key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute for each item\.
+The following code example batch writes items to a table with a primary key composed of only a partition key \- `KEY_NAME` \- and not of both a partition and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute for each item\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -167,4 +168,4 @@ To run the example, enter the following at the command prompt\.
 node ddb_batchwriteitem.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_batchwriteitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddb_batchwriteitem.js)\.

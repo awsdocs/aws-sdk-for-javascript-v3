@@ -1,74 +1,97 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
-# CloudWatch Logs examples using SDK for JavaScript V3<a name="javascript_cloudwatch-logs_code_examples"></a>
+# CloudWatch Logs examples using SDK for JavaScript \(v3\)<a name="javascript_cloudwatch-logs_code_examples"></a>
 
-The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript V3 with CloudWatch Logs\.
+The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript \(v3\) with CloudWatch Logs\.
 
-*Actions* are code excerpts that show you how to call individual CloudWatch Logs functions\.
+*Actions* are code excerpts that show you how to call individual service functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple CloudWatch Logs functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
 **Topics**
-+ [Actions](#w362aac23b9c15c13)
++ [Actions](#actions)
 
-## Actions<a name="w362aac23b9c15c13"></a>
+## Actions<a name="actions"></a>
+
+### Create a log group<a name="cloudwatch-logs_CreateLogGroup_javascript_topic"></a>
+
+The following code example shows how to create a new CloudWatch Logs log group\.
+
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cloudwatch-logs#code-examples)\. 
+  
+
+```
+import { CreateLogGroupCommand } from "@aws-sdk/client-cloudwatch-logs";
+import { client } from "../libs/client.js";
+
+const run = async () => {
+  const command = new CreateLogGroupCommand({
+    // The name of the log group.
+    logGroupName: process.env.CLOUDWATCH_LOGS_LOG_GROUP,
+  });
+
+  try {
+    return await client.send(command);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export default run();
+```
++  For API details, see [CreateLogGroup](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/createloggroupcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Create a subscription filter<a name="cloudwatch-logs_PutSubscriptionFilter_javascript_topic"></a>
 
 The following code example shows how to create an Amazon CloudWatch Logs subscription filter\.
 
-**SDK for JavaScript V3**  
-Create the client in a separate module and export it\.  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cloudwatch-logs#code-examples)\. 
+  
 
 ```
-import { CloudWatchLogsClient } from "@aws-sdk/client-cloudwatch-logs";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon CloudWatch Logs service client object.
-export const cwlClient = new CloudWatchLogsClient({ region: REGION });
-```
-Import the SDK and client modules and call the API\.  
+import { PutSubscriptionFilterCommand } from "@aws-sdk/client-cloudwatch-logs";
+import { client } from "../libs/client.js";
 
-```
-// Import required AWS SDK clients and commands for Node.js
-import {
-  PutSubscriptionFilterCommand,
-} from "@aws-sdk/client-cloudwatch-logs";
-import { cwlClient } from "./libs/cloudWatchLogsClient.js";
+const run = async () => {
+  const command = new PutSubscriptionFilterCommand({
+    // An ARN of a same-account Kinesis stream, Kinesis Firehose
+    // delivery stream, or Lambda function.
+    // https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html
+    destinationArn: process.env.CLOUDWATCH_LOGS_DESTINATION_ARN,
 
-// Set the parameters
-export const params = {
-  destinationArn: "LAMBDA_FUNCTION_ARN", //LAMBDA_FUNCTION_ARN
-  filterName: "FILTER_NAME", //FILTER_NAME
-  filterPattern: "ERROR",
-  logGroupName: "LOG_GROUP", //LOG_GROUP
-};
+    // A name for the filter.
+    filterName: process.env.CLOUDWATCH_LOGS_FILTER_NAME,
 
-export const run = async () => {
+    // A filter pattern for subscribing to a filtered stream of log events.
+    // https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html
+    filterPattern: process.env.CLOUDWATCH_LOGS_FILTER_PATTERN,
+
+    // The name of the log group. Messages in this group matching the filter pattern
+    // will be sent to the destination ARN.
+    logGroupName: process.env.CLOUDWATCH_LOGS_LOG_GROUP,
+  });
+
   try {
-    const data = await cwlClient.send(new PutSubscriptionFilterCommand(params));
-    console.log("Success", data.subscriptionFilters);
-    return data; //For unit tests.
+    return await client.send(command);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-// Uncomment this line to run execution within this file.
-// run();
+
+export default run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cloudwatch-logs#code-examples)\. 
-+  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/cloudwatch-examples-subscriptions.html#cloudwatch-examples-subscriptions-creating)\. 
 +  For API details, see [PutSubscriptionFilter](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/putsubscriptionfiltercommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/cloudwatch-logs#code-examples)\. 
   
 
 ```
@@ -95,61 +118,71 @@ cwl.putSubscriptionFilter(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/cloudwatch-logs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/cloudwatch-examples-subscriptions.html#cloudwatch-examples-subscriptions-creating)\. 
 +  For API details, see [PutSubscriptionFilter](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/logs-2014-03-28/PutSubscriptionFilter) in *AWS SDK for JavaScript API Reference*\. 
+
+### Delete a log group<a name="cloudwatch-logs_DeleteLogGroup_javascript_topic"></a>
+
+The following code example shows how to delete an existing CloudWatch Logs log group\.
+
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cloudwatch-logs#code-examples)\. 
+  
+
+```
+import { DeleteLogGroupCommand } from "@aws-sdk/client-cloudwatch-logs";
+import { client } from "../libs/client.js";
+
+const run = async () => {
+  const command = new DeleteLogGroupCommand({
+    // The name of the log group.
+    logGroupName: process.env.CLOUDWATCH_LOGS_LOG_GROUP,
+  });
+
+  try {
+    return await client.send(command);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export default run();
+```
++  For API details, see [DeleteLogGroup](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/deleteloggroupcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Delete a subscription filter<a name="cloudwatch-logs_DeleteSubscriptionFilter_javascript_topic"></a>
 
 The following code example shows how to delete an Amazon CloudWatch Logs subscription filter\.
 
-**SDK for JavaScript V3**  
-Create the client in a separate module and export it\.  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cloudwatch-logs#code-examples)\. 
+  
 
 ```
-import { CloudWatchLogsClient } from "@aws-sdk/client-cloudwatch-logs";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon CloudWatch Logs service client object.
-export const cwlClient = new CloudWatchLogsClient({ region: REGION });
-```
-Import the SDK and client modules and call the API\.  
+import { DeleteSubscriptionFilterCommand } from "@aws-sdk/client-cloudwatch-logs";
+import { client } from "../libs/client.js";
 
-```
-// Import required AWS SDK clients and commands for Node.js
-import {
-  DeleteSubscriptionFilterCommand
-} from "@aws-sdk/client-cloudwatch-logs";
-import { cwlClient } from "./libs/cloudWatchLogsClient.js";
+const run = async () => {
+  const command = new DeleteSubscriptionFilterCommand({
+    // The name of the filter.
+    filterName: process.env.CLOUDWATCH_LOGS_FILTER_NAME,
+    // The name of the log group.
+    logGroupName: process.env.CLOUDWATCH_LOGS_LOG_GROUP,
+  });
 
-// Set the parameters
-export const params = {
-  filterName: "FILTER", //FILTER
-  logGroupName: "LOG_GROUP", //LOG_GROUP
-};
-
-export const run = async () => {
   try {
-    const data = await cwlClient.send(
-      new DeleteSubscriptionFilterCommand(params)
-    );
-    console.log(
-      "Success, subscription filter deleted",
-      data
-    );
-    return data; //For unit tests.
+    return await client.send(command);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-// Uncomment this line to run execution within this file.
-// run();
+
+export default run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cloudwatch-logs#code-examples)\. 
-+  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/cloudwatch-examples-subscriptions.html#cloudwatch-examples-subscriptions-deleting)\. 
 +  For API details, see [DeleteSubscriptionFilter](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/deletesubscriptionfiltercommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/cloudwatch-logs#code-examples)\. 
   
 
 ```
@@ -174,7 +207,6 @@ cwl.deleteSubscriptionFilter(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/cloudwatch-logs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/cloudwatch-examples-subscriptions.html#cloudwatch-examples-subscriptions-deleting)\. 
 +  For API details, see [DeleteSubscriptionFilter](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/logs-2014-03-28/DeleteSubscriptionFilter) in *AWS SDK for JavaScript API Reference*\. 
 
@@ -182,48 +214,35 @@ cwl.deleteSubscriptionFilter(params, function(err, data) {
 
 The following code example shows how to describe Amazon CloudWatch Logs existing subscription filters\.
 
-**SDK for JavaScript V3**  
-Create the client in a separate module and export it\.  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cloudwatch-logs#code-examples)\. 
+  
 
 ```
-import { CloudWatchLogsClient } from "@aws-sdk/client-cloudwatch-logs";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon CloudWatch Logs service client object.
-export const cwlClient = new CloudWatchLogsClient({ region: REGION });
-```
-Import the SDK and client modules and call the API\.  
-
-```
-// Import required AWS SDK clients and commands for Node.js
 import { DescribeSubscriptionFiltersCommand } from "@aws-sdk/client-cloudwatch-logs";
-import { cwlClient } from "./libs/cloudWatchLogsClient.js";
+import { client } from "../libs/client.js";
 
-// Set the parameters
-export const params = {
-  logGroupName: "GROUP_NAME", //GROUP_NAME
-  limit: 5
-};
+const run = async () => {
+  // This will return a list of all subscription filters in your account
+  // matching the log group name.
+  const command = new DescribeSubscriptionFiltersCommand({
+    logGroupName: process.env.CLOUDWATCH_LOGS_LOG_GROUP,
+    limit: 1,
+  });
 
-export const run = async () => {
   try {
-    const data = await cwlClient.send(
-      new DescribeSubscriptionFiltersCommand(params)
-    );
-    console.log("Success", data.subscriptionFilters);
-    return data; // For unit tests.
+    return await client.send(command);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-// Uncomment this line to run execution within this file.
-// run();
+
+export default run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cloudwatch-logs#code-examples)\. 
-+  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/cloudwatch-examples-subscriptions.html#cloudwatch-examples-subscriptions-describing)\. 
 +  For API details, see [DescribeSubscriptionFilters](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/describesubscriptionfilterscommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/cloudwatch-logs#code-examples)\. 
   
 
 ```
@@ -248,6 +267,32 @@ cwl.describeSubscriptionFilters(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/cloudwatch-logs#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/cloudwatch-examples-subscriptions.html#cloudwatch-examples-subscriptions-describing)\. 
 +  For API details, see [DescribeSubscriptionFilters](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/logs-2014-03-28/DescribeSubscriptionFilters) in *AWS SDK for JavaScript API Reference*\. 
+
+### Describe log groups<a name="cloudwatch-logs_DescribeLogGroups_javascript_topic"></a>
+
+The following code example shows how to describe CloudWatch Logs log groups\.
+
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/cloudwatch-logs#code-examples)\. 
+  
+
+```
+import { DescribeLogGroupsCommand } from "@aws-sdk/client-cloudwatch-logs";
+import { client } from "../libs/client.js";
+
+const run = async () => {
+  // This command will return a list of all log groups in your account.
+  const command = new DescribeLogGroupsCommand({});
+
+  try {
+    return await client.send(command);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export default run();
+```
++  For API details, see [DescribeLogGroups](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-cloudwatch-logs/classes/describeloggroupscommand.html) in *AWS SDK for JavaScript API Reference*\. 

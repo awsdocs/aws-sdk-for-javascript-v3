@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -42,12 +40,12 @@ In this example, use a Node\.js module to send email with Amazon SES\.
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -63,30 +61,45 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *IP\_ADDRESS\_OR\_RANGE* with the IP address or range of addresses to filter, *POLICY* with with `ALLOW` or `BLOCK`, and *NAME* with the filter name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { CreateReceiptFilterCommand } from "@aws-sdk/client-ses";
+import {
+  CreateReceiptFilterCommand,
+  ReceiptFilterPolicy,
+} from "@aws-sdk/client-ses";
 import { sesClient } from "./libs/sesClient.js";
-// Set the parameters
-const params = {
-  Filter: {
-    IpFilter: {
-      Cidr: "IP_ADDRESS_OR_RANGE", // (in code; either a single IP address (10.0.0.1) or an IP address range in CIDR notation (10.0.0.1/24)),
-      Policy: "POLICY", // 'ALLOW' or 'BLOCK' email traffic from the filtered addressesOptions.
+import { getUniqueName } from "../../libs/utils/util-string.js";
+
+const createCreateReceiptFilterCommand = ({ policy, ipOrRange, name }) => {
+  return new CreateReceiptFilterCommand({
+    Filter: {
+      IpFilter: {
+        Cidr: ipOrRange, // string, either a single IP address (10.0.0.1) or an IP address range in CIDR notation (10.0.0.1/24)).
+        Policy: policy, // enum ReceiptFilterPolicy, email traffic from the filtered addressesOptions.
+      },
+      /*
+        The name of the IP address filter. Only ASCII letters, numbers, underscores, or dashes.
+        Must be less than 64 characters and start and end with a letter or number.
+       */
+      Name: name,
     },
-    Name: "NAME" // NAME (the filter name)
-  },
+  });
 };
 
+const FILTER_NAME = getUniqueName("ReceiptFilter");
+
 const run = async () => {
+  const createReceiptFilterCommand = createCreateReceiptFilterCommand({
+    policy: ReceiptFilterPolicy.Allow,
+    ipOrRange: "10.0.0.1",
+    name: FILTER_NAME,
+  });
+
   try {
-    const data = await sesClient.send(new CreateReceiptFilterCommand(params));
-    console.log("Success", data);
-    return data; // For unit tests.
+    return await sesClient.send(createReceiptFilterCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to create filter.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. The filter is created in Amazon SES\.
@@ -104,12 +117,12 @@ In this example, use a Node\.js module to send email with Amazon SES\.
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -119,20 +132,21 @@ Create a Node\.js module with the file name `ses_listreceiptfilters.js`\. Config
 Create an empty parameters object\. To call the `ListReceiptFiltersCommand` method, invoking an Amazon SES service object, passing the parameters\. 
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { ListReceiptFiltersCommand }  from "@aws-sdk/client-ses";
+import { ListReceiptFiltersCommand } from "@aws-sdk/client-ses";
 import { sesClient } from "./libs/sesClient.js";
 
+const createListReceiptFiltersCommand = () => new ListReceiptFiltersCommand({});
+
 const run = async () => {
+  const listReceiptFiltersCommand = createListReceiptFiltersCommand();
+
   try {
-    const data = await sesClient.send(new ListReceiptFiltersCommand({}));
-    console.log("Success.", data);
-    return data; // For unit tests.
+    return await sesClient.send(listReceiptFiltersCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to list receipt filters.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. Amazon SES returns the filter list\.
@@ -150,12 +164,12 @@ In this example, use a Node\.js module to send email with Amazon SES\.
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -171,24 +185,27 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *FILTER\_NAME* with the name of the IP filter to delete\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import {
-  DeleteReceiptFilterCommand
-}  from "@aws-sdk/client-ses";
+import { DeleteReceiptFilterCommand } from "@aws-sdk/client-ses";
 import { sesClient } from "./libs/sesClient.js";
-// Set the parameters
-const params = { FilterName: "FILTER_NAME" }; //FILTER_NAME
+import { getUniqueName } from "../../libs/utils/util-string.js";
+
+const RECEIPT_FILTER_NAME = getUniqueName("ReceiptFilterName");
+
+const createDeleteReceiptFilterCommand = (filterName) => {
+  return new DeleteReceiptFilterCommand({ FilterName: filterName });
+};
 
 const run = async () => {
+  const deleteReceiptFilterCommand =
+    createDeleteReceiptFilterCommand(RECEIPT_FILTER_NAME);
+
   try {
-    const data = await sesClient.send(new DeleteReceiptFilterCommand(params));
-    console.log("Success", data);
-    return data; // For unit tests.
+    return await sesClient.send(deleteReceiptFilterCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Error deleting receipt filter.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. The filter is deleted from Amazon SES\.

@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -18,7 +16,7 @@ For more information about Amazon Transcribe users, see the [Amazon Transcribe d
 ## Prerequisite tasks<a name="transcribe-example-transcription-jobs"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/transcribe/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/transcribe/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 **Important**  
@@ -36,12 +34,12 @@ Create a `libs` directory, and create a Node\.js module with the file name `tran
 const { TranscribeClient } = require("@aws-sdk/client-transcribe");
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
-// Create anAmazon EC2 service client object.
+// Create an Amazon Transcribe service client object.
 const transcribeClient = new TranscribeClient({ region: REGION });
 export { transcribeClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/transcribe/src/libs/transcribeClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/transcribe/src/libs/transcribeClient.js)\.
 
 Create a Node\.js module with the file name `transcribe-create-job.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create a parameters object, specifying the required parameters\. Start the job using the `StartMedicalTranscriptionJobCommand` command\.
 
@@ -62,6 +60,7 @@ export const params = {
     MediaFileUri: "SOURCE_LOCATION",
     // For example, "https://transcribe-demo.s3-REGION.amazonaws.com/hello_world.wav"
   },
+  OutputBucketName: "OUTPUT_BUCKET_NAME"
 };
 
 export const run = async () => {
@@ -84,7 +83,7 @@ To run the example, enter the following at the command prompt\.
 node transcribe-create-job.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/transcribe/src/transcribe_create_job.js)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/transcribe/src/transcribe_create_job.js)\.
 
 ## List Amazon Transcribe jobs<a name="transcribe-list-jobs"></a>
 
@@ -96,12 +95,12 @@ Create a `libs` directory, and create a Node\.js module with the file name `tran
 const { TranscribeClient } = require("@aws-sdk/client-transcribe");
 // Set the AWS Region.
 const REGION = "REGION"; //e.g. "us-east-1"
-// Create anAmazon EC2 service client object.
+// Create an Amazon Transcribe service client object.
 const transcribeClient = new TranscribeClient({ region: REGION });
 export { transcribeClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/transcribe/src/libs/transcribeClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/transcribe/src/libs/transcribeClient.js)\.
 
 Create a Node\.js module with the file name `transcribe-list-jobs.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create a parameters object with the required parameters\.
 
@@ -140,7 +139,7 @@ To run the example, enter the following at the command prompt\.
 node transcribe-list-jobs.js
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/transcribe/src/transcribe_list_jobs.js)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/transcribe/src/transcribe_list_jobs.js)\.
 
 ## Deleting a Amazon Transcribe job<a name="transcribe-delete-job"></a>
 
@@ -157,7 +156,7 @@ const transcribeClient = new TranscribeClient({ region: REGION });
 export { transcribeClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/transcribe/src/libs/transcribeClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/transcribe/src/libs/transcribeClient.js)\.
 
 Create a Node\.js module with the file name `transcribe-delete-job.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Specify the AWS Region, and the name of the job you want to delete\.
 
@@ -194,4 +193,4 @@ To run the example, enter the following at the command prompt\.
 node transcribe-delete-job.js  
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/transcribe/src/transcribe_delete_job.js)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/transcribe/src/transcribe_delete_job.js)\.

@@ -1,31 +1,30 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
-# EventBridge examples using SDK for JavaScript V3<a name="javascript_eventbridge_code_examples"></a>
+# EventBridge examples using SDK for JavaScript \(v3\)<a name="javascript_eventbridge_code_examples"></a>
 
-The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript V3 with EventBridge\.
+The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript \(v3\) with EventBridge\.
 
-*Actions* are code excerpts that show you how to call individual EventBridge functions\.
+*Actions* are code excerpts that show you how to call individual service functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple EventBridge functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
 **Topics**
-+ [Actions](#w362aac23b9c19c13)
++ [Actions](#actions)
 
-## Actions<a name="w362aac23b9c19c13"></a>
+## Actions<a name="actions"></a>
 
-### Add a Lambda function target<a name="eventbridge_PutTargets_javascript_topic"></a>
+### Add a target<a name="eventbridge_PutTargets_javascript_topic"></a>
 
-The following code example shows how to add an AWS Lambda function target to an Amazon EventBridge event\.
+The following code example shows how to add a target to an Amazon EventBridge event\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/eventbridge#code-examples)\. 
 Create the client in a separate module and export it\.  
 
 ```
@@ -65,10 +64,10 @@ export const run = async () => {
 // Uncomment this line to run execution within this file.
 // run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/eventbridge#code-examples)\. 
 +  For API details, see [PutTargets](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-eventbridge/classes/puttargetscommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/eventbridge#code-examples)\. 
   
 
 ```
@@ -98,14 +97,14 @@ ebevents.putTargets(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/eventbridge#code-examples)\. 
 +  For API details, see [PutTargets](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/eventbridge-2015-10-07/PutTargets) in *AWS SDK for JavaScript API Reference*\. 
 
-### Create a scheduled rule<a name="eventbridge_PutRule_javascript_topic"></a>
+### Create a rule<a name="eventbridge_PutRule_javascript_topic"></a>
 
-The following code example shows how to create an Amazon EventBridge scheduled rule\.
+The following code example shows how to create an Amazon EventBridge rule\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/eventbridge#code-examples)\. 
 Create the client in a separate module and export it\.  
 
 ```
@@ -142,10 +141,10 @@ export const run = async () => {
 // Uncomment this line to run execution within this file.
 // run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/eventbridge#code-examples)\. 
 +  For API details, see [PutRule](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-eventbridge/classes/putrulecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/eventbridge#code-examples)\. 
   
 
 ```
@@ -172,14 +171,14 @@ ebevents.putRule(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/eventbridge#code-examples)\. 
 +  For API details, see [PutRule](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/eventbridge-2015-10-07/PutRule) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Send events<a name="eventbridge_PutEvents_javascript_topic"></a>
 
 The following code example shows how to send Amazon EventBridge events\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/eventbridge#code-examples)\. 
 Create the client in a separate module and export it\.  
 
 ```
@@ -222,10 +221,10 @@ export const run = async () => {
 // Uncomment this line to run execution within this file.
 // run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/eventbridge#code-examples)\. 
 +  For API details, see [PutEvents](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-eventbridge/classes/puteventscommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/eventbridge#code-examples)\. 
   
 
 ```
@@ -258,5 +257,4 @@ ebevents.putEvents(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/eventbridge#code-examples)\. 
 +  For API details, see [PutEvents](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/eventbridge-2015-10-07/PutEvents) in *AWS SDK for JavaScript API Reference*\. 

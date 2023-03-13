@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -36,7 +34,7 @@ To set up and run this example, first complete these tasks:
 
 **Important**  
 This example uses ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
 
 ## Configuring the SDK<a name="emc-examples-jobs-configure-sdk"></a>
 
@@ -54,10 +52,10 @@ Create a `libs` directory, and create a Node\.js module with the file name `emcC
 
 ```
 import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
-// Set the AWS Region.
-const REGION = "REGION";
 // Set the account end point.
-const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
+const ENDPOINT = {
+  endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com",
+};
 // Set the MediaConvert Service Object
 const emcClient = new MediaConvertClient(ENDPOINT);
 export { emcClient };
@@ -235,10 +233,10 @@ Create a `libs` directory, and create a Node\.js module with the file name `emcC
 
 ```
 import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
-// Set the AWS Region.
-const REGION = "REGION";
 // Set the account end point.
-const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
+const ENDPOINT = {
+  endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com",
+};
 // Set the MediaConvert Service Object
 const emcClient = new MediaConvertClient(ENDPOINT);
 export { emcClient };
@@ -285,10 +283,10 @@ Create a `libs` directory, and create a Node\.js module with the file name `emcC
 
 ```
 import { MediaConvertClient } from "@aws-sdk/client-mediaconvert";
-// Set the AWS Region.
-const REGION = "REGION";
 // Set the account end point.
-const ENDPOINT = { endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com" };
+const ENDPOINT = {
+  endpoint: "https://ENDPOINT_UNIQUE_STRING.mediaconvert.REGION.amazonaws.com",
+};
 // Set the MediaConvert Service Object
 const emcClient = new MediaConvertClient(ENDPOINT);
 export { emcClient };

@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -37,7 +35,7 @@ To create an AWS account, see [How do I create and activate a new Amazon Web Ser
 
 ### Create AWS credentials and a profile<a name="getting-started-react-setup-creds"></a>
 
-To perform these tutorials, you need to create an AWS Identity and Access Management \(IAM\) user and obtain credentials for that user\. After you have those credentials, you make them available to the SDK in your development environment\. Here's how\.
+To perform these tutorials, you need to create an user and obtain credentials for that user\. After you have those credentials, you make them available to the SDK in your development environment\. Here's how\.
 
 **To create and use credentials**
 
@@ -47,13 +45,13 @@ To perform these tutorials, you need to create an AWS Identity and Access Manage
 
 1. Provide a user name\. For this tutorial, we'll use *React\-Native\-Tutorial\-User*\.
 
-1. Under **Select AWS access type**, select **Programmatic access**, and then choose **Next: Permissions**\.
+1. Choose **Next** to go to **Set permissions**\.
 
 1. Choose **Attach existing policies directly**\.
 
-1. In **Search**, enter **s3**, and then select **AmazonS3FullAccess**\.
+1. In the **Permissions policies** search box, enter **s3**, and then select **AmazonS3FullAccess**\.
 
-1. Choose **Next: Tags**, **Next: Review**, and **Create user**\.
+1. Choose **Next** and **Create user**\.
 
 1. Record the credentials for *React\-Native\-Tutorial\-User*\. You can do so by downloading the `.csv` file or by copying and pasting the *Access key ID* and *Secret access key*\.
 **Warning**  
@@ -154,7 +152,7 @@ This command installs the Amazon S3 package in your project, and updates `packag
 
 These packages and their associated code are installed in the `node_modules` subdirectory of your project\.
 
-For more information about installing Node\.js packages, see [Downloading and installing packages locally](https://docs.npmjs.com/downloading-and-installing-packages-locally) and [Creating Node\.js modules](Downloading and installing packages locally) on the [npm \(Node\.js package manager\) website](https://www.npmjs.com/)\. For information about downloading and installing the AWS SDK for JavaScript, see [Installing the SDK for JavaScript](installing-jssdk.md)\.
+For more information about installing Node\.js packages, see [Downloading and installing packages locally](https://docs.npmjs.com/downloading-and-installing-packages-locally) and [Creating Node\.js modules](https://docs.npmjs.com/creating-node-js-modules) on the [npm \(Node\.js package manager\) website](https://www.npmjs.com/)\. For information about downloading and installing the AWS SDK for JavaScript, see [Installing the SDK for JavaScript](installing-jssdk.md)\.
 
 Install other dependencies required for authentication\.
 
@@ -235,12 +233,12 @@ import React, { useState } from "javascriptv3/example_code/reactnative/App";
 	          placeholder={"Enter Bucket Name"}
 	        />
 	        <Button
-	          backroundColor="#68a0cf"
+	          backgroundColor="#68a0cf"
 	          title="Create Bucket"
 	          onPress={createBucket}
 	        />
 	        <Button
-	          backroundColor="#68a0cf"
+	          backgroundColor="#68a0cf"
 	          title="Delete Bucket"
 	          onPress={deleteBucket}
 	        />
@@ -267,7 +265,7 @@ Inside the function App:
 + The methods `createBucket` and `deleteBucket` create and delete the specified bucket, respectively\.
 + The React Native View displays a text input field for the user to specify an Amazon S3 bucket name, and buttons to create and delete the specified Amazon S3 bucket\.
 
-The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/reactnative/App.js)\.
+The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/reactnative/App.js)\.
 
 ## Step 6: Run the Example<a name="getting-started-react-native-run-sample"></a>
 
@@ -316,7 +314,7 @@ Compatible side by side NDK version was not found.
 Installing APK 'app-debug.apk' on 'Pixel_3a_API_30_x86(AVD) - 11' for app:debug
 02:18:38 D/app-debug.apk: Uploading app-debug.apk onto device 'emulator-5554'
 02:18:38 D/Device: Uploading file onto device 'emulator-5554'
-02:18:38 D/ddms: Reading file permision of /Users/trivikr/workspace/ReactNativeApp/android/app/build/outputs/apk/debug/app-debug.apk as: rw-r--r--
+02:18:38 D/ddms: Reading file permission of /Users/trivikr/workspace/ReactNativeApp/android/app/build/outputs/apk/debug/app-debug.apk as: rw-r--r--
 02:18:40 V/ddms: execute: running pm install -r -t "/data/local/tmp/app-debug.apk"
 02:18:41 V/ddms: execute 'pm install -r -t "/data/local/tmp/app-debug.apk"' on 'emulator-5554' : EOF hit. Read: -1
 02:18:41 V/ddms: execute: returning

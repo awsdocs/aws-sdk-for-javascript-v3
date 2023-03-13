@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -26,13 +24,16 @@ In this example, you use a series of Node\.js modules to read and write one item
 ## Prerequisite tasks<a name="dynamodb-example-table-read-write-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node\.js examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
++ Set up the project environment to run these Node\.js examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create a DynamoDB table whose items you can access\. For more information about creating a DynamoDB table, see [Creating and using tables in DynamoDB](dynamodb-examples-using-tables.md)\.
 
 **Important**  
 These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
+
+**Note**  
+For information about the data types used in these examples, see [Supported data types and naming rules in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)\.
 
 ## Writing an item<a name="dynamodb-example-table-read-write-writing-an-item"></a>
 
@@ -48,7 +49,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddb_putitem.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to add an item, which in this example includes the name of the table and a map that defines the attributes to set and the values for each attribute\. Call the `PutItemCommand` method of the DynamoDB client service object\.
 
@@ -56,7 +57,7 @@ Create a Node\.js module with the file name `ddb_putitem.js`\. Be sure to config
 Replace *TABLE\_NAME* with the name of the table\.
 
 **Note**  
-The following code example writes to a table with a primary key composed of only a partion key \- `CUSTOMER_ID` \- and a sort key \- `CUSTOMER_NAME`\. If the table's primary key is composed of only a partition key, you only specify the partition key\. 
+The following code example writes to a table with a primary key composed of only a partition key \- `CUSTOMER_ID` \- and a sort key \- `CUSTOMER_NAME`\. If the table's primary key is composed of only a partition key, you only specify the partition key\. 
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -90,7 +91,7 @@ To run the example, enter the following at the command prompt\.
 node ddb_putitem.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_putitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddb_putitem.js)\.
 
 ## Update an item<a name="dynamodb-example-table-update-an-item"></a>
 
@@ -106,15 +107,15 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
-Create a Node\.js module with the file name `ddb_updateitem.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to add an item, which in this example includes the name of the table, the key to update, andu date expression that maps the new attribute names, and values for each new attribute\. Call the `UpdateItemCommand` method of the DynamoDB client service object\.
+Create a Node\.js module with the file name `ddb_updateitem.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to add an item, which in this example includes the name of the table, the key to update, and the date expression that maps the new attribute names, and values for each new attribute\. Call the `UpdateItemCommand` method of the DynamoDB client service object\.
 
 **Note**  
 Replace *TABLE\_NAME* with the name of the table\.
 
 **Note**  
-The following code example writes to a table with a primary key composed of only a partion key\. If the table's primary key is composed of only a partition key, you only specify the partition key\. 
+The following code example writes to a table with a primary key composed of only a partition key\. If the table's primary key is composed of only a partition key, you only specify the partition key\. 
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -141,8 +142,8 @@ export const params = {
     // Define expressions for the new or updated attributes
     UpdateExpression: "set NEW_ATTRIBUTE_NAME_1 = :t, NEW_ATTRIBUTE_NAME_2 = :s", // For example, "'set Title = :t, Subtitle = :s'"
     ExpressionAttributeValues: {
-        ":t": "NEW_ATTRIBUTE_VALUE_1", // For example ':t' : 'NEW_TITLE'
-        ":s": "NEW_ATTRIBUTE_VALUE_2", // For example ':s' : 'NEW_SUBTITLE'
+        ":t": "NEW_ATTRIBUTE_VALUE_1", // For example ':t' : { S: 'NEW_TITLE' }
+        ":s": "NEW_ATTRIBUTE_VALUE_2", // For example ':s' : { S: 'NEW_SUBTITLE' }
     },
     ReturnValues: "ALL_NEW"
 };
@@ -164,7 +165,7 @@ To run the example, enter the following at the command prompt\.
 node ddb_putitem.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_putitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddb_putitem.js)\.
 
 ## Getting an item<a name="dynamodb-example-table-read-write-getting-an-item"></a>
 
@@ -180,7 +181,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddb_getitem.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. To identify the item to get, you must provide the value of the primary key for that item in the table\. By default, the `GetItemCommand` method returns all the attribute values defined for the item\. To get only a subset of all possible attribute values, specify a projection expression\.
 
@@ -189,7 +190,7 @@ Create a JSON object containing the parameters needed to get an item, which in t
 **Note**  
 Replace *TABLE\_NAME* with the name of the table, *KEY\_NAME* with the primary key of the table, *KEY\_NAME\_VALUE* with the value of the primary key row containing the attribute value, and *ATTRIBUTE\_NAME* the name of the attribute column containing the attribute value\.
 
-The following code example retrieves an item from a table with a primary key composed of only a partion key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute\.
+The following code example retrieves an item from a table with a primary key composed of only a partition key \- `KEY_NAME` \- and not of both a partition and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -207,8 +208,9 @@ export const params = {
 
 export const run = async () => {
   const data = await ddbClient.send(new GetItemCommand(params));
-  return data;
   console.log("Success", data.Item);
+  return data;
+  
 };
 run();
 ```
@@ -219,7 +221,7 @@ To run the example, enter the following at the command prompt\.
 node ddb_getitem.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_getitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddb_getitem.js)\.
 
 ## Deleting an item<a name="dynamodb-example-table-read-write-deleting-an-item"></a>
 
@@ -235,7 +237,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddb_deleteitem.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to delete an item, which in this example includes the name of the table and both the key name and value for the item you're deleting\. Call the `DeleteItemCommand` method of the DynamoDB client service object\.
 
@@ -243,7 +245,7 @@ Create a Node\.js module with the file name `ddb_deleteitem.js`\. Be sure to con
 Replace *TABLE\_NAME* with the name of the table\.
 
 **Note**  
-The following code example below deletes a item with a primary key composed of only a partion key \- `KEY_NAME` \- and not of both a partion and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute\.
+The following code example below deletes a item with a primary key composed of only a partition key \- `KEY_NAME` \- and not of both a partition and sort key\. If the table has a primary key composed of a partition key and a sort key, you must also specify the sort key name and attribute\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -281,4 +283,4 @@ To run the example, enter the following at the command prompt\.
 node ddb_deleteitem.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_deleteitem.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddb_deleteitem.js)\.

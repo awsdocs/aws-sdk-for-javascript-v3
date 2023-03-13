@@ -1,37 +1,36 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
-# Amazon Pinpoint examples using SDK for JavaScript V3<a name="javascript_pinpoint_code_examples"></a>
+# Amazon Pinpoint examples using SDK for JavaScript \(v3\)<a name="javascript_pinpoint_code_examples"></a>
 
-The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript V3 with Amazon Pinpoint\.
+The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript \(v3\) with Amazon Pinpoint\.
 
-*Actions* are code excerpts that show you how to call individual Amazon Pinpoint functions\.
+*Actions* are code excerpts that show you how to call individual service functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple Amazon Pinpoint functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
 **Topics**
-+ [Actions](#w362aac23b9c23c13)
++ [Actions](#actions)
 
-## Actions<a name="w362aac23b9c23c13"></a>
+## Actions<a name="actions"></a>
 
 ### Send email and text messages<a name="pinpoint_SendMessages_javascript_topic"></a>
 
 The following code example shows how to send email and text messages with Amazon Pinpoint\.
 
-**SDK for JavaScript V3**  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/pinpoint#code-examples)\. 
 Create the client in a separate module and export it\.  
 
 ```
 import { PinpointClient } from "@aws-sdk/client-pinpoint";
 // Set the AWS Region.
-const REGION = "REGION";
+const REGION = "us-east-1";
 //Set the MediaConvert Service Object
 const pinClient = new PinpointClient({region: REGION});
 export  { pinClient };
@@ -43,24 +42,10 @@ Send an email message\.
 import { SendMessagesCommand } from "@aws-sdk/client-pinpoint";
 import { pinClient } from "./libs/pinClient.js";
 
-("use strict");
-
-/* The address on the "To" line. If your Amazon Pinpoint account is in
-the sandbox, this address also has to be verified.
-Note: All recipient addresses in this example are in arrays, which makes it
-easier to specify multiple recipients. Alternatively, you can make these
-variables strings, and then modify the To/Cc/BccAddresses attributes in the
-params variable so that it passes an array for each recipient type.*/
-const senderAddress = "SENDER_ADDRESS";
-const toAddress = "RECIPIENT_ADDRESS";
-const projectId = "PINPOINT_PROJECT_ID"; //e.g., XXXXXXXX66e4e9986478cXXXXXXXXX
-
-// CC and BCC addresses. If your account is in the sandbox, these addresses have to be verified.
-var ccAddresses = ["cc_recipient1@example.com", "cc_recipient2@example.com"];
-var bccAddresses = ["bcc_recipient@example.com"];
-
-// The configuration set that you want to use to send the email.
-var configuration_set = "ConfigSet";
+// The FromAddress must be verified in SES.
+const fromAddress = "FROM_ADDRESS";
+const toAddress = "TO_ADDRESS";
+const projectId = "PINPOINT_PROJECT_ID";
 
 // The subject line of the email.
 var subject = "Amazon Pinpoint Test (AWS SDK for JavaScript in Node.js)";
@@ -69,7 +54,7 @@ var subject = "Amazon Pinpoint Test (AWS SDK for JavaScript in Node.js)";
 var body_text = `Amazon Pinpoint Test (SDK for JavaScript in Node.js)
 ----------------------------------------------------
 This email was sent with Amazon Pinpoint using the AWS SDK for JavaScript in Node.js.
-For more information, see https:\/\/aws.amazon.com/sdk-for-node-js/`;
+For more information, see https://aws.amazon.com/sdk-for-node-js/`;
 
 // The body of the email for recipients whose email clients support HTML content.
 var body_html = `<html>
@@ -77,15 +62,11 @@ var body_html = `<html>
 <body>
   <h1>Amazon Pinpoint Test (SDK for JavaScript in Node.js)</h1>
   <p>This email was sent with
-    <a href='https://aws.amazon.com//pinpoint/'>the Amazon Pinpoint Email API</a> using the
-    <a href='https://aws.amazon.com//sdk-for-node-js/'>
+    <a href='https://aws.amazon.com/pinpoint/'>the Amazon Pinpoint Email API</a> using the
+    <a href='https://aws.amazon.com/sdk-for-node-js/'>
       AWS SDK for JavaScript in Node.js</a>.</p>
 </body>
 </html>`;
-
-// The message tags that you want to apply to the email.
-var tag0 = { Name: "key0", Value: "value0" };
-var tag1 = { Name: "key1", Value: "value1" };
 
 // The character encoding for the subject line and message body of the email.
 var charset = "UTF-8";
@@ -94,19 +75,13 @@ const params = {
   ApplicationId: projectId,
   MessageRequest: {
     Addresses: {
-      Destination: {
-        ToAddresses: toAddress,
-        //  CcAddresses: CC_ADDRESSES,
-        //  BccAddresses: BCC_ADDRESSES
-      },
-
       [toAddress]: {
         ChannelType: "EMAIL",
       },
     },
     MessageConfiguration: {
       EmailMessage: {
-        FromAddress: senderAddress,
+        FromAddress: fromAddress,
         SimpleEmail: {
           Subject: {
             Charset: charset,
@@ -129,15 +104,23 @@ const params = {
 const run = async () => {
   try {
     const data = await pinClient.send(new SendMessagesCommand(params));
-    return data; // For unit tests.
-    console.log(
-      "Email sent! Message ID: ",
-      data["MessageResponse"]["Result"][toAddress]["MessageId"]
-    );
+
+    const {
+      MessageResponse: { Result },
+    } = data;
+
+    const recipientResult = Result[toAddress];
+
+    if (recipientResult.StatusCode !== 200) {
+      throw new Error(recipientResult.StatusMessage);
+    } else {
+      console.log(recipientResult.MessageId);
+    }
   } catch (err) {
-    console.log("Error", err);
+    console.log(err.message);
   }
 };
+
 run();
 ```
 Send an SMS message\.  
@@ -217,10 +200,10 @@ const run = async () => {
 };
 run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/pinpoint#code-examples)\. 
 +  For API details, see [SendMessages](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-pinpoint/classes/sendmessagescommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-**SDK for JavaScript V2**  
+**SDK for JavaScript \(v2\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/pinpoint#code-examples)\. 
 Send an email message\.  
 
 ```
@@ -410,5 +393,4 @@ pinpoint.sendMessages(params, function(err, data) {
   }
 });
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascript/example_code/pinpoint#code-examples)\. 
 +  For API details, see [SendMessages](https://docs.aws.amazon.com/goto/AWSJavaScriptSDK/pinpoint-2016-12-01/SendMessages) in *AWS SDK for JavaScript API Reference*\. 

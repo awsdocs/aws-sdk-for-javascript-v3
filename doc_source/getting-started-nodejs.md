@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -23,7 +21,7 @@ The example shows how to set up and run a simple Node\.js module that creates an
 
 To set up and run this example, you must first complete these tasks:
 + [Install npm](https://npmjs.com/get-npm)\.
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/nodegetstarted/README.md)\.
 + You need to provide credentials to AWS so that only your account and its resources are accessed by the SDK\. For more information about obtaining your account credentials, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 ## Step 1: Install the Amazon S3 package and dependencies<a name="getting-started-nodejs-install-sdk"></a>
@@ -46,7 +44,7 @@ For details about using `package.json` in a Node\.js project, see [What is the f
    }
    ```
 
-   The example code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/package.json)\.
+   The example code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/nodegetstarted/package.json)\.
 
 1. From the `nodegetstarted` directory containing the `package.json` enter the following command\.
 
@@ -81,7 +79,7 @@ const s3Client = new S3Client({ region: REGION });
 export { s3Client };
 ```
 
-The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/src/libs/s3Client.js)\.
+The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/nodegetstarted/src/libs/s3Client.js)\.
 
 Next, in the root of your project, create a file named `sample.js`\.
 
@@ -100,7 +98,7 @@ import { s3Client } from "./libs/s3Client.js";
 
 // Set the parameters
 const params = {
-  Bucket: "BUCKET_NAME", // The name of the bucket. For example, 'sample_bucket_101'.
+  Bucket: "BUCKET_NAME", // The name of the bucket. For example, 'sample-bucket-101'.
   Key: "KEY", // The name of the object. For example, 'sample_upload.txt'.
   Body: "BODY", // The content of the object. For example, 'Hello world!".
 };
@@ -136,7 +134,7 @@ const run = async () => {
 run();
 ```
 
-The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/nodegetstarted/src/sample.js)\.
+The example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/nodegetstarted/src/sample.js)\.
 
 ## Step 3: Run the example<a name="getting-started-nodejs-run-sample"></a>
 

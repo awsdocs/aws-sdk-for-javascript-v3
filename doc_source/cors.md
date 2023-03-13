@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -35,9 +33,9 @@ You can configure an Amazon S3 bucket to use CORS in the Amazon S3 console\.
 If you are configuring CORS in the AWS Web Services Management Console, you must use JSON to create a CORS configuration\. The new AWS Web Services Management Console only supports JSON CORS configurations\. 
 
 **Important**  
-In the new AWS Web Services Management Conole, the CORS configuration must be JSON\.
+In the new AWS Web Services Management Console, the CORS configuration must be JSON\.
 
-1. In the AWS Web Services Management Conole, open the Amazon S3 console, find the bucket you want to configure and select its check box\.
+1. In the AWS Web Services Management Console, open the Amazon S3 console, find the bucket you want to configure and select its check box\.
 
 1. In the pane that opens, choose **Permissions**\.
 

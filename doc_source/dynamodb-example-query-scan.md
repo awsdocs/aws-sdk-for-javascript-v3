@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -24,13 +22,14 @@ In this example, you use a series of Node\.js modules to identify one or more it
 ## Prerequisite tasks<a name="dynamodb-example-table-query-scan-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node\.js examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
++ Set up the project environment to run these Node\.js examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create a DynamoDB table whose items you can access\. For more information about creating a DynamoDB table, see [Creating and using tables in DynamoDB](dynamodb-examples-using-tables.md)\.
 
 **Important**  
 These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.  
+For information about the data types used in these examples, see [Supported data types and naming rules in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)\.
 
 ## Querying a table<a name="dynamodb-example-table-query-scan-querying"></a>
 
@@ -48,15 +47,15 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
-Create a Node\.js module with the file name `ddb_query.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client servicec object\. Create a JSON object containing the parameters needed to query the table, which in this example includes the table name, the `ExpressionAttributeValues` needed by the query, a `KeyConditionExpression` that uses those values to define which items the query returns, and the names of attribute values to return for each item\. Call the `QueryCommand` method of the DynamoDB service object\.
+Create a Node\.js module with the file name `ddb_query.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to query the table, which in this example includes the table name, the `ExpressionAttributeValues` needed by the query, a `KeyConditionExpression` that uses those values to define which items the query returns, and the names of attribute values to return for each item\. Call the `QueryCommand` method of the DynamoDB service object\.
 
 The primary key for the table is composed of the following attributes:
 + `Season`
 + `Episode`
 
-You can run the code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/QueryExample/ddb_createtable_tv.js) to create the table that this query targets, and the code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/QueryExample/ddb_batchwriteitem_tv.js) to populate the table\.
+You can run the code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/QueryExample/ddb_createtable_tv.js) to create the table that this query targets, and the code [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/QueryExample/ddb_batchwriteitem_tv.js) to populate the table\.
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -79,10 +78,10 @@ export const params = {
 export const run = async () => {
   try {
     const data = await ddbClient.send(new QueryCommand(params));
-    return data;
-    data.Items.forEach(function (element, index, array) {
+    data.Items.forEach(function (element) {
       console.log(element.Title.S + " (" + element.Subtitle.S + ")");
     });
+    return data;
   } catch (err) {
     console.error(err);
   }
@@ -96,7 +95,7 @@ To run the example, enter the following at the command prompt\.
 node ddb_query.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_query.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddb_query.js)\.
 
 ## Scanning a table<a name="dynamodb-example-table-query-scan-scanning"></a>
 
@@ -112,7 +111,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddb_scan.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. To access DynamoDB, create a `DynamoDB` client service object\. Create a JSON object containing the parameters needed to scan the table for items, which in this example includes the name of the table, the list of attribute values to return for each matching item, and an expression to filter the result set to find items containing a specified phrase\. Call the `ScanQuery` method of the DynamoDB service object\.
 
@@ -136,18 +135,17 @@ export const params = {
   TableName: "EPISODES_TABLE",
 };
 
-
 export const run = async () => {
   try {
     const data = await ddbClient.send(new ScanCommand(params));
-    return data;
-    data.Items.forEach(function (element, index, array) {
+    data.Items.forEach(function (element) {
       console.log(element.Title.S + " (" + element.Subtitle.S + ")");
     });
+    return data;
   } catch (err) {
     console.log("Error", err);
   }
-}
+};
 run();
 ```
 
@@ -157,4 +155,4 @@ To run the example, enter the following at the command prompt\.
 node ddb_scan.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddb_scan.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddb_scan.js)\.

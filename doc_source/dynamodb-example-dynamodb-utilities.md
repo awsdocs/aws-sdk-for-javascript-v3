@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -31,13 +29,16 @@ For more information on configuring the DynamoDB document client, see [@aws\-sdk
 ## Prerequisite Tasks<a name="dynamodb-example-document-client-prerequisites"></a>
 
 To set up and run this example, first complete these tasks:
-+ Set up the project environment to run these Node\.js examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/dynamodb/README.md)\.
++ Set up the project environment to run these Node\.js examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 + Create a DynamoDB table whose items you can access\. For more information about creating a DynamoDB table using the SDK for JavaScript, see [Creating and using tables in DynamoDB](dynamodb-examples-using-tables.md)\. You can also use the [DynamoDB console](https://console.aws.amazon.com/dynamodb/) to create a table\.
 
 **Important**  
 These examples use ECMAScript6 \(ES6\)\. This requires Node\.js version 13\.x or higher\. To download and install the latest version of Node\.js, see [Node\.js downloads\.](https://nodejs.org/en/download)\.  
-However, if you prefer to use CommonJS sytax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)
+However, if you prefer to use CommonJS syntax, please refer to [JavaScript ES6/CommonJS syntax](sdk-example-javascript-syntax.md)\.
+
+**Note**  
+For information about the data types used in these examples, see [Supported data types and naming rules in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)\.
 
 ## Getting an Item from a Table<a name="dynamodb-example-document-client-get"></a>
 
@@ -70,7 +71,7 @@ const ddbDocClient = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 export { ddbDocClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
 
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
@@ -84,7 +85,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddbdoc_get_item.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/lib-dynamodb`, a library package that provides document client functionality to `@aws-sdk/client-dynamodb`\. Next, set the configuration as shown below for marshalling and unmarshalling \- as an optional second parameter \- during creation of document client\. Next, create the clients\. Now create a JSON object containing the parameters needed get an item from the table, which in this example includes the name of the table, the name of the hash key in that table, and the value of the hash key for the item you want to get\. Call the `GetCommand` method of the DynamoDB Document client\.
 
@@ -132,7 +133,7 @@ To run the example, enter the following at the command prompt\.
 node ddbdoc_get_item.js // To use JavaScript, enter 'node ddbdoc_get_item.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddbdoc_get_item.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddbdoc_get_item.js)\.
 
 ## Putting an Item in a Table<a name="dynamodb-example-document-client-put"></a>
 
@@ -165,7 +166,7 @@ const ddbDocClient = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 export { ddbDocClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
 
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
@@ -179,7 +180,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddbdoc_put_item.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/lib-dynamodb`, a library package that provides document client functionality to `@aws-sdk/client-dynamodb`\. Next, set the configuration as shown below for marshalling and unmarshalling \- as an optional second parameter \- during creation of document client\. Next, create the clients\. Create a JSON object containing the parameters needed to write an item to the table, which in this example includes the name of the table and a description of the item to add or update that includes the hashkey and value and names and values for attributes to set on the item\. Call the `PutCommand` method of the DynamoDB Document client\.
 
@@ -227,7 +228,7 @@ To run the example, enter the following at the command prompt\.
 node ddbdoc_put_item.js // To use JavaScript, enter 'node ddbdoc_put_item.js'
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddbdoc_put_item.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddbdoc_put_item.js)\.
 
 ## Updating an Item in a Table<a name="dynamodb-example-document-client-update"></a>
 
@@ -260,7 +261,7 @@ const ddbDocClient = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 export { ddbDocClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
 
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
@@ -274,7 +275,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddbdoc_update_item.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/lib-dynamodb`, a library package that provides document client functionality to `@aws-sdk/client-dynamodb`\. Next, set the configuration as shown below for marshalling and unmarshalling \- as an optional second parameter \- during creation of document client\. Next, create the clients\. Create a JSON object containing the parameters needed to write an item to the table, which in this example includes the name of the table, the key of the item to update, a set of `UpdateExpressions` that define the attributes of the item to update with tokens you assign values to in the `ExpressionAttributeValues` parameters\.Call the `UpdateCommand` method of the DynamoDB Document client\.
 
@@ -327,7 +328,7 @@ To run the example, enter the following at the command prompt\.
 node ddbdoc_update_item.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddbdoc_update_item.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddbdoc_update_item.js)\.
 
 ## Querying a Table<a name="dynamodb-example-document-client-query"></a>
 
@@ -360,7 +361,7 @@ const ddbDocClient = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 export { ddbDocClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
 
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
@@ -374,7 +375,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 This example queries a table that contains episode information about a video series, returning the episode titles and subtitles of second season episodes past episode 9 that contain a specified phrase in their subtitle\.
 
@@ -428,7 +429,7 @@ To run the example, enter the following at the command prompt\.
 node ddbdoc_query_item.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddbdoc_query_item.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddbdoc_query_item.js)\.
 
 ## Deleting an Item from a Table<a name="dynamodb-example-document-client-delete"></a>
 
@@ -461,7 +462,7 @@ const ddbDocClient = DynamoDBDocumentClient.from(ddbClient, translateConfig);
 export { ddbDocClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbDocClient.js)\.
 
 In the `libs` directory create a Node\.js module with the file name `ddbClient.js`\. Copy and paste the code below into it, which creates the DynamoDB client object\. Replace *REGION* with your AWS region\.
 
@@ -475,7 +476,7 @@ const ddbClient = new DynamoDBClient({ region: REGION });
 export { ddbClient };
 ```
 
-This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
+This code is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/libs/ddbClient.js)\.
 
 Create a Node\.js module with the file name `ddbdoc_delete_item.js`\. Be sure to configure the SDK as previously shown, including installing the required clients and packages\. This includes the `@aws-sdk/lib-dynamodb`, a library package that provides document client functionality to `@aws-sdk/client-dynamodb`\. Next, set the configuration as shown below for marshalling and unmarshalling \- as an optional second parameter \- during creation of document client\. Next, create the clients\. To access DynamoDB, create a `DynamoDB` object\. Create a JSON object containing the parameters needed to delete an item in the table, which in this example includes the name of the table and the name and value of the hashkey of the item you want to delete\. Call the `DeleteCommand` method of the DynamoDB client\.
 
@@ -522,4 +523,4 @@ To run the example, enter the following at the command prompt\.
 node ddbdoc_delete_item.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/dynamodb/src/ddbdoc_delete_item.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/dynamodb/src/ddbdoc_delete_item.js)\.

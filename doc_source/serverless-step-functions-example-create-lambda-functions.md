@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -43,7 +41,7 @@ webpack getid.js --mode development --target node --devtool false --output-libra
 
 Then compress `index.js` into a `ZIP` file name `getid.js.zip.` Upload the `ZIP` file to the Amazon S3 bucket you created in the the topic of this example\.
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-step-functions/src/lambda1/getid.js)\.
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/lambda-step-functions/src/lambda1/getid.js)\.
 
 ## addItem Lambda class<a name="serverless-step-functions-example-additem"></a>
 
@@ -52,60 +50,57 @@ Create a Lambda function that selects an employee to assign the ticket, then sto
 ```
 "use strict";
 // Load the required clients and commands.
-const { DynamoDBClient, PutItemCommand } = require("@aws-sdk/client-dynamodb");
+const { PutItemCommand } = require ( "@aws-sdk/client-dynamodb" );
+const { dynamoClient } = require ( "../libs/dynamoClient" );
 
-const REGION = "eu-west-1"; //e.g. "us-east-1"
-// Create the client service objects.
-    const dbclient = new DynamoDBClient({ region: REGION });
 exports.handler = async (event) => {
- try{
-        // Helper function to send message using Amazon SNS.
-        const val = event;
-        //PersistCase adds an item to a DynamoDB table
-        const tmp = (Math.random() <= 0.5) ? 1 : 2;
-        console.log(tmp);
-        if (tmp == 1) {
-            const params = {
-                TableName: "Case",
-                Item: {
-                    id: {N: val.Case},
-                    empEmail: {S: "brmur@amazon.com"},
-                    name: {S: "Tom Blue"}
-                },
-            }
-            console.log('adding item for tom');
-            try {
-                const data = await dbclient.send(new PutItemCommand(params));
-                console.log(data);
-            } catch (err) {
-                console.error(err);
-            }
-            var result = { Email: params.Item.empEmail };
-            return result;
-        } else {
-            const params = {
-                TableName: "Case",
-                Item: {
-                    id: {N: val.Case},
-                    empEmail: {S: "brmur@amazon.com"},
-                    name: {S: "Sarah White"}
-                },
-            }
-            console.log('adding item for sarah');
-            try {
-                const data = await dbclient.send(new PutItemCommand(params));
-                console.log(data);
-            } catch (err) {
-                console.error(err);
-            }
-            return params.Item.empEmail;
-            var result = { Email: params.Item.empEmail };
-        }
+  try {
+    // Helper function to send message using Amazon SNS.
+    const val = event;
+    //PersistCase adds an item to a DynamoDB table
+    const tmp = Math.random() <= 0.5 ? 1 : 2;
+    console.log(tmp);
+    if (tmp == 1) {
+      const params = {
+        TableName: "Case",
+        Item: {
+          id: { N: val.Case },
+          empEmail: { S: "brmur@amazon.com" },
+          name: { S: "Tom Blue" },
+        },
+      };
+      console.log("adding item for tom");
+      try {
+        const data = await dynamoClient.send(new PutItemCommand(params));
+        console.log(data);
+      } catch (err) {
+        console.error(err);
+      }
+      var result = { Email: params.Item.empEmail };
+      return result;
+    } else {
+      const params = {
+        TableName: "Case",
+        Item: {
+          id: { N: val.Case },
+          empEmail: { S: "RECEIVER_EMAIL_ADDRESS" }, // Valid Amazon Simple Notification Services (Amazon SNS) email address.
+          name: { S: "Sarah White" },
+        },
+      };
+      console.log("adding item for sarah");
+      try {
+        const data = await dynamoClient.send(new PutItemCommand(params));
+        console.log(data);
+      } catch (err) {
+        console.error(err);
+      }
+      return params.Item.empEmail;
+      var result = { Email: params.Item.empEmail };
     }
-    catch(err){
-     console.log("Error" , err)
-    }
-}
+  } catch (err) {
+    console.log("Error", err);
+  }
+};
 ```
 
 Enter the following in the command line to use webpack to bundle the file into a file named `index.js`\.
@@ -116,7 +111,7 @@ webpack additem.js --mode development --target node --devtool false --output-lib
 
 Then compress `index.js` into a `ZIP` file name `additem.js.zip.` Upload the `ZIP` file to the Amazon S3 bucket you created in the the topic of this example\.
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-step-functions/src/lambda2/additem.js)\.
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/lambda-step-functions/src/lambda2/additem.js)\.
 
 ### sendemail Lambda class<a name="serverless-step-functions-example-sendemail"></a>
 
@@ -124,66 +119,58 @@ Create a Lambda function that sends an email to notify them about the new ticket
 
 ```
 // Load the required clients and commands.
-const { SESClient, SendEmailCommand } = require("@aws-sdk/client-ses");
-
-// Set the AWS Region.
-const REGION = "eu-west-1"; //e.g. "us-east-1"
-
-// Create the client service objects.
-const sesclient = new SESClient({ region: REGION });
+const { SendEmailCommand } = require ( "@aws-sdk/client-ses" );
+const { sesClient } = require ( "../libs/sesClient" );
 
 exports.handler = async (event) => {
-    // Enter a sender email address. This address must be verified.
-    const sender = "Sender Name <briangermurray@gmail.com>";
+  // Enter a sender email address. This address must be verified.
+  const senderEmail = "SENDER_EMAIL"
+  const sender = "Sender Name <" + senderEmail + ">";
 
-    // AWS Step Functions passes the  employee's email to the event.
-    // This address must be verified.
-    const recepient = event.S;
+  // AWS Step Functions passes the  employee's email to the event.
+  // This address must be verified.
+  const recepient = event.S;
 
-    // The subject line for the email.
-    const subject = "New case";
+  // The subject line for the email.
+  const subject = "New case";
 
-// The email body for recipients with non-HTML email clients.
-    const body_text =
-        "Hello,\r\n"
-        + "Please check the database for new ticket assigned to you.";
+  // The email body for recipients with non-HTML email clients.
+  const body_text =
+    "Hello,\r\n" + "Please check the database for new ticket assigned to you.";
 
-// The HTML body of the email.
-    const body_html = `<html><head></head><body><h1>Hello!</h1><p>Please check the database for new ticket assigned to you.</p></body></html>`;
+  // The HTML body of the email.
+  const body_html = `<html><head></head><body><h1>Hello!</h1><p>Please check the database for new ticket assigned to you.</p></body></html>`;
 
-// The character encoding for the email.
-    const charset = "UTF-8";
-    var params = {
-        Source: sender,
-        Destination: {
-            ToAddresses: [
-                recepient
-            ],
+  // The character encoding for the email.
+  const charset = "UTF-8";
+  var params = {
+    Source: sender,
+    Destination: {
+      ToAddresses: [recepient],
+    },
+    Message: {
+      Subject: {
+        Data: subject,
+        Charset: charset,
+      },
+      Body: {
+        Text: {
+          Data: body_text,
+          Charset: charset,
         },
-        Message: {
-            Subject: {
-                Data: subject,
-                Charset: charset
-            },
-            Body: {
-                Text: {
-                    Data: body_text,
-                    Charset: charset
-                },
-                Html: {
-                    Data: body_html,
-                    Charset: charset
-                }
-            }
-        }
-    };
-    try {
-        const data = await sesclient.send(new SendEmailCommand(params));
-        console.log(data);
-    } catch (err) {
-        console.error(err);
-    }
-
+        Html: {
+          Data: body_html,
+          Charset: charset,
+        },
+      },
+    },
+  };
+  try {
+    const data = await sesClient.send(new SendEmailCommand(params));
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
 };
 ```
 
@@ -195,7 +182,7 @@ webpack sendemail.js --mode development --target node --devtool false --output-l
 
 Then compress `index.js` into a `ZIP` file name `sendemail.js.zip.` Upload the `ZIP` file to the Amazon S3 bucket you created in the the topic of this example\.
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-step-functions/src/lambda3/sendemail.js)\.
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/lambda-step-functions/src/lambda3/sendemail.js)\.
 
 ### Deploy the Lambda functions<a name="serverless-step-functions-example-deploy"></a>
 

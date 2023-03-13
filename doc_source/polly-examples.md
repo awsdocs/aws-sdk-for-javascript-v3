@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -23,7 +21,7 @@ In this example, a series of Node\.js modules are used to automatically upload a
 To set up and run this example, you must first complete these tasks:
 + Set up a project environment to run Node JavaScript examples by following the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/s3/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a shared credentials file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
-+ Create an AWS Identity and Access Management \(IAM\) Unaunthenticated Amazon Cognito user role polly:SynthesizeSpeech permissions, and an Amazon Cognito identity pool with the IAM role attached to it\. The [Create the AWS resources using the AWS CloudFormation](#polly-example-synthesize-to-s3-create-resources)section below describes how to create these resources\.
++ Create an AWS Identity and Access Management \(IAM\) Unauthenticated Amazon Cognito user role polly:SynthesizeSpeech permissions, and an Amazon Cognito identity pool with the IAM role attached to it\. The [Create the AWS resources using the AWS CloudFormation](#polly-example-synthesize-to-s3-create-resources)section below describes how to create these resources\.
 
 **Note**  
 This example uses Amazon Cognito, but if you are not using Amazon Cognito then your AWS user must have following IAM permissions policy  
@@ -59,7 +57,7 @@ To create the AWS CloudFormation stack:
 
 1. Create a file named `setup.yaml` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/polly/general-examples/src/setup.yaml) into it\. 
 **Note**  
-The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/resources/cdk/javascript_example_code_polly_aws_service/)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
+The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/resources/cdk/javascript_example_code_polly_aws_service/)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(AWS CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
 
 1. Run the following command from the command line, replacing *STACK\_NAME* with a unique name for the stack\.
 **Important**  
@@ -81,10 +79,7 @@ Create a Node\.js module with the file name `polly_synthesize_to_s3.js`\. Make s
 Call the `StartSpeechSynthesisCommand` method of the Amazon Polly client service object synthesize the voice message and upload it to the Amazon S3 bucket\. 
 
 ```
-const {
-  Polly,
-  StartSpeechSynthesisTaskCommand,
-} = require("@aws-sdk/client-polly");
+const { StartSpeechSynthesisTaskCommand } = require("@aws-sdk/client-polly");
 const { pollyClient } = require("./libs/pollyClient.js");
 
 // Create the parameters
@@ -99,9 +94,7 @@ var params = {
 
 const run = async () => {
   try {
-    const data = await pollyClient.send(
-      new StartSpeechSynthesisTaskCommand(params)
-    );
+    await pollyClient.send(new StartSpeechSynthesisTaskCommand(params));
     console.log("Success, audio file added to " + params.OutputS3BucketName);
   } catch (err) {
     console.log("Error putting object", err);

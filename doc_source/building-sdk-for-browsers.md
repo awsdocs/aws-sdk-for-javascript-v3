@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -15,4 +13,4 @@ If you work with the SDK outside of an environment that enforces CORS in your br
 ## Using the SDK Builder to Build the SDK for JavaScript<a name="using-the-sdk-builder"></a>
 
 **Note**  
-Amazon Web Services version 3 \(V3\) no longer supports Browser Builder\. To mimimize bandwidth usage of browser applications, we recommend you import named modules, and bundle them to reduce size\. For more information about bundling, see [Bundling applications with webpack](webpack.md)\.
+Amazon Web Services version 3 \(V3\) no longer supports Browser Builder\. To minimize bandwidth usage of browser applications, we recommend you import named modules, and bundle them to reduce size\. For more information about bundling, see [Bundling applications with webpack](webpack.md)\.

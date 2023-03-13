@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -33,7 +31,7 @@ npm install --save-dev path-browserify
 By default, Webpack searches for a JavaScript file named `webpack.config.js` in your project's root directory\. This file specifies your configuration options\. The following is an example of a `webpack.config.js` configuration file for WebPack version 5\.0\.0 and later\.
 
 **Note**  
-Webpack configuration requirments vary depending on the version of Webpack you install\. For more information, see the [Webpack documentation](https://webpack.js.org/configuration/)\. 
+Webpack configuration requirements vary depending on the version of Webpack you install\. For more information, see the [Webpack documentation](https://webpack.js.org/configuration/)\. 
 
 ```
 // Import path for resolving file paths

@@ -1,1231 +1,931 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
-# Amazon S3 examples using SDK for JavaScript V3<a name="javascript_s3_code_examples"></a>
+# Amazon S3 examples using SDK for JavaScript \(v3\)<a name="javascript_s3_code_examples"></a>
 
-The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript V3 with Amazon S3\.
+The following code examples show you how to perform actions and implement common scenarios by using the AWS SDK for JavaScript \(v3\) with Amazon S3\.
 
-*Actions* are code excerpts that show you how to call individual Amazon S3 functions\.
+*Actions* are code excerpts that show you how to call individual service functions\.
 
-*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple Amazon S3 functions\.
+*Scenarios* are code examples that show you how to accomplish a specific task by calling multiple functions within the same service\.
 
 Each example includes a link to GitHub, where you can find instructions on how to set up and run the code in context\.
 
 **Topics**
-+ [Actions](#w362aac23b9c25c13)
-+ [Scenarios](#w362aac23b9c25c15)
++ [Actions](#actions)
++ [Scenarios](#scenarios)
 
-## Actions<a name="w362aac23b9c25c13"></a>
+## Actions<a name="actions"></a>
 
 ### Add CORS rules to a bucket<a name="s3_PutBucketCors_javascript_topic"></a>
 
-The following code example shows how to add cross\-origin resource sharing \(CORS\) rules to an Amazon S3 bucket\.
+The following code example shows how to add cross\-origin resource sharing \(CORS\) rules to an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Add a CORS rule\.  
 
 ```
-// Import required AWS-SDK clients and commands for Node.js.
- import { PutBucketCorsCommand } from "@aws-sdk/client-s3";
- import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { PutBucketCorsCommand, S3Client } from "@aws-sdk/client-s3";
 
-  // Set parameters.
-  // Create initial parameters JSON for putBucketCors.
-  const thisConfig = {
-    AllowedHeaders: ["Authorization"],
-    AllowedMethods: [],
-    AllowedOrigins: ["*"],
-    ExposeHeaders: [],
-    MaxAgeSeconds: 3000,
-  };
+const client = new S3Client({})
 
-  // Assemble the list of allowed methods based on command line parameters
-  const allowedMethods = [];
-  process.argv.forEach(function (val, index, array) {
-    if (val.toUpperCase() === "POST") {
-      allowedMethods.push("POST");
-    }
-    if (val.toUpperCase() === "GET") {
-      allowedMethods.push("GET");
-    }
-    if (val.toUpperCase() === "PUT") {
-      allowedMethods.push("PUT");
-    }
-    if (val.toUpperCase() === "PATCH") {
-      allowedMethods.push("PATCH");
-    }
-    if (val.toUpperCase() === "DELETE") {
-      allowedMethods.push("DELETE");
-    }
-    if (val.toUpperCase() === "HEAD") {
-      allowedMethods.push("HEAD");
-    }
+// By default, Amazon S3 doesn't allow cross-origin requests. Use this command
+// to explicitly allow cross-origin requests.
+export const main = async () => {
+  const command = new PutBucketCorsCommand({
+    Bucket: "test-bucket",
+    CORSConfiguration: {
+      CORSRules: [
+        {
+          // Allow all headers to be sent to this bucket.
+          AllowedHeaders: ["*"],
+          // Allow only GET and PUT methods to be sent to this bucket.
+          AllowedMethods: ["GET", "PUT"],
+          // Allow only requests from the specified origin.
+          AllowedOrigins: ["https://www.example.com"],
+          // Allow the entity tag (ETag) header to be returned in the response. The ETag header
+          // The entity tag represents a specific version of the object. The ETag reflects
+          // changes only to the contents of an object, not its metadata.
+          ExposeHeaders: ["ETag"],
+          // How long the requesting browser should cache the preflight response. After
+          // this time, the preflight request will have to be made again.
+          MaxAgeSeconds: 3600,
+        },
+      ],
+    },
   });
 
-  // Copy the array of allowed methods into the config object
-  thisConfig.AllowedMethods = allowedMethods;
-
-  // Create an array of configs then add the config object to it.
-  const corsRules = new Array(thisConfig);
-
-  // Create CORS parameters.
-export  const corsParams = {
-    Bucket: "BUCKET_NAME",
-    CORSConfiguration: { CORSRules: corsRules },
-  };
-export async function run() {
   try {
-    const data = await s3Client.send(new PutBucketCorsCommand(corsParams));
-    console.log("Success", data);
-    return data; // For unit tests.
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
-}
-run();
+};
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-configuring-buckets.html#s3-example-configuring-buckets-put-cors)\. 
 +  For API details, see [PutBucketCors](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putbucketcorscommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Add a policy to a bucket<a name="s3_PutBucketPolicy_javascript_topic"></a>
 
-The following code example shows how to add a policy to an Amazon S3 bucket\.
+The following code example shows how to add a policy to an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Add the policy\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { CreateBucketCommand, PutBucketPolicyCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { PutBucketPolicyCommand, S3Client } from "@aws-sdk/client-s3";
 
-const BUCKET_NAME = "BUCKET_NAME";
-export const bucketParams = {
-  Bucket: BUCKET_NAME,
-};
-// Create the policy in JSON for the S3 bucket.
-const readOnlyAnonUserPolicy = {
-  Version: "2012-10-17",
-  Statement: [
-    {
-      Sid: "AddPerm",
-      Effect: "Allow",
-      Principal: "*",
-      Action: ["s3:GetObject"],
-      Resource: [""],
-    },
-  ],
-};
+const client = new S3Client({});
 
-// Create selected bucket resource string for bucket policy.
-const bucketResource = "arn:aws:s3:::" + BUCKET_NAME + "/*"; //BUCKET_NAME
-readOnlyAnonUserPolicy.Statement[0].Resource[0] = bucketResource;
+export const main = async () => {
+  const command = new PutBucketPolicyCommand({
+    Policy: JSON.stringify({
+      Version: "2012-10-17",
+      Statement: [
+        {
+          Sid: "AllowGetObject",
+          // Allow this particular user to call GetObject on any object in this bucket.
+          Effect: "Allow",
+          Principal: {
+            AWS: "arn:aws:iam::ACCOUNT-ID:user/USERNAME",
+          },
+          Action: "s3:GetObject",
+          Resource: "arn:aws:s3:::BUCKET-NAME/*",
+        },
+      ],
+    }),
+    // Apply the preceding policy to this bucket.
+    Bucket: "BUCKET-NAME",
+  });
 
-// Convert policy JSON into string and assign into parameters.
-const bucketPolicyParams = {
-  Bucket: BUCKET_NAME,
-  Policy: JSON.stringify(readOnlyAnonUserPolicy),
-};
-
-export const run = async () => {
   try {
-    const data = await s3Client.send(
-        new CreateBucketCommand(bucketParams)
-    );
-    console.log('Success, bucket created.', data)
-    try {
-      const response = await s3Client.send(
-          new PutBucketPolicyCommand(bucketPolicyParams)
-      );
-      console.log("Success, permissions added to bucket", response);
-    }
-    catch (err) {
-        console.log("Error adding policy to S3 bucket.", err);
-      }
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error creating S3 bucket.", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-bucket-policies.html#s3-example-bucket-policies-set-policy)\. 
 +  For API details, see [PutBucketPolicy](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putbucketpolicycommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Copy an object from one bucket to another<a name="s3_CopyObject_javascript_topic"></a>
 
-The following code example shows how to copy an Amazon S3 object from one bucket to another\.
+The following code example shows how to copy an S3 object from one bucket to another\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Copy the object\.  
 
 ```
-// Get service clients module and commands using ES6 syntax.
-import { CopyObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js";
+import { S3Client, CopyObjectCommand } from "@aws-sdk/client-s3";
 
-// Set the bucket parameters.
+const client = new S3Client({});
 
-export const params = {
-    Bucket: "DESTINATION_BUCKET_NAME",
-    CopySource: "/SOURCE_BUCKET_NAME/OBJECT_NAME",
-    Key: "OBJECT_NAME"
+export const main = async () => {
+  const command = new CopyObjectCommand({
+    CopySource: "SOURCE_BUCKET/SOURCE_OBJECT_KEY",
+    Bucket: "DESTINATION_BUCKET",
+    Key: "NEW_OBJECT_KEY",
+  });
+
+  try {
+    const response = await client.send(command);
+    console.log(response);
+  } catch (err) {
+    console.error(err);
+  }
 };
-
-// Create the Amazon S3 bucket.
-export const run = async () => {
-    try {
-        const data = await s3Client.send(new CopyObjectCommand(params));
-        console.log("Success", data);
-        return data; // For unit tests.
-    } catch (err) {
-        console.log("Error", err);
-    }
-};
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For API details, see [CopyObject](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/copyobjectcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Create a bucket<a name="s3_CreateBucket_javascript_topic"></a>
 
-The following code example shows how to create an Amazon S3 bucket\.
+The following code example shows how to create an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Create the bucket\.  
 
 ```
-// Get service clients module and commands using ES6 syntax.
-import { CreateBucketCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js";
+import { CreateBucketCommand, S3Client } from "@aws-sdk/client-s3";
 
-// Set the bucket parameters.
+const client = new S3Client({});
 
-export const bucketParams = { Bucket: "BUCKET_NAME" };
+export const main = async () => {
+  const command = new CreateBucketCommand({
+    // The name of the bucket. Bucket names are unique and have several other constraints.
+    // See https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
+    Bucket: "bucket-name",
+  });
 
-// Create the Amazon S3 bucket.
-export const run = async () => {
   try {
-    const data = await s3Client.send(new CreateBucketCommand(bucketParams));
-    console.log("Success", data);
-    return data; // For unit tests.
+    const { Location } = await client.send(command);
+    console.log(`Bucket created with location ${Location}`);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html#s3-example-creating-buckets-new-bucket-2)\. 
 +  For API details, see [CreateBucket](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/createbucketcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Delete a policy from a bucket<a name="s3_DeleteBucketPolicy_javascript_topic"></a>
 
-The following code example shows how to delete a policy from an Amazon S3 bucket\.
+The following code example shows how to delete a policy from an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Delete the bucket policy\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { DeleteBucketPolicyCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { DeleteBucketPolicyCommand, S3Client } from "@aws-sdk/client-s3";
 
-// Set the bucket parameters
-export const bucketParams = { Bucket: "BUCKET_NAME" };
+const client = new S3Client({});
 
-export const run = async () => {
+// This will remove the policy from the bucket.
+export const main = async () => {
+  const command = new DeleteBucketPolicyCommand({
+    Bucket: "test-bucket",
+  });
+
   try {
-    const data = await s3Client.send(new DeleteBucketPolicyCommand(bucketParams));
-    console.log("Success", data + ", bucket policy deleted");
-    return data; // For unit tests.
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-// Invoke run() so these examples run out of the box.
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-bucket-policies.html#s3-example-bucket-policies-delete-policy)\. 
 +  For API details, see [DeleteBucketPolicy](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deletebucketpolicycommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Delete an empty bucket<a name="s3_DeleteBucket_javascript_topic"></a>
 
-The following code example shows how to delete an empty Amazon S3 bucket\.
+The following code example shows how to delete an empty S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Delete the bucket\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { DeleteBucketCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { DeleteBucketCommand, S3Client } from "@aws-sdk/client-s3";
 
-// Set the bucket parameters
-export const bucketParams = { Bucket: "BUCKET_NAME" };
+const client = new S3Client({})
 
-export const run = async () => {
+// Delete a bucket.
+export const main = async () => {
+  const command = new DeleteBucketCommand({
+    Bucket: "test-bucket",
+  });
+
   try {
-    const data = await s3Client.send(new DeleteBucketCommand(bucketParams));
-    return data; // For unit tests.
-    console.log("Success - bucket deleted");
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-// Invoke run() so these examples run out of the box.
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html#s3-example-deleting-buckets)\. 
 +  For API details, see [DeleteBucket](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deletebucketcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Delete an object<a name="s3_DeleteObject_javascript_topic"></a>
 
-The following code example shows how to delete an Amazon S3 object\.
+The following code example shows how to delete an S3 object\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Delete an object\.  
 
 ```
-import { DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js" // Helper function that creates an Amazon S3 service client module.
+import { DeleteObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
-export const bucketParams = { Bucket: "BUCKET_NAME", Key: "KEY" };
+const client = new S3Client({});
 
-export const run = async () => {
+export const main = async () => {
+  const command = new DeleteObjectCommand({
+    Bucket: "test-bucket",
+    Key: "test-key.txt",
+  });
+
   try {
-    const data = await s3Client.send(new DeleteObjectCommand(bucketParams));
-    console.log("Success. Object deleted.", data);
-    return data; // For unit tests.
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For API details, see [DeleteObject](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deleteobjectcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Delete multiple objects<a name="s3_DeleteObjects_javascript_topic"></a>
 
-The following code example shows how to delete multiple objects from an Amazon S3 bucket\.
+The following code example shows how to delete multiple objects from an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Delete multiple objects\.  
 
 ```
-import { DeleteObjectsCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js" // Helper function that creates an Amazon S3 service client module.
+import { DeleteObjectsCommand, S3Client } from "@aws-sdk/client-s3";
 
-export const bucketParams = {
-  Bucket: "BUCKET_NAME",
-  Delete: {
-    Objects: [
-      {
-        Key: "KEY_1",
-      },
-      {
-        Key: "KEY_2",
-      },
-    ],
-  },
-};
+const client = new S3Client({});
 
-export const run = async () => {
+export const main = async () => {
+  const command = new DeleteObjectsCommand({
+    Bucket: "test-bucket",
+    Delete: {
+      Objects: [{ Key: "object1.txt" }, { Key: "object2.txt" }],
+    },
+  });
+
   try {
-    const data = await s3Client.send(new DeleteObjectsCommand(bucketParams));
-    return data; // For unit tests.
-    console.log("Success. Object deleted.");
+    const { Deleted } = await client.send(command);
+    console.log(
+      `Successfully deleted ${Deleted.length} objects from S3 bucket. Deleted objects:`
+    );
+    console.log(Deleted.map((d) => ` • ${d.Key}`).join("\n"));
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-Delete all objects in a bucket\.  
-
-```
-import { ListObjectsCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
-
-export const bucketParams = { Bucket: "BUCKET_NAME" };
-
-export const run = async () => {
-  try {
-    const data = await s3Client.send(new ListObjectsCommand(bucketParams));
-    return data; // For unit tests.
-    let i = 0;
-    let noOfObjects = data.Contents;
-    for (let i = 0; i < noOfObjects.length; i++) {
-      const data = await s3Client.send(
-        new DeleteObjectCommand({
-          Bucket: bucketParams.Bucket,
-          Key: noOfObjects[i].Key,
-        })
-      );
-    }
-    console.log("Success. Objects deleted.");
-  } catch (err) {
-    console.log("Error", err);
-  }
-};
-run();
-```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For API details, see [DeleteObjects](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deleteobjectscommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Delete the website configuration from a bucket<a name="s3_DeleteBucketWebsite_javascript_topic"></a>
 
-The following code example shows how to delete the website configuration from an Amazon S3 bucket\.
+The following code example shows how to delete the website configuration from an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Delete the website configuration from the bucket\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
+import { DeleteBucketWebsiteCommand, S3Client } from "@aws-sdk/client-s3";
 
-import { DeleteBucketWebsiteCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+const client = new S3Client({})
 
-// Create the parameters for calling
-export const bucketParams = { Bucket: "BUCKET_NAME" };
+// Disable static website hosting on the bucket.
+export const main = async () => {
+  const command = new DeleteBucketWebsiteCommand({
+    Bucket: "test-bucket",
+  });
 
-export const run = async () => {
   try {
-    const data = await s3Client.send(new DeleteBucketWebsiteCommand(bucketParams));
-    return data; // For unit tests.
-    console.log("Success", data);
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-static-web-host.html#s3-example-static-web-host-delete-website)\. 
 +  For API details, see [DeleteBucketWebsite](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/deletebucketwebsitecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Get CORS rules for a bucket<a name="s3_GetBucketCors_javascript_topic"></a>
 
-The following code example shows how to get cross\-origin resource sharing \(CORS\) rules for an Amazon S3 bucket\.
+The following code example shows how to get cross\-origin resource sharing \(CORS\) rules for an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Get the CORS policy for the bucket\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { GetBucketCorsCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { GetBucketCorsCommand, S3Client } from "@aws-sdk/client-s3";
 
-// Create the parameters for calling
-export const bucketParams = { Bucket: "BUCKET_NAME" };
+const client = new S3Client({});
 
-export const run = async () => {
+export const main = async () => {
+  const command = new GetBucketCorsCommand({
+    Bucket: "test-bucket",
+  });
+
   try {
-    const data = await s3Client.send(new GetBucketCorsCommand(bucketParams));
-    console.log("Success", JSON.stringify(data.CORSRules));
-    return data; // For unit tests.
+    const { CORSRules } = await client.send(command);
+    CORSRules.forEach((cr, i) => {
+      console.log(
+        `\nCORSRule ${i + 1}`,
+        `\n${"-".repeat(10)}`,
+        `\nAllowedHeaders: ${cr.AllowedHeaders.join(" ")}`,
+        `\nAllowedMethods: ${cr.AllowedMethods.join(" ")}`,
+        `\nAllowedOrigins: ${cr.AllowedOrigins.join(" ")}`,
+        `\nExposeHeaders: ${cr.ExposeHeaders.join(" ")}`,
+        `\nMaxAgeSeconds: ${cr.MaxAgeSeconds}`
+      );
+    });
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-configuring-buckets.html#s3-example-configuring-buckets-get-cors)\. 
 +  For API details, see [GetBucketCors](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getbucketcorscommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Get an object from a bucket<a name="s3_GetObject_javascript_topic"></a>
 
-The following code example shows how to read data from an object in an Amazon S3 bucket\.
+The following code example shows how to read data from an object in an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Download the object\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { GetObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
-export const bucketParams = {
-  Bucket: "BUCKET_NAME",
-  Key: "KEY",
-};
+const client = new S3Client({})
 
-export const run = async () => {
+export const main = async () => {
+  const command = new GetObjectCommand({
+    Bucket: "test-bucket",
+    Key: "hello-s3.txt"
+  });
+
   try {
-    // Create a helper function to convert a ReadableStream to a string.
-    const streamToString = (stream) =>
-      new Promise((resolve, reject) => {
-        const chunks = [];
-        stream.on("data", (chunk) => chunks.push(chunk));
-        stream.on("error", reject);
-        stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
-      });
-
-    // Get the object} from the Amazon S3 bucket. It is returned as a ReadableStream.
-    const data = await s3Client.send(new GetObjectCommand(bucketParams));
-      return data; // For unit tests.
-    // Convert the ReadableStream to a string.
-    const bodyContents = await streamToString(data.Body);
-    console.log(bodyContents);
-      return bodyContents;
+    const response = await client.send(command);
+    // The Body object also has 'transformToByteArray' and 'transformToWebStream' methods.
+    const str = await response.Body.transformToString();
+    console.log(str);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html#s3-example-creating-buckets-get-object)\. 
 +  For API details, see [GetObject](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getobjectcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Get the ACL of a bucket<a name="s3_GetBucketAcl_javascript_topic"></a>
 
-The following code example shows how to get the access control list \(ACL\) of an Amazon S3 bucket\.
+The following code example shows how to get the access control list \(ACL\) of an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Get the ACL permissions\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { GetBucketAclCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { GetBucketAclCommand, S3Client } from "@aws-sdk/client-s3";
 
-// Create the parameters.
-export const bucketParams = { Bucket: "BUCKET_NAME" };
+const client = new S3Client({});
 
-export const run = async () => {
+export const main = async () => {
+  const command = new GetBucketAclCommand({
+    Bucket: "test-bucket",
+  });
+
   try {
-    const data = await s3Client.send(new GetBucketAclCommand(bucketParams));
-    console.log("Success", data.Grants);
-    return data; // For unit tests.
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-access-permissions.html#s3-example-access-permissions-get-acl)\. 
 +  For API details, see [GetBucketAcl](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getbucketaclcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Get the policy for a bucket<a name="s3_GetBucketPolicy_javascript_topic"></a>
 
-The following code example shows how to get the policy for an Amazon S3 bucket\.
+The following code example shows how to get the policy for an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Get the bucket policy\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { GetBucketPolicyCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { GetBucketPolicyCommand, S3Client } from "@aws-sdk/client-s3";
 
-// Create the parameters for calling
-export const bucketParams = { Bucket: "BUCKET_NAME" };
+const client = new S3Client({});
 
-export const run = async () => {
+export const main = async () => {
+  const command = new GetBucketPolicyCommand({
+    Bucket: "test-bucket",
+  });
+
   try {
-    const data = await s3Client.send(new GetBucketPolicyCommand(bucketParams));
-    console.log("Success", data);
-    return data; // For unit tests.
+    const { Policy } = await client.send(command);
+    console.log(JSON.parse(Policy));
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-bucket-policies.html#s3-example-bucket-policies-get-policy)\. 
 +  For API details, see [GetBucketPolicy](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getbucketpolicycommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Get the website configuration for a bucket<a name="s3_GetBucketWebsite_javascript_topic"></a>
 
-The following code example shows how to get the website configuration for an Amazon S3 bucket\.
+The following code example shows how to get the website configuration for an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Get the website configuration\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { GetBucketWebsiteCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { GetBucketWebsiteCommand, S3Client } from "@aws-sdk/client-s3";
 
-// Create the parameters for calling
-export const bucketParams = { Bucket: "BUCKET_NAME" };
+const client = new S3Client({});
 
-export const run = async () => {
+export const main = async () => {
+  const command = new GetBucketWebsiteCommand({
+    Bucket: "test-bucket",
+  });
+
   try {
-    const data = await s3Client.send(new GetBucketWebsiteCommand(bucketParams));
-    console.log("Success", data);
-    return data; // For unit tests.
+    const { ErrorDocument, IndexDocument } = await client.send(command);
+    console.log(
+      `Your bucket is set up to host a website. It has an error document:`,
+      `${ErrorDocument.Key}, and an index document: ${IndexDocument.Suffix}.`
+    );
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For API details, see [GetBucketWebsite](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getbucketwebsitecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### List buckets<a name="s3_ListBuckets_javascript_topic"></a>
 
-The following code example shows how to list Amazon S3 buckets\.
+The following code example shows how to list S3 buckets\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 List the buckets\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { ListBucketsCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { ListBucketsCommand, S3Client } from "@aws-sdk/client-s3";
 
-export const run = async () => {
+const client = new S3Client({});
+
+export const main = async () => {
+  const command = new ListBucketsCommand({});
+
   try {
-    const data = await s3Client.send(new ListBucketsCommand({}));
-    console.log("Success", data.Buckets);
-    return data; // For unit tests.
+    const { Owner, Buckets } = await client.send(command);
+    console.log(
+      `${Owner.DisplayName} owns ${Buckets.length} bucket${
+        Buckets.length === 1 ? "" : "s"
+      }:`
+    );
+    console.log(`${Buckets.map((b) => ` • ${b.Name}`).join("\n")}`);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html#s3-example-creating-buckets-list-buckets)\. 
 +  For API details, see [ListBuckets](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/listbucketscommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### List objects in a bucket<a name="s3_ListObjects_javascript_topic"></a>
 
-The following code example shows how to list objects in an Amazon S3 bucket\.
+The following code example shows how to list objects in an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
-List the objects\.  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
+List all of the objects in your bucket\. If there is more than one object, IsTruncated and NextContinuationToken will be used to iterate over the full list\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { ListObjectsCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import {
+  S3Client,
+  // This command supersedes the ListObjectsCommand and is the recommended way to list objects.
+  ListObjectsV2Command,
+} from "@aws-sdk/client-s3";
 
-// Create the parameters for the bucket
-export const bucketParams = { Bucket: "BUCKET_NAME" };
+const client = new S3Client({});
 
-export const run = async () => {
+export const main = async () => {
+  const command = new ListObjectsV2Command({
+    Bucket: "my-bucket",
+    // The default and maximum number of keys returned is 1000. This limits it to
+    // one for demonstration purposes.
+    MaxKeys: 1,
+  });
+
   try {
-    const data = await s3Client.send(new ListObjectsCommand(bucketParams));
-    console.log("Success", data);
-    return data; // For unit tests.
+    let isTruncated = true;
+
+    console.log("Your bucket contains the following objects:\n")
+    let contents = "";
+
+    while (isTruncated) {
+      const { Contents, IsTruncated, NextContinuationToken } = await client.send(command);
+      const contentsList = Contents.map((c) => ` • ${c.Key}`).join("\n");
+      contents += contentsList + "\n";
+      isTruncated = IsTruncated;
+      command.input.ContinuationToken = NextContinuationToken;
+    }
+    console.log(contents);
+
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-List 1000 or more objects\.  
-
-```
-// Import required AWS SDK clients and commands for Node.js.
-import { ListObjectsCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
-
-// Create the parameters for the bucket
-export const bucketParams = { Bucket: "BUCKET_NAME" };
-
-export async function run() {
-  // Declare truncated as a flag that the while loop is based on.
-  let truncated = true;
-  // Declare a variable to which the key of the last element is assigned to in the response.
-  let pageMarker;
-  // while loop that runs until 'response.truncated' is false.
-  while (truncated) {
-    try {
-      const response = await s3Client.send(new ListObjectsCommand(bucketParams));
-      // return response; //For unit tests
-      response.Contents.forEach((item) => {
-        console.log(item.Key);
-      });
-      // Log the key of every item in the response to standard output.
-      truncated = response.IsTruncated;
-      // If truncated is true, assign the key of the last element in the response to the pageMarker variable.
-      if (truncated) {
-        pageMarker = response.Contents.slice(-1)[0].Key;
-        // Assign the pageMarker value to bucketParams so that the next iteration starts from the new pageMarker.
-        bucketParams.Marker = pageMarker;
-      }
-      // At end of the list, response.truncated is false, and the function exits the while loop.
-    } catch (err) {
-      console.log("Error", err);
-      truncated = false;
-    }
-  }
-}
-run();
-```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For API details, see [ListObjects](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/listobjectscommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Set a new ACL for a bucket<a name="s3_PutBucketAcl_javascript_topic"></a>
 
-The following code example shows how to set a new access control list \(ACL\) for an Amazon S3 bucket\.
+The following code example shows how to set a new access control list \(ACL\) for an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Put the bucket ACL\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { PutBucketAclCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import {
+  PutBucketAclCommand,
+  GetBucketAclCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
 
-// Set the parameters. For more information,
-// see https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putBucketAcl-property.
-export const bucketParams = {
-  Bucket: "BUCKET_NAME",
-  // 'GrantFullControl' allows grantee the read, write, read ACP, and write ACL permissions on the bucket.
-  // Use a canonical user ID for an AWS account, formatted as follows:
-  // id=002160194XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXa7a49125274
-  GrantFullControl: "GRANTEE_1",
-  // 'GrantWrite' allows grantee to create, overwrite, and delete any object in the bucket.
-  // For example, 'uri=http://acs.amazonaws.com/groups/s3/LogDelivery'
-  GrantWrite: "GRANTEE_2",
-};
+const client = new S3Client({});
 
-export const run = async () => {
+// Most Amazon S3 use cases don't require the use of access control lists (ACLs).
+// We recommend that you disable ACLs, except in unusual circumstances where
+// you need to control access for each object individually.
+// Consider a policy instead. For more information see https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-policies.html.
+export const main = async () => {
+  // Grant a user READ access to a bucket.
+  const command = new PutBucketAclCommand({
+    Bucket: "test-bucket",
+    AccessControlPolicy: {
+      Grants: [
+        {
+          Grantee: {
+            // The canonical ID of the user. This ID is an obfuscated form of your AWS account number.
+            // It's unique to Amazon S3 and can't be found elsewhere.
+            // For more information, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/finding-canonical-user-id.html.
+            ID: "canonical-id-1",
+            Type: "CanonicalUser",
+          },
+          // One of FULL_CONTROL | READ | WRITE | READ_ACP | WRITE_ACP
+          // https://docs.aws.amazon.com/AmazonS3/latest/API/API_Grant.html#AmazonS3-Type-Grant-Permission
+          Permission: "FULL_CONTROL",
+        },
+      ],
+      Owner: {
+        ID: "canonical-id-2",
+      },
+    },
+  });
+
   try {
-    const data = await s3Client.send(new PutBucketAclCommand(bucketParams));
-    console.log("Success, permissions added to bucket", data);
-    return data; // For unit tests.
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-access-permissions.html#s3-example-access-permissions-put-acl)\. 
 +  For API details, see [PutBucketAcl](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putbucketaclcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Set the website configuration for a bucket<a name="s3_PutBucketWebsite_javascript_topic"></a>
 
-The following code example shows how to set the website configuration for an Amazon S3 bucket\.
+The following code example shows how to set the website configuration for an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Set the website configuration\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { PutBucketWebsiteCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+import { PutBucketWebsiteCommand, S3Client } from "@aws-sdk/client-s3";
 
-// Create the parameters for the bucket
-export const bucketParams = { Bucket: "BUCKET_NAME" };
-export const staticHostParams = {
-  Bucket: bucketParams,
-  WebsiteConfiguration: {
-    ErrorDocument: {
-      Key: "",
-    },
-    IndexDocument: {
-      Suffix: "",
-    },
-  },
-};
+const client = new S3Client({});
 
-export const run = async () => {
-  // Insert specified bucket name and index and error documents into parameters JSON
-  // from command line arguments
-  staticHostParams.Bucket = bucketParams;
-  staticHostParams.WebsiteConfiguration.IndexDocument.Suffix = "INDEX_PAGE"; // The index document inserted into parameters JSON.
-  staticHostParams.WebsiteConfiguration.ErrorDocument.Key = "ERROR_PAGE"; // The error document inserted into parameters JSON.
-  // Set the new website configuration on the selected bucket.
+// Set up a bucket as a static website.
+// The bucket needs to be publicly accessible.
+export const main = async () => {
+  const command = new PutBucketWebsiteCommand({
+    Bucket: "test-bucket",
+    WebsiteConfiguration: {
+      ErrorDocument: {
+        // The object key name to use when a 4XX class error occurs.
+        Key: "error.html",
+      },
+      IndexDocument: {
+        // A suffix that is appended to a request that is for a directory.
+        Suffix: "index.html",
+      },
+    },
+  });
+
   try {
-    const data = await s3Client.send(new PutBucketWebsiteCommand(staticHostParams));
-    console.log("Success", data);
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-static-web-host.html#s3-example-static-web-host-set-website)\. 
 +  For API details, see [PutBucketWebsite](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putbucketwebsitecommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
 ### Upload an object to a bucket<a name="s3_PutObject_javascript_topic"></a>
 
-The following code example shows how to upload an object to an Amazon S3 bucket\.
+The following code example shows how to upload an object to an S3 bucket\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
-Create and upload the object\.  
-
-```
-// Import required AWS SDK clients and commands for Node.js.
-import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
-
-// Set the parameters.
-export const bucketParams = {
-  Bucket: "BUCKET_NAME",
-  // Specify the name of the new object. For example, 'index.html'.
-  // To create a directory for the object, use '/'. For example, 'myApp/package.json'.
-  Key: "OBJECT_NAME",
-  // Content of the new object.
-  Body: "BODY",
-};
-
-// Create and upload the object to the S3 bucket.
-export const run = async () => {
-  try {
-    const data = await s3Client.send(new PutObjectCommand(bucketParams));
-    return data; // For unit tests.
-    console.log(
-      "Successfully uploaded object: " +
-        bucketParams.Bucket +
-        "/" +
-        bucketParams.Key
-    );
-  } catch (err) {
-    console.log("Error", err);
-  }
-};
-run();
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Upload the object\.  
 
 ```
-// Import required AWS SDK clients and commands for Node.js.
-import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
-import {path} from "path";
-import {fs} from "fs";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
-const file = "OBJECT_PATH_AND_NAME"; // Path to and name of object. For example '../myFiles/index.js'.
-const fileStream = fs.createReadStream(file);
+const client = new S3Client({});
 
-// Set the parameters
-export const uploadParams = {
-  Bucket: "BUCKET_NAME",
-  // Add the required 'Key' parameter using the 'path' module.
-  Key: path.basename(file),
-  // Add the required 'Body' parameter
-  Body: fileStream,
-};
+export const main = async () => {
+  const command = new PutObjectCommand({
+    Bucket: "test-bucket",
+    Key: "hello-s3.txt",
+    Body: "Hello S3!",
+  });
 
-
-// Upload file to specified bucket.
-export const run = async () => {
   try {
-    const data = await s3Client.send(new PutObjectCommand(uploadParams));
-    console.log("Success", data);
-    return data; // For unit tests.
+    const response = await client.send(command);
+    console.log(response);
   } catch (err) {
-    console.log("Error", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html#s3-example-creating-buckets-new-bucket-2)\. 
 +  For API details, see [PutObject](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putobjectcommand.html) in *AWS SDK for JavaScript API Reference*\. 
 
-## Scenarios<a name="w362aac23b9c25c15"></a>
+## Scenarios<a name="scenarios"></a>
 
 ### Create a presigned URL<a name="s3_Scenario_PresignedUrl_javascript_topic"></a>
 
 The following code example shows how to create a presigned URL for Amazon S3 and upload an object\.
 
-**SDK for JavaScript V3**  
-Create the client\.  
-
-```
-// Create service client module using ES6 syntax.
-import { S3Client } from "@aws-sdk/client-s3";
-// Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
-// Create an Amazon S3 service client object.
-const s3Client = new S3Client({ region: REGION });
-export { s3Client };
-```
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 Create a presigned URL to upload an object to a bucket\.  
 
 ```
-// Import the required AWS SDK clients and commands for Node.js
+import https from "https";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { fromIni } from "@aws-sdk/credential-providers";
+import { HttpRequest } from "@aws-sdk/protocol-http";
 import {
-  CreateBucketCommand,
-  DeleteObjectCommand,
-  PutObjectCommand,
-  DeleteBucketCommand }
-from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import fetch from "node-fetch";
+  getSignedUrl,
+  S3RequestPresigner,
+} from "@aws-sdk/s3-request-presigner";
+import { parseUrl } from "@aws-sdk/url-parser";
+import { formatUrl } from "@aws-sdk/util-format-url";
+import { Hash } from "@aws-sdk/hash-node";
 
-// Set parameters
-// Create a random name for the Amazon Simple Storage Service (Amazon S3) bucket and key
-export const bucketParams = {
-  Bucket: `test-bucket-${Math.ceil(Math.random() * 10 ** 10)}`,
-  Key: `test-object-${Math.ceil(Math.random() * 10 ** 10)}`,
-  Body: "BODY"
+const createPresignedUrlWithoutClient = async ({ region, bucket, key }) => {
+  const url = parseUrl(`https://${bucket}.s3.${region}.amazonaws.com/${key}`);
+  const presigner = new S3RequestPresigner({
+    credentials: fromIni(),
+    region,
+    sha256: Hash.bind(null, "sha256"),
+  });
+
+  const signedUrlObject = await presigner.presign(
+    new HttpRequest({ ...url, method: "PUT" })
+  );
+  return formatUrl(signedUrlObject);
 };
-export const run = async () => {
-  try {
-    // Create an S3 bucket.
-    console.log(`Creating bucket ${bucketParams.Bucket}`);
-    await s3Client.send(new CreateBucketCommand({ Bucket: bucketParams.Bucket }));
-    console.log(`Waiting for "${bucketParams.Bucket}" bucket creation...`);
-  } catch (err) {
-    console.log("Error creating bucket", err);
-  }
-  try {
-    // Create a command to put the object in the S3 bucket.
-    const command = new PutObjectCommand(bucketParams);
-    // Create the presigned URL.
-    const signedUrl = await getSignedUrl(s3Client, command, {
-      expiresIn: 3600,
+
+const createPresignedUrlWithClient = async ({ region, bucket, key }) => {
+  const client = new S3Client({ region });
+  const command = new PutObjectCommand({ Bucket: bucket, Key: key });
+  return getSignedUrl(client, command, { expiresIn: 3600 });
+};
+
+function put(url, data) {
+  return new Promise((resolve, reject) => {
+    const req = https.request(
+      url,
+      { method: "PUT", headers: { "Content-Length": new Blob([data]).size } },
+      (res) => {
+        let responseBody = "";
+        res.on("data", (chunk) => {
+          responseBody += chunk;
+        });
+        res.on("end", () => {
+          resolve(responseBody);
+        });
+      }
+    );
+    req.on("error", (err) => {
+      reject(err);
     });
-    console.log(
-      `\nPutting "${bucketParams.Key}" using signedUrl with body "${bucketParams.Body}" in v3`
-    );
-    console.log(signedUrl);
-    const response = await fetch(signedUrl, {method: 'PUT', body: bucketParams.Body});
-    console.log(
-      `\nResponse returned by signed URL: ${await response.text()}\n`
-    );
-  } catch (err) {
-    console.log("Error creating presigned URL", err);
-  }
+    req.write(data);
+    req.end();
+  });
+}
+
+export const main = async () => {
+  const REGION = "us-east-1";
+  const BUCKET = "coreys-default-bucket";
+  const KEY = "corey_test.txt";
+
+  // There are two ways to generate a presigned URL.
+  // 1. Use createPresignedUrl without the S3 client.
+  // 2. Use getSignedUrl in conjunction with the S3 client and GetObjectCommand.
   try {
-    // Delete the object.
-    console.log(`\nDeleting object "${bucketParams.Key}"} from bucket`);
-    await s3Client.send(
-      new DeleteObjectCommand({ Bucket: bucketParams.Bucket, Key: bucketParams.Key })
-    );
+    const noClientUrl = await createPresignedUrlWithoutClient({
+      region: REGION,
+      bucket: BUCKET,
+      key: KEY,
+    });
+
+    const clientUrl = await createPresignedUrlWithClient({
+      region: REGION,
+      bucket: BUCKET,
+      key: KEY,
+    });
+
+    // After you get the presigned URL, you can provide your own file
+    // data. Refer to put() above.
+    console.log("Calling PUT using presigned URL without client");
+    await put(noClientUrl, "Hello World");
+
+    console.log("Calling PUT using presigned URL with client");
+    await put(clientUrl, "Hello World");
+
+    console.log("\nDone. Check your S3 console.");
   } catch (err) {
-    console.log("Error deleting object", err);
-  }
-  try {
-    // Delete the S3 bucket.
-    console.log(`\nDeleting bucket ${bucketParams.Bucket}`);
-    await s3.send(new DeleteBucketCommand({ Bucket: bucketParams.Bucket }));
-  } catch (err) {
-    console.log("Error deleting bucket", err);
+    console.error(err);
   }
 };
-run();
 ```
 Create a presigned URL to download an object from a bucket\.  
 
 ```
-// Import the required AWS SDK clients and commands for Node.js
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { fromIni } from "@aws-sdk/credential-providers";
+import { HttpRequest } from "@aws-sdk/protocol-http";
 import {
-  CreateBucketCommand,
-  PutObjectCommand,
-  GetObjectCommand,
-  DeleteObjectCommand,
-  DeleteBucketCommand }
-from "@aws-sdk/client-s3";
-import { s3Client } from "./libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-const fetch = require("node-fetch");
+  getSignedUrl,
+  S3RequestPresigner,
+} from "@aws-sdk/s3-request-presigner";
+import { parseUrl } from "@aws-sdk/url-parser";
+import { formatUrl } from "@aws-sdk/util-format-url";
+import { Hash } from "@aws-sdk/hash-node";
 
-// Set parameters
-// Create a random names for the S3 bucket and key.
-export const bucketParams = {
-  Bucket: `test-bucket-${Math.ceil(Math.random() * 10 ** 10)}`,
-  Key: `test-object-${Math.ceil(Math.random() * 10 ** 10)}`,
-  Body: "BODY"
+const createPresignedUrlWithoutClient = async ({ region, bucket, key }) => {
+  const url = parseUrl(`https://${bucket}.s3.${region}.amazonaws.com/${key}`);
+  const presigner = new S3RequestPresigner({
+    credentials: fromIni(),
+    region,
+    sha256: Hash.bind(null, "sha256"),
+  });
+
+  const signedUrlObject = await presigner.presign(new HttpRequest(url));
+  return formatUrl(signedUrlObject);
 };
 
-export const run = async () => {
-  // Create an S3 bucket.
-  try {
-    console.log(`Creating bucket ${bucketParams.Bucket}`);
-    const data = await s3Client.send(
-      new CreateBucketCommand({ Bucket: bucketParams.Bucket })
-    );
-    return data; // For unit tests.
-    console.log(`Waiting for "${bucketParams.Bucket}" bucket creation...\n`);
-  } catch (err) {
-    console.log("Error creating bucket", err);
-  }
-  // Put the object in the S3 bucket.
-  try {
-    console.log(`Putting object "${bucketParams.Key}" in bucket`);
-    const data = await s3Client.send(
-      new PutObjectCommand({
-        Bucket: bucketParams.Bucket,
-        Key: bucketParams.Key,
-        Body: bucketParams.Body,
-      })
-    );
-    return data; // For unit tests.
-  } catch (err) {
-    console.log("Error putting object", err);
-  }
-  // Create a presigned URL.
-  try {
-    // Create the command.
-    const command = new GetObjectCommand(bucketParams);
+const createPresignedUrlWithClient = async ({ region, bucket, key }) => {
+  const client = new S3Client({ region });
+  const command = new GetObjectCommand({ Bucket: bucket, Key: key });
+  return getSignedUrl(client, command, { expiresIn: 3600 });
+};
 
-    // Create the presigned URL.
-    const signedUrl = await getSignedUrl(s3Client, command, {
-      expiresIn: 3600,
+export const main = async () => {
+  const REGION = "us-east-1";
+  const BUCKET = "coreys-default-bucket";
+  const KEY = "corey_mug.jpg";
+
+  try {
+    const noClientUrl = await createPresignedUrlWithoutClient({
+      region: REGION,
+      bucket: BUCKET,
+      key: KEY,
     });
-    console.log(
-      `\nGetting "${bucketParams.Key}" using signedUrl with body "${bucketParams.Body}" in v3`
-    );
-    console.log(signedUrl);
-    const response = await fetch(signedUrl);
-    console.log(
-      `\nResponse returned by signed URL: ${await response.text()}\n`
-    );
+
+    const clientUrl = await createPresignedUrlWithClient({
+      region: REGION,
+      bucket: BUCKET,
+      key: KEY,
+    });
+
+    console.log("Presigned URL without client");
+    console.log(noClientUrl);
+    console.log("\n");
+
+    console.log("Presigned URL with client");
+    console.log(clientUrl);
   } catch (err) {
-    console.log("Error creating presigned URL", err);
-  }
-  // Delete the object.
-  try {
-    console.log(`\nDeleting object "${bucketParams.Key}"} from bucket`);
-    const data = await s3Client.send(
-      new DeleteObjectCommand({ Bucket: bucketParams.Bucket, Key: bucketParams.Key })
-    );
-    return data; // For unit tests.
-  } catch (err) {
-    console.log("Error deleting object", err);
-  }
-  // Delete the S3 bucket.
-  try {
-    console.log(`\nDeleting bucket ${bucketParams.Bucket}`);
-    const data = await s3Client.send(
-      new DeleteBucketCommand({ Bucket: bucketParams.Bucket, Key: bucketParams.Key })
-    );
-    return data; // For unit tests.
-  } catch (err) {
-    console.log("Error deleting object", err);
+    console.error(err);
   }
 };
-run();
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
 +  For more information, see [AWS SDK for JavaScript Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/s3-example-creating-buckets.html#s3-create-presigendurl)\. 
 
-### Getting started with buckets and objects<a name="s3_Scenario_GettingStarted_javascript_topic"></a>
+### Create a web page that lists Amazon S3 objects<a name="s3_Scenario_ListObjectsWeb_javascript_topic"></a>
+
+The following code example shows how to list Amazon S3 objects in a web page\.
+
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3/scenarios/web/list-objects#code-examples)\. 
+The following code is the relevant React component that makes calls to the AWS SDK\. A runnable version of the application containing this component can be found at the preceding GitHub link\.  
+
+```
+import { useEffect, useState } from "react";
+import {
+  ListObjectsCommand,
+  ListObjectsCommandOutput,
+  S3Client,
+} from "@aws-sdk/client-s3";
+import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
+import "./App.css";
+
+function App() {
+  const [objects, setObjects] = useState<
+    Required<ListObjectsCommandOutput>["Contents"]
+  >([]);
+
+  useEffect(() => {
+    const client = new S3Client({
+      region: "us-east-1",
+      // Unless you have a public bucket, you'll need access to a private bucket.
+      // One way to do this is to create an Amazon Cognito identity pool, attach a role to the pool,
+      // and grant the role access to the 's3:GetObject' action.
+      //
+      // You'll also need to configure the CORS settings on the bucket to allow traffic from
+      // this example site. Here's an example configuration that allows all origins. Don't
+      // do this in production.
+      //[
+      //  {
+      //    "AllowedHeaders": ["*"],
+      //    "AllowedMethods": ["GET"],
+      //    "AllowedOrigins": ["*"],
+      //    "ExposeHeaders": [],
+      //  },
+      //]
+      //
+      credentials: fromCognitoIdentityPool({
+        clientConfig: { region: "us-east-1" },
+        identityPoolId: "<YOUR_IDENTITY_POOL_ID>",
+      }),
+    });
+    const command = new ListObjectsCommand({ Bucket: "bucket-name" });
+    client.send(command).then(({ Contents }) => setObjects(Contents || []));
+  }, []);
+
+  return (
+    <div className="App">
+      {objects.map((o) => (
+        <div key={o.ETag}>{o.Key}</div>
+      ))}
+    </div>
+  );
+}
+
+export default App;
+```
++  For API details, see [ListObjects](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/listobjectscommand.html) in *AWS SDK for JavaScript API Reference*\. 
+
+### Get started with buckets and objects<a name="s3_Scenario_GettingStarted_javascript_topic"></a>
 
 The following code example shows how to:
 + Create a bucket\.
@@ -1236,183 +936,275 @@ The following code example shows how to:
 + Delete the objects in a bucket\.
 + Delete a bucket\.
 
-**SDK for JavaScript V3**  
-  
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
+First, import all the necessary modules\.  
 
 ```
+// Used to check if currently running file is this file.
+import { fileURLToPath } from "url";
+import { readdirSync, readFileSync, writeFileSync } from "fs";
+
+// Local helper utils.
+import { dirnameFromMetaUrl } from "libs/utils/util-fs.js";
+import { promptForText, promptToContinue } from "libs/utils/util-io.js";
+import { wrapText } from "libs/utils/util-string.js";
+
 import {
+  S3Client,
   CreateBucketCommand,
   PutObjectCommand,
+  ListObjectsCommand,
   CopyObjectCommand,
-  DeleteObjectCommand,
+  GetObjectCommand,
+  DeleteObjectsCommand,
   DeleteBucketCommand,
-  GetObjectCommand
 } from "@aws-sdk/client-s3";
-import { s3Client, REGION } from "../libs/s3Client.js"; // Helper function that creates an Amazon S3 service client module.
+```
+The preceding imports reference some helper utilities\. These utilities are local to the GitHub repository linked at the start of this section\. For your reference, see the following implementations of those utilities\.  
 
-if (process.argv.length < 5) {
-  console.log(
-      "Usage: node s3_basics.js <the bucket name> <the AWS Region to use> <object name> <object content>\n" +
-      "Example: node s3_basics_full.js test-bucket 'test.txt' 'Test Content'"
-  );
-}
-const bucket_name = process.argv[2];
-const object_key = process.argv[3];
-const object_content = process.argv[4];
+```
+export const dirnameFromMetaUrl = (metaUrl) => {
+  return fileURLToPath(new URL(".", metaUrl));
+};
 
-export const run = async (bucket_name, object_key, object_content) => {
-  try {
-    const create_bucket_params = {
-      Bucket: bucket_name
-    };
-    console.log("\nCreating the bucket, named " + bucket_name + "...\n");
-    console.log("about to create");
-    const data = await s3Client.send(
-        new CreateBucketCommand(create_bucket_params)
-    );
-    console.log("Bucket created at ", data.Location);
-    try {
-      console.log(
-          "\nCreated and uploaded an object named " +
-          object_key +
-          " to first bucket " +
-          bucket_name +
-          " ...\n"
-      );
-      // Set the parameters for the object to upload.
-      const object_upload_params = {
-        Bucket: bucket_name,
-        // Specify the name of the new object. For example, 'test.html'.
-        // To create a directory for the object, use '/'. For example, 'myApp/package.json'.
-        Key: object_key,
-        // Content of the new object.
-        Body: object_content,
-      };
-      // Create and upload the object to the first S3 bucket.
-      await s3Client.send(new PutObjectCommand(object_upload_params));
-      console.log(
-          "Successfully uploaded object: " +
-          object_upload_params.Bucket +
-          "/" +
-          object_upload_params.Key
-      );
-      try {
-        const download_bucket_params = {
-          Bucket: bucket_name,
-          Key: object_key
-        };
-        console.log(
-            "\nDownloading " +
-            object_key +
-            " from" +
-            bucket_name +
-            " ...\n"
-        );
-        // Create a helper function to convert a ReadableStream into a string.
-        const streamToString = (stream) =>
-            new Promise((resolve, reject) => {
-              const chunks = [];
-              stream.on("data", (chunk) => chunks.push(chunk));
-              stream.on("error", reject);
-              stream.on("end", () => resolve(Buffer.concat(chunks).toString("utf8")));
-            });
+export const promptToSelect = (options, question = "", autoSelect) => {
+  const rl = createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  const selectionInvalid = (selected) =>
+    isNaN(selected) || selected < 1 || selected > options.length;
+  const optionsList = options.map((opt, i) => `${i + 1}) ${opt}`).join("\n");
+  const prompt = `${question}\n${optionsList}\n-> `;
 
-        // Get the object from the Amazon S3 bucket. It is returned as a ReadableStream.
-        const data = await s3Client.send(new GetObjectCommand(download_bucket_params));
-        // Convert the ReadableStream to a string.
-        const bodyContents = await streamToString(data.Body);
-        console.log(bodyContents);
-        try {
-          // Copy the object from the first bucket to the second bucket.
-          const copy_object_params = {
-            Bucket: bucket_name,
-            CopySource: "/" + bucket_name + "/" + object_key,
-            Key: "copy-destination/" + object_key,
-          };
-          console.log(
-              "\nCopying " +
-              object_key +
-              " from" +
-              bucket_name +
-              " to " +
-              bucket_name +
-              "/" +
-              copy_object_params.Key +
-              " ...\n"
-          );
-          await s3Client.send(new CopyObjectCommand(copy_object_params));
-          console.log("Success, object copied to folder.");
-          try {
-            console.log("\nDeleting " + object_key + " from" + bucket_name);
-            const delete_object_from_bucket_params = {
-              Bucket: bucket_name,
-              Key: object_key,
-            };
-
-            await s3Client.send(
-                new DeleteObjectCommand(delete_object_from_bucket_params)
-            );
-            console.log("Success. Object deleted from bucket.");
-            try {
-              console.log(
-                  "\nDeleting " +
-                  object_key +
-                  " from " +
-                  bucket_name +
-                  "/copy-destination folder"
-              );
-              const delete_object_from_folder_params = {
-                Bucket: bucket_name,
-                Key: "copy-destination/" + object_key,
-              };
-
-              await s3Client.send(
-                  new DeleteObjectCommand(delete_object_from_folder_params)
-              );
-              console.log("Success. Object deleted from folder.");
-              try {
-                console.log(
-                    "\nDeleting the bucket named " + bucket_name + "...\n"
-                );
-                const delete_bucket_params = {Bucket: bucket_name};
-                await s3Client.send(
-                    new DeleteBucketCommand(delete_bucket_params)
-                );
-                console.log("Success. First bucket deleted.");
-                return "Run successfully"; // For unit tests.
-              } catch (err) {
-                console.log("Error deleting object from folder.", err);
-                process.exit(1);
-              }
-            } catch (err) {
-              console.log("Error deleting  bucket.", err);
-              process.exit(1);
-            }
-          } catch (err) {
-            console.log("Error deleting object from  bucket.", err);
-            process.exit(1);
-          }
-        } catch (err) {
-          console.log("Error copying object from to folder", err);
-          process.exit(1);
-        }
-      } catch (err) {
-        console.log("Error downloading object", err);
-        process.exit(1);
-
-      }
-    }catch (err) {
-      console.log("Error creating and upload object to  bucket", err);
-      process.exit(1);
+  return new Promise((resolve) => {
+    if (!selectionInvalid(autoSelect)) {
+      resolve([autoSelect - 1, options[autoSelect - 1]]);
+      return;
     }
-    console.log("works");
-  } catch (err) {
-    console.log("Error creating bucket", err);
+
+    rl.question(prompt, (answer) => {
+      rl.close();
+      const selected = parseInt(answer);
+      if (selectionInvalid(selected)) {
+        console.log(
+          `Invalid option. Select a number between 1 and ${options.length}`
+        );
+        resolve(promptToSelect(options));
+      } else {
+        resolve([selected - 1, options[selected - 1]]);
+      }
+    });
+  });
+};
+
+export const promptToContinue = () => {
+  const rl = createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  return new Promise((resolve) => {
+    rl.question(`\nPress enter to continue.\n`, () => {
+      rl.close();
+      resolve();
+    });
+  });
+};
+
+export const promptForText = (question) => {
+  const rl = createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  return new Promise((resolve) => {
+    rl.question(`${question}\n-> `, (answer) => {
+      rl.close();
+      resolve(answer);
+    });
+  });
+};
+
+export const wrapText = (text, char = "=") => {
+  const rule = char.repeat(80);
+  return `${rule}\n    ${text}\n${rule}\n`;
+};
+```
+Objects in S3 are stored in 'buckets'\. Let's define a function for creating a new bucket\.  
+
+```
+export const createBucket = async () => {
+  const bucketName = await promptForText(
+    "Enter a bucket name. Bucket names must be globally unique:"
+  );
+  const command = new CreateBucketCommand({ Bucket: bucketName });
+  await s3Client.send(command);
+  console.log("Bucket created successfully.\n");
+  return bucketName;
+};
+```
+Buckets contain 'objects'\. This function uploads the contents of a directory to your bucket as objects\.  
+
+```
+export const uploadFilesToBucket = async ({ bucketName, folderPath }) => {
+  console.log(`Uploading files from ${folderPath}\n`);
+  const keys = readdirSync(folderPath);
+  const files = keys.map((key) => {
+    const filePath = `${folderPath}/${key}`;
+    const fileContent = readFileSync(filePath);
+    return {
+      Key: key,
+      Body: fileContent,
+    };
+  });
+
+  for (let file of files) {
+    await s3Client.send(
+      new PutObjectCommand({
+        Bucket: bucketName,
+        Body: file.Body,
+        Key: file.Key,
+      })
+    );
+    console.log(`${file.Key} uploaded successfully.`);
   }
 };
-run(bucket_name, object_key, object_content);
 ```
-+  Find instructions and more code on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3/scenarios/s3_basics/src#code-examples)\. 
+After uploading objects, check to confirm that they were uploaded correctly\. You can use ListObjects for that\. You'll be using the 'Key' property, but there are other useful properties in the response also\.  
+
+```
+export const listFilesInBucket = async ({ bucketName }) => {
+  const command = new ListObjectsCommand({ Bucket: bucketName });
+  const { Contents } = await s3Client.send(command);
+  const contentsList = Contents.map((c) => ` • ${c.Key}`).join("\n");
+  console.log("\nHere's a list of files in the bucket:");
+  console.log(contentsList + "\n");
+};
+```
+Sometimes you might want to copy an object from one bucket to another\. Use the CopyObject command for that\.  
+
+```
+export const copyFileFromBucket = async ({ destinationBucket }) => {
+  const answer = await promptForText(
+    "Would you like to copy an object from another bucket? (yes/no)"
+  );
+
+  if (answer === "no") {
+    return;
+  } else {
+    const copy = async () => {
+      try {
+        const sourceBucket = await promptForText("Enter source bucket name:");
+        const sourceKey = await promptForText("Enter source key:");
+        const destinationKey = await promptForText("Enter destination key:");
+
+        const command = new CopyObjectCommand({
+          Bucket: destinationBucket,
+          CopySource: `${sourceBucket}/${sourceKey}`,
+          Key: destinationKey,
+        });
+        await s3Client.send(command);
+        await copyFileFromBucket({ destinationBucket });
+      } catch (err) {
+        console.error(`Copy error.`);
+        console.error(err);
+        const retryAnswer = await promptForText("Try again? (yes/no)");
+        if (retryAnswer !== "no") {
+          await copy();
+        }
+      }
+    };
+    await copy();
+  }
+};
+```
+There's no SDK method for getting multiple objects from a bucket\. Instead, you'll create a list of objects to download and iterate over them\.  
+
+```
+export const downloadFilesFromBucket = async ({ bucketName }) => {
+  const { Contents } = await s3Client.send(
+    new ListObjectsCommand({ Bucket: bucketName })
+  );
+  const path = await promptForText("Enter destination path for files:");
+
+  for (let content of Contents) {
+    const obj = await s3Client.send(
+      new GetObjectCommand({ Bucket: bucketName, Key: content.Key })
+    );
+    writeFileSync(
+      `${path}/${content.Key}`,
+      await obj.Body.transformToByteArray()
+    );
+  }
+  console.log("Files downloaded successfully.\n");
+};
+```
+It's time to clean up your resources\. A bucket must be empty before it can be deleted\. These two functions empty and delete the bucket\.  
+
+```
+export const emptyBucket = async ({ bucketName }) => {
+  const listObjectsCommand = new ListObjectsCommand({ Bucket: bucketName });
+  const { Contents } = await s3Client.send(listObjectsCommand);
+  const keys = Contents.map((c) => c.Key);
+
+  const deleteObjectsCommand = new DeleteObjectsCommand({
+    Bucket: bucketName,
+    Delete: { Objects: keys.map((key) => ({ Key: key })) },
+  });
+  await s3Client.send(deleteObjectsCommand);
+  console.log(`${bucketName} emptied successfully.\n`);
+};
+
+export const deleteBucket = async ({ bucketName }) => {
+  const command = new DeleteBucketCommand({ Bucket: bucketName });
+  await s3Client.send(command);
+  console.log(`${bucketName} deleted successfully.\n`);
+};
+```
+The 'main' function pulls everything together\. If you run this file directly the main function will be called\.  
+
+```
+const main = async () => {
+  const OBJECT_DIRECTORY = `${dirnameFromMetaUrl(
+    import.meta.url
+  )}../../../../resources/sample_files/.sample_media`;
+
+  try {
+    console.log(wrapText("Welcome to the Amazon S3 getting started example."));
+    console.log("Let's create a bucket.");
+    const bucketName = await createBucket();
+    await promptToContinue();
+
+    console.log(wrapText("File upload."));
+    console.log(
+      "I have some default files ready to go. You can edit the source code to provide your own."
+    );
+    await uploadFilesToBucket({
+      bucketName,
+      folderPath: OBJECT_DIRECTORY,
+    });
+
+    await listFilesInBucket({ bucketName });
+    await promptToContinue();
+
+    console.log(wrapText("Copy files."));
+    await copyFileFromBucket({ destinationBucket: bucketName });
+    await listFilesInBucket({ bucketName });
+    await promptToContinue();
+
+    console.log(wrapText("Download files."));
+    await downloadFilesFromBucket({ bucketName });
+
+    console.log(wrapText("Clean up."));
+    await emptyBucket({ bucketName });
+    await deleteBucket({ bucketName });
+  } catch (err) {
+    console.error(err);
+  }
+};
+```
 + For API details, see the following topics in *AWS SDK for JavaScript API Reference*\.
   + [CopyObject](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/copyobjectcommand.html)
   + [CreateBucket](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/createbucketcommand.html)
@@ -1421,3 +1213,172 @@ run(bucket_name, object_key, object_content);
   + [GetObject](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/getobjectcommand.html)
   + [ListObjects](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/listobjectscommand.html)
   + [PutObject](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-s3/classes/putobjectcommand.html)
+
+### Upload or download large files<a name="s3_Scenario_UsingLargeFiles_javascript_topic"></a>
+
+The following code example shows how to upload or download large files to and from Amazon S3\.
+
+For more information, see [Uploading an object using multipart upload](https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpu-upload-object.html)\.
+
+**SDK for JavaScript \(v3\)**  
+ There's more on GitHub\. Find the complete example and learn how to set up and run in the [AWS Code Examples Repository](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/s3#code-examples)\. 
+Upload a large file\.  
+
+```
+import {
+  CreateMultipartUploadCommand,
+  UploadPartCommand,
+  CompleteMultipartUploadCommand,
+  AbortMultipartUploadCommand,
+  S3Client,
+} from "@aws-sdk/client-s3";
+
+const twentyFiveMB = 25 * 1024 * 1024;
+
+export const createString = (size = twentyFiveMB) => {
+  return "x".repeat(size);
+};
+
+export const main = async () => {
+  const s3Client = new S3Client({});
+  const bucketName = "test-bucket";
+  const key = "multipart.txt";
+  const str = createString();
+  const buffer = Buffer.from(str, "utf8");
+
+  let uploadId;
+
+  try {
+    const multipartUpload = await s3Client.send(
+      new CreateMultipartUploadCommand({
+        Bucket: bucketName,
+        Key: key,
+      })
+    );
+
+    uploadId = multipartUpload.UploadId;
+
+    const uploadPromises = [];
+    // Multipart uploads require a minimum size of 5 MB per part.
+    const partSize = Math.ceil(buffer.length / 5);
+
+    // Upload each part.
+    for (let i = 0; i < 5; i++) {
+      const start = i * partSize;
+      const end = start + partSize;
+      uploadPromises.push(
+        s3Client
+          .send(
+            new UploadPartCommand({
+              Bucket: bucketName,
+              Key: key,
+              UploadId: uploadId,
+              Body: buffer.subarray(start, end),
+              PartNumber: i + 1,
+            })
+          )
+          .then((d) => {
+            console.log("Part", i + 1, "uploaded");
+            return d;
+          })
+      );
+    }
+
+    const uploadResults = await Promise.all(uploadPromises);
+
+    return await s3Client.send(
+      new CompleteMultipartUploadCommand({
+        Bucket: bucketName,
+        Key: key,
+        UploadId: uploadId,
+        MultipartUpload: {
+          Parts: uploadResults.map(({ ETag }, i) => ({
+            ETag,
+            PartNumber: i + 1,
+          })),
+        },
+      })
+    );
+
+    // Verify the output by downloading the file from the Amazon Simple Storage Service (Amazon S3) console.
+    // Because the output is a 25 MB string, text editors might struggle to open the file.
+  } catch (err) {
+    console.error(err);
+
+    if (uploadId) {
+      const abortCommand = new AbortMultipartUploadCommand({
+        Bucket: bucketName,
+        Key: key,
+        UploadId: uploadId,
+      });
+
+      await s3Client.send(abortCommand);
+    }
+  }
+};
+```
+Download a large file\.  
+
+```
+import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { createWriteStream } from "fs";
+
+const s3Client = new S3Client({});
+const oneMB = 1024 * 1024;
+
+export const getObjectRange = ({ bucket, key, start, end }) => {
+  const command = new GetObjectCommand({
+    Bucket: bucket,
+    Key: key,
+    Range: `bytes=${start}-${end}`,
+  });
+
+  return s3Client.send(command);
+};
+
+export const getRangeAndLength = (contentRange) => {
+  const [range, length] = contentRange.split("/");
+  const [start, end] = range.split("-");
+  return {
+    start: parseInt(start),
+    end: parseInt(end),
+    length: parseInt(length),
+  };
+};
+
+export const isComplete = ({ end, length }) => end === length - 1;
+
+// When downloading a large file, you might want to break it down into
+// smaller pieces. Amazon S3 accepts a Range header to specify the start
+// and end of the byte range to be downloaded.
+const downloadInChunks = async ({ bucket, key }) => {
+  const writeStream = createWriteStream(
+    fileURLToPath(new URL(`./${key}`, import.meta.url))
+  ).on("error", (err) => console.error(err));
+
+  let rangeAndLength = { start: -1, end: -1, length: -1 };
+
+  while (!isComplete(rangeAndLength)) {
+    const { end } = rangeAndLength;
+    const nextRange = { start: end + 1, end: end + oneMB };
+
+    console.log(`Downloading bytes ${nextRange.start} to ${nextRange.end}`);
+
+    const { ContentRange, Body } = await getObjectRange({
+      bucket,
+      key,
+      ...nextRange,
+    });
+
+    writeStream.write(await Body.transformToByteArray());
+    rangeAndLength = getRangeAndLength(ContentRange);
+  }
+};
+
+export const main = async () => {
+  await downloadInChunks({
+    bucket: "my-cool-bucket",
+    key: "my-cool-object.txt",
+  });
+};
+```

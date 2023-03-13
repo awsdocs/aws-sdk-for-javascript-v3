@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -33,8 +31,8 @@ fs.readFile('index.html', function(err, data) {
 });
 ```
 
-For a complete list of all built\-in modules that Node\.js provides, see [Node\.js v6\.11\.1 documentation](https://nodejs.org/api/modules.html) on the Node\.js website\.
+For a complete list of all built\-in modules that Node\.js provides, see [Node\.js documentation](https://nodejs.org/api/modules.html) on the Node\.js website\.
 
 ## Using npm packages<a name="node-npm-packages"></a>
 
-In addition to the built\-in modules, you can also include and incorporate third\-party code from `npm`, the Node\.js package manager\. This is a repository of open source Node\.js packages and a command\-line interface for installing those packages\. For more information about `npm` and a list of currently available packages, see [https://www\.npmjs\.com](https://www.npmjs.com)\. You can also learn about additional Node\.js packages you can use [here on GitHub](https://github.com/sindresorhus/awesome-nodejs)\.
+In addition to the built\-in modules, you can also include and incorporate third\-party code from `npm`, the Node\.js package manager\. This is a repository of open source Node\.js packages and a command\-line interface for installing those packages\. For more information about `npm` and a list of currently available packages, see [ https://www\.npmjs\.com](https://www.npmjs.com)\. You can also learn about additional Node\.js packages you can use [here on GitHub](https://github.com/sindresorhus/awesome-nodejs)\.

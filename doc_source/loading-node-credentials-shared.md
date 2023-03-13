@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -50,7 +48,7 @@ $ node script.js
 You can also explicitly select the profile used by a client, as shown in the following example\.
 
 ```
-const {fromIni} = require("@aws-sdk/credential-provider-ini");
+const {fromIni} = require("@aws-sdk/credential-providers");
 const s3Client = new S3.S3Client({
   credentials: fromIni({profile: 'work-account'})
 });

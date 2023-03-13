@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -19,7 +17,7 @@ For more information about Amazon Redshift users, see the [Amazon Redshift getti
 ## Prerequisite tasks<a name="s3-example-configuring-buckets-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/redshift/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on[ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/main/javascriptv3/example_code/redshift/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 **Important**  
@@ -45,12 +43,12 @@ const redshiftClient = new RedshiftClient({ region: REGION });
 export { redshiftClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/libs/redshiftClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/redshift/src/libs/redshiftClient.js)\.
 
-Create a Node\.js module with the file name `redshift-create-cluster.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create a parameters object, specifying the node type to be provisioned, and the master username and password for the database instance automatically created in the cluster, and finally the cluster type\.
+Create a Node\.js module with the file name `redshift-create-cluster.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Create a parameters object, specifying the node type to be provisioned, and the master sign\-in credentials for the database instance automatically created in the cluster, and finally the cluster type\.
 
 **Note**  
-Replace *CLUSTER\_NAME* with the name of the cluster\. For *NODE\_TYPE* specify the node type to be provisioned, such as 'dc2\.large', for example\. *MASTER\_USERNAME* and *MASTER\_USER\_PASSWORD* are the master user name and password of the master user of your DB instance in the cluster\. For *CLUSTER\_TYPE*, enter the type of cluster\. If you specify `single-node`, you do not require the `NumberOfNodes` parameter\. The remaining parameters are optional\. 
+Replace *CLUSTER\_NAME* with the name of the cluster\. For *NODE\_TYPE* specify the node type to be provisioned, such as 'dc2\.large', for example\. *MASTER\_USERNAME* and *MASTER\_USER\_PASSWORD* are the sign\-in credentials of the master user of your DB instance in the cluster\. For *CLUSTER\_TYPE*, enter the type of cluster\. If you specify `single-node`, you do not require the `NumberOfNodes` parameter\. The remaining parameters are optional\. 
 
 ```
 // Import required AWS SDK clients and commands for Node.js
@@ -89,9 +87,9 @@ To run the example, enter the following at the command prompt\.
 node redshift-create-cluster.js  
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/redshift-create-cluster.js)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/redshift/src/redshift-create-cluster.js)\.
 
-## Modifing a Amazon Redshift cluster<a name="redshift-modify-cluster"></a>
+## Modifying a Amazon Redshift cluster<a name="redshift-modify-cluster"></a>
 
 This example shows how to modify the master user password of an Amazon Redshift cluster using the AWS SDK for JavaScript\. For more information about what other setting you can modify, see [ModifyCluster](https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyCluster.html)\.
 
@@ -106,7 +104,7 @@ const redshiftClient = new RedshiftClient({ region: REGION });
 export { redshiftClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/libs/redshiftClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/redshift/src/libs/redshiftClient.js)\.
 
 Create a Node\.js module with the file name `redshift-modify-cluster.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Specify the AWS Region, the name of the cluster you want to modify, and new master user password\.
 
@@ -142,7 +140,7 @@ To run the example, enter the following at the command prompt\.
 node redshift-modify-cluster.js 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/redshift-modify-cluster.js)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/redshift/src/redshift-modify-cluster.js)\.
 
 ## Viewing details of a Amazon Redshift cluster<a name="redshift-describe-cluster"></a>
 
@@ -159,9 +157,9 @@ const redshiftClient = new RedshiftClient({ region: REGION });
 export { redshiftClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/libs/redshiftClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/redshift/src/libs/redshiftClient.js)\.
 
-Create a Node\.js module with the file name `redshift-descibe-clusters.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Specify the AWS Region, the name of the cluster you want to modify, and new master user password\.
+Create a Node\.js module with the file name `redshift-describe-clusters.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Specify the AWS Region, the name of the cluster you want to modify, and new master user password\.
 
 **Note**  
 Replace *CLUSTER\_NAME* with the name of the cluster\. 
@@ -193,7 +191,7 @@ To run the example, enter the following at the command prompt\.
 node redshift-describe-clusters.js 
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/redshift-describe-clusters.js)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/redshift/src/redshift-describe-clusters.js)\.
 
 ## Delete an Amazon Redshift cluster<a name="redshift-delete-cluster"></a>
 
@@ -210,7 +208,7 @@ const redshiftClient = new RedshiftClient({ region: REGION });
 export { redshiftClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/libs/redshiftClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/redshift/src/libs/redshiftClient.js)\.
 
 Create a Node\.js module with the file named `redshift-delete-clusters.js`\. Make sure to configure the SDK as previously shown, including installing the required clients and packages\. Specify the AWS Region, the name of the cluster you want to modify, and new master user password\. The specify if you want to save a final snapshot of the cluster before deleting, and if so the ID of the snapshot\.
 
@@ -246,4 +244,4 @@ To run the example, enter the following at the command prompt\.
 node redshift-delete-cluster.js  
 ```
 
-This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/redshift/src/redshift-delete-cluster.js)\.
+This sample code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/redshift/src/redshift-delete-cluster.js)\.

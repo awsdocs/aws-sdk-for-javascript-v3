@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -57,7 +55,7 @@ Not only can you load and use individual AWS services, but you can also load and
 import {
   DynamoDBClient,
   ListTablesCommand
-} from @aws-sdk/client-dynamodb"
+} from "@aws-sdk/client-dynamodb";
 ```
 
 **Important**  
@@ -140,7 +138,7 @@ You must import the commands you want to use\. For example, the following code l
 import {DynamoDB, CreateTableCommand} from "@aws-sdk/client-dynamodb";
 ```
 
-To call these commands in the recommend async/await pattern, use the following syntax\. 
+To call these commands in the recommended async/await pattern, use the following syntax\. 
 
 ```
   CLIENT.send(new XXXCommand)
@@ -297,6 +295,7 @@ You can browse the SDK for JavaScript examples in the [AWS Code Example Reposito
 
 In addition to this guide, the following online resources are available for SDK for JavaScript developers:
 + [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html)
++  [AWS SDKs and Tools Reference Guide](https://docs.aws.amazon.com/sdkref/latest/guide/): Contains settings, features, and other foundational concepts common among AWS SDKs\. 
 + [JavaScript Developer Blog](https://aws.amazon.com/blogs/developer/category/programing-language/javascript/)
 + [AWS JavaScript Forum](https://forums.aws.amazon.com/forum.jspa?forumID=148)
 + [JavaScript examples in the AWS Code Catalog](https://docs.aws.amazon.com/code-samples/latest/catalog/code-catalog-javascriptv3.html)

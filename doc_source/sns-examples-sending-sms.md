@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -30,7 +28,7 @@ In this example, you use a series of Node\.js modules to publish SMS text messag
 ## Prerequisite Tasks<a name="sns-examples-sending-sms-prerequisites"></a>
 
 To set up and run this example, you must first complete these tasks:
-+ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/sns/README.md)\.
++ Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [ GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/README.md)\.
 + Create a shared configurations file with your user credentials\. For more information about providing a credentials JSON file, see [Loading credentials in Node\.js from the shared credentials file](loading-node-credentials-shared.md)\.
 
 **Important**  
@@ -55,7 +53,7 @@ const snsClient = new SNSClient({ region: REGION });
 export  { snsClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
 
  Create a Node\.js module with the file name `sns_getsmstype.js`\.
 
@@ -98,7 +96,7 @@ To run the example, enter the following at the command prompt\.
 node sns_getsmstype.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_getsmstype.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/sns_getsmstype.js)\.
 
 ## Setting SMS Attributes<a name="sending-sms-setattributes"></a>
 
@@ -115,7 +113,7 @@ const snsClient = new SNSClient({ region: REGION });
 export  { snsClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
 
  Create a Node\.js module with the file name `sns_setsmstype.js`\. Configure the SDK as previously shown, including installing the required clients and packages\. Create an object containing the parameters for setting SMS attributes, including the names of the individual attributes to set and the values to set for each\. For details on available SMS attributes, see [ SetSMSAttributes](https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html) in the Amazon Simple Notification Service API Reference\.
 
@@ -153,7 +151,7 @@ To run the example, enter the following at the command prompt\.
 node sns_setsmstype.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_setsmstype.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/sns_setsmstype.js)\.
 
 ## Checking If a Phone Number Has Opted Out<a name="sending-sms-checkifphonenumberisoptedout"></a>
 
@@ -170,7 +168,7 @@ const snsClient = new SNSClient({ region: REGION });
 export  { snsClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
 
 Create a Node\.js module with the file name `sns_checkphoneoptout.js`\. Configure the SDK as previously shown\. Create an object containing the phone number to check as a parameter\.
 
@@ -208,7 +206,7 @@ To run the example, enter the following at the command prompt\.
 node sns_checkphoneoptout.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_checkphoneoptout.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/sns_checkphoneoptout.js)\.
 
 ## Listing Opted\-Out Phone Numbers<a name="sending-sms-listphonenumbersoptedout"></a>
 
@@ -225,7 +223,7 @@ const snsClient = new SNSClient({ region: REGION });
 export  { snsClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
 
 Create a Node\.js module with the file name `sns_listnumbersoptedout.js`\. Configure the SDK as previously shown\. Create an empty object as a parameter\.
 
@@ -254,7 +252,7 @@ To run the example, enter the following at the command prompt\.
 node sns_listnumbersoptedout.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_listnumbersoptedout.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/sns_listnumbersoptedout.js)\.
 
 ## Publishing an SMS Message<a name="sending-sms-publishsms"></a>
 
@@ -271,7 +269,7 @@ const snsClient = new SNSClient({ region: REGION });
 export  { snsClient };
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/libs/snsClient.js)\.
 
 Create a Node\.js module with the file name `sns_publishsms.js`\. Configure the SDK as previously shown, including installing the required clients and packages\. Create an object containing the `Message` and `PhoneNumber` parameters\.
 
@@ -311,4 +309,4 @@ To run the example, enter the following at the command prompt\.
 node sns_publishsms.js
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sns/src/sns_publishsms.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/sns/src/sns_publishsms.js)\.

@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -42,7 +40,7 @@ Create an `index.html` file, and copy and paste the content below into it\. The 
 <table id="myTable" style ="width:678px;">
         <tr>
     <td style = "font-weight:bold">Time created</td>
-    <td style = "font-weight:bold">Transciption</td>
+    <td style = "font-weight:bold">Transcription</td>
     <td style = "font-weight:bold">Download</td>
     <td style = "font-weight:bold">Delete</td>
        </tr>
@@ -54,4 +52,4 @@ Create an `index.html` file, and copy and paste the content below into it\. The 
 </html>
 ```
 
-This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/transcription-app/src/index.js)\.
+This code example is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/transcription-app/src/index.js)\.

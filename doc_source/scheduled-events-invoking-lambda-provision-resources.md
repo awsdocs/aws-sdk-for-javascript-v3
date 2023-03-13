@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -25,9 +23,9 @@ To create the AWS CloudFormation stack using the AWS CLI:
 
 1. Install and configure the AWS CLI following the instructions in the [AWS CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)\.
 
-1. Create a file named `setup.yaml` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-scheduled-events/setup.yaml) into it\.
+1. Create a file named `setup.yaml` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/lambda-scheduled-events/setup.yaml) into it\.
 **Note**  
-The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/resources/cdk/lambda_using_scheduled_events)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
+The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/resources/cdk/lambda_using_scheduled_events)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(AWS CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
 
 1. Run the following command from the command line, replacing *STACK\_NAME* with a unique name for the stack\.
 **Important**  
@@ -45,20 +43,20 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
 
 ## Populate the DynamoDB table<a name="scheduled-events-invoking-lambda-resources-create-table"></a>
 
-To populate the table, first create a diretory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. 
+To populate the table, first create a directory named `libs`, and in it create a file named `dynamoClient.js`, and paste the content below into it\. 
 
 ```
 const { DynamoDBClient } = require( "@aws-sdk/client-dynamodb" );
 // Set the AWS Region.
 const REGION = "REGION"; // e.g. "us-east-1"
-// Create an Amazon DynamodDB service client object.
+// Create an Amazon DynamoDB service client object.
 const dynamoClient = new DynamoDBClient({region:REGION});
 module.exports = { dynamoClient };
 ```
 
- This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-scheduled-events/src/libs/dynamoClient.js)\.
+ This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/lambda-scheduled-events/src/libs/dynamoClient.js)\.
 
-Next, create a file named `populate-table.js` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-api-gateway/src/helper-functions/populate-table.js) into it\. For one of the items, replace the value for the `phone` property with a valid mobile phone number in the E\.164 format, and the value for the `startDate` with today's date\.
+Next, create a file named `populate-table.js` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/lambda-api-gateway/src/helper-functions/populate-table.js) into it\. For one of the items, replace the value for the `phone` property with a valid mobile phone number in the E\.164 format, and the value for the `startDate` with today's date\.
 
 Run the following command from the command line\.
 
@@ -119,4 +117,4 @@ export const run = async () => {
 run();
 ```
 
- This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/cross-services/lambda-scheduled-events/src/helper-functions/populate-table.js)\.
+ This code is available [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/cross-services/lambda-scheduled-events/src/helper-functions/populate-table.js)\.

@@ -1,14 +1,28 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
 # Supported web browsers<a name="browsers-supported"></a>
 
-The SDK for JavaScript supports all modern web browsers, including these minimum versions\.
+The AWS SDK for JavaScript supports all modern web browsers\.
+
+In version 3\.183\.0 or later, the SDK for JavaScript uses ES2020 artifacts, which supports the following minimum versions\.
+
+
+****  
+
+| Browser | Version | 
+| --- | --- | 
+| Google Chrome | 80\.0\+ | 
+| Mozilla Firefox | 80\.0\+ | 
+| Opera | 63\.0\+ | 
+| Microsoft Edge | 80\.0\+ | 
+| Apple Safari | 14\.1\+ | 
+| Samsung Internet | 12\.0\+ | 
+
+In version 3\.182\.0 or earlier, the SDK for JavaScript uses ES5 artifacts, which supports the following minimum versions\.
 
 
 ****  

@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -122,7 +120,7 @@ export  { sqsClient };
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/libs/sqsClient.js)\.
 
-Create a Node\.js module with the file name `sqs_receivemessage.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed for your message, including the URL of the queue from which you want to receive messages\. In this example, the parameters specify receipt of all message attributes, as well as receipt of no more than 10 messages\.
+Create a Node\.js module with the file name `sqs_deletemessage.js`\. Be sure to configure the SDK as previously shown, including downloading the required clients and packages\. Create a JSON object containing the parameters needed for your message, including the URL of the queue from which you want to receive messages\. In this example, the parameters specify receipt of all message attributes, as well as receipt of no more than 10 messages\.
 
 Call the `ReceiveMessageCommand` method\. The callback returns an array of `Message` objects from which you can retrieve `ReceiptHandle` for each message that you use to later delete that message\. Create another JSON object containing the parameters needed to delete the message, which are the URL of the queue and the `ReceiptHandle` value\. Call the `DeleteMessageCommand` method to delete the message you received\.
 
@@ -176,7 +174,7 @@ run();
 To run the example, enter the following at the command prompt\.
 
 ```
-node sqs_receivemessage.js 
+node sqs_deletemessage.js 
 ```
 
-This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/sqs_receivemessage.js)\.
+This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/sqs/src/sqs_deletemessage.js)\.

@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -12,7 +10,7 @@ The default Node\.js HTTP/HTTPS agent creates a new TCP connection for every new
 
 For short\-lived operations, such as Amazon DynamoDB queries, the latency overhead of setting up a TCP connection might be greater than the operation itself\. Additionally, since DynamoDB [encryption at rest](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/encryption.howitworks.html) is integrated with [AWS KMS](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/encryption.howitworks.html), you may experience latencies from the database having to re\-establish new AWS KMS cache entries for each operation\. 
 
-To disable reusing TCP connections, set the `AWS_NODEJS_CONNECTION_REUSE_ENABLED` environment variable to `false` \(the default is `true`\)\.
+To disable reusing TCP connections, set the ` AWS_NODEJS_CONNECTION_REUSE_ENABLED` environment variable to `false` \(the default is `true`\)\.
 
 You can also disable keeping these connections alive on a per\-service client basis, as shown in the following example for a DynamoDB client\.
 

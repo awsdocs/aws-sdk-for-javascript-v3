@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -48,12 +46,12 @@ In this example, use a Node\.js module to create a receipt rule in Amazon SES to
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -66,42 +64,55 @@ Create a parameters object to pass the values needed to create for the receipt r
 Replace *S3\_BUCKET\_NAME* with the name of the Amazon S3 bucket, *EMAIL\_ADDRESS \| DOMAIN* with the email, or domain, *RULE\_NAME* with the name of the rule, and *RULE\_SET\_NAME* with the name of the ruleset\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { CreateReceiptRuleCommand }  from "@aws-sdk/client-ses";
+import { CreateReceiptRuleCommand, TlsPolicy } from "@aws-sdk/client-ses";
 import { sesClient } from "./libs/sesClient.js";
-// Set the parameters
-const params = {
-  Rule: {
-    Actions: [
-      {
-        S3Action: {
-          BucketName: "BUCKET_NAME", // S3_BUCKET_NAME
-          ObjectKeyPrefix: "email",
+import { getUniqueName } from "../../libs/utils/util-string.js";
+
+const RULE_SET_NAME = getUniqueName("RuleSetName");
+const RULE_NAME = getUniqueName("RuleName");
+const S3_BUCKET_NAME = getUniqueName("S3BucketName");
+
+const createS3ReceiptRuleCommand = ({
+  bucketName,
+  emailAddresses,
+  name,
+  ruleSet,
+}) => {
+  return new CreateReceiptRuleCommand({
+    Rule: {
+      Actions: [
+        {
+          S3Action: {
+            BucketName: bucketName,
+            ObjectKeyPrefix: "email",
+          },
         },
-      },
-    ],
-    Recipients: [
-      "EMAIL_ADDRESS", // The email addresses, or domain
-      /* more items */
-    ],
-    Enabled: true | false,
-    Name: "RULE_NAME", // RULE_NAME
-    ScanEnabled: true | false,
-    TlsPolicy: "Optional",
-  },
-  RuleSetName: "RULE_SET_NAME", // RULE_SET_NAME
+      ],
+      Recipients: emailAddresses,
+      Enabled: true,
+      Name: name,
+      ScanEnabled: false,
+      TlsPolicy: TlsPolicy.Optional,
+    },
+    RuleSetName: ruleSet, // Required
+  });
 };
 
 const run = async () => {
+  const s3ReceiptRuleCommand = createS3ReceiptRuleCommand({
+    bucketName: S3_BUCKET_NAME,
+    emailAddresses: ["email@example.com"],
+    name: RULE_NAME,
+    ruleSet: RULE_SET_NAME,
+  });
+
   try {
-    const data = await sesClient.send(new CreateReceiptRuleCommand(params));
-    console.log("Rule created", data);
-    return data; // For unit tests.
+    return await sesClient.send(s3ReceiptRuleCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to create S3 receipt rule.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. Amazon SES creates the receipt rule\.
@@ -122,25 +133,29 @@ Create a parameters object to pass the name for the receipt rule to delete\. To 
 Replace *RULE\_NAME* with the name of the rule, and *RULE\_SET\_NAME* with the rule set name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { DeleteReceiptRuleCommand }  from "@aws-sdk/client-ses";
+import { DeleteReceiptRuleCommand } from "@aws-sdk/client-ses";
+import { getUniqueName } from "../../libs/utils/util-string.js";
 import { sesClient } from "./libs/sesClient.js";
-// Set the deleteReceiptRule params
-var params = {
-  RuleName: "RULE_NAME", // RULE_NAME
-  RuleSetName: "RULE_SET_NAME", // RULE_SET_NAME
+
+const RULE_NAME = getUniqueName("RuleName");
+const RULE_SET_NAME = getUniqueName("RuleSetName");
+
+const createDeleteReceiptRuleCommand = () => {
+  return new DeleteReceiptRuleCommand({
+    RuleName: RULE_NAME,
+    RuleSetName: RULE_SET_NAME,
+  });
 };
 
 const run = async () => {
+  const deleteReceiptRuleCommand = createDeleteReceiptRuleCommand();
   try {
-    const data = await sesClient.send(new DeleteReceiptRuleCommand(params));
-    console.log("Success.", data);
-    return data; // For unit tests.
+    return await sesClient.send(deleteReceiptRuleCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to delete receipt rule.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. Amazon SES creates the receipt rule set list\.
@@ -161,27 +176,27 @@ Create a parameters object to pass the name for the new receipt rule set\. To ca
 Replace *REGION* with your AWS Region, *RULE\_SET\_NAME* with the rule set name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import {
-  CreateReceiptRuleSetCommand
-} from "@aws-sdk/client-ses";
+import { CreateReceiptRuleSetCommand } from "@aws-sdk/client-ses";
 import { sesClient } from "./libs/sesClient.js";
-// Set the parameters
-const params = { RuleSetName: "RULE_SET_NAME" }; //RULE_SET_NAME
+import { getUniqueName } from "../../libs/utils/util-string.js";
+
+const RULE_SET_NAME = getUniqueName("RuleSetName");
+
+const createCreateReceiptRuleSetCommand = (ruleSetName) => {
+  return new CreateReceiptRuleSetCommand({ RuleSetName: ruleSetName });
+};
 
 const run = async () => {
+  const createReceiptRuleSetCommand =
+    createCreateReceiptRuleSetCommand(RULE_SET_NAME);
+
   try {
-    const data = await sesClient.send(new CreateReceiptRuleSetCommand(params));
-    console.log(
-      "Success",
-      data
-    );
-    return data; // For unit tests.
+    return await sesClient.send(createReceiptRuleSetCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to create receipt rule set", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. Amazon SES creates the receipt rule set list\.
@@ -202,22 +217,26 @@ Create an object to pass the name for the receipt rule set to delete\. To call t
 Replace *RULE\_SET\_NAME* with the rule set name\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { DeleteReceiptRuleSetCommand }  from "@aws-sdk/client-ses";
+import { DeleteReceiptRuleSetCommand } from "@aws-sdk/client-ses";
+import { getUniqueName } from "../../libs/utils/util-string.js";
 import { sesClient } from "./libs/sesClient.js";
-// Set the parameters
-const params = { RuleSetName: "RULE_SET_NAME" }; //RULE_SET_NAME
+
+const RULE_SET_NAME = getUniqueName("RuleSetName");
+
+const createDeleteReceiptRuleSetCommand = () => {
+  return new DeleteReceiptRuleSetCommand({ RuleSetName: RULE_SET_NAME });
+};
 
 const run = async () => {
+  const deleteReceiptRuleSetCommand = createDeleteReceiptRuleSetCommand();
+
   try {
-    const data = await sesClient.send(new DeleteReceiptRuleSetCommand(params));
-    console.log("Success.", data);
-    return data; // For unit tests.
+    return await sesClient.send(deleteReceiptRuleSetCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to delete receipt rule set.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. Amazon SES creates the receipt rule set list\.

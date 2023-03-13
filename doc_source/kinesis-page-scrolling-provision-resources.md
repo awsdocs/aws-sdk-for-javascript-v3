@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -27,7 +25,7 @@ AWS CloudFormation enables you to create and provision AWS infrastructure deploy
 
 1. Create a file named `setup.yaml` in the root directory of your project folder, and copy the content [ here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/kinesis/src/setup.yaml) into it\.
 **Note**  
-The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/resources/cdk/kinesis-iam-unauthenticated-role)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
+The AWS CloudFormation template was generated using the AWS CDK available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/resources/cdk/kinesis-iam-unauthenticated-role)\. For more information about the AWS CDK, see the [AWS Cloud Development Kit \(AWS CDK\) Developer Guide](https://docs.aws.amazon.com/cdk/latest/guide/)\.
 
 1. Run the following command from the command line, replacing *STACK\_NAME* with a unique name for the stack\.
 **Important**  
@@ -40,18 +38,18 @@ The stack name must be unique within an AWS Region and AWS account\. You can spe
    For more information on the `create-stack` command parameters, see the [AWS CLI Command Reference guide](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-stack.html), and the [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html)\.
 
 **Note**  
-If you create anoher stack using this template, you must change the stream name in the `setup.yaml` or you encounter an error\.  
+If you create another stack using this template, you must change the stream name in `setup.yaml`, or you will encounter an error\.  
 
 
 
-To view the resources when they are created, to the the **Stacks** page on the AWS AWS CloudFormation console, select the stack, and open the **Resources** tab\. 
+To view the resources when they are created, go to the **Stacks** page on the AWS CloudFormation console, select the stack, and open the **Resources** tab\.
 
-You require the following for this example:
+The following items are required for this example:
 + An Amazon Kinesis stream\. You need to include the name of the stream the browser script\.
 + An Amazon Cognito identity pool with access enabled for unauthenticated identities\. You need to include the identity pool ID in the code to obtain credentials for the browser script\. For more information about Amazon Cognito identity pools, see [Identity Pools](https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html) in the *Amazon Cognito Developer Guide*\.
 + An IAM role with an attached IAM policy that grants permission to submit data to an Amazon Kinesis stream\. For more information about creating an IAM role, see [Creating a Role to Delegate Permissions to an AWS Service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html) in the *IAM User Guide*\.
 **Note**  
-This is the role policy when is attached to the IAM role\. The CDK automatically poplulates the *STREAM\_RESOURCE\_ARN*\.  
+This is the role policy when is attached to the IAM role\. The CDK automatically populates the *STREAM\_RESOURCE\_ARN*\.  
 
   ```
   {
@@ -80,7 +78,7 @@ This is the role policy when is attached to the IAM role\. The CDK automatically
   }
   ```
 **Note**  
-The CDK automatically poplulates the *STREAM\_RESOURCE\_ARN*\. 
+The CDK automatically populates the *STREAM\_RESOURCE\_ARN*\. 
 
 ## Create the AWS resources using the Amazon Web Services Management Console;<a name="kinesis-page-scrolling-resources-console"></a>
 

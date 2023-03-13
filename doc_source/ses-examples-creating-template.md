@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -21,10 +19,10 @@ Amazon SES enables you ro send personalized email messages using email templates
 
 In this example, you use a series of Node\.js modules to work with email templates\. The Node\.js modules use the SDK for JavaScript to create and use email templates using these methods of the `SES` client class:
 + [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/listtemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/listtemplatescommand.html)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/createtemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/createtemplatescommand.html)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/gettemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/gettemplatescommand.html)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/deletetemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/deletetemplatescommand.html)
-+ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/updatetemplatescommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/updatetemplatescommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/createtemplatecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/createtemplatecommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/gettemplatecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/gettemplatecommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/deletetemplatecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/deletetemplatecommand.html)
++ [https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/updatetemplatecommand.html](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/clients/client-ses/classes/updatetemplatecommand.html)
 
 ## Prerequisite tasks<a name="ses-examples-creating-template-prerequisites"></a>
 
@@ -44,12 +42,12 @@ In this example, use a Node\.js module to create an email template to use with A
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -65,23 +63,22 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *ITEMS\_COUNT* with the maximum number of templates to return\. The value must be a minimum of 1 and a maximum of 10\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { SESClient, ListTemplatesCommand }  from "@aws-sdk/client-ses";
+import { ListTemplatesCommand } from "@aws-sdk/client-ses";
 import { sesClient } from "./libs/sesClient.js";
 
-// Set the parameters
-const params = { MaxItems: "ITEMS_COUNT" }; //ITEMS_COUNT
+const createListTemplatesCommand = (maxItems) =>
+  new ListTemplatesCommand({ MaxItems: maxItems });
 
 const run = async () => {
+  const listTemplatesCommand = createListTemplatesCommand(10);
+
   try {
-    const data = await sesClient.send(new ListTemplatesCommand({ params }));
-    console.log("Success.", data);
-    return data; // For unit tests.
+    return await sesClient.send(listTemplatesCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to list templates.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. Amazon SES returns the list of templates\.
@@ -99,12 +96,12 @@ In this example, use a Node\.js module to get an email template to use with Amaz
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -120,22 +117,25 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *TEMPLATE\_NAME* with the name of the template to return\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import {  GetTemplateCommand }  from "@aws-sdk/client-ses";
+import { GetTemplateCommand } from "@aws-sdk/client-ses";
+import { getUniqueName } from "../../libs/utils/util-string.js";
 import { sesClient } from "./libs/sesClient.js";
-// Set the parameters
-const params = { TemplateName: "TEMPLATE_NAME" };
+
+const TEMPLATE_NAME = getUniqueName("TemplateName");
+
+const createGetTemplateCommand = (templateName) =>
+  new GetTemplateCommand({ TemplateName: templateName });
 
 const run = async () => {
+  const getTemplateCommand = createGetTemplateCommand(TEMPLATE_NAME);
+
   try {
-    const data = await sesClient.send(new GetTemplateCommand(params));
-    console.log("Success.", data);
-    return data; // For unit tests.
+    return await sesClient.send(getTemplateCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to get email template.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. Amazon SES returns the template details\.
@@ -153,12 +153,12 @@ In this example, use a Node\.js module to create an email template to use with A
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -177,32 +177,43 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *TEMPLATE\_NAME* with a name for the new template, *HTML\_CONTENT* with the HTML tagged content of email, *SUBJECT* with the subject of the email, and *TEXT\_CONTENT* with the text of the email\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { CreateTemplateCommand }  from "@aws-sdk/client-ses";
+import { CreateTemplateCommand } from "@aws-sdk/client-ses";
 import { sesClient } from "./libs/sesClient.js";
-// Create createTemplate params
-const params = {
-  Template: {
-    TemplateName: "TEMPLATE_NAME", //TEMPLATE_NAME
-    HtmlPart: "HTML_CONTENT",
-    SubjectPart: "SUBJECT",
-    TextPart: "TEXT_CONTENT",
-  },
+import { getUniqueName } from "../../libs/utils/util-string.js";
+
+const TEMPLATE_NAME = getUniqueName("TestTemplateName");
+
+const createCreateTemplateCommand = () => {
+  return new CreateTemplateCommand({
+    /**
+     * The template feature in Amazon SES is based on the Handlebars template system.
+     */
+    Template: {
+      /**
+       * The name of an existing template in Amazon SES.
+       */
+      TemplateName: TEMPLATE_NAME,
+      HtmlPart: `
+        <h1>Hello, {{contact.firstName}}!</h1>
+        <p>
+        Did you know Amazon has a mascot named Peccy?
+        </p>
+      `,
+      SubjectPart: "Amazon Tip",
+    },
+  });
 };
 
 const run = async () => {
+  const createTemplateCommand = createCreateTemplateCommand();
+
   try {
-    const data = await sesClient.send(new CreateTemplateCommand(params));
-    console.log(
-      "Success",
-      data
-    );
-    return data; // For unit tests.
+    return await sesClient.send(createTemplateCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to create template.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. The template is added to Amazon SES\.
@@ -220,12 +231,12 @@ In this example, use a Node\.js module to create an email template to use with A
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -241,30 +252,34 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *TEMPLATE\_NAME* with a name of the template, *HTML\_CONTENT* with the HTML tagged content of email, *SUBJECT* with the subject of the email, and *TEXT\_CONTENT* with the text of the email\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { UpdateTemplateCommand }  from "@aws-sdk/client-ses";
+import { UpdateTemplateCommand } from "@aws-sdk/client-ses";
+import { getUniqueName } from "../../libs/utils/util-string.js";
 import { sesClient } from "./libs/sesClient.js";
 
-// Set the parameters
-const params = {
-  Template: {
-    TemplateName: "TEMPLATE_NAME", //TEMPLATE_NAME
-    HtmlPart: "HTML_CONTENT", //HTML_CONTENT; i.e., HTML content in the email
-    SubjectPart: "SUBJECT_LINE", //SUBJECT_LINE; i.e., email subject line
-    TextPart: "TEXT_CONTENT", //TEXT_CONTENT; i.e., body of email
-  },
+const TEMPLATE_NAME = getUniqueName("TemplateName");
+const HTML_PART = "<h1>Hello, World!</h1>";
+
+const createUpdateTemplateCommand = () => {
+  return new UpdateTemplateCommand({
+    Template: {
+      TemplateName: TEMPLATE_NAME,
+      HtmlPart: HTML_PART,
+      SubjectPart: "Example",
+      TextPart: "Updated template text.",
+    },
+  });
 };
 
 const run = async () => {
+  const updateTemplateCommand = createUpdateTemplateCommand();
+
   try {
-    const data = await sesClient.send(new UpdateTemplateCommand(params));
-    console.log("Success.", data);
-    return data; // For unit tests.
+    return await sesClient.send(updateTemplateCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to update template.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. Amazon SES returns the template details\.
@@ -282,12 +297,12 @@ In this example, use a Node\.js module to create an email template to use with A
 Create a `libs` directory, and create a Node\.js module with the file name `sesClient.js`\. Copy and paste the code below into it, which creates the Amazon SES client object\. Replace *REGION* with your AWS Region\.
 
 ```
-import  { SESClient }  from  "@aws-sdk/client-ses";
+import { SESClient } from "@aws-sdk/client-ses";
 // Set the AWS Region.
-const REGION = "REGION"; //e.g. "us-east-1"
+const REGION = "us-east-1";
 // Create SES service object.
 const sesClient = new SESClient({ region: REGION });
-export  { sesClient };
+export { sesClient };
 ```
 
 This example code can be found [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/ses/src/libs/sesClient.js)\.
@@ -303,22 +318,25 @@ This example imports and uses the required AWS Service V3 package clients, V3 co
 Replace *TEMPLATE\_NAME* with the name of the template to be deleted\.
 
 ```
-// Import required AWS SDK clients and commands for Node.js
-import { DeleteTemplateCommand }  from "@aws-sdk/client-ses";
+import { DeleteTemplateCommand } from "@aws-sdk/client-ses";
+import { getUniqueName } from "../../libs/utils/util-string.js";
 import { sesClient } from "./libs/sesClient.js";
-// Set the parameters
-const params = { TemplateName: "TEMPLATE_NAME" };
+
+const TEMPLATE_NAME = getUniqueName("TemplateName");
+
+const createDeleteTemplateCommand = (templateName) =>
+  new DeleteTemplateCommand({ TemplateName: templateName });
 
 const run = async () => {
+  const deleteTemplateCommand = createDeleteTemplateCommand(TEMPLATE_NAME);
+
   try {
-    const data = await sesClient.send(new DeleteTemplateCommand(params));
-    console.log("Success.", data);
-    return data; // For unit tests.
+    return await sesClient.send(deleteTemplateCommand);
   } catch (err) {
-    console.log("Error", err.stack);
+    console.log("Failed to delete template.", err);
+    return err;
   }
 };
-run();
 ```
 
 To run the example, enter the following at the command prompt\. Amazon SES returns the template details\.

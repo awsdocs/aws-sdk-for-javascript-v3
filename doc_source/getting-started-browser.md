@@ -1,8 +1,6 @@
 --------
 
-Help us improve the AWS SDK for JavaScript version 3 \(V3\) documentation by providing feedback using the **Feedback** link, or create an issue or pull request on [GitHub](https://github.com/awsdocs/aws-sdk-for-javascript-v3)\.
-
- The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\.
+ The [AWS SDK for JavaScript V3 API Reference Guide](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.html) describes in detail all the API operations for the AWS SDK for JavaScript version 3 \(V3\)\. 
 
 --------
 
@@ -14,8 +12,6 @@ This section walks you through an example that demonstrates how to run version 3
 Running V3 in the browser is slightly different from version 2 \(V2\)\. For more information, see [Using browsers in V3](welcome.md#v3_browsers)\.
 
 For other examples of using \(V3\) of the SDK for JavaScript with the Node\.js in the browser, see:
-+  [Viewing photos in an Amazon S3 bucket from a browser](s3-example-photos-view.md)
-+  [Uploading photos to Amazon S3 from a browser](s3-example-photo-album.md)
 +  [Build an app to submit data to DynamoDB](cross-service-example-submitting-data.md)
 
 ![\[JavaScript code example that applies to browser execution\]](http://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/images/browsericon.png)
@@ -95,7 +91,7 @@ After you create your Amazon Cognito identity pool and add permissions for Amazo
 
 ## Step 3: Create a project environment<a name="browserstart-prerequisites"></a>
 
-Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/polly/README.md)\. 
+Set up the project environment to run these Node TypeScript examples, and install the required AWS SDK for JavaScript and third\-party modules\. Follow the instructions on [GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/polly/README.md)\. 
 
 ## Step 4: Create the HTML Page<a name="getting-started-browser-create-html"></a>
 
@@ -107,7 +103,7 @@ You use webpack to create the `main.js` file, as described in [Step 5: Write the
 
 For more information about the `<audio>` element, see [audio](https://www.w3schools.com/tags/tag_audio.asp)\.
 
-The full HTML page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascriptv3/example_code/polly/src/polly.html)\. 
+The full HTML page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/polly/src/polly.html)\. 
 
 Save the HTML file, naming it `polly.html`\. After you have created the user interface for the application, you're ready to add the browser script code that runs the application\.
 
@@ -118,11 +114,11 @@ For information on installing Webpack, see [https://docs.aws.amazon.com/sdk-for-
 
 ## Step 5: Write the JavaScript<a name="getting-started-browser-write-sample"></a>
 
-Create a file named `polly.js`, and paste the code below into it\. The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/master/javascriptv3/example_code/polly/src/polly.js)\. The code first imports the required AWS SDK clients and commands\. Then it creates the `Polly` service client object, specifying the credentials for the SDK\. To synthesize speech with Amazon Polly, it provides a variety of parameters including the sound format of the output, the sampling rate, the ID of the voice to use, and the text to play back\. When you initially create the parameters, set the `Text:` parameter to an empty string; the `Text:` parameter will be set to the value you retrieve from the `<input>` element in the webpage\.
+Create a file named `polly.js`, and paste the code below into it\. The full JavaScript page is available [here on GitHub](https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/javascriptv3/example_code/polly/src/polly.js)\. The code first imports the required AWS SDK clients and commands\. Then it creates the `Polly` service client object, specifying the credentials for the SDK\. To synthesize speech with Amazon Polly, it provides a variety of parameters including the sound format of the output, the sampling rate, the ID of the voice to use, and the text to play back\. When you initially create the parameters, set the `Text:` parameter to an empty string; the `Text:` parameter will be set to the value you retrieve from the `<input>` element in the webpage\.
 
 Next, it creates a function named `speakText()` that is be invoked as an event handler by the button\. Amazon Polly returns synthesized speech as an audio stream\. The easiest way to play that audio in a browser is to have Amazon Polly make the audio available at a presigned URL you can then set as the `src` attribute of the `<audio>` element in the webpage\.
 
-Next it create thes `Presigner` object you'll use to create the presigned URL from which the synthesized speech audio can be retrieved\. You must pass the speech parameters that you defined as well as the `Polly` service object that you created to the `Polly.Presigner` constructor\.
+Next it creates the `Presigner` object you'll use to create the presigned URL from which the synthesized speech audio can be retrieved\. You must pass the speech parameters that you defined as well as the `Polly` service object that you created to the `Polly.Presigner` constructor\.
 
 After it creates the presigner object, it calls the `getSynthesizeSpeechUrl` method of that object, passing the speech parameters\. If successful, this method returns the URL of the synthesized speech, which the code then assign to the `<audio>` element for playback\.
 
